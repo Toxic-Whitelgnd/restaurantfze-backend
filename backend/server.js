@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const axios = require('axios');
+const Razorpay = require('razorpay');
 
 const app = express();
 
@@ -17,6 +18,11 @@ app.use(
         parameterLimit: 50000,
     }),
 );
+
+const razorpay = new Razorpay({
+    key_id: 'rzp_test_AZ9LyozDGv5aSK',
+    key_secret: 'k7q5Fkbd9EAoJaJ5JPl5dzrH',
+});
 
 
 // connection string
@@ -66,22 +72,23 @@ const foodDataSchema = new mongoose.Schema({
     foodType: String,
 });
 
+const itemSchema = new mongoose.Schema({
+    foodname: { type: String, required: true },
+    qty: { type: Number, required: true },
+    id: { type: String, required: true },
+    price: { type: Number, required: true },
+    amt: { type: Number, required: true },
+    status: { type: String, required: true },
+});
+
 const currentOrderSchema = new mongoose.Schema({
     customer_details: {
-      name: { type: String, required: true },
-      mobileNumber: { type: String, required: true },
-      numberOfSeats: { type: String, required: true },
+        name: { type: String, required: true },
+        mobileNumber: { type: String, required: true },
+        numberOfSeats: { type: String, required: true },
     },
     floor_no: { type: String, required: true },
-    items: [
-      {
-        foodname: { type: String, required: true },
-        qty: { type: Number, required: true },
-        id: { type: String, required: true },
-        price: { type: Number, required: true },
-        amt: { type: Number, required: true },
-      },
-    ],
+    items: [itemSchema],
     items_ordered: { type: Number, required: true },
     no_of_seats: { type: String, required: true },
     order_no: { type: Number, required: true },
@@ -89,7 +96,76 @@ const currentOrderSchema = new mongoose.Schema({
     table_no: { type: String, required: true },
     orderFrom: { type: String, required: true },
     total: { type: Number, required: true },
+});
+
+const customerSchema = new mongoose.Schema({
+    customer_mobileNumber: {
+        type: String,
+        required: true,
+    },
+    customer_name: {
+        type: String,
+        required: true,
+    },
+    date: {
+        type: String,
+        required: true,
+    },
+    items: [itemSchema], // Array of items using the defined itemSchema
+    items_ordered: {
+        type: Number,
+        required: true,
+    },
+    orderFrom: {
+        type: String,
+        required: true,
+    },
+    order_no: {
+        type: Number,
+        required: true,
+    },
+    ordered_tableno: {
+        type: String,
+        required: true,
+    },
+    paid_by: {
+        type: String,
+        required: true,
+    },
+    razorpay_order_id: String,
+    razorpay_payment_id: {
+        type: String,
+        required: true,
+    },
+    razorpay_signature: String,
+    time: {
+        type: String,
+        required: true,
+    },
+    total: {
+        type: Number,
+        required: true,
+    },
+    total_ppl: {
+        type: String,
+        required: true,
+    },
+    type: {
+        type: String,
+        required: true,
+    },
+    vat: String,
+    waiter_name: String,
+});
+  
+  const runningorderSchema = new mongoose.Schema({
+    orderNo: Number,
+    tableNo: String,
+    type: String,
+    from: String,
+    items: [itemSchema],
   });
+  
 
 
 
@@ -105,7 +181,9 @@ const HomePage = mongoose.model('HomePage', homePageSchema, 'home_page');
 const TablePage = mongoose.model('TablePage', tablePageSchema, 'table_page');
 const FoodType = mongoose.model('FoodType', foodTypeSchema, 'food_type');
 const FoodData = mongoose.model('FoodData', foodDataSchema, 'food_data');
-const CurrentOrder = mongoose.model('CurrentOrder', currentOrderSchema , 'current_order');
+const CurrentOrder = mongoose.model('CurrentOrder', currentOrderSchema, 'current_order');
+const CustomerDetails = mongoose.model('CustomerDetails', customerSchema, 'customer_details');
+const RunningOrder = mongoose.model('RunningOrder', runningorderSchema, 'running_order');
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -200,7 +278,7 @@ app.get('/table_data', async (req, res) => {
     try {
         // Fetch all documents from the 'home_page' collection
         const data = await TablePage.find({});
-        console.log(data);
+        // console.log(data);
         // Send the data as a JSON response
         res.json(data);
     } catch (error) {
@@ -215,7 +293,7 @@ app.get('/single_table_data/:tableno', async (req, res) => {
     try {
         // Fetch all documents from the 'home_page' collection
         const data = await TablePage.find({ table_no: tableno });
-        console.log(data);
+        // console.log(data);
         // Send the data as a JSON response
         res.json(data);
     } catch (error) {
@@ -496,16 +574,24 @@ app.post('/save_current_order', async (req, res) => {
         const newOrder = new CurrentOrder(req.body);
         const result = await newOrder.save();
 
-        const {table_no ,no_of_seats,running_order,items_ordered } = req.body;
+        const { table_no, no_of_seats, running_order, items_ordered , order_no,items , orderFrom} = req.body;
         const update_data = {
             table_taken: running_order,
-            table_pploccupied:no_of_seats,
-            table_itemsordered:items_ordered,
+            table_pploccupied: no_of_seats,
+            table_itemsordered: items_ordered,
         }
 
         // adter saving just update the table details page
-        await axios.put(`http://localhost:9999/update_table_data/${table_no}`,update_data)
-        
+        await axios.put(`http://localhost:9999/update_table_data/${table_no}`, update_data)
+        // this is for kitche to dispaly  the current order to prepare
+        const send_order = {
+            tableNo: table_no,
+            orderNo: order_no,
+            items: items,
+            from:orderFrom,
+            type:'dinein' // should be changed
+        }
+        await axios.post('http://localhost:9999/save_running_order',send_order);
         res.status(201).json({ message: 'Items saved successfully and updated' });
     } catch (error) {
         console.error('Error:', error);
@@ -517,14 +603,14 @@ app.get('/get_saved_orders', async (req, res) => {
     try {
         const orders = await CurrentOrder.find({});
         res.json(orders);
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching orders:', error);
         res.status(500).send('Internal Server Error');
-      }
+    }
 });
 
 app.get('/get_saved_orders/:tableno', async (req, res) => {
-    const {tableno} = req.params;
+    const { tableno } = req.params;
     try {
         const orders = await CurrentOrder.find({
             table_no: tableno
@@ -537,22 +623,28 @@ app.get('/get_saved_orders/:tableno', async (req, res) => {
 });
 
 app.put('/update_current_order/:tableno', async (req, res) => {
-    const {tableno} = req.params;
+    const { tableno } = req.params;
     try {
-        const {items , items_ordered ,total} = req.body;
+        const { items, items_ordered, total } = req.body;
         console.log(req.body);
         const updateOrder = await CurrentOrder.findOneAndUpdate(
-            {table_no: tableno},
+            { table_no: tableno },
             {
                 $set: req.body
 
             }, { new: true }
         );
         const update_data = {
-            table_itemsordered : items_ordered,
+            table_itemsordered: items_ordered,
         }
         // update the table data ?? s
-        await axios.put(`http://localhost:9999/update_table_data/${tableno}`,update_data)
+        await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_data)
+
+        // for current trunning orders
+        const send_update_order = {
+            items: items,
+        }
+        await axios.put(`http://localhost:9999/update_running_order/${tableno}`,send_update_order)
 
         res.status(201).json({ message: 'Items Updated successfully' });
     } catch (error) {
@@ -561,9 +653,121 @@ app.put('/update_current_order/:tableno', async (req, res) => {
     }
 });
 
+app.delete('/delete_current_order/:tableno', async (req, res) => {
+    const { tableno } = req.params;
+    try {
+
+        const update_table = {
+
+            table_taken: '0',
+            table_pploccupied: '0',
+            table_itemsordered: '0',
+
+        }
+        await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_table);
+
+        const updateNewtable = await CurrentOrder.findOneAndDelete({
+            table_no: tableno
+        })
+        if (updateNewtable.value) {
+            console.log('Deleted Document:', result.value);
+            res.status(201).json({ success: true, message: 'Document deleted successfully' });
+        } else {
+            console.log('Document not found');
+            res.status(404).json({ success: false, message: 'Document not found' });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 //  ***************************** END OF ORDERSAVING ****************************
+//  ***************************** START OF RUNNINGORDER ****************************
+app.get('/get_running_order', async (req, res) => {
+    try {
+        const runningorder = await RunningOrder.find({});
+        res.json(runningorder);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.post('/save_running_order', async (req, res) => {
+    try {
+        const saveorder = new RunningOrder(req.body);
+        await saveorder.save();
+        console.log("saved the running order");
+        res.json(saveorder);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.put('/update_running_order/:tableno', async (req, res) => {
+    const {tableno} = req.params;
+    try {
+        const updateorder = await RunningOrder.findOneAndUpdate({
+            tableNo: tableno,
+        },{
+            $set: req.body
+        }
+        );
+        res.json({msg:'updated'});
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+//  ***************************** END OF RUNNINGORDER ****************************
+
+//  ***************************** START OF CUTOMERDETAILS ****************************
+app.post('/save_customer_details', async (req, res) => {
+    try {
+        const CustomerDetail = new CustomerDetails(req.body);
+        await CustomerDetail.save();
 
 
+        // creating an order and sending back to frontend server
+        const { total } = req.body;
+        const amount = total * 100; // Amount in paise (example: 1000 paise = 10 AED)
+        const currency = 'AED';
+
+        const options = {
+            amount,
+            currency,
+        };
+
+        const order = await razorpay.orders.create(options);
+        console.log("from backend:" + order.id);
+
+
+        res.status(201).json({ message: 'Customer Details Saved', order_id: order.id });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.put("/update_customer_details/:orderid", async (req, res) => {
+    try {
+        const { orderid } = req.params;
+        const updateCustomer = await CustomerDetails.findOneAndUpdate({
+            order_no: orderid
+        }, {
+            $set: req.body,
+        })
+        res.status(201).json({ message: 'Items Updated successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+//  ***************************** END OF CUTOMERDETAILS ****************************
 
 
 

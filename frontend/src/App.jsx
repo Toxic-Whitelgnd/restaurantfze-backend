@@ -24,6 +24,8 @@ import FoodTypeEditList from './componets/FoodPanel/CRUDfood/FoodTypeEditList';
 import FoodTypeEdit from './componets/FoodPanel/CRUDfood/FoodTypeEdit';
 import FoodTypeDelList from './componets/FoodPanel/CRUDfood/FoodTypeDelList';
 import FoodTypeDelete from './componets/FoodPanel/CRUDfood/FoodTypeDelete';
+import KitchenPanel from './componets/Kitchenpanel/KitchenPanel';
+import Runningorder from './componets/Kitchenpanel/CRUDkitchen/Runningorder';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -60,6 +62,10 @@ function App() {
           <Route path='/change-food-image/:foodid' element={<FoodImageChange />} />
           <Route path='/delete-fooddata' element={<FoodDelList />} />
           <Route path='/delete-fooddata/:foodid' element={<FoodDelete />} />
+          {/* for kitchen panel */}
+          <Route path='/kitchenpanel'  element={<KitchenPanel/>} />
+          <Route path="/running-order" element={<Runningorder />} />
+          <Route path="/completed-order" element={<FoodType />} />
         </Routes>
       </Router>
       </div>
