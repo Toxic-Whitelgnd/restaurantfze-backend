@@ -14,6 +14,10 @@ const Pages = () => {
                 <br></br>
                 <NavLink to={'/kitchenpanel'}>Kitchen Panel</NavLink>
                 <br></br>
+                <NavLink to={'/deliverypanel'}>Delivery order Panel</NavLink>
+                <br></br>
+                <NavLink to={'/waiterpanel'}>WaiterPanel</NavLink>
+                <br></br>
             </div>
         </div>
     );

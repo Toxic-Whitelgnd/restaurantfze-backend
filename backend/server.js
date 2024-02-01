@@ -79,6 +79,7 @@ const itemSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     amt: { type: Number, required: true },
     status: { type: String, required: true },
+    table_no: { type: String, required: true},
 });
 
 const currentOrderSchema = new mongoose.Schema({
@@ -708,6 +709,12 @@ app.post('/save_running_order', async (req, res) => {
 
 app.put('/update_running_order/:tableno', async (req, res) => {
     const {tableno} = req.params;
+    // console.log(req.body);
+    // const tablnoupdated = req.body.filter(x => x.tableNo == tableno);
+    // console.log(tablnoupdated);
+    // tablnoupdated[0].items.map((val)=>{
+    //     console.log(val.status);
+    // })
     try {
         const updateorder = await RunningOrder.findOneAndUpdate({
             tableNo: tableno,
@@ -715,7 +722,31 @@ app.put('/update_running_order/:tableno', async (req, res) => {
             $set: req.body
         }
         );
-        res.json({msg:'updated'});
+        res.json({msg:'updated from running order'});
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.put('/update_running_items/:tableno', async (req, res) => {
+    const {tableno} = req.params;
+    try {
+        const {_id} = req.body;
+        console.log(_id);
+        const updateitem = await RunningOrder.updateOne(
+            {tableNo: tableno},
+            {
+                $pull: {
+                    items:
+                    {
+                        _id: _id
+                    }
+                }
+            }
+
+        );
+        res.json({msg:'updated the item from running order'});
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });

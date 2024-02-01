@@ -26,6 +26,9 @@ import FoodTypeDelList from './componets/FoodPanel/CRUDfood/FoodTypeDelList';
 import FoodTypeDelete from './componets/FoodPanel/CRUDfood/FoodTypeDelete';
 import KitchenPanel from './componets/Kitchenpanel/KitchenPanel';
 import Runningorder from './componets/Kitchenpanel/CRUDkitchen/Runningorder';
+import DeliveryPanel from './componets/DeliveryPanel/DeliveryPanel';
+import DineinDeliveryorder from './componets/DeliveryPanel/CRUDfoodfelivery/dineinDeliveryorder';
+import WaiterPanel from './componets/WaiterPanel/WaiterPanel';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -65,6 +68,14 @@ function App() {
           {/* for kitchen panel */}
           <Route path='/kitchenpanel'  element={<KitchenPanel/>} />
           <Route path="/running-order" element={<Runningorder />} />
+          <Route path="/completed-order" element={<FoodType />} />
+          {/* for kitchen panel */}
+          <Route path='/deliverypanel'  element={<DeliveryPanel/>} />
+          <Route path="/dinein-delivery-order" element={<DineinDeliveryorder />} />
+          <Route path="/completed-order" element={<FoodType />} />
+          {/* for Waiter panel */}
+          <Route path='/waiterpanel'  element={<WaiterPanel/>} />
+          <Route path="/dinein-delivery-order" element={<DineinDeliveryorder />} />
           <Route path="/completed-order" element={<FoodType />} />
         </Routes>
       </Router>
