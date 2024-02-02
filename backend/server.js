@@ -79,7 +79,7 @@ const itemSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     amt: { type: Number, required: true },
     status: { type: String, required: true },
-    table_no: { type: String, required: true},
+    table_no: { type: String, required: true },
 });
 
 const currentOrderSchema = new mongoose.Schema({
@@ -158,16 +158,36 @@ const customerSchema = new mongoose.Schema({
     vat: String,
     waiter_name: String,
 });
-  
-  const runningorderSchema = new mongoose.Schema({
+
+const runningorderSchema = new mongoose.Schema({
     orderNo: Number,
     tableNo: String,
     type: String,
     from: String,
     items: [itemSchema],
-  });
-  
+});
 
+const waiterSchema = new mongoose.Schema({
+    waiterName: {
+        type: String,
+        required: true
+    },
+    waiterNumber: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    dateOfJoining: {
+        type: String,
+        // required: true,
+        // get: (date) => date.toISOString().split('T')[0], // Custom getter to return only the date string
+        // set: (dateString) => new Date(dateString)
+    }
+});
 
 
 // ****************** END **********************
@@ -185,6 +205,7 @@ const FoodData = mongoose.model('FoodData', foodDataSchema, 'food_data');
 const CurrentOrder = mongoose.model('CurrentOrder', currentOrderSchema, 'current_order');
 const CustomerDetails = mongoose.model('CustomerDetails', customerSchema, 'customer_details');
 const RunningOrder = mongoose.model('RunningOrder', runningorderSchema, 'running_order');
+const Waiter = mongoose.model('Waiter', waiterSchema);
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -575,7 +596,7 @@ app.post('/save_current_order', async (req, res) => {
         const newOrder = new CurrentOrder(req.body);
         const result = await newOrder.save();
 
-        const { table_no, no_of_seats, running_order, items_ordered , order_no,items , orderFrom} = req.body;
+        const { table_no, no_of_seats, running_order, items_ordered, order_no, items, orderFrom } = req.body;
         const update_data = {
             table_taken: running_order,
             table_pploccupied: no_of_seats,
@@ -589,10 +610,10 @@ app.post('/save_current_order', async (req, res) => {
             tableNo: table_no,
             orderNo: order_no,
             items: items,
-            from:orderFrom,
-            type:'dinein' // should be changed
+            from: orderFrom,
+            type: 'dinein' // should be changed
         }
-        await axios.post('http://localhost:9999/save_running_order',send_order);
+        await axios.post('http://localhost:9999/save_running_order', send_order);
         res.status(201).json({ message: 'Items saved successfully and updated' });
     } catch (error) {
         console.error('Error:', error);
@@ -645,7 +666,7 @@ app.put('/update_current_order/:tableno', async (req, res) => {
         const send_update_order = {
             items: items,
         }
-        await axios.put(`http://localhost:9999/update_running_order/${tableno}`,send_update_order)
+        await axios.put(`http://localhost:9999/update_running_order/${tableno}`, send_update_order)
 
         res.status(201).json({ message: 'Items Updated successfully' });
     } catch (error) {
@@ -708,7 +729,7 @@ app.post('/save_running_order', async (req, res) => {
 });
 
 app.put('/update_running_order/:tableno', async (req, res) => {
-    const {tableno} = req.params;
+    const { tableno } = req.params;
     // console.log(req.body);
     // const tablnoupdated = req.body.filter(x => x.tableNo == tableno);
     // console.log(tablnoupdated);
@@ -718,11 +739,11 @@ app.put('/update_running_order/:tableno', async (req, res) => {
     try {
         const updateorder = await RunningOrder.findOneAndUpdate({
             tableNo: tableno,
-        },{
+        }, {
             $set: req.body
         }
         );
-        res.json({msg:'updated from running order'});
+        res.json({ msg: 'updated from running order' });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -730,12 +751,12 @@ app.put('/update_running_order/:tableno', async (req, res) => {
 });
 
 app.put('/update_running_items/:tableno', async (req, res) => {
-    const {tableno} = req.params;
+    const { tableno } = req.params;
     try {
-        const {_id} = req.body;
+        const { _id } = req.body;
         console.log(_id);
         const updateitem = await RunningOrder.updateOne(
-            {tableNo: tableno},
+            { tableNo: tableno },
             {
                 $pull: {
                     items:
@@ -746,10 +767,29 @@ app.put('/update_running_items/:tableno', async (req, res) => {
             }
 
         );
-        res.json({msg:'updated the item from running order'});
+        res.json({ msg: 'updated the item from running order' });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.delete('/delete_running_order/:tableno', async (req, res) => {
+    const { tableno } = req.params;
+    try {
+        const updateNewtable = await RunningOrder.findOneAndDelete({
+
+            tableNo: tableno
+        })
+        if (updateNewtable.value) {
+            console.log('Deleted Document:', result.value);
+            res.status(201).json({ success: true, message: 'Document deleted successfully' });
+        } else {
+            console.log('Document not found');
+            res.status(404).json({ success: false, message: 'Document not found' });
+        }
+    } catch (error) {
+        console.log(error);
     }
 });
 
@@ -800,7 +840,72 @@ app.put("/update_customer_details/:orderid", async (req, res) => {
 
 //  ***************************** END OF CUTOMERDETAILS ****************************
 
+//  ***************************** START OF WAITER ****************************
+app.post('/add_waiter_details', async (req, res) => {
+    try {
+        const waiterData = new Waiter(req.body);
+        waiterData.save();
+        res.json({ msg: "Waiter created successfully" });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 
+app.get('/get_waiter', async function (req, res) {
+    try {
+        const getWaiter = await Waiter.find({});
+        res.json(getWaiter);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.get('/get_waiter/:waiterid', async function (req, res) {
+    const { waiterid } = req.params;
+    try {
+        const getWaiter = await Waiter.findById({
+            _id: waiterid
+        })
+
+        res.json(getWaiter);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.put('/update_waiter/:waiterid', async (req, res) => {
+    const { waiterid } = req.params;
+    try {
+        const updateWaiter = await Waiter.findOneAndUpdate({
+            _id: waiterid
+        }
+            , {
+                $set: req.body
+            });
+        res.json({ msg: "Waiter updated successfully" })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.delete('/delete_waiter/:waiterid', async (req, res) => {
+    const { waiterid } = req.params;
+    try {
+        const waiterDelete = await Waiter.findByIdAndDelete({
+            _id: waiterid
+        });
+        res.json({ msg: "deleter waiter" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+//  ***************************** END OF WAITER ****************************
 
 
 

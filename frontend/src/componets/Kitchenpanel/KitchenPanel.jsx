@@ -8,7 +8,7 @@ const KitchenPanel = () => {
             <div>
                 <NavLink to='/running-order'>Running Order</NavLink>
                 <br></br>
-                <NavLink to='/completed-order'>Change availibity of food</NavLink>
+                <NavLink to='/changeavailibilty'>Change availibity of food</NavLink>
                 <br></br>
                 
              

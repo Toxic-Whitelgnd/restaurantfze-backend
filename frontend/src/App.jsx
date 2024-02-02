@@ -29,6 +29,13 @@ import Runningorder from './componets/Kitchenpanel/CRUDkitchen/Runningorder';
 import DeliveryPanel from './componets/DeliveryPanel/DeliveryPanel';
 import DineinDeliveryorder from './componets/DeliveryPanel/CRUDfoodfelivery/dineinDeliveryorder';
 import WaiterPanel from './componets/WaiterPanel/WaiterPanel';
+import AddWaiter from './componets/WaiterPanel/CRUDwaiter/AddWaiter';
+import EditWaiterList from './componets/WaiterPanel/CRUDwaiter/WaiterList';
+import EditWaiterForm from './componets/WaiterPanel/CRUDwaiter/EditWaiter';
+import DeleteWaiterList from './componets/WaiterPanel/CRUDwaiter/DeleteList';
+import DeleteWaiter from './componets/WaiterPanel/CRUDwaiter/DeleteWaiter';
+import ChangeFoodAvil from './componets/Kitchenpanel/CRUDkitchen/ChangeFoodAvil';
+import ChangeAvailability from './componets/Kitchenpanel/CRUDkitchen/ChangeAvailability';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -72,11 +79,16 @@ function App() {
           {/* for kitchen panel */}
           <Route path='/deliverypanel'  element={<DeliveryPanel/>} />
           <Route path="/dinein-delivery-order" element={<DineinDeliveryorder />} />
-          <Route path="/completed-order" element={<FoodType />} />
+          
+          <Route path="/changeavailibilty" element={<ChangeAvailability />} />
+          <Route path="/change-food-availablity/:foodid" element={<ChangeFoodAvil />} />
           {/* for Waiter panel */}
           <Route path='/waiterpanel'  element={<WaiterPanel/>} />
-          <Route path="/dinein-delivery-order" element={<DineinDeliveryorder />} />
-          <Route path="/completed-order" element={<FoodType />} />
+          <Route path="/add-waiter" element={<AddWaiter />} />
+          <Route path="/edit-waiter" element={<EditWaiterList />} />
+          <Route path="/edit-waiter/:waiterid" element={<EditWaiterForm />} />
+          <Route path="/delete-waiter" element={<DeleteWaiterList />} />
+          <Route path="/delete-waiter/:waiterid" element={<DeleteWaiter />} />
         </Routes>
       </Router>
       </div>

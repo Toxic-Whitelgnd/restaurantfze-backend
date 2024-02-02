@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const FoodEditList = () => {
+const ChangeAvailability = () => {
     const [tables, setTables] = useState([]);
 
     const [foodType, setFoodType] = useState('');
@@ -51,7 +51,7 @@ const FoodEditList = () => {
           {
               tables.filter(x => x.foodType === foodType).map(table => (
                   <li key={table.tableNo}>
-                    <Link to={`/edit-fooddata/${table._id}`}>{`${table.foodName}`}</Link>
+                    <Link to={`/change-food-availablity/${table._id}`}>{`${table.foodName}`}</Link>
                   </li>
                 ))
           }
@@ -61,4 +61,4 @@ const FoodEditList = () => {
     );
 }
 
-export default FoodEditList;
+export default ChangeAvailability;
