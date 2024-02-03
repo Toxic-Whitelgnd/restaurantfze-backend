@@ -18,6 +18,8 @@ const Pages = () => {
                 <br></br>
                 <NavLink to={'/waiterpanel'}>WaiterPanel</NavLink>
                 <br></br>
+                <NavLink to={'/billpanel'}>Bill Panel</NavLink>
+                <br></br>
             </div>
         </div>
     );

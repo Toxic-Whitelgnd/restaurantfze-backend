@@ -36,6 +36,8 @@ import DeleteWaiterList from './componets/WaiterPanel/CRUDwaiter/DeleteList';
 import DeleteWaiter from './componets/WaiterPanel/CRUDwaiter/DeleteWaiter';
 import ChangeFoodAvil from './componets/Kitchenpanel/CRUDkitchen/ChangeFoodAvil';
 import ChangeAvailability from './componets/Kitchenpanel/CRUDkitchen/ChangeAvailability';
+import BillPanel from './componets/BillPanel/BillPanel';
+import BillEditPanel from './componets/BillPanel/CRUDbill/BillEditPanel';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -89,6 +91,9 @@ function App() {
           <Route path="/edit-waiter/:waiterid" element={<EditWaiterForm />} />
           <Route path="/delete-waiter" element={<DeleteWaiterList />} />
           <Route path="/delete-waiter/:waiterid" element={<DeleteWaiter />} />
+          {/* for Bill panel */}
+          <Route path='/billpanel'  element={<BillPanel/>} />
+          <Route path='/bill-edit-panel'  element={<BillEditPanel/>} />
         </Routes>
       </Router>
       </div>

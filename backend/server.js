@@ -80,6 +80,7 @@ const itemSchema = new mongoose.Schema({
     amt: { type: Number, required: true },
     status: { type: String, required: true },
     table_no: { type: String, required: true },
+    orderFrom: { type: String, required: true },
 });
 
 const currentOrderSchema = new mongoose.Schema({
@@ -190,6 +191,26 @@ const waiterSchema = new mongoose.Schema({
 });
 
 
+const billdSchema = new mongoose.Schema({
+    VAT: {
+      type: Number,
+      required: true,
+    },
+    creditSale: {
+      type: Number,
+      required: true,
+    },
+    discount: {
+      type: Number,
+      required: true,
+    },
+    cardSale: {
+      type: Number,
+      required: true,
+    },
+  });
+  
+
 // ****************** END **********************
 
 // Multer configuration for handling image uploads
@@ -206,6 +227,7 @@ const CurrentOrder = mongoose.model('CurrentOrder', currentOrderSchema, 'current
 const CustomerDetails = mongoose.model('CustomerDetails', customerSchema, 'customer_details');
 const RunningOrder = mongoose.model('RunningOrder', runningorderSchema, 'running_order');
 const Waiter = mongoose.model('Waiter', waiterSchema);
+const Billd = mongoose.model('Billd', billdSchema);
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -341,10 +363,17 @@ app.put('/update_table_data/:tableno', async (req, res) => {
     const { tableno } = req.params;
 
     try {
+        const findtable = await TablePage.find({
+            table_no: tableno
+        });
+        console.log(findtable);
+        const {table_type} = req.body;
+        console.log(table_type);
         // Find the document with the specified home_id and update it with the request body
-        const result = await TablePage.findOneAndUpdate({ table_no: tableno },
+        const result = await TablePage.findOneAndUpdate({ table_no:tableno,
+            table_type: table_type },
             { $set: req.body }, { new: true });
-
+        console.log(result);
         if (!result) {
             return res.status(404).json({ message: 'Document not found' });
         }
@@ -601,6 +630,7 @@ app.post('/save_current_order', async (req, res) => {
             table_taken: running_order,
             table_pploccupied: no_of_seats,
             table_itemsordered: items_ordered,
+            table_type: orderFrom,
         }
 
         // adter saving just update the table details page
@@ -838,6 +868,15 @@ app.put("/update_customer_details/:orderid", async (req, res) => {
     }
 });
 
+app.get('/get_customer_details', async (req, res) => {
+    try {
+        const custdeat = await CustomerDetails.find({});
+        res.json(custdeat);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 //  ***************************** END OF CUTOMERDETAILS ****************************
 
 //  ***************************** START OF WAITER ****************************
@@ -908,12 +947,39 @@ app.delete('/delete_waiter/:waiterid', async (req, res) => {
 //  ***************************** END OF WAITER ****************************
 
 
+// TODO: ADD vat , Discout , cash at starting , credit sale , card sale page in the admin panel
+//  ***************************** START OF BILLD ****************************
+app.get('/get_billd',async (req, res) => {
+    try {
+        const getBild = await Billd.find({})
+        res.json(getBild);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+app.put('/update_billd/:bill_id', async (req, res) => {
+    const {bill_id} = req.params;
+    try {
+        const updateBill = await Billd.findByIdAndUpdate({
+            _id: bill_id,
+        },{
+            $set: req.body,
+        })
+        // const bill = new Billd(req.body);
+        // await bill.save();
+        res.json("saved");
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+//  ***************************** END OF BILLD ****************************
+// TODO: Expenses tracking schema 
 
 
 
-
-
-
+// ************************************DONT NOT TOUCH ****************************
 // api handler
 app.get('/', (req, res) => {
     res.json("Server running");
