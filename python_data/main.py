@@ -70,9 +70,12 @@ try:
     # defining the collections
     home_page = db.home_page
     table_page = db.table_page
-
+    running_order = db.running_order
+    current_order = db.current_order
+    customer_details = db.customer_details
     # inserttohomepage()
-    insert_to_dineintables()
+    # insert_to_dineintables()
+    
 
 except Exception as e:
     print(e)
@@ -83,4 +86,23 @@ def fetchdata():
     for i in query:
         print(i)
 
-fetchdata()
+# fetchdata()
+
+def deleterunningorder():
+    running_order.delete_many({})
+    print("deleted")
+
+# deleterunningorder()
+
+def currentOrder():
+
+    current_order.delete_many({})
+    print("deleted")
+
+# currentOrder()
+
+def customerDetails():
+    customer_details.delete_many({})
+    print("deleted")
+
+customerDetails()

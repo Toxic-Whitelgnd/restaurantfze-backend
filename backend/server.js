@@ -158,6 +158,7 @@ const customerSchema = new mongoose.Schema({
     },
     vat: String,
     waiter_name: String,
+    discount: Number,
 });
 
 const runningorderSchema = new mongoose.Schema({
@@ -190,26 +191,112 @@ const waiterSchema = new mongoose.Schema({
     }
 });
 
+// for Takeaway schema
+const itemTakeawaySchema = new mongoose.Schema({
+    foodname: { type: String, required: true },
+    qty: { type: Number, required: true },
+    id: { type: String, required: true },
+    price: { type: Number, required: true },
+    amt: { type: Number, required: true },
+    status: { type: String, required: true },
+    orderFrom: { type: String, required: true },
+});
+
+const currentTakeawayOrderSchema = new mongoose.Schema({
+    customer_details: {
+        name: { type: String, required: true },
+        mobileNumber: { type: String, required: true },
+        email: { type: String, required: true },
+        address: { type: String, required: true},
+    },
+    floor_no: { type: String, required: true },
+    items: [itemTakeawaySchema],
+    items_ordered: { type: Number, required: true },
+    
+    order_no: { type: Number, required: true },
+    running_order: { type: String, required: true },
+   
+    orderFrom: { type: String, required: true },
+    total: { type: Number, required: true },
+});
+
+const customerTakeawaySchema = new mongoose.Schema({
+    customer_mobileNumber: {
+        type: String,
+        required: true,
+    },
+    customer_name: {
+        type: String,
+        required: true,
+    },
+    customer_email: {
+        type: String,
+        required: true,
+    },
+    customer_address: {
+        type: String,
+        required: true,
+    },
+    date: {
+        type: String,
+        required: true,
+    },
+    items: [itemTakeawaySchema], // Array of items using the defined itemSchema
+    items_ordered: {
+        type: Number,
+        required: true,
+    },
+    orderFrom: {
+        type: String,
+        required: true,
+    },
+    order_no: {
+        type: Number,
+        required: true,
+    },
+    
+    paid_by: {
+        type: String,
+        required: true,
+    },
+    
+    time: {
+        type: String,
+        required: true,
+    },
+    total: {
+        type: Number,
+        required: true,
+    },
+    type: {
+        type: String,
+        required: true,
+    },
+    vat: String,
+    waiter_name: String,
+    discount: Number,
+});
+
 
 const billdSchema = new mongoose.Schema({
     VAT: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true,
     },
     creditSale: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true,
     },
     discount: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true,
     },
     cardSale: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true,
     },
-  });
-  
+});
+
 
 // ****************** END **********************
 
@@ -228,6 +315,9 @@ const CustomerDetails = mongoose.model('CustomerDetails', customerSchema, 'custo
 const RunningOrder = mongoose.model('RunningOrder', runningorderSchema, 'running_order');
 const Waiter = mongoose.model('Waiter', waiterSchema);
 const Billd = mongoose.model('Billd', billdSchema);
+
+const TakeAwayCurrentOrder = mongoose.model('TakeAwayCurrentOrder', currentTakeawayOrderSchema , 'takeaway_current_order');
+const TakeAwayCustomerDetails = mongoose.model('TakeAwayCustomerDetails', customerTakeawaySchema, 'takeaway_customer_details');
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -238,7 +328,7 @@ app.get('/home_page_data', async (req, res) => {
     try {
         // Fetch all documents from the 'home_page' collection
         const data = await HomePage.find({});
-        console.log(data);
+        // console.log(data);
         // Send the data as a JSON response
         res.json(data);
     } catch (error) {
@@ -366,14 +456,16 @@ app.put('/update_table_data/:tableno', async (req, res) => {
         const findtable = await TablePage.find({
             table_no: tableno
         });
-        console.log(findtable);
-        const {table_type} = req.body;
+        console.log("findtable - updatetabledata", findtable);
+        const { table_type } = req.body;
         console.log(table_type);
         // Find the document with the specified home_id and update it with the request body
-        const result = await TablePage.findOneAndUpdate({ table_no:tableno,
-            table_type: table_type },
+        const result = await TablePage.findOneAndUpdate({
+            table_no: tableno,
+            table_type: table_type
+        },
             { $set: req.body }, { new: true });
-        console.log(result);
+        console.log("after updating", result);
         if (!result) {
             return res.status(404).json({ message: 'Document not found' });
         }
@@ -385,6 +477,8 @@ app.put('/update_table_data/:tableno', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 })
+
+
 
 app.delete('/delete_table_data/:table_no', async (req, res) => {
     const { table_no } = req.params;
@@ -674,10 +768,11 @@ app.get('/get_saved_orders/:tableno', async (req, res) => {
     }
 });
 
+// fixed here
 app.put('/update_current_order/:tableno', async (req, res) => {
     const { tableno } = req.params;
     try {
-        const { items, items_ordered, total } = req.body;
+        const { items, items_ordered, total, orderFrom } = req.body;
         console.log(req.body);
         const updateOrder = await CurrentOrder.findOneAndUpdate(
             { table_no: tableno },
@@ -686,9 +781,13 @@ app.put('/update_current_order/:tableno', async (req, res) => {
 
             }, { new: true }
         );
+        console.log("updated order:", updateOrder.orderFrom);
+        const orderfrom = updateOrder.orderFrom;
         const update_data = {
+            table_type: orderfrom,
             table_itemsordered: items_ordered,
         }
+        console.log("thevidiya:", update_data);
         // update the table data ?? s
         await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_data)
 
@@ -709,25 +808,39 @@ app.delete('/delete_current_order/:tableno', async (req, res) => {
     const { tableno } = req.params;
     try {
 
+        const findtable = await TablePage.find({
+            table_no: tableno
+        });
+        console.log("inside deleting", findtable);
+        var tt = '';
+        if(findtable.length == 2){
+            tt = findtable[1];
+        }
+        else{
+            tt = findtable[0];
+        }
+        const { table_type } = tt;
+        console.log("befor deelting:",table_type);
+
         const update_table = {
 
             table_taken: '0',
             table_pploccupied: '0',
             table_itemsordered: '0',
+            table_type: table_type,
+
 
         }
+        console.log("update table before deleting", update_table);
         await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_table);
 
         const updateNewtable = await CurrentOrder.findOneAndDelete({
             table_no: tableno
-        })
-        if (updateNewtable.value) {
-            console.log('Deleted Document:', result.value);
-            res.status(201).json({ success: true, message: 'Document deleted successfully' });
-        } else {
-            console.log('Document not found');
-            res.status(404).json({ success: false, message: 'Document not found' });
-        }
+        });
+        console.log("delete oredr", updateNewtable);
+
+        res.status(201).json({ success: true, message: 'Document deleted successfully' });
+
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -809,15 +922,12 @@ app.delete('/delete_running_order/:tableno', async (req, res) => {
     try {
         const updateNewtable = await RunningOrder.findOneAndDelete({
 
-            tableNo: tableno
+            tableNo: tableno,
         })
-        if (updateNewtable.value) {
-            console.log('Deleted Document:', result.value);
-            res.status(201).json({ success: true, message: 'Document deleted successfully' });
-        } else {
-            console.log('Document not found');
-            res.status(404).json({ success: false, message: 'Document not found' });
-        }
+
+
+        res.status(201).json({ success: true, message: 'Document deleted successfully' });
+
     } catch (error) {
         console.log(error);
     }
@@ -949,7 +1059,7 @@ app.delete('/delete_waiter/:waiterid', async (req, res) => {
 
 // TODO: ADD vat , Discout , cash at starting , credit sale , card sale page in the admin panel
 //  ***************************** START OF BILLD ****************************
-app.get('/get_billd',async (req, res) => {
+app.get('/get_billd', async (req, res) => {
     try {
         const getBild = await Billd.find({})
         res.json(getBild);
@@ -959,11 +1069,11 @@ app.get('/get_billd',async (req, res) => {
     }
 });
 app.put('/update_billd/:bill_id', async (req, res) => {
-    const {bill_id} = req.params;
+    const { bill_id } = req.params;
     try {
         const updateBill = await Billd.findByIdAndUpdate({
             _id: bill_id,
-        },{
+        }, {
             $set: req.body,
         })
         // const bill = new Billd(req.body);
@@ -975,6 +1085,71 @@ app.put('/update_billd/:bill_id', async (req, res) => {
     }
 });
 //  ***************************** END OF BILLD ****************************
+// ****************************** START OF TAKEAWAY ****************************
+
+app.post('/save_takeaway_order', async (req, res) => { 
+    try {
+        const newOrder = new TakeAwayCustomerDetails(req.body);
+        const result = await newOrder.save();
+
+        res.status(201).json({ success: true , message: 'Items saved successfully and updated' });
+
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.get('/get_takeaway_order', async (req, res) => {  
+    try {
+        const result = await TakeAwayCustomerDetails.find({});
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.get('/get_bytakeaway_order/:orderid', async (req, res) => {
+    const {orderid} = req.params;
+        try {
+            const res1 = await TakeAwayCustomerDetails.find({
+                order_no: orderid,
+            });
+            res.json(res1);
+        } catch (error) {
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+  });
+
+  app.put('/update_takeaway_order/:orderid', async (req, res) => {
+    const {orderid} = req.params;
+    try {
+        const res1 = await TakeAwayCustomerDetails.findOneAndUpdate({
+            order_no: orderid,
+        },{
+            $set: req.body,
+        });
+        res.json({success: true});
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.delete("/delete_takeaway_order/:orderid", async (req, res) => {
+    try {
+        const {orderid} = req.params;
+        const delte = await TakeAwayCustomerDetails.findOneAndDelete({
+            order_no: orderid,
+        });
+        res.json({success: true});
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+// ****************************** END OF TAKEAWAY *******************************
+
+
 // TODO: Expenses tracking schema 
 
 
