@@ -89,7 +89,7 @@ const Runningorder = () => {
                     return (
                         <> {
                             <div>
-                                <h2>Table no: {val.tableNo}</h2>
+                                <h2>Table no: {val.tableNo}  Order From: {val.from}</h2>
                                 <h3>Items </h3> {
                                     val.items.map(f => {
                                         return (

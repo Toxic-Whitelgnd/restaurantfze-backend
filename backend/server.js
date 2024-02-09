@@ -93,6 +93,9 @@ const currentOrderSchema = new mongoose.Schema({
     items: [itemSchema],
     items_ordered: { type: Number, required: true },
     no_of_seats: { type: String, required: true },
+    waiterName: { type: String, required: true },
+    date: { type: String, required: true },
+    time: { type: String, required: true },
     order_no: { type: Number, required: true },
     running_order: { type: String, required: true },
     table_no: { type: String, required: true },
@@ -804,7 +807,7 @@ app.put('/update_current_order/:tableno', async (req, res) => {
     }
 });
 
-app.delete('/delete_current_order/:tableno', async (req, res) => {
+app.delete('/delete_current_indoor_order/:tableno', async (req, res) => {
     const { tableno } = req.params;
     try {
 
@@ -812,14 +815,8 @@ app.delete('/delete_current_order/:tableno', async (req, res) => {
             table_no: tableno
         });
         console.log("inside deleting", findtable);
-        var tt = '';
-        if(findtable.length == 2){
-            tt = findtable[1];
-        }
-        else{
-            tt = findtable[0];
-        }
-        const { table_type } = tt;
+        
+        const  table_type = "indoor" ;
         console.log("befor deelting:",table_type);
 
         const update_table = {
@@ -838,6 +835,47 @@ app.delete('/delete_current_order/:tableno', async (req, res) => {
             table_no: tableno
         });
         console.log("delete oredr", updateNewtable);
+
+        await axios.delete(`http://localhost:9999/delete_running_indoor_order/${tableno}`);
+
+        res.status(201).json({ success: true, message: 'Document deleted successfully' });
+
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.delete('/delete_current_outdoor_order/:tableno', async (req, res) => {
+    const { tableno } = req.params;
+    try {
+
+        const findtable = await TablePage.find({
+            table_no: tableno
+        });
+        console.log("inside deleting", findtable);
+        
+        const  table_type = "outdoor" ;
+        console.log("befor deelting:",table_type);
+
+        const update_table = {
+
+            table_taken: '0',
+            table_pploccupied: '0',
+            table_itemsordered: '0',
+            table_type: table_type,
+
+
+        }
+        console.log("update table before deleting", update_table);
+        await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_table);
+
+        const updateNewtable = await CurrentOrder.findOneAndDelete({
+            table_no: tableno
+        });
+        console.log("delete oredr", updateNewtable);
+
+        await axios.delete(`http://localhost:9999/delete_running_outdoor_order/${tableno}`);
 
         res.status(201).json({ success: true, message: 'Document deleted successfully' });
 
@@ -917,7 +955,23 @@ app.put('/update_running_items/:tableno', async (req, res) => {
     }
 });
 
-app.delete('/delete_running_order/:tableno', async (req, res) => {
+app.delete('/delete_running_indoor_order/:tableno', async (req, res) => {
+    const { tableno } = req.params;
+    try {
+        const updateNewtable = await RunningOrder.findOneAndDelete({
+
+            tableNo: tableno,
+        })
+
+
+        res.status(201).json({ success: true, message: 'Document deleted successfully' });
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.delete('/delete_running_outdoor_order/:tableno', async (req, res) => {
     const { tableno } = req.params;
     try {
         const updateNewtable = await RunningOrder.findOneAndDelete({
