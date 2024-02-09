@@ -1041,6 +1041,18 @@ app.get('/get_customer_details', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
+app.get('/get_customerbyid/:id', async (req, res) => {
+    const {id} = req.params;
+    try {
+        const res2 = await CustomerDetails.findById({
+            _id: id,
+        });
+        res.json(res2);
+    } catch (error) {
+        console.log(error);
+    }
+});
 //  ***************************** END OF CUTOMERDETAILS ****************************
 
 //  ***************************** START OF WAITER ****************************
