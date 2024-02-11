@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./sod.css";
-import SaleOrderApi from '../../api/sodapi';
+import SaleOrderApi from '../api/sodapi';
 import SaleOrderCard from '../../cards/SODCards/SaleOrderCard';
 import axios from 'axios';
 

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import "./CRM.css";
-import SaleOrderApi from '../../api/sodapi';
+import SaleOrderApi from '../api/sodapi';
 import CRMCards from '../../cards/CRMCards/CRMCards';
-import MessApi from '../../api/messapi';
+import MessApi from '../api/messapi';
 import MessCards from '../../cards/CRMCards/MessCards';
 
 

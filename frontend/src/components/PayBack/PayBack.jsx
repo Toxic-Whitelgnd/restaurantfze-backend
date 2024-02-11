@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./Payback.css"
-import SaleOrderApi from '../../api/sodapi';
+import SaleOrderApi from '../api/sodapi';
 import PaybackCard from '../../cards/PayBackCards/paybackCard';
 
 const PayBack = () => {

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import "./creditsale.css";
-import SaleOrderApi from '../../api/sodapi';
+import SaleOrderApi from '../api/sodapi';
 import CScards from '../../cards/CreditSaleCards/CScards';
 
 const Creditsale = () => {

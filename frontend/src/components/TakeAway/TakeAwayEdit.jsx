@@ -1,7 +1,7 @@
 // import React, { useState } from 'react';
 // import { useParams } from 'react-router-dom';
 // import FoodCard from '../../cards/FoodCards/FoodCard';
-// import FoodApi from '../../api/foodapi';
+// import FoodApi from '../api/foodapi';
 // import TableorderCard from '../../cards/Table/TableorderCard';
 // import TableBody from '../../cards/Table/tableBody';
 // import Paybillpopup from '../../cards/PopupCards/Paybillpopup';
@@ -601,7 +601,7 @@
 // import { useParams } from 'react-router-dom';
 // import Quanttity from '../../cards/QuantityCards/Quanttity';
 // import FoodCard from '../../cards/FoodCards/FoodCard';
-// import FoodApi from '../../api/foodapi';
+// import FoodApi from '../api/foodapi';
 // import TableorderCard from '../../cards/Table/TableorderCard';
 // import TableBody from '../../cards/Table/tableBody';
 // import Paybillpopup from '../../cards/PopupCards/Paybillpopup';
@@ -1216,7 +1216,7 @@ import "./takeaway.css"
 import { useParams } from 'react-router-dom';
 import Quanttity from '../../cards/QuantityCards/Quanttity';
 import FoodCard from '../../cards/FoodCards/FoodCard';
-import FoodApi from '../../api/foodapi';
+import FoodApi from '../api/foodapi';
 import TableorderCard from '../../cards/Table/TableorderCard';
 import TableBody from '../../cards/Table/tableBody';
 import Paybillpopup from '../../cards/PopupCards/Paybillpopup';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Homefeature from '../../api/homepageapi';
+import Homefeature from '../api/homepageapi';
 import HomeCard from '../../cards/HomeCards/HomeCard';
 import "./HomePage.css"
 import axios from 'axios';

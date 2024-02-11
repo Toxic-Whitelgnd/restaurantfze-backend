@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./dinein.css"
-import DineinTables from '../../api/dineintablesapi';
+import DineinTables from '../api/dineintablesapi';
 import DineInCards from '../../cards/DineInCards/DineInCards';
 import axios from 'axios';
 

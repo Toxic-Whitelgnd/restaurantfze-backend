@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import TakeAwayLogApi from '../../api/takeawaylogapi';
+import TakeAwayLogApi from '../api/takeawaylogapi';
 import TakeAwayCards from '../../cards/TakeAwayCards/TakeAwayCards';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
