@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+var cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -343,6 +343,11 @@ const db1 = mongoose.connect(mongoUri);
 
 // **************************** For HOME PAGE ********************************
 app.get('/home_page_data', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS"); 
     try {
         // Fetch all documents from the 'home_page' collection
         const data = await HomePage.find({});
