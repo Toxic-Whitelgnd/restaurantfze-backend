@@ -72,23 +72,23 @@ function App() {
           <NavBar />
         <Routes>
           {/*MAIN PATHS */}
-            <Route path='/' index element={<HomePage />} />
-            <Route path='/dinein' index element={<DineinHomepage />} />
-            <Route path='/itable/:id' index element={<DineinOrderpage />} />
-            <Route path='/otable/:id' index element={<DineoutOrderpage />} />
-            <Route path='/running-order' index element={<RunningOrder />} />
-            <Route path='/saleorderdetails' index element={<Sod />} />
-            <Route path='/sodcustomer/:id' index element={<SaleOrderView />} />
-            <Route path='/settlesale' index element={<Settlesale />} />
-            <Route path='/payback' index element={<PayBack />} />
-            <Route path='/expenses' index element={<Expenses />} />
-            <Route path='/creditsale' index element={<Creditsale />} />
-            <Route path='/cashatstarting' index element={<CashStarting />} />
-            <Route path='/crm' index element={<CRM />} />
-            <Route path='/messdetails' index element={<MessDetailsForm />} />
-            <Route path='/takeaway' index element={<TakeAway />} />
-            <Route path='/takeawaylog' index element={<TakeAwayLog />} />
-            <Route path='/takeawayedit/:id' index element={<TakeAwayEdit />} />
+          <Route path='/' index element={<HomePage />} />
+          <Route path='/dinein' index element={<DineinHomepage />} />
+          <Route path='/itable/:id' index element={<DineinOrderpage />} />
+          <Route path='/otable/:id' index element={<DineoutOrderpage />} />
+          <Route path='/running-order' index element={<RunningOrder />} />
+          <Route path='/saleorderdetails' index element={<Sod />} />
+          <Route path='/sodcustomer/:id' index element={<SaleOrderView />} />
+          <Route path='/settlesale' index element={<Settlesale />} />
+          <Route path='/payback' index element={<PayBack />} />
+          <Route path='/expenses' index element={<Expenses />} />
+          <Route path='/creditsale' index element={<Creditsale />} />
+          <Route path='/cashatstarting' index element={<CashStarting />} />
+          <Route path='/crm' index element={<CRM />} />
+          <Route path='/messdetails' index element={<MessDetailsForm />} />
+          <Route path='/takeaway' index element={<TakeAway />} />
+          <Route path='/takeawaylog' index element={<TakeAwayLog />} />
+          <Route path='/takeawayedit/:id' index element={<TakeAwayEdit />} />
 
           {/*ADMIN PATHS */}
           <Route path='/admin' index element={<Pages/>} />
