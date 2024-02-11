@@ -168,7 +168,7 @@ const Food = require('../models/Food');
 
 const router = express.Router();
 
-router.get('/get_food_data_with_images', async (req, res) => {
+router.get('/admin/get_food_data_with_images', async (req, res) => {
   try {
     const foodData = await Food.find();
     const foodDataWithBase64Images = foodData.map(item => ({
@@ -195,7 +195,7 @@ const FoodList = () => {
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
-        const response = await axios.get('/get_food_data_with_images');
+        const response = await axios.get('/admin/get_food_data_with_images');
         setFoodData(response.data);
       } catch (error) {
         console.error('Error fetching food data with images:', error);

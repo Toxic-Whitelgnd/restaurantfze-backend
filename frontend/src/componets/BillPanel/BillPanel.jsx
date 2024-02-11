@@ -5,9 +5,9 @@ const BillPanel = () => {
     return (
         <div>
             <h1>Bill panel</h1>
-            <NavLink to='/bill-edit-panel'>Edit bill Panel</NavLink>
+            <NavLink to='/admin/bill-edit-panel'>Edit bill Panel</NavLink>
                 <br></br>
-                <NavLink to={'/tablepanel'}>Edit Reciepiet Panel</NavLink>
+                <NavLink to={'/admin/tablepanel'}>Edit Reciepiet Panel</NavLink>
                 <br></br>
         </div>
     );

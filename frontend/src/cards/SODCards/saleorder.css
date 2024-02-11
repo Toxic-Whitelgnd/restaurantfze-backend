@@ -1,0 +1,116 @@
+
+.item-prdt{
+    display: inline-block;
+    /* word-wrap: break-word; */
+    overflow-wrap: break-word;
+    /* flex: 0 0 auto; */
+    /* column-gap: 10px; */
+  }
+  .box-pdt-12{
+    
+    background-color: #d4d4d4;
+    border-radius: 15px;
+  
+    position: relative;
+    display: block;
+    width: 930px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 190px;
+    flex: 0 0 190px;
+    height: 200px;
+    padding: 25px 16px 25px 25px;
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 13px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all .2s ease-out;
+    overflow-wrap: break-word;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+  }
+  .box-pdt-img{
+    position: absolute;
+      display: block;
+      top: 110px;
+      left: 50px;
+  }
+  .box-pdt-2 span{
+    display: block;
+  }
+
+.tb-no2{
+    color: #fff;
+    font-weight: bold;
+    font-size: 30px;
+    z-index: 2;
+    position: relative;
+}
+
+.totalppl{
+    left:250px;
+    padding: 8px;
+    border-radius: 20px;
+    background-color: #F5F5F5;
+    color: black;
+}
+.ordered-items2{
+    color: #F5F5F5;
+    font-weight: bold;
+    font-size: 22px;
+    z-index: 2;
+    margin-top: 80px;
+}
+  /* media queries */
+  
+  @media screen and (max-width: 768px) {
+    #scroll-style::-webkit-scrollbar {
+      /* background-color: #7e57c2; */
+      border-radius: 23px;
+      height: 8px;
+    }
+
+    #scroll-style::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 23px rgba(255, 255, 255, 0.825);
+      background-color: #F5F5F5;
+      border-radius: 23px;
+    }
+  }
+
+  /* for modal */
+  /* Modal.css */
+.modal-so {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+/* Modal content */
+.modal-content-so {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -1,0 +1,342 @@
+.dinein-navbar-cont{
+    background-color: rgb(94, 124, 145);
+    width: 1300px;
+    padding: 30px 20px 30px 20px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.ind-out-cont{
+    background-color: #3c14d0;
+    padding: 8px 8px;
+    border-radius: 10px;
+    width: 130px;
+    font-family: "Inconsolata", "Helvetica", "Arial", sans-serif;
+    font-size: inherit;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+option{
+    padding: 30px !important;
+}
+
+.indoor-cont{
+  white-space: nowrap;
+  display: flex;
+  column-gap: 30px;
+  row-gap: 20px;
+  padding: 20px;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* for btn1 style */
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+.running-order {
+    /*placement for code pen*/
+    /* margin: 10% 40%; */
+    /*Button Text Style*/
+    font-family: "Inconsolata", "Helvetica", "Arial", sans-serif;
+    font-size: inherit;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    /* text-transform: uppercase; */
+    text-decoration: none;
+    border-radius: 10px;
+    /*Button Color & Border*/
+    border: 4px solid #91D171;
+    color:'#000';
+    background: #91D171;
+    outline: none;
+    /*Position, Display, Size*/
+    position: relative;
+    display: inline-block;
+    padding: 13px 5px;
+    cursor: pointer;
+    width: auto;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-left: 15px;
+  }
+  .running-order:after {
+    /*Make a:after be as big as button*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    /*Give a:after Border & Background color*/
+    border: 2px solid #3c14d0;
+    background-color: #3c14d0;
+    /*Decide Location of a:after..this gives a           bottom right shadow*/
+    left: 4px;
+    top: 4px;
+    /*Place a:after behind button*/
+    z-index: -1;
+    content: "";
+    /*Animation/Transition Speed*/
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    color:'#000';
+  }
+  .running-order:hover {
+    top: 2px;
+    left: 2px;
+    text-decoration: none;
+  }
+  .running-order:hover:after {
+    top: -2px;
+    left: -2px;
+  }
+
+
+/* end of btn1 style */
+
+
+/* for media quries */
+@media only screen and (max-width: 979px) {
+    .dinein-navbar-cont{
+        width: 800px;
+    }
+
+}
+
+/* trying new */
+/* YourComponent.css */
+
+
+.pop-cont{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.modal-overlay1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.modal1 {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.close-btn-pb {
+  /* position: absolute; */
+  display: flex;
+  top: 0px;
+  /* left: -100px; */
+  /* background: black; */
+  border-radius: 30px;
+  color: rgb(255, 0, 0);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal1 h2 {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.save-btn {
+  cursor: pointer;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+.save-btn:hover {
+  background: #0056b3;
+}
+
+
+.pay-cont{
+  
+  display: block;
+  justify-content: flex-end;
+}
+
+.cust-btn{
+  margin-left: 30px;
+}
+
+/* for table */
+.orderCont {
+  overflow-y: scroll;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-height: 500px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  small {
+    font-size: 0.5em;
+  }
+}
+
+.responsive-table {
+
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .otable-header {
+    background-color: #95a5a6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  }
+  .otable-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  }
+  .colo-1 {
+    flex-basis: 10%;
+  }
+  .colo-2 {
+    flex-basis: 40%;
+  }
+  .colo-3 {
+    flex-basis: 15%;
+  }
+  .colo-4 {
+    flex-basis: 15%;
+  }
+  .colo-5{
+    flex-basis: 35%;
+  }
+
+  @media all and (max-width: 767px) {
+    .otable-header {
+      display: none;
+    }
+    .otable-row {
+    }
+    li {
+      display: block;
+    }
+    .colo {
+      flex-basis: 100%;
+    }
+    .colo {
+      display: flex;
+      padding: 10px 0;
+      &:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.over-order-page{
+  overflow: scroll;
+  height: 5200px;
+}
+
+/* food order and tracking page */
+.food-order-cont{
+  overflow-y: scroll;
+  min-width: 670px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-height: 700px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+.food-category-bar{
+  max-width: 1000px ;
+  height: 100px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 15px 20px;
+  background-color: #95a5a6;
+}
+
+.foo-cat{
+  display: flex;
+  flex-wrap: wrap;
+  width: 150px;
+}
+
+#foodCategory{
+  margin-top: -10px;
+}
+.date-time{
+  display: flex;
+  flex-wrap: wrap;
+  width: 180px;
+  justify-content: flex-end;
+}
+
+.orderCont-paybill {
+
+  overflow-y: scroll;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-height: 280px;
+}
+
+.orderCont-runningorder{
+  overflow-y: scroll;
+  min-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-height: 280px;
+}
