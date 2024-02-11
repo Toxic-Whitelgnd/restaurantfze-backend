@@ -343,15 +343,15 @@ const db1 = mongoose.connect(mongoUri);
 
 // **************************** For HOME PAGE ********************************
 app.get('/home_page_data', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*")
+    /*res.setHeader("Access-Control-Allow-Origin", "*")
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Max-Age", "1800");
     res.setHeader("Access-Control-Allow-Headers", "content-type");
-    res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS"); 
+    res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS"); */
     try {
         // Fetch all documents from the 'home_page' collection
         const data = await HomePage.find({});
-        // console.log(data);
+        console.log(data);
         // Send the data as a JSON response
         res.json(data);
     } catch (error) {
