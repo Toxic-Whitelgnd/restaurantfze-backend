@@ -1,11 +1,11 @@
-import img1 from "../assets/foods/idly.jpg"
-import img2 from "../assets/foods/sambarice.jpg";
-import img3 from "../assets/foods/ravadosa.jpg";
-import img4 from "../assets/foods/Plain-Dosa.jpg";
-import img5 from "../assets/foods/prawn.jpg";
-import img6 from "../assets/foods/chickensoup.jpg";
-import img7 from "../assets/foods/mysoredosa.jpg";
-import img8 from "../assets/foods/upma.jpg";
+import img1 from "../../assets/foods/idly.jpg"
+import img2 from "../../assets/foods/sambarice.jpg";
+import img3 from "../../assets/foods/ravadosa.jpg";
+import img4 from "../../assets/foods/Plain-Dosa.jpg";
+import img5 from "../../assets/foods/prawn.jpg";
+import img6 from "../../assets/foods/chickensoup.jpg";
+import img7 from "../../assets/foods/mysoredosa.jpg";
+import img8 from "../../assets/foods/upma.jpg";
 
 const FoodApi = [
     {
