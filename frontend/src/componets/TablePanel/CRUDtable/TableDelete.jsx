@@ -10,7 +10,7 @@ const TableDelete = () => {
   const handleDelete = async () => {
     try {
       // Make a DELETE request to /delete_table_data/:table_no
-      await axios.delete(`http://localhost:9999/delete_table_data/${tableno}`);
+      await axios.delete(`https://restogenius.onrender.com/delete_table_data/${tableno}`);
       console.log('Table successfully deleted!');
       // Optionally, you can add logic to handle success or navigate to another page
         window.location.href = "/" // Redirect to the table list after deletion

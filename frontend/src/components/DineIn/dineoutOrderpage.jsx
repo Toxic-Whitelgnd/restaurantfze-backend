@@ -90,7 +90,7 @@ const DineoutOrderpage = () => {
     const [tableData, setTableData] = useState([]);
     const fetchTableData = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/table_data');
+            const response = await axios.get('https://restogenius.onrender.com/table_data');
             setTableData(response.data);
             console.log(response.data);
         } catch (error) {
@@ -101,7 +101,7 @@ const DineoutOrderpage = () => {
     const [waiter, setWaiter] = useState([]);
     const fetchWaiter = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_waiter');
+            const response = await axios.get('https://restogenius.onrender.com/get_waiter');
             console.log(response.data);
             setWaiter(response.data);
         } catch (error) {
@@ -112,7 +112,7 @@ const DineoutOrderpage = () => {
     const [bill, setBill] = useState([]);
     const fetchBillD = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_billd');
+            const response = await axios.get('https://restogenius.onrender.com/get_billd');
             console.log(response.data);
             setBill(response.data[0]);
 
@@ -124,7 +124,7 @@ const DineoutOrderpage = () => {
     const [data, setData] = useState([]);
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_food_data');
+            const response = await axios.get('https://restogenius.onrender.com/get_food_data');
             console.log(response.data);
             setData(response.data);
         } catch (error) {
@@ -141,7 +141,7 @@ const DineoutOrderpage = () => {
 
     const fetchCurrentOrder = async () => {
         try {
-            const response = await axios.get(`http://localhost:9999/get_saved_orders/${id}`);
+            const response = await axios.get(`https://restogenius.onrender.com/get_saved_orders/${id}`);
             console.log(response.data);
 
             // DYnmic changeHere :TODO:
@@ -379,14 +379,14 @@ const DineoutOrderpage = () => {
     const SaveOrdertoDb = async (current_order) => {
 
         try {
-            const response = await axios.get(`http://localhost:9999/get_saved_orders/${id}`);
+            const response = await axios.get(`https://restogenius.onrender.com/get_saved_orders/${id}`);
 
             // Dynamic change here :TODO:
             const outdoorOrder = response.data.filter(x => x.orderFrom == "outdoor");
             if (outdoorOrder.length == 0 ) {
                 console.log(response.data);
                 try {
-                    const response = await axios.post("http://localhost:9999/save_current_order", current_order)
+                    const response = await axios.post("https://restogenius.onrender.com/save_current_order", current_order)
                     console.log(response.data);
                     toast.success(response.data.message);
                     window.location.reload();
@@ -404,7 +404,7 @@ const DineoutOrderpage = () => {
 
     const UpdatetoDb = async (update_order) => {
         try {
-            const response = await axios.put(`http://localhost:9999/update_current_order/${id}`, update_order)
+            const response = await axios.put(`https://restogenius.onrender.com/update_current_order/${id}`, update_order)
             console.log(response.data);
             toast.success(response.data.message);
         } catch (error) {
@@ -521,7 +521,7 @@ const DineoutOrderpage = () => {
 
         const fetchFoodTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:9999/get_food_type');
+                const response = await axios.get('https://restogenius.onrender.com/get_food_type');
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -544,7 +544,7 @@ const DineoutOrderpage = () => {
                 razorpay_signature: '',
             }
             console.log(update_data);
-            const response = await axios.put(`http://localhost:9999/update_customer_details/${fetchFood.order_no}`,
+            const response = await axios.put(`https://restogenius.onrender.com/update_customer_details/${fetchFood.order_no}`,
                 update_data);
             // toast.success("Payment done successfull So set the table to  000")
 
@@ -559,14 +559,14 @@ const DineoutOrderpage = () => {
             // call the server to set the current_order tables to empty,
             if(fetchFood.orderFrom == "indoor"){
                 try {
-                    const res = await axios.delete(`http://localhost:9999/delete_current_indoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`https://restogenius.onrender.com/delete_current_indoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
                 } catch (error) {
                     console.log(error.message);
                 }
             }else{
                 try {
-                    const res = await axios.delete(`http://localhost:9999/delete_current_outdoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`https://restogenius.onrender.com/delete_current_outdoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
                 } catch (error) {
                     console.log(error.message);
@@ -584,7 +584,7 @@ const DineoutOrderpage = () => {
             console.log("after deleting the current_order tables",fetchFood.table_no);
             if(fetchFood.orderFrom == "indoor"){
                 try {
-                    const res = await axios.delete(`http://localhost:9999/delete_running_indoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`https://restogenius.onrender.com/delete_running_indoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
                     if(res.data.success){
                         window.location.href = '/#/dinein';
@@ -594,7 +594,7 @@ const DineoutOrderpage = () => {
                 }
             }else{
                 try {
-                    const res = await axios.delete(`http://localhost:9999/delete_running_outdoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`https://restogenius.onrender.com/delete_running_outdoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
                     if(res.data.success){
                         window.location.href = '/#/dinein';
@@ -662,7 +662,7 @@ const DineoutOrderpage = () => {
 
         try {
 
-            const response = await axios.post("http://localhost:9999/save_customer_details", customer_details);
+            const response = await axios.post("https://restogenius.onrender.com/save_customer_details", customer_details);
             const order = customer_details;
             const order_id = response.data.order_id;
 

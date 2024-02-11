@@ -16,7 +16,7 @@ const DineinDeliveryorder = () => {
 
     const fetchRunningOrder = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_running_order');
+            const response = await axios.get('https://restogenius.onrender.com/get_running_order');
             console.log(response.data);
             setRunningOrder(response.data);
         } catch (error) {
@@ -26,7 +26,7 @@ const DineinDeliveryorder = () => {
 
     const handleDeleteRunningOrder = async (item) => {
         console.log("delete the curently running order", item);
-        const res = await axios.put(`http://localhost:9999/update_running_items/${item.table_no}`,item);
+        const res = await axios.put(`https://restogenius.onrender.com/update_running_items/${item.table_no}`,item);
         console.log(res.data);
     };
 

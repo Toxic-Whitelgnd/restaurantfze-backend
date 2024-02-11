@@ -13,7 +13,7 @@ const Sod = () => {
 
     const  fetchCustomerDeatils =async ()=>{
         try {
-            const cd = await axios.get('http://localhost:9999/get_customer_details');
+            const cd = await axios.get('https://restogenius.onrender.com/get_customer_details');
             console.log(cd.data);
             setSodata(cd.data); 
         } catch (error) {

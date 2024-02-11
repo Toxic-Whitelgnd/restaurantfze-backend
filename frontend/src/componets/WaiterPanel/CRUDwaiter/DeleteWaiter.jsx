@@ -10,7 +10,7 @@ const DeleteWaiter = () => {
   const handleDelete = async () => {
     try {
       // Make a DELETE request to /delete_table_data/:table_no
-      await axios.delete(`http://localhost:9999/delete_waiter/${waiterid}`);
+      await axios.delete(`https://restogenius.onrender.com/delete_waiter/${waiterid}`);
       
       alert('Waiter removed successfully!');
       // Optionally, you can add logic to handle success or navigate to another page

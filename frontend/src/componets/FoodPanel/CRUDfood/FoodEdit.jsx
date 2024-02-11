@@ -14,7 +14,7 @@ const FoodEdit = () => {
     useEffect(() => {
         const fetchFoodData = async () => {
             try {
-                const response = await axios.get(`http://localhost:9999/get_food_data_image/${foodid}`);
+                const response = await axios.get(`https://restogenius.onrender.com/get_food_data_image/${foodid}`);
                 setFoodData(response.data);
             } catch (error) {
                 console.error('Error fetching food data:', error);
@@ -28,7 +28,7 @@ const FoodEdit = () => {
 
         const fetchFoodTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:9999/get_food_type');
+                const response = await axios.get('https://restogenius.onrender.com/get_food_type');
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -72,7 +72,7 @@ const FoodEdit = () => {
 
             console.log("before passing" + formData.get('foodImage'));
 
-            await axios.put(`http://localhost:9999/update_food_data/${foodid}`, formData, {
+            await axios.put(`https://restogenius.onrender.com/update_food_data/${foodid}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

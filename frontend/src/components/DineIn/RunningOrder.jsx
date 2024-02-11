@@ -9,7 +9,7 @@ const RunningOrder = () => {
     const [runningOrder, setRunningOrder] = useState([]);
     const fetchCurrentOrder = async () => {
         try {
-            const res = await axios.get('http://localhost:9999/get_saved_orders');
+            const res = await axios.get('https://restogenius.onrender.com/get_saved_orders');
             console.log(res.data);
             setRunningOrder(res.data);
         } catch (error) {
@@ -20,7 +20,7 @@ const RunningOrder = () => {
     const handleDelete = async (val) => {
         if (val.orderFrom == "indoor") {
             try {
-                const res = await axios.delete(`http://localhost:9999/delete_current_indoor_order/${val.table_no}`);
+                const res = await axios.delete(`https://restogenius.onrender.com/delete_current_indoor_order/${val.table_no}`);
                 console.log(res.data);
                 if(res.data.success){
                     window.location.reload();
@@ -31,7 +31,7 @@ const RunningOrder = () => {
          
         } else {
             try {
-                const res = await axios.delete(`http://localhost:9999/delete_current_outdoor_order/${val.table_no}`);
+                const res = await axios.delete(`https://restogenius.onrender.com/delete_current_outdoor_order/${val.table_no}`);
                 console.log(res.data);
                 if(res.data.success){
                     window.location.reload();

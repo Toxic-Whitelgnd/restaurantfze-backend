@@ -11,7 +11,7 @@ const FoodTypeEdit = () => {
     // Fetch food type details when the component mounts
     const fetchFoodType = async () => {
       try {
-        const response = await axios.get(`http://localhost:9999/get_singlefood_type/${foodid}`);
+        const response = await axios.get(`https://restogenius.onrender.com/get_singlefood_type/${foodid}`);
         // Assuming the response.data contains the details of the food type
         console.log(response.data);
         setFoodName(response.data[0]);
@@ -26,7 +26,7 @@ const FoodTypeEdit = () => {
   const handleUpdate = async () => {
     console.log(foodName);
     try {
-      const response = await axios.put(`http://localhost:9999/update_food_type/${foodid}`, {
+      const response = await axios.put(`https://restogenius.onrender.com/update_food_type/${foodid}`, {
         food_name: foodName
       });
 

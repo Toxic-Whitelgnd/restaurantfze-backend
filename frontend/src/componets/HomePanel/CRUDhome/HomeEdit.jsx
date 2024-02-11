@@ -18,7 +18,7 @@ const HomeEdit = () => {
     useEffect(() => {
         const fetchTableData = async () => {
             try {
-                const response = await axios.get(`http://localhost:9999/single_home_page/${homeno}`);
+                const response = await axios.get(`https://restogenius.onrender.com/single_home_page/${homeno}`);
                 console.log("from server hitback",response.data[0]);
                 setFormData(response.data[0]);
             } catch (error) {
@@ -39,7 +39,7 @@ const HomeEdit = () => {
         console.log(formData);
         try {
             // Make a PUT request to /update_table_data/:table_no
-            await axios.put(`http://localhost:9999/update_home_page_data/${homeno}`, formData);
+            await axios.put(`https://restogenius.onrender.com/update_home_page_data/${homeno}`, formData);
             alert('Home item updated successfully deleted!');
 
             window.location.href = "/"

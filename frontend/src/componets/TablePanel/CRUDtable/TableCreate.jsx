@@ -47,7 +47,7 @@ const TableForm = () => {
     try {
       // Make a POST request to /post_table_data API
       
-      await axios.post('http://localhost:9999/post_table_data', formData);
+      await axios.post('https://restogenius.onrender.com/post_table_data', formData);
 
       // Optionally, you can add logic to handle success or navigate to another page
       console.log('Table data successfully submitted!');

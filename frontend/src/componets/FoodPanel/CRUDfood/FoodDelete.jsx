@@ -10,7 +10,7 @@ const FoodDelete = () => {
   const handleDelete = async () => {
     try {
       // Make a DELETE request to /delete_table_data/:table_no
-      await axios.delete(`http://localhost:9999/delete_food_data/${foodid}`);
+      await axios.delete(`https://restogenius.onrender.com/delete_food_data/${foodid}`);
       
       alert('Food item deleted successfully deleted!');
       // Optionally, you can add logic to handle success or navigate to another page

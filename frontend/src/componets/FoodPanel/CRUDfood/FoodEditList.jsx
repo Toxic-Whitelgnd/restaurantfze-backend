@@ -11,7 +11,7 @@ const FoodEditList = () => {
     useEffect(() => {
         const fetchTables = async () => {
           try {
-            const response = await axios.get('http://localhost:9999/get_food_data');
+            const response = await axios.get('https://restogenius.onrender.com/get_food_data');
             setTables(response.data);
           } catch (error) {
             console.error('Error fetching tables:', error);
@@ -20,7 +20,7 @@ const FoodEditList = () => {
 
         const fetchFoodTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:9999/get_food_type');
+                const response = await axios.get('https://restogenius.onrender.com/get_food_type');
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);

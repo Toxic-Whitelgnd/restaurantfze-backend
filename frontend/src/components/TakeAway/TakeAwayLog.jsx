@@ -13,7 +13,7 @@ const TakeAwayLog = () => {
     const [takeaway,setTakeAwayLog] = useState([]);
     const fetchTakeaway = async() =>{
         try {
-            const res = await axios.get('http://localhost:9999/get_takeaway_order');
+            const res = await axios.get('https://restogenius.onrender.com/get_takeaway_order');
             console.log(res.data);
             setTakeAwayLog(res.data);
         } catch (error) {

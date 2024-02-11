@@ -23,7 +23,7 @@ const FoodImageChange = () => {
         console.log(selectedImage.name);
       if (selectedImage) {
         // Post the Base64-encoded image to the Node.js server
-        await axios.put(`http://localhost:9999/update-food-image/${foodid}`,{foodImage: selectedImage},
+        await axios.put(`https://restogenius.onrender.com/update-food-image/${foodid}`,{foodImage: selectedImage},
         {
             headers: {
                 'Content-Type': 'multipart/form-data',

@@ -18,7 +18,7 @@ const BillEditPanel = () => {
 
       const fetchData = async () => {
         try {
-          const response = await axios.get('http://localhost:9999/get_billd'); // Replace with your actual endpoint
+          const response = await axios.get('https://restogenius.onrender.com/get_billd'); // Replace with your actual endpoint
           console.log(response.data);
           setFormData(response.data[0]); // Update the form data with fetched values
         } catch (error) {
@@ -35,7 +35,7 @@ const BillEditPanel = () => {
         e.preventDefault();
     
         try {
-          const response = await axios.put(`http://localhost:9999/update_billd/${formData._id}`, formData);
+          const response = await axios.put(`https://restogenius.onrender.com/update_billd/${formData._id}`, formData);
           console.log('Data sent successfully:', response.data);
           // You can add further logic or state updates as needed
         } catch (error) {

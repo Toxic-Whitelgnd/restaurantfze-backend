@@ -83,7 +83,7 @@ const DineinHomepage = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/table_data');
+            const response = await axios.get('https://restogenius.onrender.com/table_data');
             setData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -95,7 +95,7 @@ const DineinHomepage = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:9999/get_saved_orders');
+                const response = await axios.get('https://restogenius.onrender.com/get_saved_orders');
                 setOrders(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -133,7 +133,7 @@ const DineinHomepage = () => {
     const [completedOrder, setCompletedOrder] = useState([]);
     const fetchCompletedData = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_customer_details');
+            const response = await axios.get('https://restogenius.onrender.com/get_customer_details');
             console.log(response.data);
             setCompletedOrder(response.data);
         } catch (error) {
