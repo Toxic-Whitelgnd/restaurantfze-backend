@@ -8,22 +8,7 @@ const Razorpay = require('razorpay');
 
 const app = express();
 
-app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-
-        // Check if the origin is allowed
-        const allowedOrigins = ['https://restogenius.vercel.app/','https://restogenius.vercel.app'];
-        if (allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-}));
+app.use(cors())
 app.use(bodyParser.json({ limit: '35mb' }));
 
 app.use(
