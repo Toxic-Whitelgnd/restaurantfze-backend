@@ -26,7 +26,7 @@ const razorpay = new Razorpay({
 
 
 // connection string
-mongoUri = "mongodb+srv://whitelegend56:q1olisZZfHsPMazm@cluster0.jsetkub.mongodb.net/fzerestaurant"
+mongoUri = "mongodb+srv://vercel-admin-user:9qxIHefsIBo2qS53@nextjslearner.meicurk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 
 // Define a Mongoose schema *********** START ************
