@@ -203,6 +203,7 @@ const itemTakeawaySchema = new mongoose.Schema({
     amt: { type: Number, required: true },
     status: { type: String, required: true },
     orderFrom: { type: String, required: true },
+    orderno: { type: Number, required: true },
 });
 
 const currentTakeawayOrderSchema = new mongoose.Schema({
@@ -280,6 +281,99 @@ const customerTakeawaySchema = new mongoose.Schema({
     discount: Number,
 });
 
+// For Deliver schema
+const itemDeliverySaleSchema = new mongoose.Schema({
+    foodname: { type: String, required: true },
+    qty: { type: Number, required: true },
+    id: { type: String, required: true },
+    price: { type: Number, required: true },
+    amt: { type: Number, required: true },
+    status: { type: String, required: true },
+    orderFrom: { type: String, required: true },
+    orderno: { type: Number, required: true },
+});
+
+const currentDeliverySaleOrderSchema = new mongoose.Schema({
+    customer_details: {
+        name: { type: String, required: true },
+        mobileNumber: { type: String, required: true },
+        email: { type: String, required: true },
+        address: { type: String, required: true},
+    },
+    floor_no: { type: String, required: true },
+    items: [itemDeliverySaleSchema],
+    items_ordered: { type: Number, required: true },
+    
+    order_no: { type: Number, required: true },
+    running_order: { type: String, required: true },
+   
+    orderFrom: { type: String, required: true },
+    total: { type: Number, required: true },
+});
+
+const customerDeliverySaleSchema = new mongoose.Schema({
+    customer_mobileNumber: {
+        type: String,
+        required: true,
+    },
+    customer_name: {
+        type: String,
+        required: true,
+    },
+    customer_email: {
+        type: String,
+        required: true,
+    },
+    customer_address: {
+        type: String,
+        required: true,
+    },
+    customer_vehicleno: {
+        type: String,
+        required: true,
+    },
+    date: {
+        type: String,
+        required: true,
+    },
+    delivered_by:String, // backend dashboard handling
+    delivery_vehicle_no:String, //backend dashboard handling
+    items: [itemDeliverySaleSchema], // Array of items using the defined itemSchema
+    items_ordered: {
+        type: Number,
+        required: true,
+    },
+    orderFrom: {
+        type: String,
+        required: true,
+    },
+    order_no: {
+        type: Number,
+        required: true,
+    },
+    
+    paid_by: {
+        type: String,
+        required: true,
+    },
+    
+    time: {
+        type: String,
+        required: true,
+    },
+    total: {
+        type: Number,
+        required: true,
+    },
+    type: {
+        type: String,
+        required: true,
+    },
+    vat: String,
+    waiter_name: String,
+    discount: Number,
+});
+
 
 const billdSchema = new mongoose.Schema({
     VAT: {
@@ -321,6 +415,9 @@ const Billd = mongoose.model('Billd', billdSchema);
 
 const TakeAwayCurrentOrder = mongoose.model('TakeAwayCurrentOrder', currentTakeawayOrderSchema , 'takeaway_current_order');
 const TakeAwayCustomerDetails = mongoose.model('TakeAwayCustomerDetails', customerTakeawaySchema, 'takeaway_customer_details');
+
+const DeliverySaleCurrentOrder = mongoose.model('DeliverySaleCurrentOrder', currentDeliverySaleOrderSchema, 'delivery_sales_current_order');
+const DeliverySaleCustomerDetails = mongoose.model('DeliveryCustomerDetails', customerDeliverySaleSchema, 'delivery_sales_customer_details' );
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -1123,7 +1220,7 @@ app.delete('/delete_waiter/:waiterid', async (req, res) => {
 //  ***************************** END OF WAITER ****************************
 
 
-// TODO: ADD vat , Discout , cash at starting , credit sale , card sale page in the admin panel
+
 //  ***************************** START OF BILLD ****************************
 app.get('/get_billd', async (req, res) => {
     try {
@@ -1153,7 +1250,7 @@ app.put('/update_billd/:bill_id', async (req, res) => {
 //  ***************************** END OF BILLD ****************************
 // ****************************** START OF TAKEAWAY ****************************
 
-app.post('/save_takeaway_order', async (req, res) => { 
+ app.post('/save_takeaway_order', async (req, res) => { 
     try {
         const newOrder = new TakeAwayCustomerDetails(req.body);
         const result = await newOrder.save();
@@ -1213,10 +1310,206 @@ app.post('/save_takeaway_order', async (req, res) => {
     }
   });
 
+  app.post('/save_current_takeaway_order', async (req, res) => {
+    try {
+        const newOrder = new TakeAwayCurrentOrder(req.body);
+        const result = await newOrder.save();
+
+        res.status(201).json({ success: true , message: 'Items saved successfully and updated to current order' });
+
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.get('/get_running_takeaway_order', async (req, res) => {
+    try {
+        const dlo = await TakeAwayCurrentOrder.find({});
+        res.json(dlo);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.put('/update_running_takeaway_order/:orderno',async (req, res) => {
+    const {orderno} = req.params;
+    try {
+        const newOne = await TakeAwayCurrentOrder.findOneAndUpdate({
+            order_no:orderno,
+        },{
+            $set: req.body,
+        });
+        res.json({success: true, message: 'updated the food status'});
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.put('/update_takeaway_backend_order/:orderno', async (req, res) => {
+    try {
+        const {orderno} = req.params;
+        const { _id } = req.body;
+        console.log(_id);
+        const updateitem = await TakeAwayCurrentOrder.updateOne(
+            { order_no: orderno },
+            {
+                $pull: {
+                    items:
+                    {
+                        _id: _id
+                    }
+                }
+            }
+
+        );
+        res.json({ msg: 'updated the item from running order' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
 // ****************************** END OF TAKEAWAY *******************************
+// ****************************** START OF DELIVERSALE ******************************
+app.post('/save_deliverysale_order', async (req, res) => { 
+    try {
+        const newOrder = new DeliverySaleCustomerDetails(req.body);
+        const result = await newOrder.save();
+
+        res.status(201).json({ success: true , message: 'Items saved successfully and updated' });
+
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.get('/get_deliversale_order', async (req, res) => {  
+    try {
+        const result = await DeliverySaleCustomerDetails.find({});
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.get('/get_bydeliverysale_order/:orderid', async (req, res) => {
+    const {orderid} = req.params;
+        try {
+            const res1 = await DeliverySaleCustomerDetails.find({
+                order_no: orderid,
+            });
+            res.json(res1);
+        } catch (error) {
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+  });
+
+  app.put('/update_deliverysale_order/:orderid', async (req, res) => {
+    const {orderid} = req.params;
+    try {
+        const res1 = await DeliverySaleCustomerDetails.findOneAndUpdate({
+            order_no: orderid,
+        },{
+            $set: req.body,
+        });
+        res.json({success: true});
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.delete("/delete_deliverysale_order/:orderid", async (req, res) => {
+    try {
+        const {orderid} = req.params;
+        const delte = await DeliverySaleCustomerDetails.findOneAndDelete({
+            order_no: orderid,
+        });
+        res.json({success: true});
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.post('/save_current_deliverysale_order', async (req, res) => {
+    try {
+        const newOrder = new DeliverySaleCurrentOrder(req.body);
+        const result = await newOrder.save();
+
+        res.status(201).json({ success: true , message: 'Items saved successfully and updated to current order' });
+
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.get('/get_running_deliverysale_order', async (req, res) => {
+    try {
+        const dlo = await DeliverySaleCurrentOrder.find({});
+        res.json(dlo);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.put('/update_running_deliverysale_order/:orderno',async (req, res) => {
+    const {orderno} = req.params;
+    try {
+        const newOne = await DeliverySaleCurrentOrder.findOneAndUpdate({
+            order_no:orderno,
+        },{
+            $set: req.body,
+        });
+        res.json({success: true, message: 'updated the food status'});
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.put('/update_deliverysale_backend_order/:orderno', async (req, res) => {
+    try {
+        const {orderno} = req.params;
+        const { _id } = req.body;
+        console.log(_id);
+        const updateitem = await DeliverySaleCurrentOrder.updateOne(
+            { order_no: orderno },
+            {
+                $pull: {
+                    items:
+                    {
+                        _id: _id
+                    }
+                }
+            }
+
+        );
+        res.json({ msg: 'updated the item from running order' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+  app.delete('/delete_running_deliverysale_order/:id', async (req,res)=>{
+    const {id} = req.params;
+    try {
+        
+        const delte = await DeliverySaleCurrentOrder.findOneAndDelete({
+            _id: id,
+        });
+        res.json({success: true});
+    } catch (error) {
+        res.status(500).json({msg:"deleted successfully"});
+    }
+  });
+// ****************************** END OF DELIVERYSALE *******************************
 
 
 // TODO: Expenses tracking schema 
+
+// TODO: ADD vat , Discout , cash at starting , credit sale , card sale page in the admin panel
 
 
 

@@ -12,6 +12,8 @@ const DeliveryPanel = () => {
                 <br></br>
                 <NavLink to='/deliverysale-delivery-order'>DeliverySale Delivery Order</NavLink>
                 <br></br>
+                <NavLink to='/deliverysale-takeaway-order'>Takeaway Delivery Order</NavLink>
+                <br></br>
              
             </div>
         </div>

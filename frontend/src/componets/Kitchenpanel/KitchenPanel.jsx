@@ -10,6 +10,10 @@ const KitchenPanel = () => {
                 <br></br>
                 <NavLink to='/changeavailibilty'>Change availibity of food</NavLink>
                 <br></br>
+                <NavLink to='/running-delivery-order'>Running Delivery Sale order</NavLink>
+                <br></br>
+                <NavLink to='/running-takeaway-order'>Running TakeAway order</NavLink>
+                <br></br>
                 
              
             </div>

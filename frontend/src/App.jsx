@@ -38,6 +38,10 @@ import ChangeFoodAvil from './componets/Kitchenpanel/CRUDkitchen/ChangeFoodAvil'
 import ChangeAvailability from './componets/Kitchenpanel/CRUDkitchen/ChangeAvailability';
 import BillPanel from './componets/BillPanel/BillPanel';
 import BillEditPanel from './componets/BillPanel/CRUDbill/BillEditPanel';
+import RunningOrderDeliverySale from './componets/Kitchenpanel/CRUDkitchen/RunningOrderDeliverySale';
+import DelevrysaleDeliveryorder from './componets/DeliveryPanel/CRUDfoodfelivery/delevrysaleDeliveryorder';
+import RunningOrderTakeAway from './componets/Kitchenpanel/CRUDkitchen/RunningOrderTakeAway';
+import TakeawayDeliveryorder from './componets/DeliveryPanel/CRUDfoodfelivery/takeawayDeliveryorder';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -77,11 +81,14 @@ function App() {
           {/* for kitchen panel */}
           <Route path='/kitchenpanel'  element={<KitchenPanel/>} />
           <Route path="/running-order" element={<Runningorder />} />
+          <Route path="/running-delivery-order" element={<RunningOrderDeliverySale />} />
+          <Route path="/running-takeaway-order" element={<RunningOrderTakeAway />} />
           <Route path="/completed-order" element={<FoodType />} />
-          {/* for kitchen panel */}
+          {/* for delivery panel */}
           <Route path='/deliverypanel'  element={<DeliveryPanel/>} />
           <Route path="/dinein-delivery-order" element={<DineinDeliveryorder />} />
-          
+          <Route path="/deliverysale-delivery-order" element={<DelevrysaleDeliveryorder />} />
+          <Route path="/deliverysale-takeaway-order" element={<TakeawayDeliveryorder />} />
           <Route path="/changeavailibilty" element={<ChangeAvailability />} />
           <Route path="/change-food-availablity/:foodid" element={<ChangeFoodAvil />} />
           {/* for Waiter panel */}
