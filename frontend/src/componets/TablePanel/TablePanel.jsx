@@ -6,11 +6,11 @@ const TablePanel = () => {
         <div>
             <h1>Table Panel</h1>
             <div>
-                <NavLink to='/create-table'>Create Table</NavLink>
+                <NavLink to='/admin/create-table'>Create Table</NavLink>
                 <br></br>
-                <NavLink to='/edit-table'>Edit Table</NavLink>
+                <NavLink to='/admin/edit-table'>Edit Table</NavLink>
                 <br></br>
-                <NavLink to='/delete-table'>Delete Table</NavLink>
+                <NavLink to='/admin/delete-table'>Delete Table</NavLink>
              
             </div>
         </div>

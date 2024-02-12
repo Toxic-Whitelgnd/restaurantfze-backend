@@ -1,0 +1,103 @@
+/* food order and tracking page */
+.food-order-cont {
+    /* min-width: 670px; */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-height: 500px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+.food-category-bar-1 {
+    /* max-width: 1000px ; */
+    margin: 20px;
+    height: 100px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px 20px;
+    background-color: #95a5a6;
+}
+
+.foo-cat-1 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 150px;
+}
+
+#foodCategory-1 {
+    margin-top: -10px;
+}
+
+.form__input {
+    /* width: clamp(120px, 50vw, 420px); */
+    width: 162px;
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    border: 1px solid #303030;
+    border-radius: 5px;
+    margin: 0.625rem auto;
+    transition: all 250ms;
+    margin-top: 15px;
+
+}
+
+.form__input:focus {
+    outline: none;
+    border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.form__input:focus+.form__label,
+.form__input:not(:placeholder-shown)+.form__label {
+    transform: translateY(-4.5rem) scale(1);
+    color: #303030;
+}
+
+.form__input::placeholder {
+    display: none;
+    color: transparent;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.form__input:not(:placeholder-shown) {
+    border-top-color: rgba(0, 0, 0, 0.5);
+}
+
+.form__label {
+    font-size: 1rem;
+    color: #909090;
+    display: block;
+    /* Moves the label on TOP of the placeholder */
+    /* You'll need to change this as needed */
+    transform: translate(1.25rem, -2.5rem);
+    transform-origin: 0 0;
+    /* Used later for transitions */
+    transition: all 500ms;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+    /* THIS PART IS IMPORTANT! */
+    /* This line prevents the label from being selected.*/
+    /* This is crucial because if this line doesn't exist, users can
+       click on the label, instead of the input field. That's bad UX! */
+    pointer-events: none;
+}
+
+.sod-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px;
+    row-gap: 30px;
+}

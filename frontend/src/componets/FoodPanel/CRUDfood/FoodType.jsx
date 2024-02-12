@@ -12,7 +12,7 @@ const FoodType = () => {
     console.log(foodType);
 
     try {
-      const response = await axios.post('http://localhost:9999/post_food_type', {foodType : foodType });
+      const response = await axios.post('https://restogenius.onrender.com/post_food_type', {foodType : foodType });
 
       alert(`${foodType} added successfully!`);
       setFoodType('');

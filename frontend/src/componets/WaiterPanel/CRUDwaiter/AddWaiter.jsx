@@ -23,7 +23,7 @@ const AddWaiter = () => {
     
         try {
             console.log(waiterData.dateOfJoining);
-          const res = await axios.post('http://localhost:9999/add_waiter_details', waiterData);
+          const res = await axios.post('https://restogenius.onrender.com/add_waiter_details', waiterData);
           if(res.data){
             alert('Waiter added successfully!');
           }

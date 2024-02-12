@@ -9,7 +9,7 @@ const HomeEditList = () => {
   useEffect(() => {
     const fetchTables = async () => {
       try {
-        const response = await axios.get('http://localhost:9999/home_page_data');
+        const response = await axios.get('https://restogenius.onrender.com/home_page_data');
         setTables(response.data);
       } catch (error) {
         console.error('Error fetching tables:', error);

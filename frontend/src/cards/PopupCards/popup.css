@@ -1,0 +1,283 @@
+/* for popup 1 */
+.modal-overlay-1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .modal-1 {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 630px;
+    margin-top: 100px;
+    z-index: 2;
+  }
+  
+  .modal-header-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .modal-header-1 h2 {
+    margin: 0;
+  }
+  
+  .modal-content-1 {
+    display: flex;
+    /* grid-template-columns: 1fr 1fr; */
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+  .order-details-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  .order-details-row p {
+    margin: 0;
+  }
+  
+  .close-btn {
+    /* position: absolute; */
+    display: flex;
+    top: 0px;
+    left: -100px;
+    background: black;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .responsive-table-popup {
+
+    margin-right: 16px;
+    padding: 0px 0px 0px 32px;
+    li {
+      border-radius: 3px;
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+    .otable-header {
+      background-color: #95a5a6;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    }
+    .otable-row {
+      background-color: #ffffff;
+      box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    }
+    .colo-1 {
+      flex-basis: 10%;
+    }
+    .colo-2 {
+      flex-basis: 40%;
+    }
+    .colo-3 {
+      flex-basis: 15%;
+    }
+    .colo-4 {
+      flex-basis: 15%;
+    }
+    .colo-5{
+      flex-basis: 35%;
+    }
+  
+    @media all and (max-width: 767px) {
+      .otable-header {
+        display: none;
+      }
+      .otable-row {
+      }
+      li {
+        display: block;
+      }
+      .colo {
+        flex-basis: 100%;
+      }
+      .colo {
+        display: flex;
+        padding: 10px 0;
+        &:before {
+          color: #6c7a89;
+          padding-right: 10px;
+          content: attr(data-label);
+          flex-basis: 50%;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  /* for take away */
+  /* SaleOrderModal.css */
+
+.modal-tk {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 16px;
+}
+
+.modal-content-tk {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #ff0404;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+
+
+.tk-ls{
+  margin-bottom: 10px;
+  display: flex;
+
+}
+
+.rc-details{
+  border: #666666 solid 2px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+.cust-details{
+  border: #666666 solid 2px;
+  margin-left: 10px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+/* for edit popup */
+/* EditSaleOrderPopup.css */
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 10px solid #6d6d6d;
+  width: 60%;
+}
+
+.close {
+  color: #ff0000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+
+/* Add more styling based on your preferences */
+/* save btn */
+.btn-save {
+  font-family: inherit;
+  font-size: 20px;
+  background: #212121;
+  color: white;
+  fill: rgb(155, 153, 153);
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  font-weight: 1000;
+}
+
+.btn-save span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-save svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-save:hover {
+  background: #000;
+}
+
+.btn-save:hover .svg-wrapper {
+  transform: scale(1.25);
+  transition: 0.5s linear;
+}
+
+.btn-save:hover svg {
+  transform: translateX(1.2em) scale(1.1);
+  fill: #fff;
+}
+
+.btn-save:hover span {
+  opacity: 0;
+  transition: 0.5s linear;
+}
+
+.btn-save:active {
+  transform: scale(0.95);
+}

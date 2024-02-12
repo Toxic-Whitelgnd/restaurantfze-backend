@@ -1,0 +1,246 @@
+// available - #009946
+// occupied - #FF0505
+// partially occupied - #FF9D08
+
+const DineinTables = [
+    {
+        id: 1,
+        type: 'indoor',
+        tableno: '1',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/1',
+
+    },
+    {
+        id: 2,
+        type: 'indoor',
+        tableno: '2',
+        totalcapacity: '4',
+        pploccupied: 4,
+        itemsordered: 0,
+        color: '#FF0505',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/2',
+
+    },
+    {
+        id: 3,
+        type: 'indoor',
+        tableno: '3',
+        totalcapacity: '4',
+        pploccupied: 1,
+        itemsordered: 0,
+        color: '#FF9D08',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/3',
+
+    },
+    {
+        id: 4,
+        type: 'indoor',
+        tableno: '4',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 1,
+        url:'/itable/4',
+
+    },
+    {
+        id: 5,
+        type: 'indoor',
+        tableno: '5',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/5',
+
+    },
+    {
+        id: 6,
+        type: 'indoor',
+        tableno: '6',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/6',
+
+    },
+    {
+        id: 7,
+        type: 'indoor',
+        tableno: '7',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/7',
+
+    },
+    {
+        id: 8,
+        type: 'indoor',
+        tableno: '8',
+        totalcapacity: '4',
+        pploccupied: 2,
+        itemsordered: 5,
+        color: '#009946',
+        icon: '',
+        tabletaken: 1,
+        url:'/itable/8',
+
+    },
+
+
+    {
+        id: 9,
+        type: 'indoor',
+        tableno: '9',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/9',
+
+    },
+    {
+        id: 10,
+        type: 'indoor',
+        tableno: '10',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/10',
+
+    },
+
+    {
+        id: 11,
+        type: 'indoor',
+        tableno: '11',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/11',
+
+    },
+    {
+        id: 12,
+        type: 'indoor',
+        tableno: '12',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/12',
+
+    },
+    {
+        id: 13,
+        type: 'indoor',
+        tableno: '13',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/13',
+
+    },
+
+    {
+        id: 14,
+        type: 'indoor',
+        tableno: '14',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/14',
+
+    },
+    {
+        id: 15,
+        type: 'indoor',
+        tableno: '15',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/itable/15',
+
+    },
+    {
+        id: 16,
+        type: 'outdoor',
+        tableno: '1',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/otable/1',
+
+    },
+    {
+        id: 17,
+        type: 'outdoor',
+        tableno: '2',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/otable/2',
+
+    },
+    {
+        id: 18,
+        type: 'outdoor',
+        tableno: '3',
+        totalcapacity: '4',
+        pploccupied: 0,
+        itemsordered: 0,
+        color: '#009946',
+        icon: '',
+        tabletaken: 0,
+        url:'/otable/3',
+
+    },
+]
+
+export default DineinTables;

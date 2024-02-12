@@ -6,11 +6,11 @@ const DeliveryPanel = () => {
         <div>
             <h1>Food Delivery Panel</h1>
             <div>
-                <NavLink to='/dinein-delivery-order'>Dinein Delivery Order</NavLink>
+                <NavLink to='/admin/dinein-delivery-order'>Dinein Delivery Order</NavLink>
                 <br></br>
-                <NavLink to='/takeaway-delivery-order'>Takeaway Delivery Order</NavLink>
+                <NavLink to='/admin/takeaway-delivery-order'>Takeaway Delivery Order</NavLink>
                 <br></br>
-                <NavLink to='/deliverysale-delivery-order'>DeliverySale Delivery Order</NavLink>
+                <NavLink to='/admin/deliverysale-delivery-order'>DeliverySale Delivery Order</NavLink>
                 <br></br>
                 <NavLink to='/deliverysale-takeaway-order'>Takeaway Delivery Order</NavLink>
                 <br></br>

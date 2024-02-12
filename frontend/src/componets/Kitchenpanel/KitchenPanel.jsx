@@ -6,9 +6,9 @@ const KitchenPanel = () => {
         <div>
             <h1>Kitchen Panel</h1>
             <div>
-                <NavLink to='/running-order'>Running Order</NavLink>
+                <NavLink to='/admin/running-order'>Running Order</NavLink>
                 <br></br>
-                <NavLink to='/changeavailibilty'>Change availibity of food</NavLink>
+                <NavLink to='/admin/changeavailibilty'>Change availibity of food</NavLink>
                 <br></br>
                 <NavLink to='/running-delivery-order'>Running Delivery Sale order</NavLink>
                 <br></br>

@@ -6,11 +6,11 @@ const WaiterPanel = () => {
         <div>
             <h1>Waiter Panel</h1>
             <div>
-                <NavLink to='/add-waiter'>Add waiter</NavLink>
+                <NavLink to='/admin/add-waiter'>Add waiter</NavLink>
                 <br></br>
-                <NavLink to='/edit-waiter'>Edit waiter</NavLink>
+                <NavLink to='/admin/edit-waiter'>Edit waiter</NavLink>
                 <br></br>
-                <NavLink to='/delete-waiter'>Delete waiter</NavLink>
+                <NavLink to='/admin/delete-waiter'>Delete waiter</NavLink>
                 <br></br>
              
             </div>

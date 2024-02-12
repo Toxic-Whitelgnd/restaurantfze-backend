@@ -9,7 +9,7 @@ const TableDelList = () => {
   useEffect(() => {
     const fetchTables = async () => {
       try {
-        const response = await axios.get('http://localhost:9999/table_data');
+        const response = await axios.get('https://restogenius.onrender.com/table_data');
         setTables(response.data);
       } catch (error) {
         console.error('Error fetching tables:', error);

@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import './App.css'
 import TablePanel from './componets/TablePanel/TablePanel'
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
+
+//ADMIN COMPONENTS
 import TableForm from './componets/TablePanel/CRUDtable/TableCreate';
 import TableList from './componets/TablePanel/CRUDtable/TableList';
 import TableEdit from './componets/TablePanel/CRUDtable/TableEdit';
@@ -38,10 +41,32 @@ import ChangeFoodAvil from './componets/Kitchenpanel/CRUDkitchen/ChangeFoodAvil'
 import ChangeAvailability from './componets/Kitchenpanel/CRUDkitchen/ChangeAvailability';
 import BillPanel from './componets/BillPanel/BillPanel';
 import BillEditPanel from './componets/BillPanel/CRUDbill/BillEditPanel';
-import RunningOrderDeliverySale from './componets/Kitchenpanel/CRUDkitchen/RunningOrderDeliverySale';
-import DelevrysaleDeliveryorder from './componets/DeliveryPanel/CRUDfoodfelivery/delevrysaleDeliveryorder';
-import RunningOrderTakeAway from './componets/Kitchenpanel/CRUDkitchen/RunningOrderTakeAway';
-import TakeawayDeliveryorder from './componets/DeliveryPanel/CRUDfoodfelivery/takeawayDeliveryorder';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -50,41 +75,62 @@ function App() {
     <>
       <div>
         <Router>
+          <NavBar />
         <Routes>
-          <Route path='/' index element={<Pages/>} />
+          {/*MAIN PATHS */}
+          <Route path='/' index element={<HomePage />} />
+          <Route path='/dinein' index element={<DineinHomepage />} />
+          <Route path='/itable/:id' index element={<DineinOrderpage />} />
+          <Route path='/otable/:id' index element={<DineoutOrderpage />} />
+          <Route path='/running-order' index element={<RunningOrder />} />
+          <Route path='/saleorderdetails' index element={<Sod />} />
+          <Route path='/sodcustomer/:id' index element={<SaleOrderView />} />
+          <Route path='/settlesale' index element={<Settlesale />} />
+          <Route path='/payback' index element={<PayBack />} />
+          <Route path='/expenses' index element={<Expenses />} />
+          <Route path='/creditsale' index element={<Creditsale />} />
+          <Route path='/cashatstarting' index element={<CashStarting />} />
+          <Route path='/crm' index element={<CRM />} />
+          <Route path='/messdetails' index element={<MessDetailsForm />} />
+          <Route path='/takeaway' index element={<TakeAway />} />
+          <Route path='/takeawaylog' index element={<TakeAwayLog />} />
+          <Route path='/takeawayedit/:id' index element={<TakeAwayEdit />} />
+
+          {/*ADMIN PATHS */}
+          <Route path='/admin' index element={<Pages/>} />
           {/* for Home panel */}
-          <Route path='/homepanel'  element={<HomePanel/>} />
-          <Route path='/edit-home'  element={<HomeEditList/>} />
-          <Route path='/edit-home/:homeno'  element={<HomeEdit/>} />
-          <Route path='/delete-home'  element={<HomeDelList/>} />
-          <Route path='/delete-home/:homeno'  element={<HomeDelete />} />
+          <Route path='/admin/homepanel'  element={<HomePanel/>} />
+          <Route path='/admin/edit-home'  element={<HomeEditList/>} />
+          <Route path='/admin/edit-home/:homeno'  element={<HomeEdit/>} />
+          <Route path='/admin/delete-home'  element={<HomeDelList/>} />
+          <Route path='/admin/delete-home/:homeno'  element={<HomeDelete />} />
           {/* for tables */}
-          <Route path='/tablepanel'  element={<TablePanel/>} />
-          <Route path='/create-table' element={<TableForm />} />
-          <Route path='/edit-table' element={<TableList />} />
-          <Route path='/edit-table/:tableno' element={<TableEdit />} />
-          <Route path='/delete-table' element={<TableDelList />} />
-          <Route path='/delete-table/:tableno' element={<TableDelete />} />
+          <Route path='/admin/tablepanel'  element={<TablePanel/>} />
+          <Route path='/admin/create-table' element={<TableForm />} />
+          <Route path='/admin/edit-table' element={<TableList />} />
+          <Route path='/admin/edit-table/:tableno' element={<TableEdit />} />
+          <Route path='/admin/delete-table' element={<TableDelList />} />
+          <Route path='/admin/delete-table/:tableno' element={<TableDelete />} />
           {/* for food panel */}
-          <Route path='/foodpanel'  element={<FoodPanel/>} />
+          <Route path='/admin/foodpanel'  element={<FoodPanel/>} />
           <Route path="/add-foodtype" element={<FoodType />} />
-          <Route path='/edit-foodtype' element={<FoodTypeEditList />} />
-          <Route path='/edit-foodtype/:foodid' element={<FoodTypeEdit />} />
-          <Route path='/delete-foodtype' element={<FoodTypeDelList />} />
-          <Route path='/delete-foodtype/:foodid' element={<FoodTypeDelete />} />
+          <Route path='/admin/edit-foodtype' element={<FoodTypeEditList />} />
+          <Route path='/admin/edit-foodtype/:foodid' element={<FoodTypeEdit />} />
+          <Route path='/admin/delete-foodtype' element={<FoodTypeDelList />} />
+          <Route path='/admin/delete-foodtype/:foodid' element={<FoodTypeDelete />} />
           <Route path="/add-fooddata" element={<FoodData />} />
-          <Route path='/edit-fooddata' element={<FoodEditList />} />
-          <Route path='/edit-fooddata/:foodid' element={<FoodEdit />} />
-          <Route path='/change-food-image/:foodid' element={<FoodImageChange />} />
-          <Route path='/delete-fooddata' element={<FoodDelList />} />
-          <Route path='/delete-fooddata/:foodid' element={<FoodDelete />} />
+          <Route path='/admin/edit-fooddata' element={<FoodEditList />} />
+          <Route path='/admin/edit-fooddata/:foodid' element={<FoodEdit />} />
+          <Route path='/admin/change-food-image/:foodid' element={<FoodImageChange />} />
+          <Route path='/admin/delete-fooddata' element={<FoodDelList />} />
+          <Route path='/admin/delete-fooddata/:foodid' element={<FoodDelete />} />
           {/* for kitchen panel */}
-          <Route path='/kitchenpanel'  element={<KitchenPanel/>} />
+          <Route path='/admin/kitchenpanel'  element={<KitchenPanel/>} />
           <Route path="/running-order" element={<Runningorder />} />
           <Route path="/running-delivery-order" element={<RunningOrderDeliverySale />} />
           <Route path="/running-takeaway-order" element={<RunningOrderTakeAway />} />
           <Route path="/completed-order" element={<FoodType />} />
-          {/* for delivery panel */}
+          {/* for kitchen panel */}
           <Route path='/deliverypanel'  element={<DeliveryPanel/>} />
           <Route path="/dinein-delivery-order" element={<DineinDeliveryorder />} />
           <Route path="/deliverysale-delivery-order" element={<DelevrysaleDeliveryorder />} />
@@ -92,15 +138,15 @@ function App() {
           <Route path="/changeavailibilty" element={<ChangeAvailability />} />
           <Route path="/change-food-availablity/:foodid" element={<ChangeFoodAvil />} />
           {/* for Waiter panel */}
-          <Route path='/waiterpanel'  element={<WaiterPanel/>} />
+          <Route path='/admin/waiterpanel'  element={<WaiterPanel/>} />
           <Route path="/add-waiter" element={<AddWaiter />} />
           <Route path="/edit-waiter" element={<EditWaiterList />} />
           <Route path="/edit-waiter/:waiterid" element={<EditWaiterForm />} />
           <Route path="/delete-waiter" element={<DeleteWaiterList />} />
           <Route path="/delete-waiter/:waiterid" element={<DeleteWaiter />} />
           {/* for Bill panel */}
-          <Route path='/billpanel'  element={<BillPanel/>} />
-          <Route path='/bill-edit-panel'  element={<BillEditPanel/>} />
+          <Route path='/admin/billpanel'  element={<BillPanel/>} />
+          <Route path='/admin/bill-edit-panel'  element={<BillEditPanel/>} />
         </Routes>
       </Router>
       </div>

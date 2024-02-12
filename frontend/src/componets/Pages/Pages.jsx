@@ -6,19 +6,19 @@ const Pages = () => {
         <div>
             <h1>Admin Panel</h1>
             <div>
-                <NavLink to='/homepanel'>Home Panel</NavLink>
+                <NavLink to='/admin/homepanel'>Home Panel</NavLink>
                 <br></br>
-                <NavLink to={'/tablepanel'}>Table Panel</NavLink>
+                <NavLink to={'/admin/tablepanel'}>Table Panel</NavLink>
                 <br></br>
-                <NavLink to={'/foodpanel'}>Food Panel</NavLink>
+                <NavLink to={'/admin/foodpanel'}>Food Panel</NavLink>
                 <br></br>
-                <NavLink to={'/kitchenpanel'}>Kitchen Panel</NavLink>
+                <NavLink to={'/admin/kitchenpanel'}>Kitchen Panel</NavLink>
                 <br></br>
-                <NavLink to={'/deliverypanel'}>Delivery order Panel</NavLink>
+                <NavLink to={'/admin/deliverypanel'}>Delivery order Panel</NavLink>
                 <br></br>
-                <NavLink to={'/waiterpanel'}>WaiterPanel</NavLink>
+                <NavLink to={'/admin/waiterpanel'}>WaiterPanel</NavLink>
                 <br></br>
-                <NavLink to={'/billpanel'}>Bill Panel</NavLink>
+                <NavLink to={'/admin/billpanel'}>Bill Panel</NavLink>
                 <br></br>
             </div>
         </div>

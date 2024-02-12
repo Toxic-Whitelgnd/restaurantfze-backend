@@ -10,7 +10,7 @@ const HomeDelete = () => {
   const handleDelete = async () => {
     try {
       // Make a DELETE request to /delete_table_data/:table_no
-      await axios.delete(`http://localhost:9999/delete_home_page_data/${homeno}`);
+      await axios.delete(`https://restogenius.onrender.com/delete_home_page_data/${homeno}`);
       
       alert('Home item deleted successfully deleted!');
 

@@ -15,7 +15,7 @@ const EditWaiterForm = () => {
     // Fetch waiter details by ID when the component mounts
     const fetchWaiterDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:9999/get_waiter/${waiterid}`);
+        const response = await axios.get(`https://restogenius.onrender.com/get_waiter/${waiterid}`);
         console.log(response.data);
         setWaiterData(response.data);
       } catch (error) {
@@ -36,7 +36,7 @@ const EditWaiterForm = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:9999/update_waiter/${waiterid}`, waiterData);
+      await axios.put(`https://restogenius.onrender.com/update_waiter/${waiterid}`, waiterData);
       alert('Waiter details updated successfully!');
     } catch (error) {
       console.error('Error updating waiter details:', error);

@@ -22,7 +22,7 @@ const TableEdit = () => {
     useEffect(() => {
         const fetchTableData = async () => {
             try {
-                const response = await axios.get(`http://localhost:9999/single_table_data/${tableno}`);
+                const response = await axios.get(`https://restogenius.onrender.com/single_table_data/${tableno}`);
                 console.log("from server hitback",response.data[0]);
                 setFormData(response.data[0]);
             } catch (error) {
@@ -43,7 +43,7 @@ const TableEdit = () => {
         console.log(formData);
         try {
             // Make a PUT request to /update_table_data/:table_no
-            await axios.put(`http://localhost:9999/update_table_data/${tableno}`, formData);
+            await axios.put(`https://restogenius.onrender.com/update_table_data/${tableno}`, formData);
             console.log('Table data successfully updated!');
             // Optionally, you can add logic to handle success or navigate to another page
         } catch (error) {

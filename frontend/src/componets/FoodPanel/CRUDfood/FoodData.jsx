@@ -15,7 +15,7 @@ const FoodData = () => {
         // Fetch food types from the server
         const fetchFoodTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:9999/get_food_type');
+                const response = await axios.get('https://restogenius.onrender.com/get_food_type');
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -55,7 +55,7 @@ const FoodData = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:9999/post_add_food_data', {
+            const response = await axios.post('https://restogenius.onrender.com/post_add_food_data', {
                 foodName,
                 foodPrice,
                 foodImage,
@@ -168,7 +168,7 @@ const Food = require('../models/Food');
 
 const router = express.Router();
 
-router.get('/get_food_data_with_images', async (req, res) => {
+router.get('/admin/get_food_data_with_images', async (req, res) => {
   try {
     const foodData = await Food.find();
     const foodDataWithBase64Images = foodData.map(item => ({
@@ -195,7 +195,7 @@ const FoodList = () => {
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
-        const response = await axios.get('/get_food_data_with_images');
+        const response = await axios.get('/admin/get_food_data_with_images');
         setFoodData(response.data);
       } catch (error) {
         console.error('Error fetching food data with images:', error);
