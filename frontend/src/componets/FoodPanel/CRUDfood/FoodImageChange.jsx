@@ -31,7 +31,7 @@ const FoodImageChange = () => {
         } );
 
         alert('Image uploaded successfully!');
-        window.location.href = "/#/edit-fooddata/"
+        window.location.href = "/#/admin/edit-fooddata/"
       }
     } catch (error) {
       console.error('Error uploading image:', error);

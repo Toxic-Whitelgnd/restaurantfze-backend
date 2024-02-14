@@ -27,7 +27,7 @@ const FoodTypeEditList = () => {
           {
               tables.map(table => (
                   <li key={table._id}>
-                    <Link to={`/edit-foodtype/${table._id}`}>{`${table.food_name}`}</Link>
+                    <Link to={`/admin/edit-foodtype/${table._id}`}>{`${table.food_name}`}</Link>
                   </li>
                 ))
           }

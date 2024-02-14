@@ -1,12 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import "./takeaway.css"
+import "./deliverysale.css";
 import { useParams } from 'react-router-dom';
-import Quanttity from '../../cards/QuantityCards/Quanttity';
-import FoodCard from '../../cards/FoodCards/FoodCard';
-import FoodApi from '../api/foodapi';
+
 import TableorderCard from '../../cards/Table/TableorderCard';
-import TableBody from '../../cards/Table/tableBody';
-import Paybillpopup from '../../cards/PopupCards/Paybillpopup';
+
 import GetDate from '../../cards/TimeandDate/GetDate';
 import GetTime from '../../cards/TimeandDate/GetTime';
 import { ToastContainer, toast } from 'react-toastify';
@@ -85,12 +82,14 @@ const DeliverySale = () => {
         fetchTableData();
 
         fetchBillD();
+
+        GenerateOrderNo();
     }, []);
 
     const [tableData, setTableData] = useState([]);
     const fetchTableData = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/table_data');
+            const response = await axios.get('http://localhost:9999/table_data');
             setTableData(response.data);
             console.log(response.data);
         } catch (error) {
@@ -101,7 +100,7 @@ const DeliverySale = () => {
     const [waiter, setWaiter] = useState([]);
     const fetchWaiter = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/get_waiter');
+            const response = await axios.get('http://localhost:9999/get_waiter');
             console.log(response.data);
             setWaiter(response.data);
         } catch (error) {
@@ -112,7 +111,7 @@ const DeliverySale = () => {
     const [bill, setBill] = useState([]);
     const fetchBillD = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/get_billd');
+            const response = await axios.get('http://localhost:9999/get_billd');
             console.log(response.data);
             setBill(response.data[0]);
 
@@ -124,7 +123,7 @@ const DeliverySale = () => {
     const [data, setData] = useState([]);
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/get_food_data');
+            const response = await axios.get('http://localhost:9999/get_food_data');
             console.log(response.data);
             setData(response.data);
         } catch (error) {
@@ -141,7 +140,7 @@ const DeliverySale = () => {
 
     const fetchCurrentOrder = async () => {
         try {
-            const response = await axios.get(`https://restogenius.onrender.com/get_saved_orders/${id}`);
+            const response = await axios.get(`http://localhost:9999/get_saved_orders/${id}`);
             console.log(response.data);
 
             // DYnmic changeHere :TODO:
@@ -156,11 +155,11 @@ const DeliverySale = () => {
             else {
                 // DYnamic change here: TODO:
                 console.log("Saved orders", outdoorSavedOrder);
-                    setFetchFood(outdoorSavedOrder[0]);
-                    setOrdersave(false); // this is indicate that the oreder existed or not (fasle)
-                    // console.log(ordersave);
-                    setUsercreated(false);
-                
+                setFetchFood(outdoorSavedOrder[0]);
+                setOrdersave(false); // this is indicate that the oreder existed or not (fasle)
+                // console.log(ordersave);
+                setUsercreated(false);
+
 
             }
 
@@ -200,16 +199,16 @@ const DeliverySale = () => {
 
     const handleSave = () => {
 
-      
-        
-            console.log('Customer Details:', customerDetails);
 
-            // need to set thge layout for 
-            setCustomerstate();
 
-            // Close the modal
-            closeModal();
-        
+        console.log('Customer Details:', customerDetails);
+
+        // need to set thge layout for 
+        setCustomerstate();
+
+        // Close the modal
+        closeModal();
+
     };
 
     function setCustomerstate() {
@@ -237,6 +236,12 @@ const DeliverySale = () => {
         setSelectedCategory(event.target.value);
     };
 
+    // generate no
+    const [orderNou,setOrderNo] = useState(0);
+    const GenerateOrderNo = ()=>{
+        const orderId = randomOrderNoGenerator();
+        setOrderNo(orderId);
+    }
 
 
     // for popup 01 
@@ -265,7 +270,8 @@ const DeliverySale = () => {
             id: fd._id.substring(fd._id.length - 3, fd._id.length),
             amt: Number(fd.foodPrice) + Number(fd.foodPrice),
             status: "not ready",
-            orderFrom: "deliverysale", //Dynamic TODO:
+            orderno: orderNou,
+            orderFrom: "deliverysale", //Dynamic
         }
 
         console.log("mff" + fetchedFd);
@@ -368,30 +374,23 @@ const DeliverySale = () => {
         const max = 99999999; // Maximum 8-digit number
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-
-    const orderId = (ordersave) ? randomOrderNoGenerator() : fetchFood.order_no;
+    
 
     const SaveOrdertoDb = async (current_order) => {
 
         try {
-            const response = await axios.get(`https://restogenius.onrender.com/get_saved_orders/${id}`);
-
-            // Dynamic change here :TODO:
-            const outdoorOrder = response.data.filter(x => x.orderFrom == "deliverysale");
-            if (outdoorOrder.length == 0 ) {
-                console.log(response.data);
-                try {
-                    const response = await axios.post("https://restogenius.onrender.com/save_current_order", current_order)
+            
+                    const response = await axios.post("http://localhost:9999/save_current_deliverysale_order", current_order)
                     console.log(response.data);
-                    toast.success(response.data.message);
-                    window.location.reload();
-                } catch (error) {
-                    console.error(error);
-                }
-            } else {
-                UpdateOrder();
+                    if(response.data.success){
+                        toast.success(response.data.message);
+                        window.location.reload();
+                    }
+                   
+                    
+               
             }
-        } catch (error) {
+        catch (error) {
             console.error(error);
         }
 
@@ -399,7 +398,7 @@ const DeliverySale = () => {
 
     const UpdatetoDb = async (update_order) => {
         try {
-            const response = await axios.put(`https://restogenius.onrender.com/update_current_order/${id}`, update_order)
+            const response = await axios.put(`http://localhost:9999/update_current_order/${id}`, update_order)
             console.log(response.data);
             toast.success(response.data.message);
         } catch (error) {
@@ -420,18 +419,18 @@ const DeliverySale = () => {
 
             else {
                 const current_order = {
-                    order_no: orderId,
+                    order_no: orderNou,
                     floor_no: '1', // DYNAMIC TODO:
                     customer_details: customerDetails,
                     items_ordered: foodD.length,
                     items: foodD,
                     total: calculateTotalAmountofItem(),
                     running_order: 'Yes',
-                    orderFrom: 'deliversale', //dynamic TODO: 'outdoor' 'countersale' 'deliverysale
+                    orderFrom: 'deliverysale', //dynamic TODO: 'outdoor' 'countersale' 'deliverysale
                 }
 
 
-
+                console.log("current order");
                 console.log(current_order);
 
 
@@ -511,7 +510,7 @@ const DeliverySale = () => {
 
         const fetchFoodTypes = async () => {
             try {
-                const response = await axios.get('https://restogenius.onrender.com/get_food_type');
+                const response = await axios.get('http://localhost:9999/get_food_type');
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -528,7 +527,7 @@ const DeliverySale = () => {
     const SuccessfullPayment = async () => {
 
         try {
-    
+
             window.location.reload();
         } catch (error) {
             alert(error.message);
@@ -538,19 +537,19 @@ const DeliverySale = () => {
     const ClearTheTableData = async () => {
         try {
             // call the server to set the current_order tables to empty,
-            const response = await axios.delete(`https://restogenius.onrender.com/delete_current_order/${fetchFood.table_no}`)
-            
+            const response = await axios.delete(`http://localhost:9999/delete_current_order/${fetchFood.table_no}`)
+
             toast.success("redirect to new page");
 
         } catch (error) {
             toast.error(error.message)
-            
+
         }
 
         try {
-            console.log("after deleting the current_order tables",fetchFood.table_no);
-            const response2 = await axios.delete(`https://restogenius.onrender.com/delete_running_order/${fetchFood.table_no}`)
-            if(response2.data.success){
+            console.log("after deleting the current_order tables", fetchFood.table_no);
+            const response2 = await axios.delete(`http://localhost:9999/delete_running_order/${fetchFood.table_no}`)
+            if (response2.data.success) {
                 window.location.href = '/#/dinein';
             }
         } catch (error) {
@@ -577,9 +576,13 @@ const DeliverySale = () => {
     const [paymentId, setPaymentId] = useState('');
     const [orderpaymetId, setOrderId] = useState('');
     const [signature, setSignature] = useState('');
+
     const handlePayBill = async () => {
         // Add logic here to handle the payment
         console.log('Payment processed successfully');
+
+        SaveOrder();
+
         // You can close the modal or perform other actions after payment
         toast.success("Payment Started to proceeding");
 
@@ -588,7 +591,7 @@ const DeliverySale = () => {
             customer_mobileNumber: customerDetails.mobileNumber,
             customer_email: customerDetails.email,
             customer_address: customerDetails.address,
-            order_no: orderId,
+            order_no: orderNou,
             items_ordered: foodD.length,
             items: foodD,
             total: calculateTotalAmountofItem(),
@@ -597,9 +600,11 @@ const DeliverySale = () => {
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
             type: 'deliverysale', //TODO: 'coutersale' ,'deliversale'
-            orderFrom: 'deliverysale', //TODO: '
+            orderFrom: 'deliverysale',
             paid_by: selectedPaymentType,
             waiter_name: waiterName,
+            delivered_by: "", // backend dashboard handling
+            delivery_vehicle_no: "",
 
         }
 
@@ -607,13 +612,13 @@ const DeliverySale = () => {
 
         try {
 
-            const response = await axios.post("https://restogenius.onrender.com/save_takeaway_order", customer_details);
-            
-            if(response.data.success){
+            const response = await axios.post("http://localhost:9999/save_deliverysale_order", customer_details);
+
+            if (response.data.success) {
                 toast.success("Customer detail saved");
                 SuccessfullPayment();
             }
-            
+
 
         } catch (error) {
             console.error('Error:', error);
@@ -680,7 +685,7 @@ const DeliverySale = () => {
                                         value={customerDetails.email}
                                         onChange={handleInputChange}
                                         required
-                                        
+
                                     />
                                 </label>
                                 <label>
@@ -692,7 +697,7 @@ const DeliverySale = () => {
                                         value={customerDetails.address}
                                         onChange={handleInputChange}
                                         required
-                                        
+
                                     />
                                 </label>
                                 <button type="button" onClick={handleSave} className="save-btn">
@@ -703,12 +708,12 @@ const DeliverySale = () => {
                     </div>
                 )}
             </div>
-          
+
             <div className='row g-3'>
                 <div className='dinein-navbar-cont'>
 
                     <div className='info-cont'>
-                        <a href="#" className="running-order" style={{ 'color': '#000' }}>OrderNo #{orderId}</a>
+                        <a href="#" className="running-order" style={{ 'color': '#000' }}>OrderNo #{orderNou}</a>
                         {/* <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
                         <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
                         <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
@@ -746,7 +751,7 @@ const DeliverySale = () => {
                                         </li>
 
                                         {/* Dynamic TODO: */}
-                                        {foodD && foodD.filter(x => x.orderFrom == "takeaway").map((val, idx) => {
+                                        {foodD && foodD.filter(x => x.orderFrom == "deliverysale").map((val, idx) => {
                                             return (
                                                 <>
                                                     <li class="otable-row">
@@ -838,7 +843,7 @@ const DeliverySale = () => {
                                 <div class="colo colo-4">Amount</div>
                             </li>
                             {/* save to db and fetch from there DYNAMIC TODO:*/}
-                            {foodD.length > 0 && foodD.filter(x => x.orderFrom == "takeaway").map((food) => (
+                            {foodD.length > 0 && foodD.filter(x => x.orderFrom == "deliverysale").map((food) => (
                                 < TableorderCard fooditem={food}
                                     onDecrement={handleDecrement}
                                     onIncrement={handleIncrement}

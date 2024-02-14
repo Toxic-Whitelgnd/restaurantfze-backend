@@ -16,7 +16,7 @@ const RunningOrderDeliverySale = () => {
 
     const fetchRunningOrder = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_running_deliverysale_order');
+            const response = await axios.get('https://restogenius.onrender.com/get_running_deliverysale_order');
             console.log(response.data);
             setRunningOrder(response.data);
         } catch (error) {
@@ -75,7 +75,7 @@ const RunningOrderDeliverySale = () => {
 
     const handleSave = async (val) => {
         console.log("mf runingorder", val);
-        const res = await axios.put(`http://localhost:9999/update_running_deliverysale_order/${val.order_no}`,
+        const res = await axios.put(`https://restogenius.onrender.com/update_running_deliverysale_order/${val.order_no}`,
             val);
         console.log(res.data);
 

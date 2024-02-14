@@ -41,7 +41,32 @@ import ChangeFoodAvil from './componets/Kitchenpanel/CRUDkitchen/ChangeFoodAvil'
 import ChangeAvailability from './componets/Kitchenpanel/CRUDkitchen/ChangeAvailability';
 import BillPanel from './componets/BillPanel/BillPanel';
 import BillEditPanel from './componets/BillPanel/CRUDbill/BillEditPanel';
+import RunningOrderDeliverySale from './componets/Kitchenpanel/CRUDkitchen/RunningOrderDeliverySale';
+import RunningOrderTakeAway from './componets/Kitchenpanel/CRUDkitchen/RunningOrderTakeAway';
+import  DelevrysaleDeliveryorder from "./componets/DeliveryPanel/CRUDfoodfelivery/delevrysaleDeliveryorder"
+import TakeawayDeliveryorder from "./componets/DeliveryPanel/CRUDfoodfelivery/takeawayDeliveryorder";
 
+
+// from components.
+import NavBar from './components/NavBar/NavBar';
+import HomePage from './components/HomePage/HomePage';
+import DineinHomepage from './components/DineIn/dineinHomepage';
+import DineinOrderpage from './components/DineIn/dineinOrderpage';
+import Sod from './components/SaleOrderDetails/Sod';
+import DineoutOrderpage from './components/DineIn/dineoutOrderpage';
+import Settlesale from './components/Settlesale/Settlesale';
+import PayBack from './components/PayBack/PayBack';
+import Expenses from './components/Expenses/Expenses';
+import Creditsale from './components/Credit Sale/Creditsale';
+import CashStarting from './components/CashAtStarting/CashStarting';
+import CRM from './components/CRM/CRM';
+import MessDetailsForm from './components/CRM/MESS';
+import TakeAway from './components/TakeAway/Takeaway';
+import TakeAwayLog from './components/TakeAway/TakeAwayLog';
+import TakeAwayEdit from './components/TakeAway/TakeAwayEdit';
+import RunningOrder from './components/DineIn/RunningOrder';
+import SaleOrderView from './cards/SODCards/SaleOrderView';
+import DeliverySale from './components/DeliverySale/DeliverySale';
 
 
 
@@ -95,6 +120,7 @@ function App() {
           <Route path='/takeaway' index element={<TakeAway />} />
           <Route path='/takeawaylog' index element={<TakeAwayLog />} />
           <Route path='/takeawayedit/:id' index element={<TakeAwayEdit />} />
+          <Route path='/deliverysale' index element={<DeliverySale />} />
 
           {/*ADMIN PATHS */}
           <Route path='/admin' index element={<Pages/>} />
@@ -113,12 +139,12 @@ function App() {
           <Route path='/admin/delete-table/:tableno' element={<TableDelete />} />
           {/* for food panel */}
           <Route path='/admin/foodpanel'  element={<FoodPanel/>} />
-          <Route path="/add-foodtype" element={<FoodType />} />
+          <Route path="/admin/add-foodtype" element={<FoodType />} />
           <Route path='/admin/edit-foodtype' element={<FoodTypeEditList />} />
           <Route path='/admin/edit-foodtype/:foodid' element={<FoodTypeEdit />} />
           <Route path='/admin/delete-foodtype' element={<FoodTypeDelList />} />
           <Route path='/admin/delete-foodtype/:foodid' element={<FoodTypeDelete />} />
-          <Route path="/add-fooddata" element={<FoodData />} />
+          <Route path="/admin/add-fooddata" element={<FoodData />} />
           <Route path='/admin/edit-fooddata' element={<FoodEditList />} />
           <Route path='/admin/edit-fooddata/:foodid' element={<FoodEdit />} />
           <Route path='/admin/change-food-image/:foodid' element={<FoodImageChange />} />
@@ -126,24 +152,24 @@ function App() {
           <Route path='/admin/delete-fooddata/:foodid' element={<FoodDelete />} />
           {/* for kitchen panel */}
           <Route path='/admin/kitchenpanel'  element={<KitchenPanel/>} />
-          <Route path="/running-order" element={<Runningorder />} />
-          <Route path="/running-delivery-order" element={<RunningOrderDeliverySale />} />
-          <Route path="/running-takeaway-order" element={<RunningOrderTakeAway />} />
-          <Route path="/completed-order" element={<FoodType />} />
+          <Route path="/admin/running-order" element={<Runningorder />} />
+          <Route path="/admin/running-delivery-order" element={<RunningOrderDeliverySale />} />
+          <Route path="/admin/running-takeaway-order" element={<RunningOrderTakeAway />} />
+          <Route path="/admin/completed-order" element={<FoodType />} />
           {/* for kitchen panel */}
-          <Route path='/deliverypanel'  element={<DeliveryPanel/>} />
-          <Route path="/dinein-delivery-order" element={<DineinDeliveryorder />} />
-          <Route path="/deliverysale-delivery-order" element={<DelevrysaleDeliveryorder />} />
-          <Route path="/deliverysale-takeaway-order" element={<TakeawayDeliveryorder />} />
-          <Route path="/changeavailibilty" element={<ChangeAvailability />} />
-          <Route path="/change-food-availablity/:foodid" element={<ChangeFoodAvil />} />
+          <Route path='/admin/deliverypanel'  element={<DeliveryPanel/>} />
+          <Route path="/admin/dinein-delivery-order" element={<DineinDeliveryorder />} />
+          <Route path="/admin/deliverysale-delivery-order" element={<DelevrysaleDeliveryorder />} />
+          <Route path="/admin/deliverysale-takeaway-order" element={<TakeawayDeliveryorder />} />
+          <Route path="/admin/changeavailibilty" element={<ChangeAvailability />} />
+          <Route path="/admin/change-food-availablity/:foodid" element={<ChangeFoodAvil />} />
           {/* for Waiter panel */}
           <Route path='/admin/waiterpanel'  element={<WaiterPanel/>} />
-          <Route path="/add-waiter" element={<AddWaiter />} />
-          <Route path="/edit-waiter" element={<EditWaiterList />} />
-          <Route path="/edit-waiter/:waiterid" element={<EditWaiterForm />} />
-          <Route path="/delete-waiter" element={<DeleteWaiterList />} />
-          <Route path="/delete-waiter/:waiterid" element={<DeleteWaiter />} />
+          <Route path="/admin/add-waiter" element={<AddWaiter />} />
+          <Route path="/admin/edit-waiter" element={<EditWaiterList />} />
+          <Route path="/admin/edit-waiter/:waiterid" element={<EditWaiterForm />} />
+          <Route path="/admin/delete-waiter" element={<DeleteWaiterList />} />
+          <Route path="/admin/delete-waiter/:waiterid" element={<DeleteWaiter />} />
           {/* for Bill panel */}
           <Route path='/admin/billpanel'  element={<BillPanel/>} />
           <Route path='/admin/bill-edit-panel'  element={<BillEditPanel/>} />

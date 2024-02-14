@@ -27,7 +27,7 @@ const FoodTypeDelList = () => {
           {
               tables.map(table => (
                   <li key={table._id}>
-                    <Link to={`/delete-foodtype/${table._id}`}>{`${table.food_name}`}</Link>
+                    <Link to={`/admin/delete-foodtype/${table._id}`}>{`${table.food_name}`}</Link>
                   </li>
                 ))
           }

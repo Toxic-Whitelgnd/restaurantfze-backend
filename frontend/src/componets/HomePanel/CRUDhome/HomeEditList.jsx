@@ -26,7 +26,7 @@ const HomeEditList = () => {
         {
             tables.map(table => (
                 <li key={table.tableNo}>
-                  <Link to={`/edit-home/${table.home_id}`}>{`${table.home_name}`}</Link>
+                  <Link to={`/admin/edit-home/${table.home_id}`}>{`${table.home_name}`}</Link>
                 </li>
               ))
         }

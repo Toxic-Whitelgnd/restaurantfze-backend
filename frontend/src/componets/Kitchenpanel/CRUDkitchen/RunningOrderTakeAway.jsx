@@ -15,7 +15,7 @@ const RunningOrderTakeAway = () => {
 
     const fetchRunningOrder = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_running_takeaway_order');
+            const response = await axios.get('https://restogenius.onrender.com/get_running_takeaway_order');
             console.log(response.data);
             setRunningOrder(response.data);
         } catch (error) {
@@ -74,7 +74,7 @@ const RunningOrderTakeAway = () => {
 
     const handleSave = async (val) => {
         console.log("mf runingorder", val);
-        const res = await axios.put(`http://localhost:9999/update_running_takeaway_order/${val.order_no}`,
+        const res = await axios.put(`https://restogenius.onrender.com/update_running_takeaway_order/${val.order_no}`,
             val);
         console.log(res.data);
 

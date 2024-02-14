@@ -51,7 +51,7 @@ const FoodDelList = () => {
           {
               tables.filter(x => x.foodType === foodType).map(table => (
                   <li key={table.tableNo}>
-                    <Link to={`/delete-fooddata/${table._id}`}>{`${table.foodName}`}</Link>
+                    <Link to={`/admin/delete-fooddata/${table._id}`}>{`${table.foodName}`}</Link>
                   </li>
                 ))
           }

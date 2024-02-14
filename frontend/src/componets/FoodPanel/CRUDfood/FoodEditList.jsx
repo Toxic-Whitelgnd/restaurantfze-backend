@@ -51,7 +51,7 @@ const FoodEditList = () => {
           {
               tables.filter(x => x.foodType === foodType).map(table => (
                   <li key={table.tableNo}>
-                    <Link to={`/edit-fooddata/${table._id}`}>{`${table.foodName}`}</Link>
+                    <Link to={`/admin/edit-fooddata/${table._id}`}>{`${table.foodName}`}</Link>
                   </li>
                 ))
           }

@@ -51,7 +51,7 @@ const ChangeAvailability = () => {
           {
               tables.filter(x => x.foodType === foodType).map(table => (
                   <li key={table.tableNo}>
-                    <Link to={`/change-food-availablity/${table._id}`}>{`${table.foodName}`}</Link>
+                    <Link to={`/admin/change-food-availablity/${table._id}`}>{`${table.foodName}`}</Link>
                   </li>
                 ))
           }

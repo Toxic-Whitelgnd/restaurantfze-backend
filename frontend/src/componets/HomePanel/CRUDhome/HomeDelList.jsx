@@ -24,7 +24,7 @@ const HomeDelList = () => {
                 {
                     tables.map(table => (
                         <li key={table.tableNo}>
-                            <Link to={`/delete-home/${table.home_id}`}>{`${table.home_name}`}</Link>
+                            <Link to={`/admin/delete-home/${table.home_id}`}>{`${table.home_name}`}</Link>
                         </li>
                     ))
                 }
