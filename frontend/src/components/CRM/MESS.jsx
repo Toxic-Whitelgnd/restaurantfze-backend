@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
 
 const MessDetailsForm = () => {
     const [messDetails, setMessDetails] = useState({
-        idno: '',
-        joindate: '',
-        closingdate: '',
-        custname: '',
-        time1: '',
-        time2: '',
-        time3: '',
+        joiningDate: '',
+        name: '',
+        mealItem1: '',
+        mealItem2: '',
+        mealItem3: '',
         amount: '',
     });
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,23 +21,25 @@ const MessDetailsForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here, you can save the details to your desired location (e.g., database, state, etc.)
-        console.log('Mess Details Submitted:', messDetails);
-        // Reset the form after submission
-        toast.success("data added successfully")
-
-        setMessDetails({
-            idno: '',
-            joindate: '',
-            closingdate: '',
-            custname: '',
-            time1: '',
-            time2: '',
-            time3: '',
-            amount: '',
-        });
+        try {
+            const result = await axios.post("http://localhost:9999/save_messDetails", messDetails);
+            console.log(result.data); // Assuming the result contains data
+            console.log('Mess Details Submitted:', messDetails);
+            toast.success("Data added successfully");
+            setMessDetails({
+                joiningDate: '',
+                name: '',
+                mealItem1: '',
+                mealItem2: '',
+                mealItem3: '',
+                amount: '',
+            });
+        } catch (error) {
+            console.error('Error submitting mess details:', error);
+            toast.error("Failed to add data");
+        }
     };
 
     return (
@@ -45,24 +47,13 @@ const MessDetailsForm = () => {
             <h2>Mess Details Form</h2>
             <div className='mess-container'>
             <form onSubmit={handleSubmit}>
-                <label>
-                    ID Number:
-                    <input
-                        type="text"
-                        name="idno"
-                        value={messDetails.idno}
-                        onChange={handleChange}
-                        id="exp-input"
-                    />
-                </label>
-                <br />
 
                 <label>
                     Name:
                     <input
                         type="text"
-                        name="custname"
-                        value={messDetails.custname}
+                        name="name"
+                        value={messDetails.name}
                         onChange={handleChange} id="exp-input"
                     />
                 </label>
@@ -72,21 +63,10 @@ const MessDetailsForm = () => {
                     Join Date:
                     <input
                         type="date"
-                        name="joindate"
-                        value={messDetails.joindate}
+                        name="joiningDate"
+                        value={messDetails.joiningDate}
                         onChange={handleChange}
                         id="exp-input"
-                    />
-                </label>
-                <br />
-
-                <label>
-                    Closing Date:
-                    <input
-                        type="date"
-                        name="closingdate"
-                        value={messDetails.closingdate}
-                        onChange={handleChange} id="exp-input"
                     />
                 </label>
                 <br />
@@ -106,8 +86,8 @@ const MessDetailsForm = () => {
                     1-Time:
                     <input
                         type="number"
-                        name="time1"
-                        value={messDetails.time1}
+                        name="mealItem1"
+                        value={messDetails.mealItem1}
                         onChange={handleChange} id="exp-input"
                     />
                 </label>
@@ -117,8 +97,8 @@ const MessDetailsForm = () => {
                     2-Time:
                     <input
                         type="number"
-                        name="time2"
-                        value={messDetails.time2}
+                        name="mealItem2"
+                        value={messDetails.mealItem2}
                         onChange={handleChange} id="exp-input"
                     />
                 </label>
@@ -128,8 +108,8 @@ const MessDetailsForm = () => {
                     3-Time:
                     <input
                         type="number"
-                        name="time3"
-                        value={messDetails.time3}
+                        name="mealItem3"
+                        value={messDetails.mealItem3}
                         onChange={handleChange} id="exp-input"
                     />
                 </label>
