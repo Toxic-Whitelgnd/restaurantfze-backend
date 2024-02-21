@@ -67,6 +67,8 @@ import TakeAwayEdit from './components/TakeAway/TakeAwayEdit';
 import RunningOrder from './components/DineIn/RunningOrder';
 import SaleOrderView from './cards/SODCards/SaleOrderView';
 import DeliverySale from './components/DeliverySale/DeliverySale';
+import RecipietCard from './cards/RecipitCards/RecipietCard';
+import KitchenRecipietCard from './cards/RecipitCards/KitchenRecipietCard';
 
 
 
@@ -121,7 +123,9 @@ function App() {
           <Route path='/takeawaylog' index element={<TakeAwayLog />} />
           <Route path='/takeawayedit/:id' index element={<TakeAwayEdit />} />
           <Route path='/deliverysale' index element={<DeliverySale />} />
-
+          <Route path='/print/indoor/:id' element={<RecipietCard />} />
+          <Route path='/print/kitchen/indoor/:id' element={<KitchenRecipietCard />} />
+          <Route path='/print/kitchen/outdoor/:id' element={<KitchenRecipietCard />} />
           {/*ADMIN PATHS */}
           <Route path='/admin' index element={<Pages/>} />
           {/* for Home panel */}

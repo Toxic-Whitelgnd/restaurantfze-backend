@@ -101,6 +101,7 @@ const currentOrderSchema = new mongoose.Schema({
     table_no: { type: String, required: true },
     orderFrom: { type: String, required: true },
     total: { type: Number, required: true },
+    type: { type: String, required: true },
 });
 
 const customerSchema = new mongoose.Schema({
@@ -137,12 +138,6 @@ const customerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    razorpay_order_id: String,
-    razorpay_payment_id: {
-        type: String,
-        required: true,
-    },
-    razorpay_signature: String,
     time: {
         type: String,
         required: true,
@@ -162,6 +157,10 @@ const customerSchema = new mongoose.Schema({
     vat: String,
     waiter_name: String,
     discount: Number,
+    amountpaid: Number,
+    amountbalance: Number,
+    receiptNo:String,
+    totalwithoutvat: Number,
 });
 
 const runningorderSchema = new mongoose.Schema({
@@ -828,7 +827,7 @@ app.post('/save_current_order', async (req, res) => {
         }
 
         // adter saving just update the table details page
-        await axios.put(`http://localhost:9999/update_table_data/${table_no}`, update_data)
+        await axios.put(`https://restogenius.onrender.com/update_table_data/${table_no}`, update_data)
         // this is for kitche to dispaly  the current order to prepare
         const send_order = {
             tableNo: table_no,
@@ -837,7 +836,7 @@ app.post('/save_current_order', async (req, res) => {
             from: orderFrom,
             type: 'dinein' // should be changed
         }
-        await axios.post('http://localhost:9999/save_running_order', send_order);
+        await axios.post('https://restogenius.onrender.com/save_running_order', send_order);
         res.status(201).json({ message: 'Items saved successfully and updated' });
     } catch (error) {
         console.error('Error:', error);
@@ -868,7 +867,35 @@ app.get('/get_saved_orders/:tableno', async (req, res) => {
     }
 });
 
-// fixed here
+app.get('/get_current_order_indoor/:tableno', async (req, res) => {
+    const { tableno } = req.params;
+    try {
+        const orders = await CurrentOrder.find({
+            table_no: tableno,
+            orderFrom: 'indoor',
+        });
+       
+        res.json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.get('/get_current_order_outdoor/:tableno', async (req, res) => {
+    const { tableno } = req.params;
+    try {
+        const orders = await CurrentOrder.find({
+            table_no: tableno,
+            orderFrom: 'outdoor',
+        });
+        res.json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.put('/update_current_order/:tableno', async (req, res) => {
     const { tableno } = req.params;
     try {
@@ -889,13 +916,13 @@ app.put('/update_current_order/:tableno', async (req, res) => {
         }
         console.log("thevidiya:", update_data);
         // update the table data ?? s
-        await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_data)
+        await axios.put(`https://restogenius.onrender.com/update_table_data/${tableno}`, update_data)
 
         // for current trunning orders
         const send_update_order = {
             items: items,
         }
-        await axios.put(`http://localhost:9999/update_running_order/${tableno}`, send_update_order)
+        await axios.put(`https://restogenius.onrender.com/update_running_order/${tableno}`, send_update_order)
 
         res.status(201).json({ message: 'Items Updated successfully' });
     } catch (error) {
@@ -926,14 +953,14 @@ app.delete('/delete_current_indoor_order/:tableno', async (req, res) => {
 
         }
         console.log("update table before deleting", update_table);
-        await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_table);
+        await axios.put(`https://restogenius.onrender.com/update_table_data/${tableno}`, update_table);
 
         const updateNewtable = await CurrentOrder.findOneAndDelete({
             table_no: tableno
         });
         console.log("delete oredr", updateNewtable);
 
-        await axios.delete(`http://localhost:9999/delete_running_indoor_order/${tableno}`);
+        await axios.delete(`https://restogenius.onrender.com/delete_running_indoor_order/${tableno}`);
 
         res.status(201).json({ success: true, message: 'Document deleted successfully' });
 
@@ -965,14 +992,14 @@ app.delete('/delete_current_outdoor_order/:tableno', async (req, res) => {
 
         }
         console.log("update table before deleting", update_table);
-        await axios.put(`http://localhost:9999/update_table_data/${tableno}`, update_table);
+        await axios.put(`https://restogenius.onrender.com/update_table_data/${tableno}`, update_table);
 
         const updateNewtable = await CurrentOrder.findOneAndDelete({
             table_no: tableno
         });
         console.log("delete oredr", updateNewtable);
 
-        await axios.delete(`http://localhost:9999/delete_running_outdoor_order/${tableno}`);
+        await axios.delete(`https://restogenius.onrender.com/delete_running_outdoor_order/${tableno}`);
 
         res.status(201).json({ success: true, message: 'Document deleted successfully' });
 
@@ -1092,22 +1119,7 @@ app.post('/save_customer_details', async (req, res) => {
         const CustomerDetail = new CustomerDetails(req.body);
         await CustomerDetail.save();
 
-
-        // creating an order and sending back to frontend server
-        const { total } = req.body;
-        const amount = total * 100; // Amount in paise (example: 1000 paise = 10 AED)
-        const currency = 'AED';
-
-        const options = {
-            amount,
-            currency,
-        };
-
-        const order = await razorpay.orders.create(options);
-        console.log("from backend:" + order.id);
-
-
-        res.status(201).json({ message: 'Customer Details Saved', order_id: order.id });
+        res.status(201).json({ success:true ,message: 'Customer Details Saved'});
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -1150,6 +1162,18 @@ app.get('/get_customerbyid/:id', async (req, res) => {
         console.log(error);
     }
 });
+
+app.get('/get_customerby_order_no/:orderno', async (req,res) =>{
+    const {orderno} = req.params;
+    try {
+        const res2 = await CustomerDetails.findOne({
+            order_no: orderno,
+        });
+        res.json(res2);
+    } catch (error) {
+        console.log(error);
+    }
+})
 //  ***************************** END OF CUTOMERDETAILS ****************************
 
 //  ***************************** START OF WAITER ****************************

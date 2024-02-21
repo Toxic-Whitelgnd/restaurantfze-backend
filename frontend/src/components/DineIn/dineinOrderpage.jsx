@@ -12,6 +12,9 @@ import GetTime from '../../cards/TimeandDate/GetTime';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import RecipietCard from '../../cards/RecipitCards/RecipietCard';
+import { useReactToPrint } from 'react-to-print';
+import { FaSearch } from 'react-icons/fa';
 
 
 
@@ -21,15 +24,15 @@ const DineinOrderpage = () => {
 
     const { id } = useParams();
 
+    const Productionurl = `https://restogenius.onrender.com/`
+    const dynamicurl = `http://localhost:9999/`
     // Componet's are Dynamic 
 
-    const DynamicComponent = ({ fooddata, foodtype }) => (
+    const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
-
                 {
-
-                    fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
+                    foodtype == 'all' ? fooddata.filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
                         return (
                             <>
                                 <div className="my-alert">
@@ -64,7 +67,82 @@ const DineinOrderpage = () => {
                         )
                     })
 
+                        : fooddata.filter(x => x.foodType === foodtype).filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
+                            return (
+                                <>
+                                    <div className="my-alert">
+                                        <div className="my-alert__unique1">
+                                            {val.foodImage && (
+                                                <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+                                            )}
+
+                                        </div>
+                                        {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+                                        <div className="my-alert__unique2">
+                                            <div className='my-alert__unique3'>
+                                                <div className='my-alert__unique4'>
+                                                    <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                    <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+                                                </div>
+                                                <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+
+                                            </div>
+                                            {val.foodAvailability === 'No' ? <button
+                                                className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                type='button' disabled
+                                            >Add to cart</button> :
+                                                <button
+                                                    className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                    type='button'
+                                                >Add to cart</button>}
+
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })
+
                 }
+
+
+                {/* {
+
+                    fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
+                        return (
+                            <>
+                                <div className="my-alert">
+                                    <div className="my-alert__unique1">
+                                        {val.foodImage && (
+                                            <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+                                        )}
+
+                                    </div>
+                                    {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+                                    <div className="my-alert__unique2">
+                                        <div className='my-alert__unique3'>
+                                            <div className='my-alert__unique4'>
+                                                <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+                                            </div>
+                                            <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+
+                                        </div>
+                                        {val.foodAvailability === 'No' ? <button
+                                            className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                            type='button' disabled
+                                        >Add to cart</button> :
+                                            <button
+                                                className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                type='button'
+                                            >Add to cart</button>}
+
+                                    </div>
+                                </div>
+                            </>
+                        )
+                    })
+
+                } */}
             </div>
         </>
     )
@@ -90,7 +168,7 @@ const DineinOrderpage = () => {
     const [tableData, setTableData] = useState([]);
     const fetchTableData = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/table_data');
+            const response = await axios.get(`${dynamicurl}table_data`);
             setTableData(response.data);
             console.log(response.data);
         } catch (error) {
@@ -101,7 +179,7 @@ const DineinOrderpage = () => {
     const [waiter, setWaiter] = useState([]);
     const fetchWaiter = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/get_waiter');
+            const response = await axios.get(`${dynamicurl}get_waiter`);
             console.log(response.data);
             setWaiter(response.data);
         } catch (error) {
@@ -112,7 +190,7 @@ const DineinOrderpage = () => {
     const [bill, setBill] = useState([]);
     const fetchBillD = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/get_billd');
+            const response = await axios.get(`${dynamicurl}get_billd`);
             console.log(response.data);
             setBill(response.data[0]);
 
@@ -124,7 +202,7 @@ const DineinOrderpage = () => {
     const [data, setData] = useState([]);
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://restogenius.onrender.com/get_food_data');
+            const response = await axios.get(`${dynamicurl}get_food_data`);
             console.log(response.data);
             setData(response.data);
         } catch (error) {
@@ -141,7 +219,7 @@ const DineinOrderpage = () => {
 
     const fetchCurrentOrder = async () => {
         try {
-            const response = await axios.get(`https://restogenius.onrender.com/get_saved_orders/${id}`);
+            const response = await axios.get(`${dynamicurl}get_saved_orders/${id}`);
             console.log(response.data);
             const indoorSavedOrder = response.data.filter(x => x.orderFrom == "indoor");
             console.log("Here");
@@ -228,7 +306,7 @@ const DineinOrderpage = () => {
 
     // Define your food components
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
@@ -370,15 +448,15 @@ const DineinOrderpage = () => {
     const orderId = (ordersave) ? randomOrderNoGenerator() : fetchFood.order_no;
 
     const SaveOrdertoDb = async (current_order) => {
-        
+
         try {
-           
-            const response = await axios.get(`https://restogenius.onrender.com/get_saved_orders/${id}`);
+
+            const response = await axios.get(`${dynamicurl}get_saved_orders/${id}`);
 
             //outdoor tableno and it return len -- 1 and from id outdoor --- it is false
-            if (ordersave){
+            if (ordersave) {
                 try {
-                    const response = await axios.post("https://restogenius.onrender.com/save_current_order", current_order)
+                    const response = await axios.post(`${dynamicurl}save_current_order`, current_order)
                     console.log(response.data);
                     toast.success(response.data.message);
                     window.location.reload();
@@ -396,7 +474,7 @@ const DineinOrderpage = () => {
 
     const UpdatetoDb = async (update_order) => {
         try {
-            const response = await axios.put(`https://restogenius.onrender.com/update_current_order/${id}`, update_order)
+            const response = await axios.put(`${dynamicurl}update_current_order/${id}`, update_order)
             console.log(response.data);
             toast.success(response.data.message);
         } catch (error) {
@@ -430,6 +508,7 @@ const DineinOrderpage = () => {
                     waiterName: waiterName,
                     date: new Date().toLocaleDateString(),
                     time: new Date().toLocaleTimeString(),
+                    type: 'dinein', //TODO: dynamic
                 }
 
 
@@ -513,7 +592,7 @@ const DineinOrderpage = () => {
 
         const fetchFoodTypes = async () => {
             try {
-                const response = await axios.get('https://restogenius.onrender.com/get_food_type');
+                const response = await axios.get(`${dynamicurl}get_food_type`);
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -530,14 +609,9 @@ const DineinOrderpage = () => {
     const SuccessfullPayment = async () => {
 
         try {
-            const update_data = {
-                razorpay_payment_id: '',
-                razorpay_order_id: '',
-                razorpay_signature: '',
-            }
-            console.log(update_data);
-            const response = await axios.put(`https://restogenius.onrender.com/update_customer_details/${fetchFood.order_no}`,
-                update_data);
+           
+            // const response = await axios.put(`${dynamicurl}update_customer_details/${fetchFood.order_no}`,
+            //     update_data);
             // toast.success("Payment done successfull So set the table to  000")
 
             ClearTheTableData();
@@ -549,56 +623,58 @@ const DineinOrderpage = () => {
     const ClearTheTableData = async () => {
         try {
             // call the server to set the current_order tables to empty,
-            if(fetchFood.orderFrom == "indoor"){
+            if (fetchFood.orderFrom == "indoor") {
                 try {
-                    const res = await axios.delete(`https://restogenius.onrender.com/delete_current_indoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`${dynamicurl}delete_current_indoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
-                    if(res.data.success){
-                        window.location.href = '/#/dinein';
+                    if (res.data.success) {
+                        // window.location.href = '/#/dinein';
+                        handleReciept();
                     }
                 } catch (error) {
                     console.log(error.message);
                 }
-                
-            }else{
+
+            } else {
                 try {
-                    const res = await axios.delete(`https://restogenius.onrender.com/delete_current_outdoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`${dynamicurl}delete_current_outdoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
-                    if(res.data.success){
-                        window.location.href = '/#/dinein';
+                    if (res.data.success) {
+                        // window.location.href = '/#/dinein';
+                        handleReciept();
                     }
                 } catch (error) {
                     console.log(error.message);
                 }
-                
+
             }
-            
+
             toast.success("redirect to new page");
 
         } catch (error) {
             toast.error(error.message)
-            
+
         }
 
         try {
-            console.log("after deleting the current_order tables",fetchFood.table_no);
-            if(fetchFood.orderFrom == "indoor"){
+            console.log("after deleting the current_order tables", fetchFood.table_no);
+            if (fetchFood.orderFrom == "indoor") {
                 try {
-                    const res = await axios.delete(`https://restogenius.onrender.com/delete_running_indoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`${dynamicurl}delete_running_indoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
                 } catch (error) {
                     console.log(error.message);
                 }
-            }else{
+            } else {
                 try {
-                    const res = await axios.delete(`https://restogenius.onrender.com/delete_running_outdoor_order/${fetchFood.table_no}`);
+                    const res = await axios.delete(`${dynamicurl}delete_running_outdoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
                 } catch (error) {
                     console.log(error.message);
                 }
             }
-            const response2 = await axios.delete(`https://restogenius.onrender.com/delete_running_order/${fetchFood.table_no}`)
-            if(response2.data.success){
+            const response2 = await axios.delete(`${dynamicurl}delete_running_order/${fetchFood.table_no}`)
+            if (response2.data.success) {
                 window.location.href = '/#/dinein';
             }
         } catch (error) {
@@ -622,11 +698,17 @@ const DineinOrderpage = () => {
     }
 
     const [waiterName, setWaiterName] = useState('');
-    const [paymentId, setPaymentId] = useState('');
-    const [orderpaymetId, setOrderId] = useState('');
-    const [signature, setSignature] = useState('');
 
-    // 
+    const [randomNumber, setRandomNumber] = useState(null);
+
+    const generateRandomNumber = () => {
+        const min = 10000;
+        const max = 99999;
+        const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+        setRandomNumber(rand);
+        return rand;
+    };
+
     const handlePayBill = async () => {
         // Add logic here to handle the payment
         console.log('Payment processed successfully');
@@ -639,7 +721,7 @@ const DineinOrderpage = () => {
             order_no: fetchFood.order_no,
             items_ordered: fetchFood.items_ordered,
             items: fetchFood.items,
-            total: fetchFood.total,
+            total: calculateTotalwithvatdis(),
             vat: bill.VAT, // should be dynamic
             discount: bill.discount,
             date: new Date().toLocaleDateString(),
@@ -649,10 +731,11 @@ const DineinOrderpage = () => {
             ordered_tableno: fetchFood.table_no,
             total_ppl: fetchFood.no_of_seats,
             paid_by: selectedPaymentType,
-            razorpay_payment_id: 'from razorpay',
-            razorpay_order_id: 'from razorpay',
-            razorpay_signature: 'from razorpay',
-            waiter_name: waiterName,
+            waiter_name: fetchFood.waiterName,
+            amountpaid: totalAmount, //TODO: NEED TO ADD DYNAMICALLY
+            amountbalance: calculateTotalwithvatdis()-totalAmount, //todo: same 
+            receiptNo: `GH-${generateRandomNumber()}`,
+            totalwithoutvat: calculateTotalAmountofItem(),
 
         }
 
@@ -660,53 +743,54 @@ const DineinOrderpage = () => {
 
         try {
 
-            const response = await axios.post("https://restogenius.onrender.com/save_customer_details", customer_details);
-            const order = customer_details;
-            const order_id = response.data.order_id;
+            const response = await axios.post(`${dynamicurl}save_customer_details`, customer_details);
 
+            if (response.data.success) {
+                SuccessfullPayment();
+            }
 
-            // const options = {
-            //     key: 'rzp_test_AZ9LyozDGv5aSK',
-            //     key_secret: 'k7q5Fkbd9EAoJaJ5JPl5dzrH',
-            //     amount: order.total , //dynamic
-            //     currency: 'AED',
-            //     name: 'FZE Restaurant',
-            //     description: 'Pyament for a resturant food',
-            //     order_id: order_id, // dynamic
-            //     handler: function (response) {
-            //         // Handle the payment success
-            //         alert(response.razorpay_payment_id);
-            //         alert(response.razorpay_order_id);
-            //         alert(response.razorpay_signature)
-            //         setPaymentId(response.razorpay_payment_id || '');
-            //         setOrderId(response.razorpay_order_id || '');
-            //         setSignature(response.razorpay_signature || '');
-            //         setTimeout(() => {
-            //             SuccessfullPayment(response.razorpay_payment_id,response.razorpay_order_id,
-            //                 response.razorpay_signature);
-            //         }, 2000);
-            //     },
-            //     prefill: {
-            //         name: order.customer_name, // dynamic
-            //         contact: order.customer_mobileNumber, // dynamic
-            //     },
-            //     theme: {
-            //         color: '#528FF0', // restuarant theme
-            //     },
-            // };
-
-            // const razorpay = new window.Razorpay(options);
-            // razorpay.open();
-            SuccessfullPayment();
 
         } catch (error) {
             console.error('Error creating Razorpay order:', error);
-            SuccessfullPayment();
+            // SuccessfullPayment();
         }
 
 
         closeModalPayBill();
     };
+
+    // handling the total amont
+    const [totalAmount, setTotalAmount] = useState('');
+
+    const handleAmountChange = (e) => {
+        setTotalAmount(e.target.value);
+    };
+
+    
+
+
+
+    const handleReciept = () => {
+        console.log("check here");
+        // TODO: aFTER SAVING THE ORDER ONLY MAKE THIS TO PRINT BILL OR WHEN CLICK ON PRINTBILL JUST CHECK 
+        // IF IT SAVED OR NOT IF NOT JUST SAVE IT?? 
+
+
+        window.location.href = `/#/print/indoor/${fetchFood.order_no}`;
+    }
+
+    const handleRecieptoKitchen = () => {
+        window.location.href = `/#/print/kitchen/indoor/${id}`;
+    };
+
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleInputChange1 = (e) => {
+        setSearchTerm(e.target.value);
+    }
+
+
 
 
 
@@ -838,17 +922,17 @@ const DineinOrderpage = () => {
                         <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
                         <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
                         <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
-                        <select style={{display:`${fetchFood.waiterName ? 'none' : ''}`}} id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
-                                        <option value="" disabled>
-                                            Waiter handled
-                                        </option>
+                        <select style={{ display: `${fetchFood.waiterName ? 'none' : ''}` }} id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
+                            <option value="" disabled>
+                                Waiter handled
+                            </option>
 
-                                        {waiter && waiter.map((type) => (
-                                            <option key={type.waiterName} value={type.waiterName}>
-                                                {type.waiterName}
-                                            </option>
-                                        ))}
-                                    </select>
+                            {waiter && waiter.map((type) => (
+                                <option key={type.waiterName} value={type.waiterName}>
+                                    {type.waiterName}
+                                </option>
+                            ))}
+                        </select>
                         <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>{waiterName ? waiterName : fetchFood.waiterName} </p>
                     </div>
                     <div className='pay-cont'>
@@ -856,7 +940,8 @@ const DineinOrderpage = () => {
                         <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                             ordersave ? SaveOrder() : UpdateOrder()
                         }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button>
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p>
+                        <button className="running-order" onClick={handleRecieptoKitchen} style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Add to Kitchen </button>
+
                         <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Pay Bill
 
                         </button>
@@ -899,34 +984,36 @@ const DineinOrderpage = () => {
                                         })}
                                     </ul>
                                     <div className="order-details-row">
-                                    <p>Total: AED{calculateTotalAmountofItem()}</p>
+                                        <p>Total: AED{calculateTotalAmountofItem()}</p>
                                     </div>
-                                   
+
                                 </div>
+
 
 
                                 <div>
                                     <label>Waiter Name: {fetchFood.waiterName ? fetchFood.waiterName : waiterName}</label>
-                                    {/* <select id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
-                                        <option value="" disabled>
-                                            Waiter handled 
-                                        </option>
 
-                                        {waiter && waiter.map((type) => (
-                                            <option key={type.waiterName} value={type.waiterName}>
-                                                {type.waiterName}
-                                            </option>
-                                        ))}
-                                    </select> */}
                                     <label>Select Payment Type:</label>
                                     <select value={selectedPaymentType} onChange={handleSelectChange}>
                                         <option value="">Select...</option>
                                         <option value="creditcard">Credit Card</option>
-                                        <option value="upi">UPI</option>
                                         <option value="debitcard">Debit Card</option>
                                         <option value="cash">Cash</option>
                                     </select>
                                     <div className='row'>
+                                        <div className='col'>
+                                            <label>
+                                                Total Amount Paid:
+                                                <input
+                                                    type="number"
+                                                    value={totalAmount}
+                                                    onChange={handleAmountChange}
+                                                    placeholder="Enter total amount paid"
+                                                    required
+                                                />
+                                            </label>
+                                        </div>
                                         <div className="col">
 
                                             {selectedPaymentType == "creditcard" ? <p>{selectedPaymentType} offer {bill.creditSale}</p>
@@ -944,8 +1031,8 @@ const DineinOrderpage = () => {
                                             </div>
                                             <div className="order-details-row">
                                                 <p>After Applying:</p>
-                                                <p>AED 
-                                                {calculateTotalwithvatdis()}</p>
+                                                <p>AED
+                                                    {calculateTotalwithvatdis()}</p>
 
                                             </div>
                                         </div>
@@ -954,7 +1041,11 @@ const DineinOrderpage = () => {
 
 
                                 </div>
-                                <button className="btn btn-success" onClick={handlePayBill} >Pay Bill</button>
+                                <button className="btn btn-success" onClick={() => {
+                                    generateRandomNumber()
+                                    handlePayBill()
+
+                                }} >Print Bill</button>
                             </div>
 
                         </div>
@@ -1008,9 +1099,9 @@ const DineinOrderpage = () => {
                             <div className='foo-cat'>
                                 <span htmlFor="foodCategory">Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
-                                    <option value="" disabled>
-                                        Select Food Type to filter
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'}>
+                                    <option value="all">
+                                        all
                                     </option>
                                     {foodTypes.map((type) => (
                                         <option key={type.food_name} value={type.food_name}>
@@ -1028,6 +1119,17 @@ const DineinOrderpage = () => {
                                     <option value="available">Available</option>
                                 </select>
                             </div>
+                            <div>
+                                <div className="search-container">
+                                    <input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={handleInputChange1}
+                                    />
+                                    <FaSearch className="search-icon" />
+                                </div>
+                            </div>
 
                             <div className='date-time'>
 
@@ -1038,13 +1140,16 @@ const DineinOrderpage = () => {
 
                         </div>
                         <div>
-                      
+
                             {
                                 <DynamicComponent
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
+                                    foodterm={searchTerm}
                                 />
                             }
+
+
 
 
                         </div>

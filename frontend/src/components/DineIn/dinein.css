@@ -37,7 +37,7 @@ option{
 }
 
 /* for btn1 style */
-@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+/* @import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700"); */
 .running-order {
     /*placement for code pen*/
     /* margin: 10% 40%; */
@@ -339,4 +339,19 @@ h2 {
   padding-left: 10px;
   padding-right: 10px;
   max-height: 280px;
+}
+
+/* For search */
+
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #777; /* Change color as needed */
+  cursor: pointer;
 }
