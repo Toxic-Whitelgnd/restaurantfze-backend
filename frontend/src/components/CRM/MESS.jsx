@@ -6,6 +6,7 @@ const MessDetailsForm = () => {
     const [messDetails, setMessDetails] = useState({
         joiningDate: '',
         name: '',
+        mobileNumber:'',
         mealItem1: '',
         mealItem2: '',
         mealItem3: '',
@@ -24,13 +25,12 @@ const MessDetailsForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post("http://localhost:9999/save_messDetails", messDetails);
-            console.log(result.data); // Assuming the result contains data
-            console.log('Mess Details Submitted:', messDetails);
+            const result = await axios.post("https://restogenius.onrender.com/save_messDetails", messDetails);
             toast.success("Data added successfully");
             setMessDetails({
                 joiningDate: '',
                 name: '',
+                mobileNumber:'',
                 mealItem1: '',
                 mealItem2: '',
                 mealItem3: '',
@@ -54,6 +54,17 @@ const MessDetailsForm = () => {
                         type="text"
                         name="name"
                         value={messDetails.name}
+                        onChange={handleChange} id="exp-input"
+                    />
+                </label>
+                <br />
+
+                <label>
+                    Mobile Number:
+                    <input
+                        type="tel"
+                        name="mobileNumber"
+                        value={messDetails.mobileNumber}
                         onChange={handleChange} id="exp-input"
                     />
                 </label>

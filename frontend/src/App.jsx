@@ -45,7 +45,11 @@ import RunningOrderDeliverySale from './componets/Kitchenpanel/CRUDkitchen/Runni
 import RunningOrderTakeAway from './componets/Kitchenpanel/CRUDkitchen/RunningOrderTakeAway';
 import  DelevrysaleDeliveryorder from "./componets/DeliveryPanel/CRUDfoodfelivery/delevrysaleDeliveryorder"
 import TakeawayDeliveryorder from "./componets/DeliveryPanel/CRUDfoodfelivery/takeawayDeliveryorder";
-
+import MessPanel from './componets/MessPanel/MessPanel';
+import EditMessDetailsList from './componets/MessPanel/CRUDmess/EditMessDetailsList';
+import EditMessForm from './componets/MessPanel/CRUDmess/EditMessDetails';
+import DeleteMessDetailsList from './componets/MessPanel/CRUDmess/DeleteMessDetailsList';
+import DeleteMessDetails from './componets/MessPanel/CRUDmess/DeleteMessDetails';
 
 // from components.
 import NavBar from './components/NavBar/NavBar';
@@ -69,31 +73,6 @@ import SaleOrderView from './cards/SODCards/SaleOrderView';
 import DeliverySale from './components/DeliverySale/DeliverySale';
 import RecipietCard from './cards/RecipitCards/RecipietCard';
 import KitchenRecipietCard from './cards/RecipitCards/KitchenRecipietCard';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function App() {
   const [count, setCount] = useState(0)
@@ -177,6 +156,12 @@ function App() {
           {/* for Bill panel */}
           <Route path='/admin/billpanel'  element={<BillPanel/>} />
           <Route path='/admin/bill-edit-panel'  element={<BillEditPanel/>} />
+          {/* for Mess panel */}
+          <Route path='/admin/messpanel'  element={<MessPanel/>} />
+          <Route path="/admin/edit-messDetails" element={<EditMessDetailsList />} />
+          <Route path="/admin/edit-messDetails/:messid" element={<EditMessForm />} />
+          <Route path="/admin/delete-messDetails" element={<DeleteMessDetailsList />} />
+          <Route path="/admin/delete-messDetails/:messid" element={<DeleteMessDetails />} />
         </Routes>
       </Router>
       </div>

@@ -402,11 +402,15 @@ const messDetailsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  mobileNumber: {
+    type: String,
+    required: true,
+  },
   joiningDate: {
     type: String,
     required: true,
   },
-  closingData: {
+  closingDate: {
     type: String,
     default: "",
   },
@@ -421,6 +425,10 @@ const messDetailsSchema = new mongoose.Schema({
   mealItem3: {
     type: Number,
     default: 0,
+  },
+  amount: {
+    type: Number,
+    required: true,
   },
 });
 
@@ -1624,6 +1632,18 @@ app.get("/get_messDetails", async (req, res) => {
   }
 });
 
+app.get("/get_messDetails/:messid", async (req, res) => {
+  const { messid } = req.params;
+  try {
+    const messDetails = await MessDetails.find({
+      _id: messid,
+    });
+    res.json(messDetails);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.post("/save_messDetails", async (req, res) => {
   try {
     const messDetail = new MessDetails(req.body);
@@ -1656,7 +1676,7 @@ app.put("/update_messDetails/:messDetail_id", async (req, res) => {
   }
 });
 
-app.delete("/delete_messDetail/:messDetails_id", async (req, res) => {
+app.delete("/delete_messDetails/:messDetails_id", async (req, res) => {
   try {
     const { messDetails_id } = req.params;
     const delte = await MessDetails.findOneAndDelete({
