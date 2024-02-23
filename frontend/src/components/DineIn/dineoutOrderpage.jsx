@@ -23,7 +23,7 @@ const DineoutOrderpage = () => {
     const { id } = useParams();
 
     // Componet's are Dynamic 
-    const Productionurl = `http://localhost:9999/`
+    const Productionurl = `https://restogenius.onrender.com/`
     const dynamicurl = `https://restogenius.onrender.com/`
 
     const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
