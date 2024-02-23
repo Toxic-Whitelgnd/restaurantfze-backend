@@ -743,7 +743,10 @@ const DineinOrderpage = () => {
 
         try {
 
-            const response = await axios.post(`${dynamicurl}save_customer_details`, customer_details);
+            const response = await axios.post(`${dynamicurl}save_customer_details`, 
+            {
+                'body': JSON.stringify(customer_details)
+            });
 
             if (response.data.success) {
                 SuccessfullPayment();
