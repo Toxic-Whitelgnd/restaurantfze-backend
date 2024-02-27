@@ -24,8 +24,8 @@ const DineinOrderpage = () => {
 
     const { id } = useParams();
 
-    const Productionurl = `https://restogenius.onrender.com/`
-    const dynamicurl = `https://restogenius.onrender.com/`
+    const dynamicurl = `http://localhost:9999/`
+    const dynamicurl1 = `https://restogenius.onrender.com/`
     // Componet's are Dynamic 
 
     const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
@@ -509,6 +509,7 @@ const DineinOrderpage = () => {
                     date: new Date().toLocaleDateString(),
                     time: new Date().toLocaleTimeString(),
                     type: 'dinein', //TODO: dynamic
+
                 }
 
 
@@ -662,6 +663,10 @@ const DineinOrderpage = () => {
                 try {
                     const res = await axios.delete(`${dynamicurl}delete_running_indoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
+                    if (res.data.success) {
+                        // window.location.href = '/#/dinein';
+                        handleReciept();
+                    }
                 } catch (error) {
                     console.log(error.message);
                 }
@@ -669,14 +674,16 @@ const DineinOrderpage = () => {
                 try {
                     const res = await axios.delete(`${dynamicurl}delete_running_outdoor_order/${fetchFood.table_no}`);
                     console.log(res.data);
+                    if (res.data.success) {
+                        // window.location.href = '/#/dinein';
+                        handleReciept();
+                    }
                 } catch (error) {
                     console.log(error.message);
                 }
             }
-            const response2 = await axios.delete(`${dynamicurl}delete_running_order/${fetchFood.table_no}`)
-            if (response2.data.success) {
-                window.location.href = '/#/dinein';
-            }
+           
+           
         } catch (error) {
             toast.error(error.message)
         }
@@ -743,10 +750,7 @@ const DineinOrderpage = () => {
 
         try {
 
-            const response = await axios.post(`${dynamicurl}save_customer_details`, 
-            {
-                'body': JSON.stringify(customer_details)
-            });
+            const response = await axios.post(`${dynamicurl}save_customer_details`, customer_details);
 
             if (response.data.success) {
                 SuccessfullPayment();
@@ -754,7 +758,7 @@ const DineinOrderpage = () => {
 
 
         } catch (error) {
-            console.error('Error creating Razorpay order:', error);
+            console.error('', error);
             // SuccessfullPayment();
         }
 

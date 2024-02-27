@@ -1240,9 +1240,8 @@ const TakeAwayEdit = () => {
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
 
-                {
-
-                    fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
+            {
+                    foodtype == 'all' ? fooddata.filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
                         return (
                             <>
                                 <div className="my-alert">
@@ -1277,7 +1276,43 @@ const TakeAwayEdit = () => {
                         )
                     })
 
+                        : fooddata.filter(x => x.foodType === foodtype).filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
+                            return (
+                                <>
+                                    <div className="my-alert">
+                                        <div className="my-alert__unique1">
+                                            {val.foodImage && (
+                                                <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+                                            )}
+
+                                        </div>
+                                        {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+                                        <div className="my-alert__unique2">
+                                            <div className='my-alert__unique3'>
+                                                <div className='my-alert__unique4'>
+                                                    <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                    <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+                                                </div>
+                                                <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+
+                                            </div>
+                                            {val.foodAvailability === 'No' ? <button
+                                                className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                type='button' disabled
+                                            >Add to cart</button> :
+                                                <button
+                                                    className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                    type='button'
+                                                >Add to cart</button>}
+
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })
+
                 }
+                
             </div>
         </>
     )
@@ -1445,7 +1480,7 @@ const TakeAwayEdit = () => {
 
     // Define your food components
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
@@ -1856,6 +1891,13 @@ const TakeAwayEdit = () => {
         }
     }
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleInputChange1 = (e) => {
+        setSearchTerm(e.target.value);
+    }
+
+
 
 
 
@@ -2104,9 +2146,9 @@ const TakeAwayEdit = () => {
                             <div className='foo-cat'>
                                 <span htmlFor="foodCategory">Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
-                                    <option value="" disabled>
-                                        Select Food Type to filter
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'}>
+                                    <option value="all" disabled>
+                                        all
                                     </option>
                                     {foodTypes.map((type) => (
                                         <option key={type.food_name} value={type.food_name}>
@@ -2123,6 +2165,17 @@ const TakeAwayEdit = () => {
                                     <option value="lowPrice">Low Price</option>
                                     <option value="available">Available</option>
                                 </select>
+                            </div>
+                            <div>
+                                <div className="search-container">
+                                    <input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={handleInputChange1}
+                                    />
+                                    <FaSearch className="search-icon" />
+                                </div>
                             </div>
 
                             <div className='date-time'>

@@ -9,6 +9,9 @@ const KitchenRecipietCard = () => {
 
     const [urlParams, setUrlParams] = useState([]);
 
+    const dynamciurl = 'https://restogenius.onrender.com/'
+    const testurl = 'http://localhost:9999'
+
     var total = 0;
     useEffect(() => {
         const hash = window.location.hash;
@@ -37,9 +40,9 @@ const KitchenRecipietCard = () => {
     const [foodData, setFoodData] = useState([]);
     const FetchFoodData = async (firstParam) => {
         try {
-            const res = await axios.get(`http://localhost:9999/get_current_order_${firstParam}/${id}`);
-            // console.log(res.data);
-            setFoodData(res.data[0]);
+            const res = await axios.get(`${dynamciurl}get_current_order_${firstParam}/${id}`);
+            console.log(res.data);
+            setFoodData(res.data);
         } catch (error) {
             console.log(error.message);
         }

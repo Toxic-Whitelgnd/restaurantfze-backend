@@ -5,47 +5,54 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
-const RecipietCard = () => {
+const KitchenRecipietTakeawayCard = () => {
 
     const [urlParams, setUrlParams] = useState([]);
 
     const dynamciurl = 'https://restogenius.onrender.com/'
-    const testurl = 'http://localhost:9999'
+    const testurl = 'http://localhost:9999/'
 
     var total = 0;
     useEffect(() => {
         const hash = window.location.hash;
         const params = hash.split('/').filter(param => param !== '');
         setUrlParams(params);
+        const firstParam = params[3]; // indoor or outdoor
+        const secondParam = params[4]; // 3
 
-        FetchFoodData();
+        console.log(firstParam + ' ' + secondParam);
+        
+        FetchFoodData(secondParam);
         // total = calculateTotalAmountofItem();
     }, []);
 
-    // Access the parts of the URL separately
-    const firstParam = urlParams[1]; // indoor
-    const secondParam = urlParams[2]; // 3
 
-    const { id } = useParams();
+    const { orderno } = useParams();
     const current = window.location.href;
 
     const componentRef = useRef();
     const handleRecipetBill = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: 'FZE-Restaurant',
-        onAfterPrint: () => toast.success("Printed"),
+        onAfterPrint: () => {
+            toast.success("Added to kitchen!")
+            window.location.href = `/#/takeawaypay/${orderno}`
+        },
     });
 
+
     const [foodData, setFoodData] = useState([]);
-    const FetchFoodData = async () => {
+    const FetchFoodData = async (firstParam) => {
         try {
-            const res = await axios.get(`${dynamciurl}get_customerby_order_no/${id}`);
+            const res = await axios.get(`${testurl}get_takeaway_order/${orderno}`);
             console.log(res.data);
             setFoodData(res.data);
         } catch (error) {
             console.log(error.message);
         }
     }
+
+    // FetchFoodData(firstParam);
 
     const calculateTotalAmountofItem = () => {
 
@@ -54,10 +61,6 @@ const RecipietCard = () => {
         }, 0);
     };
 
-    const [tableno,setTableno] = useState(0);
-    const handleTableNo = (t)=>{
-        setTableno(t);
-    }
     return (
         <div>
 
@@ -73,9 +76,6 @@ const RecipietCard = () => {
                                 <div className="info">
                                     <h2>Grand Restaurant Catering FZE</h2>
                                 </div>
-                                <div className="info">
-                                    <h2><strong>TAX INVOICE</strong></h2>
-                                </div>
                                 {/*End Info*/}
                             </center>
                             {/*End InvoiceTop*/}
@@ -83,11 +83,11 @@ const RecipietCard = () => {
                                 <div className="col">
                                     <div id="mid">
                                         <div className="info">
-                                            <h2>Contact Info</h2>
+                                            <h2>Order Info</h2>
                                             <p>
-                                                Address : street city, state 0000<br />
-                                                Email : JohnDoe@gmail.com<br />
-                                                Phone : 555-555-5555<br />
+                                                TableNo :{foodData.table_no}<br />
+                                                OrderFrom : {foodData.orderFrom}<br />
+                                                Type : {foodData.type}<br />
                                             </p>
                                         </div>
                                     </div>
@@ -105,20 +105,6 @@ const RecipietCard = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row">
-                                    <center>
-                                <div id="mid">
-                                        <div className="info">
-                                            <h2>info</h2>
-                                            <p>
-                                                Table no : {foodData.ordered_tableno}<br />
-                                                Waiter : {foodData.waiter_name}<br />
-                                                Type: {foodData.type}<br />
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </center>
-                                </div>
 
                             </div>
                             {/*End Invoice Mid*/}
@@ -128,9 +114,6 @@ const RecipietCard = () => {
                                         <tbody><tr className="tabletitle">
                                             <td className="item">
                                                 <h2>Item</h2>
-                                            </td>
-                                            <td className="Hours">
-                                                <h2>U.Price</h2>
                                             </td>
                                             <td className="Hours">
                                                 <h2>Qty</h2>
@@ -146,10 +129,6 @@ const RecipietCard = () => {
                                                                 <tr className="service">
                                                                     <td className="tableitem">
                                                                         <p className="itemtext">{val.foodname}</p>
-                                                                        {/* <div>{handleTableNo(val.table_no)}</div> */}
-                                                                    </td>
-                                                                    <td className="tableitem">
-                                                                        <p className="itemtext">{val.price}</p>
                                                                     </td>
                                                                     <td className="tableitem">
                                                                         <p className="itemtext">{val.qty}</p>
@@ -163,19 +142,8 @@ const RecipietCard = () => {
                                                     })
                                                 )
                                             }
-                                            <tr className="tabletitle">
-                                                <td />
-                                                <td />
-                                                <td className="Rate">
-                                                    <h2>Total Before vat</h2>
-                                                </td>
-                                                <td className="payment">
-                                                    <h2>{foodData.totalwithoutvat}</h2>
-                                                </td>
 
-                                            </tr>
-                                            <tr className="tabletitle">
-                                                <td />
+                                            {/* <tr className="tabletitle">
                                                 <td />
                                                 <td className="Rate">
                                                     <h2>VAT</h2>
@@ -183,10 +151,9 @@ const RecipietCard = () => {
                                                 <td className="payment">
                                                     <h2>{foodData.vat}%</h2>
                                                 </td>
-
+                                                
                                             </tr>
                                             <tr className="tabletitle">
-                                                <td />
                                                 <td />
                                                 <td className="Rate">
                                                     <h2>Discount</h2>
@@ -194,65 +161,24 @@ const RecipietCard = () => {
                                                 <td className="payment">
                                                     <h2>{foodData.discount}%</h2>
                                                 </td>
-
-                                            </tr>
+                                                
+                                            </tr> */}
                                             <tr className="tabletitle">
                                                 <td />
-                                                <td />
                                                 <td className="Rate">
-                                                    <h2>Grand Total</h2>
+                                                    <h2>Total</h2>
                                                 </td>
                                                 <td className="payment">
-                                                    <h2>AED {foodData && parseFloat(foodData.total)}</h2>
+                                                    <h2>AED {foodData.total}</h2>
                                                 </td>
                                             </tr>
-                                            {/* amout paid */}
-                                            <tr className="tabletitle1">
-                                                <td />
-                                                <td />
-                                                <td className="Rate">
-                                                    <h2>Payment method</h2>
-                                                </td>
-                                                <td className="payment">
-                                                    <h2> {foodData.paid_by}</h2>
-                                                </td>
-                                                
-                                            </tr>
-                                            <tr className="tabletitle1">
-                                                <td />
-                                                <td />
-                                                <td className="Rate">
-                                                    <h2>Amount Paid</h2>
-                                                </td>
-                                                <td className="payment">
-                                                    <h2> {foodData.amountpaid}</h2>
-                                                </td>
-                                            </tr>
-                                            <tr className="tabletitle1">
-                                                <td />
-                                                <td />
-                                                <td className="Rate">
-                                                    <h2>Balance</h2>
-                                                </td>
-                                                <td className="payment">
-                                                    <h2> {foodData.amountbalance && foodData.amountbalance === undefined ? 0 : parseFloat((foodData.amountbalance)) }</h2>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        </tbody></table>
                                 </div>
-
                                 {/*End Table*/}
                                 <div id="legalcopy">
                                     <center>
-                                        <p className="legal"><strong>Thank you and Visit Again!</strong>&nbsp;
+                                        <p className="legal"><strong>Please take the order!</strong>&nbsp;
                                         </p>
-                                    </center>
-                                </div>
-                                <div id="legalcopy">
-                                    <center>
-                                        <h2 className="legal"><strong>Reciept no: {foodData.receiptNo}</strong>&nbsp;
-                                        </h2>
                                     </center>
                                 </div>
                             </div>
@@ -266,7 +192,7 @@ const RecipietCard = () => {
 
                     <ToastContainer />
                     {/* no to touch here */}
-                    <button className='btn btn-success' onClick={handleRecipetBill}>Pay</button>
+                    <button className='btn btn-success' onClick={handleRecipetBill}>Add to Kitchen</button>
                 </>
 
 
@@ -278,7 +204,7 @@ const RecipietCard = () => {
                         <h1>Add items to print the bill </h1>
 
                         {/* no to touch here */}
-                        <button className='btn btn-success' disabled onClick={handleRecipetBill}>Pay</button>
+                        <button className='btn btn-success' disabled onClick={handleRecipetBill}>Add to kitchen</button>
                     </>
                 )
             }
@@ -288,4 +214,6 @@ const RecipietCard = () => {
     );
 };
 
-export default RecipietCard;
+export default KitchenRecipietTakeawayCard;
+
+

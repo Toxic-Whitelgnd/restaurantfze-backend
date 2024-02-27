@@ -73,6 +73,9 @@ import SaleOrderView from './cards/SODCards/SaleOrderView';
 import DeliverySale from './components/DeliverySale/DeliverySale';
 import RecipietCard from './cards/RecipitCards/RecipietCard';
 import KitchenRecipietCard from './cards/RecipitCards/KitchenRecipietCard';
+import KitchenRecipietTakeawayCard from './cards/RecipitCards/KitchenRecipietTakeawayCard';
+import TakeAwayPay from './components/TakeAway/TakeAwayPay';
+import RecipientTakeAwayCard from './cards/RecipitCards/RecipientTakeAwayCard';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -101,10 +104,14 @@ function App() {
           <Route path='/takeaway' index element={<TakeAway />} />
           <Route path='/takeawaylog' index element={<TakeAwayLog />} />
           <Route path='/takeawayedit/:id' index element={<TakeAwayEdit />} />
+          <Route path='/takeawaypay/:orderid' index element={<TakeAwayPay />} />
           <Route path='/deliverysale' index element={<DeliverySale />} />
           <Route path='/print/indoor/:id' element={<RecipietCard />} />
+          <Route path='/print/outdoor/:id' element={<RecipietCard />} />
           <Route path='/print/kitchen/indoor/:id' element={<KitchenRecipietCard />} />
           <Route path='/print/kitchen/outdoor/:id' element={<KitchenRecipietCard />} />
+          <Route path='/printrecipiet/:orderid' element={<RecipientTakeAwayCard />} />
+          <Route path='/print/kitchen/takeaway/:orderno' element={<KitchenRecipietTakeawayCard />} />
           {/*ADMIN PATHS */}
           <Route path='/admin' index element={<Pages/>} />
           {/* for Home panel */}
