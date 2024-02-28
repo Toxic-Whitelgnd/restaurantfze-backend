@@ -755,7 +755,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         try {
 
-            const response = await axios.post("http://localhost:9999/save_customer_details", customer_details);
+            const response = await axios.post("https://restogenius.onrender.com/save_customer_details", customer_details);
             if (response.data.success) {
                 SuccessfullPayment();
             }

@@ -9,9 +9,10 @@ const KitchenRecipietTakeawayCard = () => {
 
     const [urlParams, setUrlParams] = useState([]);
 
-    const dynamciurl1 = 'https://restogenius.onrender.com/'
-    const dynamciurl = 'http://localhost:9999/';
-    const testurl = 'http://localhost:9999/';
+    
+    const dynamciurl = 'https://restogenius.onrender.com/'
+    const testurl = 'https://restogenius.onrender.com/'
+
 
     var total = 0;
     useEffect(() => {
