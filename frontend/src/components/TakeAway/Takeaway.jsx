@@ -804,11 +804,11 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
         <div className='over-order-page'>
             {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
                 Add User
-            </button> : <div>
-                <p className='ms-3 mt-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
-                <p className='ms-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
-                <p className='ms-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
-                <p className='ms-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
+            </button> : <div className='row'>
+                <p className='mt-3 col-md-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
+                <p className='mt-3 col-md-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
+                <p className='mt-3 col-md-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
+                <p className='mt-3 col-md-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
                 {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
                 Update user (seprate modal)
             </button> */}
@@ -877,11 +877,11 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                 )}
             </div>
 
-            <div className='row g-3'>
+            <div className='row'>
                 <div className='dinein-navbar-cont'>
 
                     <div className='info-cont'>
-                        <a href="#" className="running-order" style={{ 'color': '#000' }}>OrderNo #{orderNou}</a>
+                        <p className="static-running-order" style={{ 'color': '#000' }}>OrderNo #{orderNou}</p>
                         {/* <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
                         <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
                         <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
@@ -1055,7 +1055,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                     </div>
                 </div>
                 {/* layout - 2 */}
-                <div className='col-sm-5'>
+                <div className='col-sm-6'>
                     <div className='food-order-cont'>
                         <div className='food-category-bar'>
                             <div className='foo-cat'>

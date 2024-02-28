@@ -1,6 +1,6 @@
 .dinein-navbar-cont{
     background-color: rgb(94, 124, 145);
-    width: 1300px;
+    width: 100vw;
     padding: 30px 20px 30px 20px;
     margin-left: 30px;
     display: flex;
@@ -38,6 +38,33 @@ option{
 
 /* for btn1 style */
 /* @import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700"); */
+.static-running-order {
+  /*placement for code pen*/
+  /* margin: 10% 40%; */
+  /*Button Text Style*/
+  font-family: "Inconsolata", "Helvetica", "Arial", sans-serif;
+  font-size: inherit;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  /* text-transform: uppercase; */
+  text-decoration: none;
+  border-radius: 10px;
+  /*Button Color & Border*/
+  border: 4px solid #91D171;
+  color: '#000';
+  background: #91D171;
+  outline: none;
+  /*Position, Display, Size*/
+  position: relative;
+  display: inline-block;
+  padding: 13px 5px;
+  cursor: pointer;
+  width: auto;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  margin-left: 15px;
+}
 .running-order {
     /*placement for code pen*/
     /* margin: 10% 40%; */
