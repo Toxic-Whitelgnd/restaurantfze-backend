@@ -41,7 +41,7 @@ const TakeAwayCards = ({ name, recipientid, date, time, total, number, paymentTy
   const handleDelete = async () => {
     // Handle delete logic here
     try {
-        const deleteLog = await axios.delete(`http://localhost:9999/delete_takeaway_order/${recipientid}`);
+        const deleteLog = await axios.delete(`https://restogenius.onrender.com/delete_takeaway_order/${recipientid}`);
         if(deleteLog.data.success){
           toast.success("Log has been deleted successfully")
         }

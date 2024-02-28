@@ -36,7 +36,7 @@ const RecipietCard = () => {
     const [foodData, setFoodData] = useState([]);
     const FetchFoodData = async () => {
         try {
-            const res = await axios.get(`http://localhost:9999/get_customerby_order_no/${id}`);
+            const res = await axios.get(`https://restogenius.onrender.com/get_customerby_order_no/${id}`);
             console.log(res.data);
             setFoodData(res.data);
         } catch (error) {

@@ -13,7 +13,7 @@ const SaleOrderView = () => {
     const [customerDetails, setData] = useState([]);
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:9999/get_customerbyid/${id}`)
+            const response = await axios.get(`https://restogenius.onrender.com/get_customerbyid/${id}`)
             console.log(response.data);
             setData(response.data);
         } catch (error) {

@@ -37,7 +37,7 @@ const KitchenRecipietCard = () => {
     const [foodData, setFoodData] = useState([]);
     const FetchFoodData = async (firstParam) => {
         try {
-            const res = await axios.get(`http://localhost:9999/get_current_order_${firstParam}/${id}`);
+            const res = await axios.get(`https://restogenius.onrender.com/get_current_order_${firstParam}/${id}`);
             // console.log(res.data);
             setFoodData(res.data[0]);
         } catch (error) {
