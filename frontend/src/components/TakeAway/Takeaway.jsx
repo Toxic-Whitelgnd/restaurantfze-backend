@@ -31,7 +31,7 @@ const TakeAway = () => {
                     foodtype == 'all' ? fooddata.filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
                         return (
                             <>
-                                <div className="my-alert">
+                                <div key={idx} className="my-alert">
                                     <div className="my-alert__unique1">
                                         {val.foodImage && (
                                             <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
@@ -42,7 +42,7 @@ const TakeAway = () => {
                                     <div className="my-alert__unique2">
                                         <div className='my-alert__unique3'>
                                             <div className='my-alert__unique4'>
-                                                <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                <span className='fs-6 fw-bold text-capitalize'>{val.foodName}</span>
                                                 <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
                                             </div>
                                             <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
@@ -51,11 +51,11 @@ const TakeAway = () => {
                                         {val.foodAvailability === 'No' ? <button
                                             className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                             type='button' disabled
-                                        >Add to cart</button> :
+                                        >Add</button> :
                                             <button
                                                 className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                 type='button'
-                                            >Add to cart</button>}
+                                            >Add</button>}
 
                                     </div>
                                 </div>
@@ -86,11 +86,11 @@ const TakeAway = () => {
                                             {val.foodAvailability === 'No' ? <button
                                                 className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                 type='button' disabled
-                                            >Add to cart</button> :
+                                            >Add</button> :
                                                 <button
                                                     className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                     type='button'
-                                                >Add to cart</button>}
+                                                >Add</button>}
 
                                         </div>
                                     </div>
@@ -802,13 +802,13 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
     return (
         <div className='over-order-page'>
-            {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
+            {usercreated ? <button type="button" className='btn btn-primary mt-1 ms-3' onClick={openModal}>
                 Add User
             </button> : <div className='row'>
-                <p className='mt-3 col-md-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
-                <p className='mt-3 col-md-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
-                <p className='mt-3 col-md-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
-                <p className='mt-3 col-md-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
+                <p className='mt-1 col-md-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
+                <p className='mt-1 col-md-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
+                <p className='mt-1 col-md-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
+                <p className='mt-1 col-md-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
                 {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
                 Update user (seprate modal)
             </button> */}
@@ -880,7 +880,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
             <div className='row'>
                 <div className='dinein-navbar-cont'>
 
-                    <div className='info-cont'>
+                    <div>
                         <p className="static-running-order" style={{ 'color': '#000' }}>OrderNo #{orderNou}</p>
                         {/* <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
                         <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
@@ -1061,7 +1061,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                             <div className='foo-cat'>
                                 <span htmlFor="foodCategory">Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''} className='filter'>
                                     <option value="all" >
                                         All
                                     </option>
@@ -1075,7 +1075,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                             
                             <div className='foo-cat'>
                                 <span htmlFor="foodCategory">Sort-by or Filter</span>
-                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption}>
+                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>
                                     <option value="lowPrice">Low Price</option>
@@ -1094,12 +1094,6 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                 </div>
                             </div>
 
-                            <div className='date-time'>
-
-                                <GetDate />
-                                <br></br>
-                                <GetTime />
-                            </div>
 
                         </div>
                         <div>

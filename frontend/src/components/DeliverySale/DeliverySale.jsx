@@ -9,7 +9,7 @@ import GetTime from '../../cards/TimeandDate/GetTime';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
+import { FaSearch } from 'react-icons/fa';
 
 
 
@@ -29,7 +29,7 @@ const DeliverySale = () => {
                     fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
                         return (
                             <>
-                                <div className="my-alert">
+                                <div key={idx} className="my-alert">
                                     <div className="my-alert__unique1">
                                         {val.foodImage && (
                                             <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
@@ -85,6 +85,12 @@ const DeliverySale = () => {
 
         GenerateOrderNo();
     }, []);
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleInputChange1 = (e) => {
+        setSearchTerm(e.target.value);
+    }
 
     const [tableData, setTableData] = useState([]);
     const fetchTableData = async () => {
@@ -870,15 +876,15 @@ const DeliverySale = () => {
                     </div>
                 </div>
                 {/* layout - 2 */}
-                <div className='col-sm-5'>
+                <div className='col-sm-6'>
                     <div className='food-order-cont'>
                         <div className='food-category-bar'>
                             <div className='foo-cat'>
                                 <span htmlFor="foodCategory">Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
-                                    <option value="" disabled>
-                                        Select Food Type to filter
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''} className='filter'>
+                                    <option value="all" >
+                                        All
                                     </option>
                                     {foodTypes.map((type) => (
                                         <option key={type.food_name} value={type.food_name}>
@@ -887,22 +893,28 @@ const DeliverySale = () => {
                                     ))}
                                 </select>
                             </div>
+
                             <div className='foo-cat'>
                                 <span htmlFor="foodCategory">Sort-by or Filter</span>
-                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption}>
+                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>
                                     <option value="lowPrice">Low Price</option>
                                     <option value="available">Available</option>
                                 </select>
                             </div>
-
-                            <div className='date-time'>
-
-                                <GetDate />
-                                <br></br>
-                                <GetTime />
+                            <div>
+                                <div className="search-container">
+                                    <input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={handleInputChange1}
+                                    />
+                                    <FaSearch className="search-icon" />
+                                </div>
                             </div>
+
 
                         </div>
                         <div>
@@ -911,6 +923,7 @@ const DeliverySale = () => {
                                 <DynamicComponent
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
+                                    foodterm={searchTerm}
                                 />
                             }
 

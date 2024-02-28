@@ -18,7 +18,7 @@ const TableorderCard = ({ key, fooditem, onIncrement, onDecrement , onAmountChan
                                 &times;
                             </button> */}
                     <div class="colo colo-1" data-label="Job Id">{fooditem.id}</div>
-                    <div class="colo colo-2" data-label="Customer Name">{fooditem.foodname}{fooditem.qty}</div>
+                    <div class="colo colo-2" data-label="Customer Name">{fooditem.foodname}</div>
                     <div class="colo colo-5" data-label="Amount"><div>
                         <button onClick={() => onDecrement(fooditem.id)} className='btn btn-danger'>-</button>
                         <span className='m-3'>{fooditem.qty}</span>
