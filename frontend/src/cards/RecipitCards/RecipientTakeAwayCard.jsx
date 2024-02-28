@@ -10,7 +10,7 @@ const RecipientTakeAwayCard = () => {
     const [urlParams, setUrlParams] = useState([]);
 
     const dynamciurl = 'https://restogenius.onrender.com/'
-    const testurl = 'http://localhost:9999'
+    const testurl = 'https://restogenius.onrender.com'
 
     var total = 0;
     useEffect(() => {

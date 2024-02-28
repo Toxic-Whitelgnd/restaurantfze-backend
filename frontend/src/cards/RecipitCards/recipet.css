@@ -30,7 +30,7 @@
     color: #666;
     line-height: 1.2em;
   }
-  #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
+  #invoice-POS #top, #invoice-POS .mid, #invoice-POS #bot {
     /* Targets all id with 'col-' */
     border-bottom: 1px solid #EEE;
   }

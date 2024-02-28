@@ -19,7 +19,7 @@ const TakeAway = () => {
     const { id } = useParams();
 
     const dynamicurl = `https://restogenius.onrender.com/`
-    const dynamicurl1 = `http://localhost:9999/`
+    const dynamicurl1 = `https://restogenius.onrender.com/`
 
     // Componet's are Dynamic 
 
