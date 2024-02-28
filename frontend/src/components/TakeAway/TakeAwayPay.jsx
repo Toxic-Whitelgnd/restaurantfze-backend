@@ -14,9 +14,9 @@ import { FaSearch } from 'react-icons/fa';
 
 
 
-const TakeAway = () => {
+const TakeAwayPay = () => {
 
-    const { id } = useParams();
+    const { orderid } = useParams();
 
     const dynamicurl = `https://restogenius.onrender.com/`
     const dynamicurl1 = `http://localhost:9999/`
@@ -223,7 +223,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
     const fetchCurrentOrder = async () => {
         try {
-            const response = await axios.get(`${dynamicurl}get_saved_orders/${id}`);
+            const response = await axios.get(`${dynamicurl}get_bytakeaway_order/${orderid}`);
             console.log(response.data);
 
             // DYnmic changeHere :TODO:
@@ -458,7 +458,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         try {
 
-            const response = await axios.post(`${dynamicurl}save_current_takeaway_order`, current_order)
+            const response = await axios.put(`${dynamicurl}update_running_takeaway_order/${orderid}`, current_order)
             console.log(response.data);
             if (response.data.success) {
                 toast.success(response.data.message);
@@ -497,7 +497,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
             else {
                 const current_order = {
-                    order_no: orderNou,
+                    order_no: fetchFood.order_no,
                     floor_no: '1', // DYNAMIC TODO:
                     customer_details: customerDetails,
                     items_ordered: foodD.length,
@@ -606,7 +606,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         try {
 
-            window.location.reload();
+           // window.location.href = '/#/takeaway/';
+           handleReciept();
         } catch (error) {
             alert(error.message);
         }
@@ -667,7 +668,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
             customer_mobileNumber: customerDetails.mobileNumber,
             customer_email: customerDetails.email,
             customer_address: customerDetails.address,
-            order_no: orderNou,
+            order_no: fetchFood.order_no,
             items_ordered: foodD.length,
             items: foodD,
             total: calculateTotalAmountofItem(),
@@ -690,12 +691,11 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         try {
 
-            const response = await axios.post(`${dynamicurl}save_takeaway_order`, customer_details);
+            const response = await axios.put(`${dynamicurl}update_takeaway_order/${orderid}`, customer_details);
 
             if (response.data.success) {
                 toast.success("Customer detail saved");
                 //SuccessfullPayment();
-
             }
 
 
@@ -707,6 +707,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
         closeModalPayBill();
     };
 
+    // for handlip paymnet
     const handlePayBillPay = async () => {
         // Add logic here to handle the payment
         console.log('Payment processed successfully');
@@ -720,7 +721,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
             customer_mobileNumber: customerDetails.mobileNumber,
             customer_email: customerDetails.email,
             customer_address: customerDetails.address,
-            order_no: orderNou,
+            order_no: fetchFood.order_no,
             items_ordered: foodD.length,
             items: foodD,
             total: calculateTotalAmountofItem(),
@@ -743,12 +744,11 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         try {
 
-            const response = await axios.post(`${dynamicurl}save_takeaway_order`, customer_details);
+            const response = await axios.put(`${dynamicurl}update_takeaway_order/${orderid}`, customer_details);
 
             if (response.data.success) {
                 toast.success("Customer detail saved");
                 SuccessfullPayment();
-
             }
 
 
@@ -759,7 +759,6 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         closeModalPayBill();
     };
-
     const [totalAmount, setTotalAmount] = useState('');
 
     const handleAmountChange = (e) => {
@@ -881,7 +880,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                 <div className='dinein-navbar-cont'>
 
                     <div className='info-cont'>
-                        <a href="#" className="running-order" style={{ 'color': '#000' }}>OrderNo #{orderNou}</a>
+                        <a href="#" className="running-order" style={{ 'color': '#000' }}>OrderNo #{fetchFood.order_no}</a>
                         {/* <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
                         <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
                         <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
@@ -1124,6 +1123,6 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
     );
 }
 
-export default TakeAway;
+export default TakeAwayPay;
 
 

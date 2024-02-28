@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
-const RecipietCard = () => {
+const RecipientTakeAwayCard = () => {
 
     const [urlParams, setUrlParams] = useState([]);
 
@@ -25,23 +25,25 @@ const RecipietCard = () => {
     // Access the parts of the URL separately
     const firstParam = urlParams[1]; // indoor
     const secondParam = urlParams[2]; // 3
-
-    const { id } = useParams();
     const current = window.location.href;
 
     const componentRef = useRef();
     const handleRecipetBill = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: 'FZE-Restaurant',
-        onAfterPrint: () => toast.success("Printed"),
+        onAfterPrint: () => {toast.success("Printed")
+    
+        window.location.href = '/#/takeaway/';},
     });
+
+    const {orderid} = useParams();
 
     const [foodData, setFoodData] = useState([]);
     const FetchFoodData = async () => {
         try {
-            const res = await axios.get(`${dynamciurl}get_customerby_order_no/${id}`);
+            const res = await axios.get(`${dynamciurl}get_bytakeaway_order/${orderid}`);
             console.log(res.data);
-            setFoodData(res.data);
+            setFoodData(res.data[0]);
         } catch (error) {
             console.log(error.message);
         }
@@ -111,8 +113,7 @@ const RecipietCard = () => {
                                         <div className="info">
                                             <h2>info</h2>
                                             <p>
-                                                Table no : {foodData.ordered_tableno}<br />
-                                                Waiter : {foodData.waiter_name}<br />
+                                               
                                                 Type: {foodData.type}<br />
                                             </p>
                                         </div>
@@ -288,4 +289,5 @@ const RecipietCard = () => {
     );
 };
 
-export default RecipietCard;
+export default RecipientTakeAwayCard;
+
