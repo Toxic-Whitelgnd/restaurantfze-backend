@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const FoodType = () => {
   const [foodType, setFoodType] = useState('');
@@ -14,15 +15,18 @@ const FoodType = () => {
     try {
       const response = await axios.post('https://restogenius.onrender.com/post_food_type', {foodType : foodType });
 
-      alert(`${foodType} added successfully!`);
+
+      toast.success(`${foodType} added successfully!`)
       setFoodType('');
     } catch (error) {
       console.error('Error:', error);
+      toast.error("error while adding food type")
     }
   };
 
   return (
     <div>
+      <ToastContainer />
         <h1>Add the food type</h1>
     
     <form onSubmit={handleSubmit}>

@@ -7,7 +7,7 @@ const BillPanel = () => {
             <h1>Bill panel</h1>
             <NavLink to='/admin/bill-edit-panel'>Edit bill Panel</NavLink>
                 <br></br>
-                <NavLink to={'/admin/tablepanel'}>Edit Reciepiet Panel</NavLink>
+                <NavLink to={'/admin/recipiet-edit-panel'}>Edit Reciepiet Panel</NavLink>
                 <br></br>
         </div>
     );

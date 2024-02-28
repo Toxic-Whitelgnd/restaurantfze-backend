@@ -434,6 +434,13 @@ const messDetailsSchema = new mongoose.Schema({
   },
 });
 
+const recipietSchema = new mongoose.Schema({
+   companyname: String,
+   companycaption: String,
+   address: String,
+   description: String,
+})
+
 // ****************** END **********************
 
 // Multer configuration for handling image uploads
@@ -486,6 +493,8 @@ const DeliverySaleCustomerDetails = mongoose.model(
   customerDeliverySaleSchema,
   "delivery_sales_customer_details"
 );
+
+const Recipiet = mongoose.model("recipiet",recipietSchema);
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -1719,6 +1728,32 @@ app.delete("/delete_messDetails/:messDetails_id", async (req, res) => {
 });
 
 //  ***************************** END OF MessDetails ****************************
+// ******************************** START OF Recipiet Details ****************************
+
+app.get('/get_recipiet', async (req, res) => {
+  try {
+    const rec = await Recipiet.find({});
+    res.json({ success: true , data: rec});
+  } catch (error) {
+    res.status(500).json({ message: "Error in get_recipiet" });
+  }
+});
+
+app.put('/update_recipiet/:id', async (req, res) => {
+  const {id} = req.params;
+  try {
+    const rec = await Recipiet.findOneAndUpdate({
+      _id: id,
+    },{
+      $set: req.body,
+    });
+    res.json({ success: true , msg: "Recipiet updated" , data: rec});
+  } catch (error) {
+    res.status(500).json({ message: "Error in post_recipiet" });
+  }
+});
+
+// ******************************** END OF RECIPIENT *******************************
 
 // TODO: Expenses tracking schema
 

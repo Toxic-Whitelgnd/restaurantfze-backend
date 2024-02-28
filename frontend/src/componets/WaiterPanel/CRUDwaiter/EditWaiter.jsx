@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const EditWaiterForm = () => {
     const {waiterid} = useParams();
@@ -37,16 +38,17 @@ const EditWaiterForm = () => {
   const handleUpdate = async () => {
     try {
       await axios.put(`https://restogenius.onrender.com/update_waiter/${waiterid}`, waiterData);
-      alert('Waiter details updated successfully!');
+      toast.success('Waiter details updated successfully!');
     } catch (error) {
       console.error('Error updating waiter details:', error);
-      alert('Error updating waiter details. Please try again.');
+      toast.error('Error updating waiter details. Please try again.');
     }
   };
 
   return (
     <div>
       <h2>Edit Waiter Details</h2>
+      <ToastContainer />
       <form>
         <label>
           Waiter Name:

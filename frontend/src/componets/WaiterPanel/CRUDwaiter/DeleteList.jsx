@@ -28,7 +28,7 @@ const DeleteWaiterList = () => {
           {
               tables.map(table => (
                   <li key={table.tableNo}>
-                    <Link to={`/delete-waiter/${table._id}`}>{`${table.waiterName}`}</Link>
+                    <Link to={`/admin/delete-waiter/${table._id}`}>{`${table.waiterName}`}</Link>
                   </li>
                 ))
           }

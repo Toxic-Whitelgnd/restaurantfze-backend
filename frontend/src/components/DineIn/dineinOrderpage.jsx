@@ -163,6 +163,7 @@ const DineinOrderpage = () => {
         fetchTableData();
 
         fetchBillD();
+
     }, []);
 
     const [tableData, setTableData] = useState([]);

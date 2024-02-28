@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const TableEdit = () => {
@@ -45,15 +46,18 @@ const TableEdit = () => {
             // Make a PUT request to /update_table_data/:table_no
             await axios.put(`https://restogenius.onrender.com/update_table_data/${tableno}`, formData);
             console.log('Table data successfully updated!');
+            toast.success(`Table data successfully updated!`);
             // Optionally, you can add logic to handle success or navigate to another page
         } catch (error) {
             console.error('Error updating table data:', error.message);
+            toast.error(`Error updating table data: ${error.message}`);
         }
     };
 
     return (
         <div>
             <h1>Edit table for {tableno}</h1>
+            <ToastContainer />
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="tableType" className="form-label">Table Type:</label>

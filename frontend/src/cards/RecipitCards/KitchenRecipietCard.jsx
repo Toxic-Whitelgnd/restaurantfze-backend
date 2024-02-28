@@ -24,6 +24,7 @@ const KitchenRecipietCard = () => {
         
         FetchFoodData(firstParam);
         // total = calculateTotalAmountofItem();
+        FetchRecipiet();
     }, []);
 
 
@@ -57,6 +58,25 @@ const KitchenRecipietCard = () => {
         }, 0);
     };
 
+    const [formData, setFormData] = useState({
+        companyname:'',
+            companycaption:"",
+            description:"",
+            address:"",
+            email:"",
+            mobilenumber:"",
+      });
+
+    const FetchRecipiet = async ()=>{
+        try {
+            const res = await axios.get(`${dynamciurl}get_recipiet`);
+            console.log(res.data);
+            setFormData(res.data.data[0]); 
+        } catch (error) {
+            console.log("error in recipientcard");
+        }
+    }
+
     return (
         <div>
 
@@ -70,7 +90,7 @@ const KitchenRecipietCard = () => {
                             <center id="top">
                                 <div className="logo" />
                                 <div className="info">
-                                    <h2>Grand Restaurant Catering FZE</h2>
+                                    <h2>{formData.companyname}</h2>
                                 </div>
                                 {/*End Info*/}
                             </center>
@@ -173,7 +193,7 @@ const KitchenRecipietCard = () => {
                                 {/*End Table*/}
                                 <div id="legalcopy">
                                     <center>
-                                        <p className="legal"><strong>Please take the order!</strong>&nbsp;
+                                        <p className="legal"><strong>{formData.companycaption}</strong>&nbsp;
                                         </p>
                                     </center>
                                 </div>

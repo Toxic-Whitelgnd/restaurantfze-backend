@@ -1,6 +1,7 @@
 // src/TableForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const TableForm = () => {
    
@@ -51,15 +52,17 @@ const TableForm = () => {
 
       // Optionally, you can add logic to handle success or navigate to another page
       console.log('Table data successfully submitted!');
-      alert("Table added successfully!");
+      toast.success("Table added successfully!");
     } catch (error) {
       console.error('Error submitting table data:', error);
+      toast.error("Error submitting table data");
     }
   };
 
   return (
     <div>
         <h1>Add your Table Here</h1>
+        <ToastContainer />
     <form onSubmit={handleSubmit}>
       <label>
         Table Type:

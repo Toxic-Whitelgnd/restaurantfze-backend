@@ -9,8 +9,9 @@ const KitchenRecipietTakeawayCard = () => {
 
     const [urlParams, setUrlParams] = useState([]);
 
-    const dynamciurl = 'https://restogenius.onrender.com/'
-    const testurl = 'http://localhost:9999/'
+    const dynamciurl1 = 'https://restogenius.onrender.com/'
+    const dynamciurl = 'http://localhost:9999/';
+    const testurl = 'http://localhost:9999/';
 
     var total = 0;
     useEffect(() => {
@@ -24,6 +25,7 @@ const KitchenRecipietTakeawayCard = () => {
         
         FetchFoodData(secondParam);
         // total = calculateTotalAmountofItem();
+        FetchRecipiet();
     }, []);
 
 
@@ -45,7 +47,7 @@ const KitchenRecipietTakeawayCard = () => {
     const FetchFoodData = async (firstParam) => {
         try {
             const res = await axios.get(`${testurl}get_takeaway_order/${orderno}`);
-            console.log(res.data);
+        
             setFoodData(res.data);
         } catch (error) {
             console.log(error.message);
@@ -61,6 +63,25 @@ const KitchenRecipietTakeawayCard = () => {
         }, 0);
     };
 
+    const [formData, setFormData] = useState({
+        companyname:'',
+            companycaption:"",
+            description:"",
+            address:"",
+            email:"",
+            mobilenumber:"",
+      });
+
+    const FetchRecipiet = async ()=>{
+        try {
+            const res = await axios.get(`${dynamciurl}get_recipiet`);
+            console.log(res.data.data[0]);
+            setFormData(res.data.data[0]); 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div>
 
@@ -74,7 +95,7 @@ const KitchenRecipietTakeawayCard = () => {
                             <center id="top">
                                 <div className="logo" />
                                 <div className="info">
-                                    <h2>Grand Restaurant Catering FZE</h2>
+                                    <h2>{formData.companyname}</h2>
                                 </div>
                                 {/*End Info*/}
                             </center>
@@ -177,7 +198,7 @@ const KitchenRecipietTakeawayCard = () => {
                                 {/*End Table*/}
                                 <div id="legalcopy">
                                     <center>
-                                        <p className="legal"><strong>Please take the order!</strong>&nbsp;
+                                        <p className="legal"><strong>{formData.companycaption}</strong>&nbsp;
                                         </p>
                                     </center>
                                 </div>

@@ -76,6 +76,7 @@ import KitchenRecipietCard from './cards/RecipitCards/KitchenRecipietCard';
 import KitchenRecipietTakeawayCard from './cards/RecipitCards/KitchenRecipietTakeawayCard';
 import TakeAwayPay from './components/TakeAway/TakeAwayPay';
 import RecipientTakeAwayCard from './cards/RecipitCards/RecipientTakeAwayCard';
+import EditRecipietPanel from './componets/BillPanel/CRUDbill/RecipietEditPanel';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -163,6 +164,7 @@ function App() {
           {/* for Bill panel */}
           <Route path='/admin/billpanel'  element={<BillPanel/>} />
           <Route path='/admin/bill-edit-panel'  element={<BillEditPanel/>} />
+          <Route path='/admin/recipiet-edit-panel'  element={<EditRecipietPanel/>} />
           {/* for Mess panel */}
           <Route path='/admin/messpanel'  element={<MessPanel/>} />
           <Route path="/admin/edit-messDetails" element={<EditMessDetailsList />} />

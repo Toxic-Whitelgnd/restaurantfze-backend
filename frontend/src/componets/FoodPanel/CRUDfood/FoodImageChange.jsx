@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const FoodImageChange = () => {
     const { foodid } = useParams();
@@ -30,15 +31,18 @@ const FoodImageChange = () => {
             },
         } );
 
-        alert('Image uploaded successfully!');
-        window.location.href = "/#/admin/edit-fooddata/"
+        toast.success('Image uploaded successfully!');
+        setTimeout(()=>{window.location.href = "/#/admin/edit-fooddata/"},3000);
+        
       }
     } catch (error) {
       console.error('Error uploading image:', error);
+      toast.error('Error uploading image:');
     }
   };
     return (
         <div>
+          <ToastContainer />
             <h1>Change your image here</h1>
             <div>
                 <label>

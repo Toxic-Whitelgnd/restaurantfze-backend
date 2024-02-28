@@ -28,7 +28,7 @@ const EditWaiterList = () => {
           {
               tables.map(table => (
                   <li key={table.tableNo}>
-                    <Link to={`/edit-waiter/${table._id}`}>{`${table.waiterName}`}</Link>
+                    <Link to={`/admin/edit-waiter/${table._id}`}>{`${table.waiterName}`}</Link>
                   </li>
                 ))
           }

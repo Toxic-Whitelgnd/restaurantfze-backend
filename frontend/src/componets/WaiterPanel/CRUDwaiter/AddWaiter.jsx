@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddWaiter = () => {
 
@@ -25,7 +26,7 @@ const AddWaiter = () => {
             console.log(waiterData.dateOfJoining);
           const res = await axios.post('https://restogenius.onrender.com/add_waiter_details', waiterData);
           if(res.data){
-            alert('Waiter added successfully!');
+           toast.success('Waiter added successfully!');
           }
           
           setWaiterData({
@@ -36,13 +37,14 @@ const AddWaiter = () => {
           });
         } catch (error) {
           console.error('Error adding waiter:', error);
-          alert('Error adding waiter. Please try again.');
+          toast.error('Error adding waiter. Please try again.');
         }
       };
 
     return (
         <div>
          <h2>Add Waiter</h2>
+         <ToastContainer />
       <form onSubmit={handleSubmit}>
         <label>
           Waiter Name:

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const BillEditPanel = () => {
 
@@ -38,6 +39,9 @@ const BillEditPanel = () => {
           const response = await axios.put(`https://restogenius.onrender.com/update_billd/${formData._id}`, formData);
           console.log('Data sent successfully:', response.data);
           // You can add further logic or state updates as needed
+          if(response.data == 'saved'){
+              toast.success("Updation successful")
+          }
         } catch (error) {
           console.error('Error sending data:', error);
         }
@@ -45,6 +49,7 @@ const BillEditPanel = () => {
     
       return (
         <div>
+          <ToastContainer />
           <h2>Submit VAT Data</h2>
           <form onSubmit={handleSubmit}>
             <label>

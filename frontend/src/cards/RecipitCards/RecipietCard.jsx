@@ -9,8 +9,8 @@ const RecipietCard = () => {
 
     const [urlParams, setUrlParams] = useState([]);
 
-    const dynamciurl = 'https://restogenius.onrender.com/'
-    const testurl = 'http://localhost:9999'
+    const dynamciurl1 = 'https://restogenius.onrender.com/'
+    const dynamciurl = 'http://localhost:9999'
 
     var total = 0;
     useEffect(() => {
@@ -20,6 +20,8 @@ const RecipietCard = () => {
 
         FetchFoodData();
         // total = calculateTotalAmountofItem();
+
+        FetchRecipiet();
     }, []);
 
     // Access the parts of the URL separately
@@ -35,6 +37,26 @@ const RecipietCard = () => {
         documentTitle: 'FZE-Restaurant',
         onAfterPrint: () => toast.success("Printed"),
     });
+
+   
+    const [formData, setFormData] = useState({
+        companyname:'',
+            companycaption:"",
+            description:"",
+            address:"",
+            email:"",
+            mobilenumber:"",
+      });
+
+    const FetchRecipiet = async ()=>{
+        try {
+            const res = await axios.get(`${dynamciurl}get_recipiet`);
+            console.log(res.data.data[0]);
+            setFormData(res.data.data[0]);
+        } catch (error) {
+            console.log("error in recipientcard");
+        }
+    }
 
     const [foodData, setFoodData] = useState([]);
     const FetchFoodData = async () => {
@@ -71,7 +93,10 @@ const RecipietCard = () => {
                             <center id="top">
                                 <div className="logo" />
                                 <div className="info">
-                                    <h2>Grand Restaurant Catering FZE</h2>
+                                    <h2>{formData.companyname}</h2>
+                                </div>
+                                <div className="info">
+                                    <h5>{formData.address}</h5>
                                 </div>
                                 <div className="info">
                                     <h2><strong>TAX INVOICE</strong></h2>
@@ -85,9 +110,9 @@ const RecipietCard = () => {
                                         <div className="info">
                                             <h2>Contact Info</h2>
                                             <p>
-                                                Address : street city, state 0000<br />
-                                                Email : JohnDoe@gmail.com<br />
-                                                Phone : 555-555-5555<br />
+                                                Address : {formData.address}<br />
+                                                Email : {formData.email}<br />
+                                                Phone : {formData.mobilenumber}<br />
                                             </p>
                                         </div>
                                     </div>
@@ -245,7 +270,13 @@ const RecipietCard = () => {
                                 {/*End Table*/}
                                 <div id="legalcopy">
                                     <center>
-                                        <p className="legal"><strong>Thank you and Visit Again!</strong>&nbsp;
+                                        <p className="legal"><strong>{formData.description}</strong>&nbsp;
+                                        </p>
+                                    </center>
+                                </div>
+                                <div id="legalcopy">
+                                    <center>
+                                        <p className="legal"><strong>{formData.companycaption}</strong>&nbsp;
                                         </p>
                                     </center>
                                 </div>

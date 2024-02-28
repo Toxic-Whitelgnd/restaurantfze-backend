@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const FoodData = () => {
 
@@ -70,11 +71,11 @@ const FoodData = () => {
 
             if (response.status === 201) {
                 console.log('Food data added successfully!');
-                alert('Food data added successfully!');
+                toast.success('Food data added successfully!');
                 // You can also redirect or perform any other action upon success
-                window.location.reload();
+              //  window.location.reload();
             } else {
-                console.error('Failed to add food data');
+                toast.error('Failed to add food data');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -85,6 +86,7 @@ const FoodData = () => {
     return (
         <div>
             <h1>Add the food items</h1>
+            <ToastContainer />
             <div>
                 <form onSubmit={handleSubmit}>
                     <label>
