@@ -38,35 +38,33 @@ const HomeEdit = () => {
         e.preventDefault();
         console.log(formData);
         try {
-            // Make a PUT request to /update_table_data/:table_no
-            await axios.put(`https://restogenius.onrender.com/update_home_page_data/${homeno}`, formData);
-           
-            toast.success("Home item updated successfully deleted!");
-            window.location.href = "/"
-        } catch (error) {
-            console.error('Error updating table data:', error.message);
-        }
-    };
+            // Make a DELETE request to /delete_table_data/:table_no
+            await axios.delete(`https://restogenius.onrender.com/delete_home_page_data/${homeno}`);
+            
+            toast.success('Home item deleted successfully deleted!');
+            
+            window.location.href = '/';
+          } catch (error) {
+            toast.error('Error deleting table:', error);
+          }
+        };
 
-    return (
-        <div className='Edit-table-home-panel'>
-            <div className='Edit-table-home-panel-heading'>
-            <h1>Edit table for {homeno}</h1>
-            </div>
-            <div className='Edit-table-home-panel-heading'></div>
-            <form onSubmit={handleSubmit}>
-                
-                {/* Other input fields */}
-                
-                <div className="mb-3">
-                    <label htmlFor="tableCapacity" className="form-label">Home Name:</label>
-                    <input type="text" className="form-control" id="table_capacity" name="home_name" value={formData.home_name} onChange={handleChange} />
+        return (
+            <div className="container mt-4">
+              <div className='home-delete-table'>
+                <div className='home-delete-table-heading'>
+                  <ToastContainer />
+                  <h1>Delete Table {homeno}</h1>
                 </div>
-                <ToastContainer/>
-                <button type="submit" className="btn btn-primary">Update Table</button>
-            </form>
-        </div>
-    );
-}
+                <div className='home-delete-table-page'>
+                  <p>Are you sure you want to delete Home page (might leads to error)?</p>
+                  <button type="button" className="btn btn-danger" onClick={handleDelete}>
+                    Delete Home Page
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        };
 
 export default HomeEdit;
