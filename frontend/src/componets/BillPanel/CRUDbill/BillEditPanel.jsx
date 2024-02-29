@@ -49,67 +49,59 @@ const BillEditPanel = () => {
       };
     
       return (
-<<<<<<< HEAD
         <div class='body'>
-        <div class='vatd-1'>
-          <h2 id='text-1'>Submit VAT Data</h2>
-          <form onSubmit={handleSubmit} className='form-1'>
-            <div class="lab-design">
-            <label class='label'>
-=======
-        <div>
-          <ToastContainer />
-          <h2>Submit VAT Data</h2>
-          <form onSubmit={handleSubmit}>
-            <label>
->>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
-             VAT:
-              <input 
-                class="input"
-                type="number"
-                name="VAT"
-                value={formData.VAT}
-                onChange={handleChange}
-              />
-            </label >
-            <br />
-            <label class ='label'>
-              Credit Sale:
-              <input 
-                class="input"
-                type="number"
-                name="creditSale"
-                value={formData.creditSale}
-                onChange={handleChange}
-              />
-            </label>
-            <br />
-            <label class="label">
-              Discount:
-              <input 
-                class="input"
-                type="number"
-                name="discount"
-                value={formData.discount}
-                onChange={handleChange}
-              />
-            </label>
-            <br />
-            <label class="label">
-              Card Sale:
-              <input 
-                class="input"
-                type="number"
-                name="cardSale"
-                value={formData.cardSale}
-                onChange={handleChange}
-              />
-            </label>
-            </div>
-            <br />
-            <button className='submit'type="submit">SAVE</button>
-          </form>
-        </div>
+          <div class='vatd-1'>
+            <h2 id='text-1'>Submit VAT Data</h2>
+            <form onSubmit={handleSubmit} className='form-1'>
+              <div class="lab-design">
+                <label class='label'>
+                  VAT:
+                  <input 
+                    class="input"
+                    type="number"
+                    name="VAT"
+                    value={formData.VAT}
+                    onChange={handleChange}
+                  />
+                </label >
+                <br />
+                <label class ='label'>
+                  Credit Sale:
+                  <input 
+                    class="input"
+                    type="number"
+                    name="creditSale"
+                    value={formData.creditSale}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label class="label">
+                  Discount:
+                  <input 
+                    class="input"
+                    type="number"
+                    name="discount"
+                    value={formData.discount}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label class="label">
+                  Card Sale:
+                  <input 
+                    class="input"
+                    type="number"
+                    name="cardSale"
+                    value={formData.cardSale}
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+              <br />
+              <button className='submit'type="submit">SAVE</button>
+            </form>
+          </div>
         </div>
       );
   
