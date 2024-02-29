@@ -963,7 +963,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                     <select value={selectedPaymentType} onChange={handleSelectChange}>
                                         <option value="">Select...</option>
                                         <option value="creditcard">Credit Card</option>
-                                        <option value="upi">UPI</option>
+            
                                         <option value="debitcard">Debit Card</option>
                                         <option value="cash">Cash</option>
                                     </select>

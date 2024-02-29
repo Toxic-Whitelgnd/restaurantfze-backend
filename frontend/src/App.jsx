@@ -77,6 +77,7 @@ import KitchenRecipietTakeawayCard from './cards/RecipitCards/KitchenRecipietTak
 import TakeAwayPay from './components/TakeAway/TakeAwayPay';
 import RecipientTakeAwayCard from './cards/RecipitCards/RecipientTakeAwayCard';
 import EditRecipietPanel from './componets/BillPanel/CRUDbill/RecipietEditPanel';
+import RecipientDeliverySaleCard from './cards/RecipitCards/RecipientDeliverySaleCar';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -113,6 +114,7 @@ function App() {
           <Route path='/print/kitchen/outdoor/:id' element={<KitchenRecipietCard />} />
           <Route path='/printrecipiet/:orderid' element={<RecipientTakeAwayCard />} />
           <Route path='/print/kitchen/takeaway/:orderno' element={<KitchenRecipietTakeawayCard />} />
+          <Route path='/printrecipiet/deliverysale/:orderid' element={<RecipientDeliverySaleCard />} />
           {/*ADMIN PATHS */}
           <Route path='/admin' index element={<Pages/>} />
           {/* for Home panel */}

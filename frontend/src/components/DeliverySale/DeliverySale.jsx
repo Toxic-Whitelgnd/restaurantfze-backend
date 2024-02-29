@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
+import { FaSearch } from 'react-icons/fa';
 
 
 
@@ -20,13 +21,12 @@ const DeliverySale = () => {
 
     // Componet's are Dynamic 
 
-    const DynamicComponent = ({ fooddata, foodtype }) => (
+    const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
 
                 {
-
-                    fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
+                    foodtype == 'all' ? fooddata.filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
                         return (
                             <>
                                 <div className="my-alert">
@@ -60,6 +60,41 @@ const DeliverySale = () => {
                             </>
                         )
                     })
+
+                        : fooddata.filter(x => x.foodType === foodtype).filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
+                            return (
+                                <>
+                                    <div className="my-alert">
+                                        <div className="my-alert__unique1">
+                                            {val.foodImage && (
+                                                <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+                                            )}
+
+                                        </div>
+                                        {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+                                        <div className="my-alert__unique2">
+                                            <div className='my-alert__unique3'>
+                                                <div className='my-alert__unique4'>
+                                                    <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                    <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+                                                </div>
+                                                <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+
+                                            </div>
+                                            {val.foodAvailability === 'No' ? <button
+                                                className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                type='button' disabled
+                                            >Add to cart</button> :
+                                                <button
+                                                    className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                    type='button'
+                                                >Add to cart</button>}
+
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })
 
                 }
             </div>
@@ -173,7 +208,7 @@ const DeliverySale = () => {
     const [customerDetails, setCustomerDetails] = useState({
         name: '',
         mobileNumber: '',
-        email: '',
+        vehiclenumber: '',
         address: '',
     }
     );
@@ -230,15 +265,15 @@ const DeliverySale = () => {
 
     // Define your food components
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
     };
 
     // generate no
-    const [orderNou,setOrderNo] = useState(0);
-    const GenerateOrderNo = ()=>{
+    const [orderNou, setOrderNo] = useState(0);
+    const GenerateOrderNo = () => {
         const orderId = randomOrderNoGenerator();
         setOrderNo(orderId);
     }
@@ -374,22 +409,22 @@ const DeliverySale = () => {
         const max = 99999999; // Maximum 8-digit number
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    
+
 
     const SaveOrdertoDb = async (current_order) => {
 
         try {
-            
-                    const response = await axios.post("https://restogenius.onrender.com/save_current_deliverysale_order", current_order)
-                    console.log(response.data);
-                    if(response.data.success){
-                        toast.success(response.data.message);
-                        window.location.reload();
-                    }
-                   
-                    
-               
+
+            const response = await axios.post("https://restogenius.onrender.com/save_current_deliverysale_order", current_order)
+            console.log(response.data);
+            if (response.data.success) {
+                toast.success(response.data.message);
+                window.location.reload();
             }
+
+
+
+        }
         catch (error) {
             console.error(error);
         }
@@ -528,7 +563,8 @@ const DeliverySale = () => {
 
         try {
 
-            window.location.reload();
+            //window.location.reload();
+            handleReciept();
         } catch (error) {
             alert(error.message);
         }
@@ -572,6 +608,16 @@ const DeliverySale = () => {
         setWaiterName(e.target.value);
     }
 
+    const [randomNumber, setRandomNumber] = useState(null);
+
+    const generateRandomNumber = () => {
+        const min = 10000;
+        const max = 99999;
+        const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+        setRandomNumber(rand);
+        return rand;
+    };
+
     const [waiterName, setWaiterName] = useState('');
     const [paymentId, setPaymentId] = useState('');
     const [orderpaymetId, setOrderId] = useState('');
@@ -589,7 +635,7 @@ const DeliverySale = () => {
         const customer_details = {
             customer_name: customerDetails.name,
             customer_mobileNumber: customerDetails.mobileNumber,
-            customer_email: customerDetails.email,
+            customer_vehicleno: customerDetails.vehiclenumber,
             customer_address: customerDetails.address,
             order_no: orderNou,
             items_ordered: foodD.length,
@@ -605,6 +651,10 @@ const DeliverySale = () => {
             waiter_name: waiterName,
             delivered_by: "", // backend dashboard handling
             delivery_vehicle_no: "",
+            amountpaid: totalAmount,
+            amountbalance: calculateTotalwithvatdis(),
+            receiptNo: `GH-${generateRandomNumber()}` ,
+            totalwithoutvat: calculateTotalAmountofItem(),
 
         }
 
@@ -612,7 +662,7 @@ const DeliverySale = () => {
 
         try {
 
-            const response = await axios.post("https://restogenius.onrender.com/save_deliverysale_order", customer_details);
+            const response = await axios.post("http://localhost:9999/save_deliverysale_order", customer_details);
 
             if (response.data.success) {
                 toast.success("Customer detail saved");
@@ -628,6 +678,26 @@ const DeliverySale = () => {
         closeModalPayBill();
     };
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleInputChange1 = (e) => {
+        setSearchTerm(e.target.value);
+    }
+
+    const [totalAmount, setTotalAmount] = useState('');
+
+    const handleAmountChange = (e) => {
+        setTotalAmount(e.target.value);
+    };
+
+    const handleReciept = () => {
+        console.log("check here");
+        // TODO: aFTER SAVING THE ORDER ONLY MAKE THIS TO PRINT BILL OR WHEN CLICK ON PRINTBILL JUST CHECK 
+        // IF IT SAVED OR NOT IF NOT JUST SAVE IT?? 
+
+
+        window.location.href = `/#/printrecipiet/deliverysale/${orderNou}`;
+    }
 
 
 
@@ -637,10 +707,10 @@ const DeliverySale = () => {
             {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
                 Add User
             </button> : <div>
-                <p className='ms-3 mt-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
-                <p className='ms-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
-                <p className='ms-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
-                <p className='ms-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
+                <p className='ms-3 mt-3'> name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
+                <p className='ms-3'> Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
+                <p className='ms-3'> Vehiclenumber: <span className='text-capitalize fw-bold'>{customerDetails.vehiclenumber}</span></p>
+                <p className='ms-3'>Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
                 {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
                 Update user (seprate modal)
             </button> */}
@@ -677,12 +747,12 @@ const DeliverySale = () => {
                                     />
                                 </label>
                                 <label>
-                                    Email:
+                                    vehicle number:
                                     <input
-                                        type="email"
-                                        name="email"
+                                        type="text"
+                                        name="vehiclenumber"
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
-                                        value={customerDetails.email}
+                                        value={customerDetails.vehiclenumber}
                                         onChange={handleInputChange}
                                         required
 
@@ -790,7 +860,7 @@ const DeliverySale = () => {
                                     <select value={selectedPaymentType} onChange={handleSelectChange}>
                                         <option value="">Select...</option>
                                         <option value="creditcard">Credit Card</option>
-                                        <option value="upi">UPI</option>
+
                                         <option value="debitcard">Debit Card</option>
                                         <option value="cash">Cash</option>
                                     </select>
@@ -816,6 +886,18 @@ const DeliverySale = () => {
                                                     {calculateTotalwithvatdis()}</p>
 
                                             </div>
+                                        </div>
+                                        <div className='col'>
+                                            <label>
+                                                Total Amount Paid:
+                                                <input
+                                                    type="number"
+                                                    value={totalAmount}
+                                                    onChange={handleAmountChange}
+                                                    placeholder="Enter total amount paid"
+                                                    required
+                                                />
+                                            </label>
                                         </div>
                                     </div>
 
@@ -877,8 +959,8 @@ const DeliverySale = () => {
                                 <span htmlFor="foodCategory">Food Category</span>
 
                                 <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
-                                    <option value="" disabled>
-                                        Select Food Type to filter
+                                    <option value="all" >
+                                        All
                                     </option>
                                     {foodTypes.map((type) => (
                                         <option key={type.food_name} value={type.food_name}>
@@ -896,6 +978,17 @@ const DeliverySale = () => {
                                     <option value="available">Available</option>
                                 </select>
                             </div>
+                            <div>
+                                <div className="search-container">
+                                    <input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={handleInputChange1}
+                                    />
+                                    <FaSearch className="search-icon" />
+                                </div>
+                            </div>
 
                             <div className='date-time'>
 
@@ -911,6 +1004,7 @@ const DeliverySale = () => {
                                 <DynamicComponent
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
+                                    foodterm={searchTerm}
                                 />
                             }
 
