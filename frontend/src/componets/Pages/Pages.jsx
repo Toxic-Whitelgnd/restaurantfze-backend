@@ -31,7 +31,7 @@ const Pages = () => {
                  
                 <NavLink to={'/admin/deliverypanel'}className='DELIVERY-P'style={{ textDecoration: 'none'}}>DeliveryOrder<br></br> Panel</NavLink>
                 <br></br>
-                <NavLink to={'/admin/messpanel'}>Mess Panel</NavLink>
+                <NavLink to={'/admin/messpanel'}className='messpanel'style={{ textDecoration: 'none'}}>Mess Panel</NavLink>
             </div>
             </div>
         </div>
