@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
-const RecipientTakeAwayCard = () => {
+const RecipientDeliverySaleCard = () => {
 
     const [urlParams, setUrlParams] = useState([]);
 
@@ -42,7 +42,7 @@ const RecipientTakeAwayCard = () => {
     const [foodData, setFoodData] = useState([]);
     const FetchFoodData = async () => {
         try {
-            const res = await axios.get(`${dynamciurl}get_bytakeaway_order/${orderid}`);
+            const res = await axios.get(`${dynamciurl}get_bydeliverysale_order/${orderid}`);
             console.log(res.data);
             setFoodData(res.data[0]);
         } catch (error) {
@@ -316,5 +316,7 @@ const RecipientTakeAwayCard = () => {
     );
 };
 
-export default RecipientTakeAwayCard;
+export default RecipientDeliverySaleCard;
+
+
 

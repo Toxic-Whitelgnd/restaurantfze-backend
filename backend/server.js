@@ -320,23 +320,19 @@ const currentDeliverySaleOrderSchema = new mongoose.Schema({
 const customerDeliverySaleSchema = new mongoose.Schema({
   customer_mobileNumber: {
     type: String,
-    required: true,
+    
   },
   customer_name: {
     type: String,
-    required: true,
-  },
-  customer_email: {
-    type: String,
-    required: true,
+    
   },
   customer_address: {
     type: String,
-    required: true,
+    
   },
   customer_vehicleno: {
     type: String,
-    required: true,
+    
   },
   date: {
     type: String,
@@ -378,6 +374,10 @@ const customerDeliverySaleSchema = new mongoose.Schema({
   vat: String,
   waiter_name: String,
   discount: Number,
+  amountpaid: Number,
+  amountbalance: Number,
+  receiptNo: String ,
+  totalwithoutvat: Number,
 });
 
 const billdSchema = new mongoose.Schema({
