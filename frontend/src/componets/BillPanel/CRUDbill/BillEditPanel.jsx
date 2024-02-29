@@ -49,20 +49,12 @@ const BillEditPanel = () => {
       };
     
       return (
-<<<<<<< HEAD
-        <div class='body'>
-        <div class='vatd-1'>
-          <h2 id='text-1'>Submit VAT Data</h2>
-          <form onSubmit={handleSubmit} className='form-1'>
-            <div class="lab-design">
-            <label class='label'>
-=======
+        <div>
         <div>
           <ToastContainer />
           <h2>Submit VAT Data</h2>
           <form onSubmit={handleSubmit}>
             <label>
->>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
              VAT:
               <input 
                 class="input"
@@ -105,7 +97,6 @@ const BillEditPanel = () => {
                 onChange={handleChange}
               />
             </label>
-            </div>
             <br />
             <button className='submit'type="submit">SAVE</button>
           </form>
