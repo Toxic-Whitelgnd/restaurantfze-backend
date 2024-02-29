@@ -20,13 +20,12 @@ const DeliverySale = () => {
 
     // Componet's are Dynamic 
 
-    const DynamicComponent = ({ fooddata, foodtype }) => (
+    const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
 
                 {
-
-                    fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
+                    foodtype == 'all' ? fooddata.filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
                         return (
                             <>
                                 <div key={idx} className="my-alert">
@@ -40,7 +39,7 @@ const DeliverySale = () => {
                                     <div className="my-alert__unique2">
                                         <div className='my-alert__unique3'>
                                             <div className='my-alert__unique4'>
-                                                <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                <span className='fs-6 fw-bold text-capitalize'>{val.foodName}</span>
                                                 <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
                                             </div>
                                             <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
@@ -49,11 +48,11 @@ const DeliverySale = () => {
                                         {val.foodAvailability === 'No' ? <button
                                             className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                             type='button' disabled
-                                        >Add to cart</button> :
+                                        >Add</button> :
                                             <button
                                                 className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                 type='button'
-                                            >Add to cart</button>}
+                                            >Add</button>}
 
                                     </div>
                                 </div>
@@ -61,10 +60,85 @@ const DeliverySale = () => {
                         )
                     })
 
+                        : fooddata.filter(x => x.foodType === foodtype).filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
+                            return (
+                                <>
+                                    <div key={idx} className="my-alert">
+                                        <div className="my-alert__unique1">
+                                            {val.foodImage && (
+                                                <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+                                            )}
+
+                                        </div>
+                                        {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+                                        <div className="my-alert__unique2">
+                                            <div className='my-alert__unique3'>
+                                                <div className='my-alert__unique4'>
+                                                    <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                    <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+                                                </div>
+                                                <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+
+                                            </div>
+                                            {val.foodAvailability === 'No' ? <button
+                                                className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                type='button' disabled
+                                            >Add</button> :
+                                                <button
+                                                    className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                    type='button'
+                                                >Add</button>}
+
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })
+
                 }
+
+
+                {/* {
+
+fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
+    return (
+        <>
+            <div className="my-alert">
+                <div className="my-alert__unique1">
+                    {val.foodImage && (
+                        <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+                    )}
+
+                </div>
+                {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+                <div className="my-alert__unique2">
+                    <div className='my-alert__unique3'>
+                        <div className='my-alert__unique4'>
+                            <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                            <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+                        </div>
+                        <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+
+                    </div>
+                    {val.foodAvailability === 'No' ? <button
+                        className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                        type='button' disabled
+                    >Add to cart</button> :
+                        <button
+                            className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                            type='button'
+                        >Add to cart</button>}
+
+                </div>
             </div>
         </>
     )
+})
+} */}
+            </div>
+        </>
+    )
+
 
     // componet ending
 
@@ -179,8 +253,9 @@ const DeliverySale = () => {
     const [customerDetails, setCustomerDetails] = useState({
         name: '',
         mobileNumber: '',
-        email: '',
+        driver: '',
         address: '',
+        vin:'',
     }
     );
 
@@ -236,7 +311,7 @@ const DeliverySale = () => {
 
     // Define your food components
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
@@ -640,17 +715,28 @@ const DeliverySale = () => {
 
     return (
         <div className='over-order-page'>
-            {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
-                Add User
-            </button> : <div>
-                <p className='ms-3 mt-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
-                <p className='ms-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
-                <p className='ms-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
-                <p className='ms-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
-                {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
-                Update user (seprate modal)
-            </button> */}
-            </div>}
+            {usercreated ?
+
+                <button type="button" className='adduser' onClick={openModal}>
+                    Add User
+                </button>
+
+                : 
+                <div>
+                    <div className='row'>
+                        <p className='mt-1 col-md-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
+                        <p className='mt-1 col-md-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
+                        <p className='mt-1 col-md-3'>Driver: <span className='text-capitalize fw-bold'>{customerDetails.driver}</span></p>
+                        <p className='mt-1 col-md-3'>VIN: <span className='text-capitalize fw-bold'>{customerDetails.vin}</span></p>
+                        {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
+                        Update user (seprate modal)
+                    </button> */}
+                    </div>
+                    <div className='row'>
+                        <p className=''>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
+                    </div>
+                </div>
+                }
             <div className="pop-cont">
                 {/* Your other content goes here */}
 
@@ -683,12 +769,12 @@ const DeliverySale = () => {
                                     />
                                 </label>
                                 <label>
-                                    Email:
+                                    Driver Name:
                                     <input
-                                        type="email"
-                                        name="email"
+                                        type="text"
+                                        name="driver"
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
-                                        value={customerDetails.email}
+                                        value={customerDetails.driver}
                                         onChange={handleInputChange}
                                         required
 
@@ -701,6 +787,18 @@ const DeliverySale = () => {
                                         name="address"
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
                                         value={customerDetails.address}
+                                        onChange={handleInputChange}
+                                        required
+
+                                    />
+                                </label>
+                                <label>
+                                    Vehicle Number:
+                                    <input
+                                        type="text"
+                                        name="vin"
+                                        // placeholder={fetchFood.customer_details.numberOfSeats}
+                                        value={customerDetails.vin}
                                         onChange={handleInputChange}
                                         required
 
@@ -747,7 +845,7 @@ const DeliverySale = () => {
                                     </button>
                                 </div>
                                 <div className='orderCont-paybill'>
-                                    <ul class="responsive-table-popup">
+                                    <ul class="responsive-table-popup" >
                                         <li class="otable-header">
                                             <div class="colo colo-1">Id</div>
                                             <div class="colo colo-2">Name</div>
@@ -841,12 +939,12 @@ const DeliverySale = () => {
                     <div className='orderCont'>
                         <h5 className='d-flex justify-content-center'>Track your order here</h5>
                         <ul class="responsive-table">
-                            <li class="otable-header">
-                                <div class="colo colo-1">Id</div>
-                                <div class="colo colo-2">Name</div>
-                                <div class="colo colo-5">Quantity</div>
-                                <div class="colo colo-3">Price</div>
-                                <div class="colo colo-4">Amount</div>
+                            <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius: '10px' }}>
+                                <div class="colo colo-1" style={{ fontWeight: 'bold' }}>Id</div>
+                                <div class="colo colo-2" style={{ fontWeight: 'bold' }}>Name</div>
+                                <div class="colo colo-5" style={{ fontWeight: 'bold' }}>Quantity</div>
+                                <div class="colo colo-3" style={{ fontWeight: 'bold' }}>Price</div>
+                                <div class="colo colo-4" style={{ fontWeight: 'bold' }}>Amount</div>
                             </li>
                             {/* save to db and fetch from there DYNAMIC TODO:*/}
                             {foodD.length > 0 && foodD.filter(x => x.orderFrom == "deliverysale").map((food) => (
@@ -878,11 +976,11 @@ const DeliverySale = () => {
                 {/* layout - 2 */}
                 <div className='col-sm-6'>
                     <div className='food-order-cont'>
-                        <div className='food-category-bar'>
+                        <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '10px' }}>
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Food Category</span>
+                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''} className='filter'>
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'} className='filter'>
                                     <option value="all" >
                                         All
                                     </option>
@@ -895,7 +993,7 @@ const DeliverySale = () => {
                             </div>
 
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Sort-by or Filter</span>
+                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
                                 <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>

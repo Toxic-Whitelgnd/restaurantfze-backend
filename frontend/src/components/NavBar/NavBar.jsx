@@ -21,7 +21,7 @@ const NavBar = () => {
                 <nav>
                         <Link to="/">
                             <IoHomeOutline 
-                                style={{ fontSize: '25px' }}
+                                style={{ fontSize: '20px' }}
                             />
                         </Link>
                 </nav>
