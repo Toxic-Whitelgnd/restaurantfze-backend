@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './BillEditPanel.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -49,22 +50,25 @@ const BillEditPanel = () => {
     
       return (
         <div>
+        <div>
           <ToastContainer />
           <h2>Submit VAT Data</h2>
           <form onSubmit={handleSubmit}>
             <label>
              VAT:
-              <input
+              <input 
+                class="input"
                 type="number"
                 name="VAT"
                 value={formData.VAT}
                 onChange={handleChange}
               />
-            </label>
+            </label >
             <br />
-            <label>
+            <label class ='label'>
               Credit Sale:
-              <input
+              <input 
+                class="input"
                 type="number"
                 name="creditSale"
                 value={formData.creditSale}
@@ -72,9 +76,10 @@ const BillEditPanel = () => {
               />
             </label>
             <br />
-            <label>
+            <label class="label">
               Discount:
-              <input
+              <input 
+                class="input"
                 type="number"
                 name="discount"
                 value={formData.discount}
@@ -82,9 +87,10 @@ const BillEditPanel = () => {
               />
             </label>
             <br />
-            <label>
+            <label class="label">
               Card Sale:
-              <input
+              <input 
+                class="input"
                 type="number"
                 name="cardSale"
                 value={formData.cardSale}
@@ -92,8 +98,9 @@ const BillEditPanel = () => {
               />
             </label>
             <br />
-            <button type="submit">SAVE</button>
+            <button className='submit'type="submit">SAVE</button>
           </form>
+        </div>
         </div>
       );
   

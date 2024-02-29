@@ -24,12 +24,18 @@ const HomeDelete = () => {
 
   return (
     <div className="container mt-4">
+      <div>
+      <div>
       <ToastContainer />
       <h1>Delete Table {homeno}</h1>
-      <p>Are you sure you want to delete Home page (might leads to error)?</p>
+      </div>
+      <div className='home-delete-table-page'>
+      <p>Are you sure you want to delete Home page (might leads to error)?</p><ToastContainer/>
       <button type="button" className="btn btn-danger" onClick={handleDelete}>
         Delete Home Page
       </button>
+      </div>
+      </div>
     </div>
   );
 };

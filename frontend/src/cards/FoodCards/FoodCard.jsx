@@ -52,7 +52,7 @@ const FoodCard = ({ image, foodname, price, available, quantity, type }) => {
                     <div className="my-alert__unique2">
                         <div className='my-alert__unique3'>
                             <div className='my-alert__unique4'>
-                                <span className='fs-4 fw-bold text-capitalize'>{foodname}</span>
+                                <span className='fs-6 fw-bold text-capitalize'>{foodname}</span>
                                 {/* <p className='fs-6'>{quantity == 0 ? '' : quantity}</p> */}
                             </div>
                             <span className='mt-3 fw-semibold'>AED {price}</span>

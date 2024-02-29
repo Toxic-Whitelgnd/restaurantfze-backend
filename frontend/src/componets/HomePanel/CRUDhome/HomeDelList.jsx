@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './HomeDelList.css'
 
 const HomeDelList = () => {
     const [tables, setTables] = useState([]);
@@ -19,17 +20,22 @@ const HomeDelList = () => {
     }, []);
     return (
         <div className="container mt-4">
-            <h1>Select the HomeName to Edit</h1>
+            <div class='HomeDelList'>
+            <div class='HomeDelList-heading'>
+            <h1 >Select The Home Name To Edit</h1>
+            </div>
+            <div class='HomeDelList-options'>
             <ul>
                 {
                     tables.map(table => (
-                        <li key={table.tableNo}>
-                            <Link to={`/admin/delete-home/${table.home_id}`}>{`${table.home_name}`}</Link>
+                        <li key={table.tableNo}s>
+                            <Link to={`/admin/delete-home/${table.home_id}`} style={{textdecoration:'none'}}>{`${table.home_name}`}</Link>
                         </li>
                     ))
                 }
             </ul>
-
+            </div>
+            </div>
         </div>
     );
 }

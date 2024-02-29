@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './HomeEditList.css';
 
 const HomeEditList = () => {
   const [tables, setTables] = useState([]);
@@ -21,17 +22,22 @@ const HomeEditList = () => {
 
   return (
     <div className="container mt-4">
-      <h1>Select the HomeName to Edit</h1>
+        <div class='edit-home'>
+        <div class='edit-home-heading'>
+      <h1>Select the Home Name to Edit</h1>
+      </div>
+      <div class='edit-home-options'>
       <ul>
         {
             tables.map(table => (
                 <li key={table.tableNo}>
-                  <Link to={`/admin/edit-home/${table.home_id}`}>{`${table.home_name}`}</Link>
+                  <Link to={`/admin/edit-home/${table.home_id}`} style={{textDecoration:'none'}}>{`${table.home_name}`}</Link>
                 </li>
               ))
         }
       </ul>
-      
+      </div>
+      </div>
     </div>
   );
 };

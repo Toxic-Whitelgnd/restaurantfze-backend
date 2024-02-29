@@ -12,6 +12,7 @@ import axios from 'axios';
 
 import { FaSearch } from 'react-icons/fa';
 
+import DynamicComponent from '../../cards/DynamicComponent/DynamicComponent';
 
 
 const TakeAway = () => {
@@ -19,10 +20,9 @@ const TakeAway = () => {
     const { id } = useParams();
 
     const dynamicurl = `https://restogenius.onrender.com/`
-    const dynamicurl1 = `https://restogenius.onrender.com/`
 
     // Componet's are Dynamic 
-
+    /*
     const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
@@ -31,7 +31,7 @@ const TakeAway = () => {
                     foodtype == 'all' ? fooddata.filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
                         return (
                             <>
-                                <div className="my-alert">
+                                <div key={idx} className="my-alert">
                                     <div className="my-alert__unique1">
                                         {val.foodImage && (
                                             <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
@@ -42,7 +42,7 @@ const TakeAway = () => {
                                     <div className="my-alert__unique2">
                                         <div className='my-alert__unique3'>
                                             <div className='my-alert__unique4'>
-                                                <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                <span className='fs-6 fw-bold text-capitalize'>{val.foodName}</span>
                                                 <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
                                             </div>
                                             <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
@@ -51,11 +51,11 @@ const TakeAway = () => {
                                         {val.foodAvailability === 'No' ? <button
                                             className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                             type='button' disabled
-                                        >Add to cart</button> :
+                                        >Add</button> :
                                             <button
                                                 className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                 type='button'
-                                            >Add to cart</button>}
+                                            >Add</button>}
 
                                     </div>
                                 </div>
@@ -86,11 +86,11 @@ const TakeAway = () => {
                                             {val.foodAvailability === 'No' ? <button
                                                 className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                 type='button' disabled
-                                            >Add to cart</button> :
+                                            >Add</button> :
                                                 <button
                                                     className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                     type='button'
-                                                >Add to cart</button>}
+                                                >Add</button>}
 
                                         </div>
                                     </div>
@@ -137,11 +137,11 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
         </>
     )
 })
-} */}
+} }
             </div>
         </>
     )
-
+    */
     // componet ending
 
     // from server side rendering
@@ -802,317 +802,318 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
     return (
         <div className='over-order-page'>
-            {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
-                Add User
-            </button> : <div>
-                <p className='ms-3 mt-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
-                <p className='ms-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
-                <p className='ms-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
-                <p className='ms-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
-                {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
-                Update user (seprate modal)
-            </button> */}
-            </div>}
-            <div className="pop-cont">
-                {/* Your other content goes here */}
+            <div className='inside-container'>
+                {usercreated ? 
+                
+                <button type="button" className='adduser' onClick={openModal}>
+                    Add User
+                </button>
+                
+                : <div className='row'>
+                    <p className='mt-1 col-md-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
+                    <p className='mt-1 col-md-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
+                    <p className='mt-1 col-md-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
+                    <p className='mt-1 col-md-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
+                    {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
+                    Update user (seprate modal)
+                </button> */}
+                </div>}
+                <div className="pop-cont">
+                    {/* Your other content goes here */}
 
-                {isModalOpen && (
-                    <div className="modal-overlay1">
-                        <div className="modal1">
-                            <button type="button" className="close-btn" onClick={closeModal}>
-                                &times;
-                            </button>
-                            <h2>Customer Details</h2>
-                            <form>
-                                <label>
-                                    Customer Name:
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={customerDetails.name}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </label>
-                                <label>
-                                    Mobile Number:
-                                    <input
-                                        type="tel"
-                                        name="mobileNumber"
-                                        value={customerDetails.mobileNumber}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </label>
-                                <label>
-                                    Email:
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        // placeholder={fetchFood.customer_details.numberOfSeats}
-                                        value={customerDetails.email}
-                                        onChange={handleInputChange}
-                                        required
-
-                                    />
-                                </label>
-                                <label>
-                                    Address:
-                                    <input
-                                        type="text"
-                                        name="address"
-                                        // placeholder={fetchFood.customer_details.numberOfSeats}
-                                        value={customerDetails.address}
-                                        onChange={handleInputChange}
-                                        required
-
-                                    />
-                                </label>
-                                <button type="button" onClick={handleSave} className="save-btn">
-                                    Save
+                    {isModalOpen && (
+                        <div className="modal-overlay1">
+                            <div className="modal1">
+                                <button type="button" className="close-btn" onClick={closeModal}>
+                                    &times;
                                 </button>
-                            </form>
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            <div className='row g-3'>
-                <div className='dinein-navbar-cont'>
-
-                    <div className='info-cont'>
-                        <a href="#" className="running-order" style={{ 'color': '#000' }}>OrderNo #{orderNou}</a>
-                        {/* <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
-                        <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
-                        <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Waiter name </p> */}
-                    </div>
-                    <div className='pay-cont'>
-                        <ToastContainer />
-                        {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
-                            ordersave ? SaveOrder() : UpdateOrder()
-                        }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p>
-                        <button onClick={SaveOrder} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Add to kitchen
-
-                        </button>
-                        
-                        <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Pay Bill
-
-                        </button>
-
-                    </div>
-
-                    {/* start of popup */}
-                    {modalOpen && (
-                        <div className="modal-overlay-1">
-                            <div className="modal-1" >
-                                <div className="modal-header-1">
-                                    <h2>Food Order Details</h2>
-                                    <button type="button" className="close-btn-pb" onClick={closeModalPayBill}>
-                                        &times;
-                                    </button>
-                                </div>
-                                <div className='orderCont-paybill'>
-                                    <ul class="responsive-table-popup">
-                                        <li class="otable-header">
-                                            <div class="colo colo-1">Id</div>
-                                            <div class="colo colo-2">Name</div>
-                                            <div class="colo colo-5">Quantity</div>
-                                            <div class="colo colo-3">Price</div>
-                                            <div class="colo colo-4">Amount</div>
-                                        </li>
-
-                                        {/* Dynamic TODO: */}
-                                        {foodD && foodD.filter(x => x.orderFrom == "takeaway").map((val, idx) => {
-                                            return (
-                                                <>
-                                                    <li class="otable-row">
-                                                        <div class="colo colo-1" data-label="Job Id">{val.id}</div>
-                                                        <div class="colo colo-2" data-label="Customer Name">{val.foodname}</div>
-                                                        <div class="colo colo-5" data-label="Amount">{val.qty}</div>
-                                                        <div class="colo colo-3" data-label="Amount">{val.price}</div>
-                                                        <div class="colo colo-4" data-label="Payment Status">{calculateTotalAmount(val.qty, val.price)}</div>
-                                                    </li>
-
-                                                </>
-                                            )
-                                        })}
-                                    </ul>
-                                    <div className="order-details-row">
-                                        <p>Total: AED{calculateTotalAmountofItem()}</p>
-                                    </div>
-
-                                </div>
-
-
-                                <div>
-                                    <label>Waiter Name: </label>
-                                    <select id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
-                                        <option value="" disabled>
-                                            Waiter handled
-                                        </option>
-
-                                        {waiter && waiter.map((type) => (
-                                            <option key={type.waiterName} value={type.waiterName}>
-                                                {type.waiterName}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <label>Select Payment Type:</label>
-                                    <select value={selectedPaymentType} onChange={handleSelectChange}>
-                                        <option value="">Select...</option>
-                                        <option value="creditcard">Credit Card</option>
-            
-                                        <option value="debitcard">Debit Card</option>
-                                        <option value="cash">Cash</option>
-                                    </select>
-                                    <div className='row'>
-                                        <div className="col">
-
-                                            {selectedPaymentType == "creditcard" ? <p>{selectedPaymentType} offer {bill.creditSale}</p>
-                                                : ""}
-                                            {selectedPaymentType == "debitcard" ? <p>Card offer {bill.cardSale}</p>
-                                                : ""}
-
-                                            {<p>Discount: {bill.discount}</p>}
-                                        </div>
-                                        <div className="col">
-                                            <div className="order-details-row">
-                                                <p>VAT:{bill && bill.VAT}</p>
-                                                %
-
-                                            </div>
-                                            <div className="order-details-row">
-                                                <p>After Applying:</p>
-                                                <p>AED
-                                                    {calculateTotalwithvatdis()}</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-                                <div className='col'>
+                                <h2>Customer Details</h2>
+                                <form>
                                     <label>
-                                        Total Amount Paid:
+                                        Customer Name:
                                         <input
-                                            type="number"
-                                            value={totalAmount}
-                                            onChange={handleAmountChange}
-                                            placeholder="Enter total amount paid"
+                                            type="text"
+                                            name="name"
+                                            value={customerDetails.name}
+                                            onChange={handleInputChange}
                                             required
                                         />
                                     </label>
-                                </div>
-                                <button className="btn btn-success" onClick={handlePayBillPay} >Pay Bill</button>
-                            </div>
+                                    <label>
+                                        Mobile Number:
+                                        <input
+                                            type="tel"
+                                            name="mobileNumber"
+                                            value={customerDetails.mobileNumber}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        Email:
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            // placeholder={fetchFood.customer_details.numberOfSeats}
+                                            value={customerDetails.email}
+                                            onChange={handleInputChange}
+                                            required
 
+                                        />
+                                    </label>
+                                    <label>
+                                        Address:
+                                        <input
+                                            type="text"
+                                            name="address"
+                                            // placeholder={fetchFood.customer_details.numberOfSeats}
+                                            value={customerDetails.address}
+                                            onChange={handleInputChange}
+                                            required
+
+                                        />
+                                    </label>
+                                    <button type="button" onClick={handleSave} className="save-btn">
+                                        Save
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     )}
-
-                    {/* end of popup */}
                 </div>
-                {/* layout -1 */}
-                <div className='col-sm-6'>
-                    <div className='orderCont'>
-                        <h5 className='d-flex justify-content-center'>Track your order here</h5>
-                        <ul class="responsive-table">
-                            <li class="otable-header">
-                                <div class="colo colo-1">Id</div>
-                                <div class="colo colo-2">Name</div>
-                                <div class="colo colo-5">Quantity</div>
-                                <div class="colo colo-3">Price</div>
-                                <div class="colo colo-4">Amount</div>
-                            </li>
-                            {/* save to db and fetch from there DYNAMIC TODO:*/}
-                            {foodD.length > 0 && foodD.filter(x => x.orderFrom == "takeaway").map((food) => (
-                                < TableorderCard fooditem={food}
-                                    onDecrement={handleDecrement}
-                                    onIncrement={handleIncrement}
-                                // onAmountChange={handleAmount}
-                                />
-                            ))
 
-                            }
+                <div className='row'>
+                    <div className='dinein-navbar-cont'>
 
-                            {ordersave ? '' :
-                                loadfood && (
-                                    <>
-                                        <button className='btn btn-primary' onClick={loadItems} > load data</button>
-                                    </>)
-
-                            }
-
-
-                        </ul>
-                        {/* the total goes here */}
                         <div>
-                            <h5>Total: AED {calculateTotalAmountofItem()} </h5>
+                            <p className="static-running-order" style={{ backgroundColor:'#A9B3CE','color': '#000' }}>OrderNo #{orderNou}</p>
+                            {/* <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
+                            <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
+                            <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
+                            <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Waiter name </p> */}
+                        </div>
+                        <div className='pay-cont'>
+                            <ToastContainer />
+                            {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
+                                ordersave ? SaveOrder() : UpdateOrder()
+                            }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
+                            <p className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>Receipt </p>
+                            <button onClick={SaveOrder} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>KOT
+
+                            </button>
+                            
+                            <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>Bill
+
+                            </button>
+
+                        </div>
+
+                        {/* start of popup */}
+                        {modalOpen && (
+                            <div className="modal-overlay-1">
+                                <div className="modal-1" >
+                                    <div className="modal-header-1">
+                                        <h2>Food Order Details</h2>
+                                        <button type="button" className="close-btn-pb" onClick={closeModalPayBill}>
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div className='orderCont-paybill'>
+                                        <ul class="responsive-table-popup">
+                                            <li class="otable-header">
+                                                <div class="colo colo-1">Id</div>
+                                                <div class="colo colo-2">Name</div>
+                                                <div class="colo colo-5">Quantity</div>
+                                                <div class="colo colo-3">Price</div>
+                                                <div class="colo colo-4">Amount</div>
+                                            </li>
+
+                                            {/* Dynamic TODO: */}
+                                            {foodD && foodD.filter(x => x.orderFrom == "takeaway").map((val, idx) => {
+                                                return (
+                                                    <>
+                                                        <li class="otable-row">
+                                                            <div class="colo colo-1" data-label="Job Id">{val.id}</div>
+                                                            <div class="colo colo-2" data-label="Customer Name">{val.foodname}</div>
+                                                            <div class="colo colo-5" data-label="Amount">{val.qty}</div>
+                                                            <div class="colo colo-3" data-label="Amount">{val.price}</div>
+                                                            <div class="colo colo-4" data-label="Payment Status">{calculateTotalAmount(val.qty, val.price)}</div>
+                                                        </li>
+
+                                                    </>
+                                                )
+                                            })}
+                                        </ul>
+                                        <div className="order-details-row">
+                                            <p>Total: AED{calculateTotalAmountofItem()}</p>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div>
+                                        <label>Waiter Name: </label>
+                                        <select id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
+                                            <option value="" disabled>
+                                                Waiter handled
+                                            </option>
+
+                                            {waiter && waiter.map((type) => (
+                                                <option key={type.waiterName} value={type.waiterName}>
+                                                    {type.waiterName}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <label>Select Payment Type:</label>
+                                        <select value={selectedPaymentType} onChange={handleSelectChange}>
+                                            <option value="">Select...</option>
+                                            <option value="creditcard">Credit Card</option>
+                                            <option value="upi">UPI</option>
+                                            <option value="debitcard">Debit Card</option>
+                                            <option value="cash">Cash</option>
+                                        </select>
+                                        <div className='row'>
+                                            <div className="col">
+
+                                                {selectedPaymentType == "creditcard" ? <p>{selectedPaymentType} offer {bill.creditSale}</p>
+                                                    : ""}
+                                                {selectedPaymentType == "debitcard" ? <p>Card offer {bill.cardSale}</p>
+                                                    : ""}
+
+                                                {<p>Discount: {bill.discount}</p>}
+                                            </div>
+                                            <div className="col">
+                                                <div className="order-details-row">
+                                                    <p>VAT:{bill && bill.VAT}</p>
+                                                    %
+
+                                                </div>
+                                                <div className="order-details-row">
+                                                    <p>After Applying:</p>
+                                                    <p>AED
+                                                        {calculateTotalwithvatdis()}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div className='col'>
+                                        <label>
+                                            Total Amount Paid:
+                                            <input
+                                                type="number"
+                                                value={totalAmount}
+                                                onChange={handleAmountChange}
+                                                placeholder="Enter total amount paid"
+                                                required
+                                            />
+                                        </label>
+                                    </div>
+                                    <button className="btn btn-success" onClick={handlePayBillPay} >Pay Bill</button>
+                                </div>
+
+                            </div>
+                        )}
+
+                        {/* end of popup */}
+                    </div>
+                    {/* layout -1 */}
+                    <div className='col-sm-6'>
+                        <div className='orderCont'>
+                            <h5 className='d-flex justify-content-center'>Track your order here</h5>
+                            <ul class="responsive-table">
+                                <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius: '10px' }}>
+                                    <div class="colo colo-1" style={{fontWeight:'bold'}}>Id</div>
+                                    <div class="colo colo-2" style={{ fontWeight: 'bold' }}>Name</div>
+                                    <div class="colo colo-5" style={{ fontWeight: 'bold' }}>Quantity</div>
+                                    <div class="colo colo-3" style={{ fontWeight: 'bold' }}>Price</div>
+                                    <div class="colo colo-4" style={{ fontWeight: 'bold' }}>Amount</div>
+                                </li>
+                                {/* save to db and fetch from there DYNAMIC TODO:*/}
+                                {foodD.length > 0 && foodD.filter(x => x.orderFrom == "takeaway").map((food) => (
+                                    < TableorderCard fooditem={food}
+                                        onDecrement={handleDecrement}
+                                        onIncrement={handleIncrement}
+                                    // onAmountChange={handleAmount}
+                                    />
+                                ))
+
+                                }
+
+                                {ordersave ? '' :
+                                    loadfood && (
+                                        <>
+                                            <button className='btn btn-primary' onClick={loadItems} > load data</button>
+                                        </>)
+
+                                }
+
+
+                            </ul>
+                            {/* the total goes here */}
+                            <div>
+                                <h5>Total: AED {calculateTotalAmountofItem()} </h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {/* layout - 2 */}
-                <div className='col-sm-5'>
-                    <div className='food-order-cont'>
-                        <div className='food-category-bar'>
-                            <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Food Category</span>
+                    {/* layout - 2 */}
+                    <div className='col-sm-6'>
+                        <div className='food-order-cont'>
+                            <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '10px' }}>
+                                <div className='foo-cat'>
+                                    <span htmlFor="foodCategory" style={{fontWeight:'bold'}}>Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
-                                    <option value="all" >
-                                        All
-                                    </option>
-                                    {foodTypes.map((type) => (
-                                        <option key={type.food_name} value={type.food_name}>
-                                            {type.food_name}
+                                    <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''} className='filter'>
+                                        <option value="all" >
+                                            All
                                         </option>
-                                    ))}
-                                </select>
-                            </div>
-                            
-                            <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Sort-by or Filter</span>
-                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption}>
-                                    <option value="all">All</option>
-                                    <option value="highPrice">High Price</option>
-                                    <option value="lowPrice">Low Price</option>
-                                    <option value="available">Available</option>
-                                </select>
+                                        {foodTypes.map((type) => (
+                                            <option key={type.food_name} value={type.food_name}>
+                                                {type.food_name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                
+                                <div className='foo-cat'>
+                                    <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
+                                    <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
+                                        <option value="all">All</option>
+                                        <option value="highPrice">High Price</option>
+                                        <option value="lowPrice">Low Price</option>
+                                        <option value="available">Available</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <div className="search-container">
+                                        <input
+                                            type="text"
+                                            placeholder="Search..."
+                                            value={searchTerm}
+                                            onChange={handleInputChange1}
+                                        />
+                                        <FaSearch className="search-icon" />
+                                    </div>
+                                </div>
+
+
                             </div>
                             <div>
-                                <div className="search-container">
-                                    <input
-                                        type="text"
-                                        placeholder="Search..."
-                                        value={searchTerm}
-                                        onChange={handleInputChange1}
+
+                                {
+                                    <DynamicComponent
+                                        fooddata={filteredFoodItems}
+                                        foodtype={selectedCategory}
+                                        foodterm={searchTerm}
+                                        handleFoodItem={handleFoodItem}
                                     />
-                                    <FaSearch className="search-icon" />
-                                </div>
+                                }
+
+
                             </div>
-
-                            <div className='date-time'>
-
-                                <GetDate />
-                                <br></br>
-                                <GetTime />
-                            </div>
-
-                        </div>
-                        <div>
-
-                            {
-                                <DynamicComponent
-                                    fooddata={filteredFoodItems}
-                                    foodtype={selectedCategory}
-                                    foodterm={searchTerm}
-                                />
-                            }
-
-
                         </div>
                     </div>
                 </div>

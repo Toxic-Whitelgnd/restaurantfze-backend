@@ -1,0 +1,52 @@
+/* home panel body css */
+.home-panel{
+    margin-top: 1.5cm;
+    background-color: #5a7bdca6;
+    margin-right: 40%;
+    margin-bottom: 20%;
+    margin-left: 35%;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    align-items: center;
+}
+/* home panel heading css */
+.home-panel-heading{
+    background-color:  blanchedalmond;
+    margin-top: 0.1cm;
+    margin-bottom: 0.2cm;
+    font-weight: 700;
+    border-radius: 15px 15px 15px 15px;
+    text-align: center;
+    box-shadow:  rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+}
+.home-panel-heading h1{
+    font-weight: bold;
+    
+}
+/* home panel option css */
+.option-home-panel a{
+    display: inline-block;
+    color: white;
+    font-weight: 700;
+    background-color: #1c3176fd;
+    margin-left: 1%;
+    border-radius: 20px;
+    text-align: center;
+    padding: 30px 55px 30px 55px;
+    margin: 3px 40% 10px 30%;
+}
+.edit-home-panel{
+    
+    text-align: center;
+}
+.option-home-panel a:hover{
+    color: #1c3176fd;
+    font-weight: bold;
+    background-color:rgba(255, 228, 196, 0.755); 
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+}
+
+
+

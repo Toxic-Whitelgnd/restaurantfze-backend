@@ -1,24 +1,29 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import './FoodPanel.css';
 const FoodPanel = () => {
     return (
-        <div>
+        <div class='food-panel'>
+            <div class='food-panel-heading'>
             <h1>Food Panel</h1>
-            <div>
-                <NavLink to='/admin/add-foodtype'>Add Food Type</NavLink>
+            </div>
+            <div class ='food-panel-option'>
+            <div class ='food-panel-option-1'>  
+                <NavLink to='/admin/add-foodtype' className='add-foodtype'style={{ textDecoration: 'none'}}>Add Food Type</NavLink>
                 <br></br>
-                <NavLink to='/admin/edit-foodtype'>Edit Food Type</NavLink>
+                <NavLink to='/admin/edit-foodtype'className='edit-foodtype'style={{ textDecoration: 'none'}}>Edit Food Type</NavLink>
                 <br></br>
-                <NavLink to='/admin/delete-foodtype'>Delete Food Type</NavLink>
+                <NavLink to='/admin/delete-foodtype'className='delete-foodtype'style={{ textDecoration: 'none'}}>Delete Food Type</NavLink>
                 <br></br>
-                <NavLink to='/admin/add-fooddata'>Add Food</NavLink>
+            </div>  
+            <div class ='food-panel-option-2'>
+                <NavLink to='/admin/add-fooddata'className='add-fooddata'style={{ textDecoration: 'none'}}>Add Food</NavLink>
                 <br></br>
-                <NavLink to='/admin/edit-fooddata'>Edit Food</NavLink>
+                <NavLink to='/admin/edit-fooddata'className='edit-fooddata'style={{ textDecoration: 'none'}}>Edit Food</NavLink>
                 <br></br>
-                <NavLink to='/admin/delete-fooddata'>Delete Food</NavLink>
+                <NavLink to='/admin/delete-fooddata'className='delete-fooddata'style={{ textDecoration: 'none'}}>Delete Food</NavLink>
                 <br></br>
-                
+            </div>  
              
             </div>
         </div>

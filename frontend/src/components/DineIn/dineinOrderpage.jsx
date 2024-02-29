@@ -15,7 +15,7 @@ import axios from 'axios';
 import RecipietCard from '../../cards/RecipitCards/RecipietCard';
 import { useReactToPrint } from 'react-to-print';
 import { FaSearch } from 'react-icons/fa';
-
+import DynamicComponent from '../../cards/DynamicComponent/DynamicComponent';
 
 
 
@@ -27,7 +27,7 @@ const DineinOrderpage = () => {
     const dynamicurl = `https://restogenius.onrender.com/`
     const dynamicurl1 = `https://restogenius.onrender.com/`
     // Componet's are Dynamic 
-
+    /*
     const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
@@ -46,7 +46,7 @@ const DineinOrderpage = () => {
                                     <div className="my-alert__unique2">
                                         <div className='my-alert__unique3'>
                                             <div className='my-alert__unique4'>
-                                                <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                <span className='fs-6 fw-bold text-capitalize'>{val.foodName}</span>
                                                 <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
                                             </div>
                                             <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
@@ -55,11 +55,11 @@ const DineinOrderpage = () => {
                                         {val.foodAvailability === 'No' ? <button
                                             className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                             type='button' disabled
-                                        >Add to cart</button> :
+                                        >Add</button> :
                                             <button
                                                 className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                 type='button'
-                                            >Add to cart</button>}
+                                            >Add</button>}
 
                                     </div>
                                 </div>
@@ -142,10 +142,9 @@ const DineinOrderpage = () => {
                         )
                     })
 
-                } */}
             </div>
         </>
-    )
+    )*/
 
     // componet ending
 
@@ -806,11 +805,11 @@ const DineinOrderpage = () => {
 
     return (
         <div className='over-order-page'>
-            {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
+            {usercreated ? <button type="button" className='adduser' onClick={openModal}>
                 Add User
-            </button> : <div>
-                <p className='ms-3 mt-3'>Customer name: <span className='text-capitalize fw-bold'>{!ordersave ? fetchFood.customer_details.name : customerDetails.name}</span> </p>
-                <p className='ms-3'>Customer Phone: <span className='text-capitalize fw-bold'>{!ordersave ? fetchFood.customer_details.mobileNumber : customerDetails.mobileNumber}</span></p>
+            </button> : <div className='row'>
+                <p className='mt-1 col-md-2'>Customer name: <span className='text-capitalize fw-bold'>{!ordersave ? fetchFood.customer_details.name : customerDetails.name}</span> </p>
+                <p className='mt-1 col-md-2'>Customer Phone: <span className='text-capitalize fw-bold'>{!ordersave ? fetchFood.customer_details.mobileNumber : customerDetails.mobileNumber}</span></p>
                 {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
                 Update user (seprate modal)
             </button> */}
@@ -922,15 +921,15 @@ const DineinOrderpage = () => {
                     </div>
                 )}
             </div>
-            <div className='row g-3'>
+            <div className='row'>
                 <div className='dinein-navbar-cont'>
 
                     <div className='info-cont'>
-                        <a href="#" className="running-order" style={{ 'color': '#000' }}>OrderNo #{orderId}</a>
-                        <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
-                        <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
-                        <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
-                        <select style={{ display: `${fetchFood.waiterName ? 'none' : ''}` }} id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
+                        <p className="static-running-order" style={{ 'color': '#000' }}>OrderNo #{orderId}</p>
+                        <p className="static-running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000'}}>Floor No 1</p>
+                        <p className="static-running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000',width:'80px' }}>Table {id}</p>
+                        <p className="static-running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000', width:'80px' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
+                        <select className='select-waiter' id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
                             <option value="" disabled>
                                 Waiter handled
                             </option>
@@ -941,16 +940,16 @@ const DineinOrderpage = () => {
                                 </option>
                             ))}
                         </select>
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>{waiterName ? waiterName : fetchFood.waiterName} </p>
+                        
                     </div>
                     <div className='pay-cont'>
 
-                        <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
+                        <button className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                             ordersave ? SaveOrder() : UpdateOrder()
                         }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button>
-                        <button className="running-order" onClick={handleRecieptoKitchen} style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Add to Kitchen </button>
+                        <button className="running-order" onClick={handleRecieptoKitchen} style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>KOT </button>
 
-                        <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Pay Bill
+                        <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>Pay Bill
 
                         </button>
                     </div>
@@ -966,7 +965,7 @@ const DineinOrderpage = () => {
                                     </button>
                                 </div>
                                 <div className='orderCont-paybill'>
-                                    <ul class="responsive-table-popup">
+                                    <ul class="responsive-table-popup" >
                                         <li class="otable-header">
                                             <div class="colo colo-1">Id</div>
                                             <div class="colo colo-2">Name</div>
@@ -1066,12 +1065,12 @@ const DineinOrderpage = () => {
                     <div className='orderCont'>
                         <h5 className='d-flex justify-content-center'>Track your order here</h5>
                         <ul class="responsive-table">
-                            <li class="otable-header">
-                                <div class="colo colo-1">Id</div>
-                                <div class="colo colo-2">Name</div>
-                                <div class="colo colo-5">Quantity</div>
-                                <div class="colo colo-3">Price</div>
-                                <div class="colo colo-4">Amount</div>
+                            <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius:'10px' }}>
+                                <div class="colo colo-1" style={{ fontWeight: 'bold' }}>Id</div>
+                                <div class="colo colo-2" style={{ fontWeight: 'bold' }}>Name</div>
+                                <div class="colo colo-5" style={{ fontWeight: 'bold' }}>Quantity</div>
+                                <div class="colo colo-3" style={{ fontWeight: 'bold' }}>Price</div>
+                                <div class="colo colo-4" style={{ fontWeight: 'bold' }}>Amount</div>
                             </li>
                             {/* save to db and fetch from there DYNAMIC TODO:*/}
                             {foodD.length > 0 && foodD.filter(x => x.orderFrom == "indoor").map((food) => (
@@ -1103,13 +1102,13 @@ const DineinOrderpage = () => {
                 {/* layout - 2 */}
                 <div className='col-sm-5'>
                     <div className='food-order-cont'>
-                        <div className='food-category-bar'>
+                        <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius:'10px' }}>
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Food Category</span>
+                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span>
 
                                 <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'}>
                                     <option value="all">
-                                        all
+                                        All
                                     </option>
                                     {foodTypes.map((type) => (
                                         <option key={type.food_name} value={type.food_name}>
@@ -1119,7 +1118,7 @@ const DineinOrderpage = () => {
                                 </select>
                             </div>
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Sort-by or Filter</span>
+                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
                                 <select id="foodCategory" onChange={handleFilterChange} value={filterOption}>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>
@@ -1154,6 +1153,7 @@ const DineinOrderpage = () => {
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
                                     foodterm={searchTerm}
+                                    handleFoodItem={handleFoodItem}
                                 />
                             }
 
