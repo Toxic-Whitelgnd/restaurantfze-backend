@@ -12,6 +12,7 @@ import axios from 'axios';
 
 import { FaSearch } from 'react-icons/fa';
 
+import DynamicComponent from '../../cards/DynamicComponent/DynamicComponent';
 
 
 const TakeAway = () => {
@@ -21,7 +22,7 @@ const TakeAway = () => {
     const dynamicurl = `https://restogenius.onrender.com/`
 
     // Componet's are Dynamic 
-
+    /*
     const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
@@ -136,11 +137,11 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
         </>
     )
 })
-} */}
+} }
             </div>
         </>
     )
-
+    */
     // componet ending
 
     // from server side rendering
@@ -1107,6 +1108,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                         fooddata={filteredFoodItems}
                                         foodtype={selectedCategory}
                                         foodterm={searchTerm}
+                                        handleFoodItem={handleFoodItem}
                                     />
                                 }
 

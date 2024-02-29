@@ -15,7 +15,7 @@ import axios from 'axios';
 import RecipietCard from '../../cards/RecipitCards/RecipietCard';
 import { useReactToPrint } from 'react-to-print';
 import { FaSearch } from 'react-icons/fa';
-
+import DynamicComponent from '../../cards/DynamicComponent/DynamicComponent';
 
 
 
@@ -27,7 +27,7 @@ const DineinOrderpage = () => {
     const dynamicurl = `https://restogenius.onrender.com/`
     const dynamicurl1 = `https://restogenius.onrender.com/`
     // Componet's are Dynamic 
-
+    /*
     const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
@@ -142,10 +142,9 @@ const DineinOrderpage = () => {
                         )
                     })
 
-                } */}
             </div>
         </>
-    )
+    )*/
 
     // componet ending
 
@@ -1154,6 +1153,7 @@ const DineinOrderpage = () => {
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
                                     foodterm={searchTerm}
+                                    handleFoodItem={handleFoodItem}
                                 />
                             }
 

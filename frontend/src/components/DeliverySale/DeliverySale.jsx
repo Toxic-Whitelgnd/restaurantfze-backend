@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { FaSearch } from 'react-icons/fa';
-
+import DynamicComponent from '../../cards/DynamicComponent/DynamicComponent';
 
 
 
@@ -19,7 +19,7 @@ const DeliverySale = () => {
     const { id } = useParams();
 
     // Componet's are Dynamic 
-
+    /*
     const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
@@ -97,48 +97,10 @@ const DeliverySale = () => {
 
                 }
 
-
-                {/* {
-
-fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
-    return (
-        <>
-            <div className="my-alert">
-                <div className="my-alert__unique1">
-                    {val.foodImage && (
-                        <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
-                    )}
-
-                </div>
-                {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
-                <div className="my-alert__unique2">
-                    <div className='my-alert__unique3'>
-                        <div className='my-alert__unique4'>
-                            <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
-                            <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
-                        </div>
-                        <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
-
-                    </div>
-                    {val.foodAvailability === 'No' ? <button
-                        className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
-                        type='button' disabled
-                    >Add to cart</button> :
-                        <button
-                            className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
-                            type='button'
-                        >Add to cart</button>}
-
-                </div>
             </div>
         </>
     )
-})
-} */}
-            </div>
-        </>
-    )
-
+                */
 
     // componet ending
 
@@ -1022,6 +984,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
                                     foodterm={searchTerm}
+                                    handleFoodItem={handleFoodItem}
                                 />
                             }
 
