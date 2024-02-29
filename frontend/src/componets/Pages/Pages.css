@@ -1,4 +1,20 @@
+.option-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 20px; /* Gap between items */
+    margin-bottom: 0.3cm;
+    padding: 40px 50px 35px 50px;
+    margin-left: 0px;
+    margin-right: 15px;
+    margin-top:1px;
+}
 
+.option-panel-row {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Add the rest of your existing CSS styles */
 /* pages -admin-and all navigation page css */
 .admin-panel-body{
     margin: 0.5cm 20% 1cm 20%;
@@ -18,218 +34,21 @@
 .admin-panel-head h1{
     font-weight: bolder;
 }
-
-/* option of adin panel css */
-.option-panel{
-    display: inline-block;
-    text-align: center;
-    margin-left: 40px;
-    margin-right: 20px;
-}
-/* option row 1 css */
-.option-panel-1{
-    /* display: flex;  */
-    display: inline-block;
-    margin-top: 0.1cm; 
-    margin-left: 50px;
-    margin-right: 40px;
-    text-align: center;
-    padding: 10px 15px 10px 15px;
-   
-    
-}
-/* option row 2css*/
-.option-panel-2{
-    text-align: center;
-    display: inline-block;
-    margin-top: 0.1cm;
-    margin-left: 65px;
-    margin-right: 40px;
-    padding: 15px 15px 15px 15px;
-}    
-.option-panel-3{
-    display:inline-flex;
-    /* margin: 0px 45% 0.5cm 25%; */
-    /* margin-left: 50px; */
-    margin-right: 60px;
-    padding: 0px 15px 15px 15px;
-    margin-top:0.7px;
-}
 /* home option css */
-.HOME-P{
-    color:white;
-    background-color:#1c3176fd;
-    padding: 40px 50px 40px 50px;
-    /* margin-left: 20px; */
+.option-panel-row a{
+    display: block;
+    color: white;
+    font-weight: 700;
+    background-color: #1c3176fd;
     border-radius: 20px;
-    margin-right: 20px;
-    display: flex;
     text-align: center;
-    font-weight: bold;
-    transition: 300ms linear;
-    
+    padding: 50px 0; /* Adjust padding */
+    text-decoration: none;
+    margin-bottom: 0.5cm;
 }
-.HOME-P:hover{
+.option-panel-row a:hover{
     color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
-}
-/* table option css */
-.TABLE-P{
-    color:white;
-    background-color:#1c3176fd;
-    padding: 40px 50px 40px 50px;
-    /* margin-left: 20px; */
-    border-radius: 20px;
-    margin-right: 20px;
-    display: flex;
-    text-align: center;
-    justify-content: center;
     font-weight: bold;
-    transition: 300ms linear;
-}
-
-.TABLE-P:hover{
-    color: #1c3176fd;
     background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-}   
-/* food optio css */
-.FOOD-P{
-    color:white;
-    background-color:#1c3176fd;
-    padding: 40px 50px 40px 50px;
-    /* margin-left: 20px; */
-    border-radius: 20px;
-    margin-right: 20px;
-    display: flex;
-    text-align: center;
-    font-weight: bold;
-    transition: 300ms linear;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
-.FOOD-P:hover{
-    color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
-}
-/* kitchen option css */
-.KITCHEN-P{
-    color:white;
-    background-color:#1c3176fd;
-    padding: 40px 50px 40px 50px;
-    /* margin-left: 20px; */
-    border-radius: 20px;
-    margin-right: 20px;
-    display: flex;
-    text-align: center;
-    font-weight: bold;
-    transition: 300ms linear;
-}
-.KITCHEN-P:hover{
-    color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
-}
-
-  
-
-/* delievery option css */
-.DELIVERY-P{
-    color:white;
-    background-color:#1c3176fd;
-    padding: 35px 70px 35px 70px;
-    /* margin-left: 20px; */
-    border-radius: 20px;
-    display: flex;
-    margin-left: 45px;
-    text-align: center;
-    font-weight: bold;
-    transition: 300ms linear;
-}
-.DELIVERY-P:hover{
-    color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
-}
-/* waiter optio css */
-.WAITER-P{
-    color:white;
-    background-color:#1c3176fd;
-    padding: 40px 50px 40px 50px;
-    /* margin-left: 20px; */
-    border-radius: 20px;
-    margin-right: 20px;
-    display: flex;
-    text-align: center;
-    font-weight: bold;
-    transition: 300ms linear;
-}
-.WAITER-P:hover{
-    color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
-}
-/* bill option css */
-.BILL-P{
-    color:white;
-    background-color:#1c3176fd;
-    padding: 40px 50px 40px 50px;
-    /* margin-left: 20px; */
-    border-radius: 20px;
-    margin-right: 20px;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    font-weight: bold;
-    transition: 300ms linear;
-}
-.BILL-P:hover{
-    color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
-}
-/* responsive for all media */
-@media all and (max-width: 767px) {
-    .admin-panel-body {
-        margin: 0.5cm 20% 1cm 20%;
-    }
-    .option-panel-1{
-        display: inline-block;
-        margin-top: 0.1cm; 
-        margin-left: 1px;
-        margin-right: 160px;
-        text-align: center;
-     padding: 10px 15px 10px 15px;
-    }
-    .option-panel-2{
-        text-align: center;
-    display: inline-block;
-    margin-top: 0.1cm;
-    margin-left: 1px;
-    margin-right: 160px;
-    padding: 15px 15px 15px 15px;
-    }
-      .option-panel-3{
-        display:inline-flex;
-        margin-right: 180px;
-        margin-left: 0px;
-        padding: 15px 15px 15px 15px;
-        margin-top:0.9px;
-    }
-    .DELIVERY-P{
-        margin-left: 1px;
-        margin-right: 85%;
-        display: flex;
-        padding: 15px 15px 15px 15px;
-    }
-    
-
-
-      }
-  

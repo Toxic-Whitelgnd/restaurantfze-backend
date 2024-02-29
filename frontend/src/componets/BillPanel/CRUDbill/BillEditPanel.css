@@ -1,34 +1,38 @@
 /* bill edit panel css */
 .vatd-1{
     margin-top: 1.5cm;
-  padding-top: 2px;
+  padding-top: 1px;
     background-color: #5a7bdca6;
-    margin-left: 30%;
-    margin-right: 30%;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    border-radius: 2cm;
+    margin-left: 35%;
+    margin-right: 35%;
+    border-radius: 1cm;
 }
 #text-1{
-    background-color: blanchedalmond;
-    border-radius: 4cm;
-    margin-left: 25%;
-    margin-right: 25%;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    }
+  background-color:  blanchedalmond;
+    margin-top: 0px;
+    margin-bottom: 0.2cm;
+    font-weight: 700;
+    margin-left: 45%;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow:  rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin-bottom: 3cm;
+      }
     /*form css  */
 .form{
     align-self: center;
     text-align: center;
+    margin-top: 2.5cm;
     }
 .lab-design{
-    margin-left: 150px;
+    margin-left: 70px;
     justify-content: center;
     display:inline-block;
 }
 /* label css */
 .label{
-    margin-top: 2px;
-    padding-top: 2px;
+    margin-top: 7px;
+    padding-top: 6px;
     text-align: center;
     justify-content: center;
     margin-left: 5px;
@@ -71,8 +75,8 @@ input[type=number]:focus {
     background-color: rgb(156, 156, 29);
     color: aliceblue;
     font-size: large;
-    margin-left: 45%;
-    margin-right: 45%;
+    margin-left: 35%;
+    margin-right: 35%;
     margin-bottom: 0.5cm;
     border-radius: 1cm;
 }
