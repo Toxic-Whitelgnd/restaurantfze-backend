@@ -67,7 +67,7 @@ const DeliverySale = () => {
             </div>
         </>
     )
-                */
+             
 
     // componet ending
 
@@ -89,11 +89,7 @@ const DeliverySale = () => {
         GenerateOrderNo();
     }, []);
 
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const handleInputChange1 = (e) => {
-        setSearchTerm(e.target.value);
-    }
+  
 
     const [tableData, setTableData] = useState([]);
     const fetchTableData = async () => {
