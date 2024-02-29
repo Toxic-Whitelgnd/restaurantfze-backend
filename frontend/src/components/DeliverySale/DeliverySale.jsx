@@ -633,7 +633,7 @@ const DeliverySale = () => {
 
         try {
 
-            const response = await axios.post("http://localhost:9999/save_deliverysale_order", customer_details);
+            const response = await axios.post("https://restogenius.onrender.com/save_deliverysale_order", customer_details);
 
             if (response.data.success) {
                 toast.success("Customer detail saved");
