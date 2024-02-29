@@ -23,7 +23,11 @@ const Pages = () => {
                 <br></br>
                 <NavLink to={'/admin/billpanel'}className='BILL-P'style={{ textDecoration: 'none'}}>Bill Panel</NavLink>
                 <br></br>
+<<<<<<< HEAD
                 <NavLink to={'/admin/waiterpanel'}className='WAITER-P'style={{ textDecoration: 'none'}}>Waiter Panel</NavLink>
+=======
+                <NavLink to={'/admin/waiterpanel'}>Waiter Panel</NavLink>
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
                 <br></br>
                 
             </div>
@@ -31,6 +35,7 @@ const Pages = () => {
                  
                 <NavLink to={'/admin/deliverypanel'}className='DELIVERY-P'style={{ textDecoration: 'none'}}>DeliveryOrder<br></br> Panel</NavLink>
                 <br></br>
+                <NavLink to={'/admin/messpanel'}>Mess Panel</NavLink>
             </div>
             </div>
         </div>

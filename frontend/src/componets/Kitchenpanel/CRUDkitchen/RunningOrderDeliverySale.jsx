@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const RunningOrderDeliverySale = () => {
     const [runningORder, setRunningOrder] = useState([]);
@@ -78,10 +79,12 @@ const RunningOrderDeliverySale = () => {
         const res = await axios.put(`https://restogenius.onrender.com/update_running_deliverysale_order/${val.order_no}`,
             val);
         console.log(res.data);
+        toast.success("saved");
 
     }
     return (
         <div>
+            <ToastContainer />
             <h1>Current running order of DeliverySale</h1>
             
             <div>{

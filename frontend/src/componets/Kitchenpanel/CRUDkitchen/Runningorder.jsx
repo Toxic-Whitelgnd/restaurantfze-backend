@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Runningorder = () => {
     const [runningORder, setRunningOrder] = useState([]);
@@ -48,6 +49,7 @@ const Runningorder = () => {
 
         console.log("updated", runningORder);
         console.log(item.status);
+        toast.success("updated");
 
 
     };
@@ -77,11 +79,13 @@ const Runningorder = () => {
         const res = await axios.put(`https://restogenius.onrender.com/update_running_order/${val.tableNo}`,
             val);
         console.log(res.data);
+        toast.success("Saved");
 
     }
 
     return (
         <div>
+            <ToastContainer />
             <h1>Current running order</h1>
             
             <div>{

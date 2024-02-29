@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './BillEditPanel.css';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const BillEditPanel = () => {
 
@@ -39,18 +40,29 @@ const BillEditPanel = () => {
           const response = await axios.put(`https://restogenius.onrender.com/update_billd/${formData._id}`, formData);
           console.log('Data sent successfully:', response.data);
           // You can add further logic or state updates as needed
+          if(response.data == 'saved'){
+              toast.success("Updation successful")
+          }
         } catch (error) {
           console.error('Error sending data:', error);
         }
       };
     
       return (
+<<<<<<< HEAD
         <div class='body'>
         <div class='vatd-1'>
           <h2 id='text-1'>Submit VAT Data</h2>
           <form onSubmit={handleSubmit} className='form-1'>
             <div class="lab-design">
             <label class='label'>
+=======
+        <div>
+          <ToastContainer />
+          <h2>Submit VAT Data</h2>
+          <form onSubmit={handleSubmit}>
+            <label>
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
              VAT:
               <input 
                 class="input"

@@ -201,9 +201,9 @@ const DineinHomepage = () => {
 
 
                         <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Completed Order {completedorder}</a>
-                        <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Available {totavl}</p>
-                        <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Occupied {fullyoccu}</p>
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Partially Occupied {partiallyoccu}</p>
+                        <p className="static-running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Available {totavl}</p>
+                        <p className="static-running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Occupied {fullyoccu}</p>
+                        <p className="static-running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Partially Occupied {partiallyoccu}</p>
                     </div>
 
                 </div>

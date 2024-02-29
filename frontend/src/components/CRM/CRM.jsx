@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./CRM.css";
 import SaleOrderApi from '../api/sodapi';
 import CRMCards from '../../cards/CRMCards/CRMCards';
 import MessApi from '../api/messapi';
 import MessCards from '../../cards/CRMCards/MessCards';
+import axios from 'axios';
 
 
 // for active customers
@@ -26,18 +27,22 @@ const ActiveCustomer = ({ data, currmonth }) => (
                     data && data.filter(
                         (x) => {
                             const purchasedate = new Date(x.date).toLocaleDateString('en-US');
-                            console.log(purchasedate, currmonth);
-                            return purchasedate >= currmonth
+                            console.log("from activecustomer", purchasedate, currmonth, x.customer_name);
+                            const date1 = new Date(purchasedate);
+                            const date2 = new Date(currmonth);
+
+                            console.log(date1 > date2);
+                            return date1 >= date2
                         }
 
                     ).map((val, idx) => {
                         return (
                             <>
                                 <CRMCards
-                                    name={val.custname}
+                                    name={val.customer_name}
                                     status='active Customer'
-                                    number={val.number}
-                                    email={val.freqcount}
+                                    number={val.customer_mobileNumber}
+                                    email={val.type}
                                 />
                             </>
                         )
@@ -72,17 +77,21 @@ const InactiveCustomer = ({ data, currmonth }) => (
                         (x) => {
                             const purchasedate = new Date(x.date).toLocaleDateString('en-US');
                             console.log(purchasedate, currmonth);
-                            return purchasedate <= currmonth && x.freqcount <= 1
+                            const date1 = new Date(purchasedate);
+                            const date2 = new Date(currmonth);
+
+                            console.log(date1 > date2);
+                            return date1 <= date2
                         }
 
                     ).map((val, idx) => {
                         return (
                             <>
                                 <CRMCards
-                                    name={val.custname}
+                                    name={val.customer_name}
                                     status='inactive Customer'
-                                    number={val.number}
-                                    email={val.freqcount}
+                                    number={val.customer_mobileNumber}
+                                    email={val.type}
                                 />
                             </>
                         )
@@ -97,7 +106,7 @@ const InactiveCustomer = ({ data, currmonth }) => (
 );
 
 // for top customers
-const TopCustomer = ({ data, currmonth }) => (
+const TopCustomer = ({ data, currmonth, repeatedNumbers, counts }) => (
     <div>
         <h1 className='text-center mt-2'>Top customer list</h1>
         <p className='text-center mt-2'>Customer who purchased more than 2 times</p>
@@ -111,16 +120,17 @@ const TopCustomer = ({ data, currmonth }) => (
                     <div class="colo colo-4">Status</div>
                 </li>
                 {/* only three parameter is passed as it should contin only total,discount,net total */}
+                
                 {
                     // hashmap table or dictionary
 
-                    data && data.filter(x => x.freqcount >= 2).map((val, idx) => {
+                    data && data.filter(x => counts[x.customer_mobileNumber] >= 2).map((val, idx) => {
                         return (
                             <CRMCards
-                                name={val.custname}
-                                status='active Customer'
-                                number={val.number}
-                                email={val.freqcount}
+                                name={val.customer_name}
+                                status='Top Customer'
+                                number={val.customer_mobileNumber}
+                                email={val.type}
                             />
                         )
                     })
@@ -186,7 +196,7 @@ const MessCustomer = ({ data, currmonth, messdata }) => {
                         messdata && messdata.map((val, idx) => {
                             return (
                                 <MessCards
-                                    name={val.custname}
+                                    name={val.customer_name}
                                     mealfreq={val.mealfreq}
                                     idno={val.idno}
                                     amt={val.amount}
@@ -218,6 +228,22 @@ const MessCustomer = ({ data, currmonth, messdata }) => {
 
 const CRM = () => {
     const [sodata, setSodata] = useState(SaleOrderApi);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const dynamicurl = `https://restogenius.onrender.com/`;
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get(`${dynamicurl}get_customer_details`);
+            console.log(res.data);
+            setSodata(res.data);
+        } catch (error) {
+            console.log("error getting the crm data", error);
+        }
+    }
 
     const [messdata, setMessdata] = useState(MessApi);
 
@@ -257,11 +283,11 @@ const CRM = () => {
     const currentDate = new Date();
     const threeMonthsAgo = new Date(currentDate);
     threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
-    console.log(threeMonthsAgo);
+    console.log("three month date", threeMonthsAgo.toLocaleDateString('en-US'));
 
     const handleFilterRec = () => {
         const ans = sodata.filter((x) => {
-            const mobnumner = x.number.toString();
+            const mobnumner = x.customer_mobileNumber.toString();
             return mobnumner.includes(recipientIdFilter)
         });
 
@@ -308,6 +334,25 @@ const CRM = () => {
         console.log(differenceInDays);
     }
 
+    //freq count :]
+    const findRepeatedMobileNumbers = (data) => {
+        const mobileNumbers = data.map(item => item.customer_mobileNumber);
+        const counts = {};
+
+        // Count occurrences of each mobile number
+        mobileNumbers.forEach(number => {
+            counts[number] = (counts[number] || 0) + 1;
+        });
+
+        // Filter numbers with counts greater than 1
+        const repeatedNumbers = Object.keys(counts).filter(number => counts[number] > 1);
+
+
+        return { repeatedNumbers, counts };
+    };
+
+    const { repeatedNumbers, counts } = findRepeatedMobileNumbers(sodata);
+    console.log("repeatedMobileNumbers", repeatedNumbers, counts);
 
     return (
         <div>
@@ -366,6 +411,8 @@ const CRM = () => {
                     data={sodata}
                     currmonth={threeMonthsAgo.toLocaleDateString('en-US')}
                     messdata={messdata}
+                    repeatedNumbers={repeatedNumbers}
+                    counts={counts}
                 /> : ''}
 
                 {
@@ -388,17 +435,18 @@ const CRM = () => {
                                         return (
                                             index ===
                                             self.findIndex(
-                                                (c) => c.custname === customer.custname && c.number === customer.number
+                                                (c) => c.customer_name === customer.customer_name && c.customer_mobileNumber === customer.customer_mobileNumber
                                             )
                                         );
                                     }).map((val, idx) => {
                                         return (
                                             <>
                                                 <CRMCards
-                                                    name={val.custname}
+                                                    name={val.customer_name}
                                                     status='from backends'
-                                                    number={val.number}
-                                                    email={val.freqcount}
+                                                    number={val.customer_mobileNumber}
+                                                    email={val.type}
+                                                    
                                                 />
                                             </>
                                         )

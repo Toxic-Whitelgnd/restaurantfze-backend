@@ -1,9 +1,13 @@
 // src/TableForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import './TableCreate.css';
 import { ToastContainer, toast } from 'react-toastify';
 
+=======
+import { ToastContainer, toast } from 'react-toastify';
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
 
 const TableForm = () => {
    
@@ -54,16 +58,27 @@ const TableForm = () => {
 
       // Optionally, you can add logic to handle success or navigate to another page
       console.log('Table data successfully submitted!');
+<<<<<<< HEAD
       toast.success("Table created successfully!");
      
+=======
+      toast.success("Table added successfully!");
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
     } catch (error) {
       console.error('Error submitting table data:', error);
+      toast.error("Error submitting table data");
     }
   };
 
   return (
+<<<<<<< HEAD
     <div class='table-create'>
         <h1 className='heading-table-create'>Add Your Table Here</h1>
+=======
+    <div>
+        <h1>Add your Table Here</h1>
+        <ToastContainer />
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
     <form onSubmit={handleSubmit}>
       <label class='label-1'>
         Table Type:

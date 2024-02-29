@@ -16,7 +16,7 @@ const TakeawayDeliveryorder = () => {
 
     const fetchRunningOrder = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_running_takeaway_order');
+            const response = await axios.get('https://restogenius.onrender.com/get_running_takeaway_order');
             console.log(response.data);
             setRunningOrder(response.data);
             checkforEmptyItems();
@@ -33,7 +33,7 @@ const TakeawayDeliveryorder = () => {
             console.log("fks");
             console.log(emptyitems);
             try {
-                const response = await axios.delete(`http://localhost:9999/delete_running_takeaway_order/${emptyitems[0]._id}`);
+                const response = await axios.delete(`https://restogenius.onrender.com/delete_running_takeaway_order/${emptyitems[0]._id}`);
                 if(response.data.success){
                     console.log("deleted");
                 }
@@ -49,7 +49,7 @@ const TakeawayDeliveryorder = () => {
 
     const handleDeleteRunningOrder = async (item,fooditems) => {
         console.log("delete the curently running order", item);
-        const res = await axios.put(`http://localhost:9999/update_takeaway_backend_order/${item.orderno}`,item);
+        const res = await axios.put(`https://restogenius.onrender.com/update_takeaway_backend_order/${item.orderno}`,item);
         console.log(res.data);
 
         handleCheckforItem(fooditems);

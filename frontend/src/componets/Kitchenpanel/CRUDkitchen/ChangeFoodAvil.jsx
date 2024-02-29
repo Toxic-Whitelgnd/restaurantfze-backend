@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { NavLink, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ChangeFoodAvil = () => {
     const { foodid } = useParams();
@@ -61,14 +62,15 @@ const ChangeFoodAvil = () => {
                 },
             });
 
-            alert('Food data updated successfully!');
+            toast.success('Food data updated successfully!');
         } catch (error) {
-            alert('Error updating food data:', error);
+            toast.error('Error updating food data:', error);
         }
     };
 
     return (
         <div>
+            <ToastContainer />
             {foodData && foodData.map((food) => (
                 <form key={food._id} onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" {...register('id')} value={food._id} />

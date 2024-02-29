@@ -27,7 +27,7 @@ const TableList = () => {
         {
             tables.filter(x => x.table_type === 'indoor').map(table => (
                 <li key={table.tableNo}>
-                  <Link to={`/edit-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
+                  <Link to={`/admin/edit-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
                 </li>
               ))
         }
@@ -36,7 +36,7 @@ const TableList = () => {
       <ul>
         {tables.filter(x => x.table_type === 'outdoor').map(table => (
           <li key={table.tableNo}>
-            <Link to={`/edit-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
+            <Link to={`/admin/edit-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
           </li>
         ))}
       </ul>

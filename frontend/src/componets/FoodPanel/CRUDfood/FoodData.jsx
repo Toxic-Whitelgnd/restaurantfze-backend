@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import './FoodData.css';
 import { ToastContainer, toast } from 'react-toastify';
+=======
+import { ToastContainer, toast } from 'react-toastify';
+
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
 const FoodData = () => {
 
     const [foodName, setFoodName] = useState('');
@@ -71,11 +76,15 @@ const FoodData = () => {
 
             if (response.status === 201) {
                 console.log('Food data added successfully!');
+<<<<<<< HEAD
                 toast.success("Food data added successfully");
+=======
+                toast.success('Food data added successfully!');
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
                 // You can also redirect or perform any other action upon success
-                window.location.reload();
+              //  window.location.reload();
             } else {
-                console.error('Failed to add food data');
+                toast.error('Failed to add food data');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -84,6 +93,7 @@ const FoodData = () => {
 
 
     return (
+<<<<<<< HEAD
         <div class='FoodData'>
           <div class='FoodData-heading'>
             <h1>Add The Food Items</h1>
@@ -91,6 +101,14 @@ const FoodData = () => {
             <div class='FoodData-form'>
                 <form className='form-FoodData' onSubmit={handleSubmit}>
                     <label class='FoodData-label-1'>
+=======
+        <div>
+            <h1>Add the food items</h1>
+            <ToastContainer />
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <label>
+>>>>>>> 0ed4b0d4c412c1f3f980055442663bb8ca4343e6
                         Food Name:
                         <input
                            class='FoodData-input-1'

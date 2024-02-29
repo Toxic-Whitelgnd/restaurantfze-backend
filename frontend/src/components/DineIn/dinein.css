@@ -1,15 +1,55 @@
+.inside-container
+{
+  max-width: 100vw;
+  padding-right: 30px;
+}
+
+/* Style for the button */
+.adduser {
+  display: inline-block;
+  padding: 5px;
+  background-color: #3498db;
+  /* Button background color */
+  color: #000000;
+  /* Text color */
+  font-weight: bold;
+  font-size: 12px;
+  /* Bold text */
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+/* Hover effect */
+.adduser:hover {
+  background-color: #217dbb;
+  /* Change background color on hover */
+}
+
+.select-waiter
+{
+  font-size: 14px;
+  border-radius: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  background-color: #E55381;
+  font-weight: bold;
+}
+
 .dinein-navbar-cont{
-    background-color: rgb(94, 124, 145);
-    width: 1300px;
-    padding: 30px 20px 30px 20px;
-    margin-left: 30px;
+    padding: 5px 0px 0px 0px;
     display: flex;
+    justify-content: space-around;
     flex-direction: row;
-    
+    max-width: 100%;
+    font-size: small;
 }
 
 .ind-out-cont{
-    background-color: #3c14d0;
+    background-color: #7856f0;
     padding: 8px 8px;
     border-radius: 10px;
     width: 130px;
@@ -19,6 +59,7 @@
     font-weight: bold;
     letter-spacing: 2px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    cursor: pointer;
 }
 
 option{
@@ -37,7 +78,32 @@ option{
 }
 
 /* for btn1 style */
-@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+/* @import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700"); */
+.static-running-order {
+  /*placement for code pen*/
+  /* margin: 10% 40%; */
+  /*Button Text Style*/
+  font-family: "Inconsolata", "Helvetica", "Arial", sans-serif;
+  font-size: inherit;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  /* text-transform: uppercase; */
+  text-decoration: none;
+  border-radius: 10px;
+  /*Button Color & Border*/
+  margin-left: 10px;
+  color: '#000';
+  background: #91D171;
+  outline: none;
+  /*Position, Display, Size*/
+  position: relative;
+  display: inline-block;
+  padding: 1px 1px;
+  width: 200px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
 .running-order {
     /*placement for code pen*/
     /* margin: 10% 40%; */
@@ -46,21 +112,20 @@ option{
     font-size: inherit;
     text-align: center;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     /* text-transform: uppercase; */
     text-decoration: none;
     border-radius: 10px;
     /*Button Color & Border*/
-    border: 4px solid #91D171;
     color:'#000';
     background: #91D171;
     outline: none;
     /*Position, Display, Size*/
     position: relative;
     display: inline-block;
-    padding: 13px 5px;
+    padding: 1px 1px;
     cursor: pointer;
-    width: auto;
+    width: 200px;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     margin-left: 15px;
@@ -103,7 +168,7 @@ option{
 /* for media quries */
 @media only screen and (max-width: 979px) {
     .dinein-navbar-cont{
-        width: 800px;
+        width: 500px;
     }
 
 }
@@ -115,6 +180,7 @@ option{
 .pop-cont{
   text-align: center;
   margin-top: 10px;
+  max-width: 100%;
 }
 
 .modal-overlay1 {
@@ -277,41 +343,45 @@ h2 {
 }
 
 .over-order-page{
-  overflow: scroll;
-  height: 5200px;
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
 }
 
 /* food order and tracking page */
 .food-order-cont{
-  overflow-y: scroll;
-  min-width: 670px;
+  min-width: fit-content;
   margin-left: auto;
   margin-right: auto;
   padding-left: 10px;
   padding-right: 10px;
-  max-height: 700px;
+  max-height: 100vh;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
 .food-category-bar{
-  max-width: 1000px ;
-  height: 100px;
+  max-width: 100vw ;
+  height: 50px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding: 15px 20px;
+  padding: 5px 10px;
   background-color: #95a5a6;
 }
 
 .foo-cat{
   display: flex;
-  flex-wrap: wrap;
-  width: 150px;
+
+  flex-direction: row;
+    /* This is the default value, so you can omit it if you want */
+  justify-content: space-between;
+  width: 250px;
+  padding-bottom: 5px;
 }
 
 #foodCategory{
-  margin-top: -10px;
+  margin-top: 0px;
 }
 .date-time{
   display: flex;
@@ -339,4 +409,20 @@ h2 {
   padding-left: 10px;
   padding-right: 10px;
   max-height: 280px;
+}
+
+/* For search */
+
+.search-container {
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 35%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #777; /* Change color as needed */
+  cursor: pointer;
 }

@@ -9,8 +9,8 @@ import GetTime from '../../cards/TimeandDate/GetTime';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
-
+import { FaSearch } from 'react-icons/fa';
+import DynamicComponent from '../../cards/DynamicComponent/DynamicComponent';
 
 
 
@@ -19,17 +19,16 @@ const DeliverySale = () => {
     const { id } = useParams();
 
     // Componet's are Dynamic 
-
-    const DynamicComponent = ({ fooddata, foodtype }) => (
+    /*
+    const DynamicComponent = ({ fooddata, foodtype, foodterm }) => (
         <>
             <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
 
                 {
-
-                    fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
+                    foodtype == 'all' ? fooddata.filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
                         return (
                             <>
-                                <div className="my-alert">
+                                <div key={idx} className="my-alert">
                                     <div className="my-alert__unique1">
                                         {val.foodImage && (
                                             <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
@@ -40,7 +39,7 @@ const DeliverySale = () => {
                                     <div className="my-alert__unique2">
                                         <div className='my-alert__unique3'>
                                             <div className='my-alert__unique4'>
-                                                <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                <span className='fs-6 fw-bold text-capitalize'>{val.foodName}</span>
                                                 <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
                                             </div>
                                             <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
@@ -49,11 +48,11 @@ const DeliverySale = () => {
                                         {val.foodAvailability === 'No' ? <button
                                             className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                             type='button' disabled
-                                        >Add to cart</button> :
+                                        >Add</button> :
                                             <button
                                                 className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
                                                 type='button'
-                                            >Add to cart</button>}
+                                            >Add</button>}
 
                                     </div>
                                 </div>
@@ -61,10 +60,47 @@ const DeliverySale = () => {
                         )
                     })
 
+                        : fooddata.filter(x => x.foodType === foodtype).filter(x => x.foodName.toLowerCase().includes(foodterm.toLowerCase())).map((val, idx) => {
+                            return (
+                                <>
+                                    <div key={idx} className="my-alert">
+                                        <div className="my-alert__unique1">
+                                            {val.foodImage && (
+                                                <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+                                            )}
+
+                                        </div>
+                                        {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+                                        <div className="my-alert__unique2">
+                                            <div className='my-alert__unique3'>
+                                                <div className='my-alert__unique4'>
+                                                    <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+                                                    <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+                                                </div>
+                                                <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+
+                                            </div>
+                                            {val.foodAvailability === 'No' ? <button
+                                                className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                type='button' disabled
+                                            >Add</button> :
+                                                <button
+                                                    className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+                                                    type='button'
+                                                >Add</button>}
+
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })
+
                 }
+
             </div>
         </>
     )
+                */
 
     // componet ending
 
@@ -86,10 +122,16 @@ const DeliverySale = () => {
         GenerateOrderNo();
     }, []);
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleInputChange1 = (e) => {
+        setSearchTerm(e.target.value);
+    }
+
     const [tableData, setTableData] = useState([]);
     const fetchTableData = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/table_data');
+            const response = await axios.get('https://restogenius.onrender.com/table_data');
             setTableData(response.data);
             console.log(response.data);
         } catch (error) {
@@ -100,7 +142,7 @@ const DeliverySale = () => {
     const [waiter, setWaiter] = useState([]);
     const fetchWaiter = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_waiter');
+            const response = await axios.get('https://restogenius.onrender.com/get_waiter');
             console.log(response.data);
             setWaiter(response.data);
         } catch (error) {
@@ -111,7 +153,7 @@ const DeliverySale = () => {
     const [bill, setBill] = useState([]);
     const fetchBillD = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_billd');
+            const response = await axios.get('https://restogenius.onrender.com/get_billd');
             console.log(response.data);
             setBill(response.data[0]);
 
@@ -123,7 +165,7 @@ const DeliverySale = () => {
     const [data, setData] = useState([]);
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:9999/get_food_data');
+            const response = await axios.get('https://restogenius.onrender.com/get_food_data');
             console.log(response.data);
             setData(response.data);
         } catch (error) {
@@ -140,7 +182,7 @@ const DeliverySale = () => {
 
     const fetchCurrentOrder = async () => {
         try {
-            const response = await axios.get(`http://localhost:9999/get_saved_orders/${id}`);
+            const response = await axios.get(`https://restogenius.onrender.com/get_saved_orders/${id}`);
             console.log(response.data);
 
             // DYnmic changeHere :TODO:
@@ -173,8 +215,9 @@ const DeliverySale = () => {
     const [customerDetails, setCustomerDetails] = useState({
         name: '',
         mobileNumber: '',
-        email: '',
+        driver: '',
         address: '',
+        vin:'',
     }
     );
 
@@ -230,7 +273,7 @@ const DeliverySale = () => {
 
     // Define your food components
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
@@ -380,7 +423,7 @@ const DeliverySale = () => {
 
         try {
             
-                    const response = await axios.post("http://localhost:9999/save_current_deliverysale_order", current_order)
+                    const response = await axios.post("https://restogenius.onrender.com/save_current_deliverysale_order", current_order)
                     console.log(response.data);
                     if(response.data.success){
                         toast.success(response.data.message);
@@ -398,7 +441,7 @@ const DeliverySale = () => {
 
     const UpdatetoDb = async (update_order) => {
         try {
-            const response = await axios.put(`http://localhost:9999/update_current_order/${id}`, update_order)
+            const response = await axios.put(`https://restogenius.onrender.com/update_current_order/${id}`, update_order)
             console.log(response.data);
             toast.success(response.data.message);
         } catch (error) {
@@ -510,7 +553,7 @@ const DeliverySale = () => {
 
         const fetchFoodTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:9999/get_food_type');
+                const response = await axios.get('https://restogenius.onrender.com/get_food_type');
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -537,7 +580,7 @@ const DeliverySale = () => {
     const ClearTheTableData = async () => {
         try {
             // call the server to set the current_order tables to empty,
-            const response = await axios.delete(`http://localhost:9999/delete_current_order/${fetchFood.table_no}`)
+            const response = await axios.delete(`https://restogenius.onrender.com/delete_current_order/${fetchFood.table_no}`)
 
             toast.success("redirect to new page");
 
@@ -548,7 +591,7 @@ const DeliverySale = () => {
 
         try {
             console.log("after deleting the current_order tables", fetchFood.table_no);
-            const response2 = await axios.delete(`http://localhost:9999/delete_running_order/${fetchFood.table_no}`)
+            const response2 = await axios.delete(`https://restogenius.onrender.com/delete_running_order/${fetchFood.table_no}`)
             if (response2.data.success) {
                 window.location.href = '/#/dinein';
             }
@@ -612,7 +655,7 @@ const DeliverySale = () => {
 
         try {
 
-            const response = await axios.post("http://localhost:9999/save_deliverysale_order", customer_details);
+            const response = await axios.post("https://restogenius.onrender.com/save_deliverysale_order", customer_details);
 
             if (response.data.success) {
                 toast.success("Customer detail saved");
@@ -634,17 +677,28 @@ const DeliverySale = () => {
 
     return (
         <div className='over-order-page'>
-            {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
-                Add User
-            </button> : <div>
-                <p className='ms-3 mt-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
-                <p className='ms-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
-                <p className='ms-3'>Customer email: <span className='text-capitalize fw-bold'>{customerDetails.email}</span></p>
-                <p className='ms-3'>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
-                {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
-                Update user (seprate modal)
-            </button> */}
-            </div>}
+            {usercreated ?
+
+                <button type="button" className='adduser' onClick={openModal}>
+                    Add User
+                </button>
+
+                : 
+                <div>
+                    <div className='row'>
+                        <p className='mt-1 col-md-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
+                        <p className='mt-1 col-md-3'>Customer Phone: <span className='text-capitalize fw-bold'>{customerDetails.mobileNumber}</span></p>
+                        <p className='mt-1 col-md-3'>Driver: <span className='text-capitalize fw-bold'>{customerDetails.driver}</span></p>
+                        <p className='mt-1 col-md-3'>VIN: <span className='text-capitalize fw-bold'>{customerDetails.vin}</span></p>
+                        {/* <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openUpdateModal}>
+                        Update user (seprate modal)
+                    </button> */}
+                    </div>
+                    <div className='row'>
+                        <p className=''>Customer Address: <span className='text-capitalize fw-bold'>{customerDetails.address}</span></p>
+                    </div>
+                </div>
+                }
             <div className="pop-cont">
                 {/* Your other content goes here */}
 
@@ -677,12 +731,12 @@ const DeliverySale = () => {
                                     />
                                 </label>
                                 <label>
-                                    Email:
+                                    Driver Name:
                                     <input
-                                        type="email"
-                                        name="email"
+                                        type="text"
+                                        name="driver"
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
-                                        value={customerDetails.email}
+                                        value={customerDetails.driver}
                                         onChange={handleInputChange}
                                         required
 
@@ -695,6 +749,18 @@ const DeliverySale = () => {
                                         name="address"
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
                                         value={customerDetails.address}
+                                        onChange={handleInputChange}
+                                        required
+
+                                    />
+                                </label>
+                                <label>
+                                    Vehicle Number:
+                                    <input
+                                        type="text"
+                                        name="vin"
+                                        // placeholder={fetchFood.customer_details.numberOfSeats}
+                                        value={customerDetails.vin}
                                         onChange={handleInputChange}
                                         required
 
@@ -741,7 +807,7 @@ const DeliverySale = () => {
                                     </button>
                                 </div>
                                 <div className='orderCont-paybill'>
-                                    <ul class="responsive-table-popup">
+                                    <ul class="responsive-table-popup" >
                                         <li class="otable-header">
                                             <div class="colo colo-1">Id</div>
                                             <div class="colo colo-2">Name</div>
@@ -835,12 +901,12 @@ const DeliverySale = () => {
                     <div className='orderCont'>
                         <h5 className='d-flex justify-content-center'>Track your order here</h5>
                         <ul class="responsive-table">
-                            <li class="otable-header">
-                                <div class="colo colo-1">Id</div>
-                                <div class="colo colo-2">Name</div>
-                                <div class="colo colo-5">Quantity</div>
-                                <div class="colo colo-3">Price</div>
-                                <div class="colo colo-4">Amount</div>
+                            <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius: '10px' }}>
+                                <div class="colo colo-1" style={{ fontWeight: 'bold' }}>Id</div>
+                                <div class="colo colo-2" style={{ fontWeight: 'bold' }}>Name</div>
+                                <div class="colo colo-5" style={{ fontWeight: 'bold' }}>Quantity</div>
+                                <div class="colo colo-3" style={{ fontWeight: 'bold' }}>Price</div>
+                                <div class="colo colo-4" style={{ fontWeight: 'bold' }}>Amount</div>
                             </li>
                             {/* save to db and fetch from there DYNAMIC TODO:*/}
                             {foodD.length > 0 && foodD.filter(x => x.orderFrom == "deliverysale").map((food) => (
@@ -870,15 +936,15 @@ const DeliverySale = () => {
                     </div>
                 </div>
                 {/* layout - 2 */}
-                <div className='col-sm-5'>
+                <div className='col-sm-6'>
                     <div className='food-order-cont'>
-                        <div className='food-category-bar'>
+                        <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '10px' }}>
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Food Category</span>
+                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
-                                    <option value="" disabled>
-                                        Select Food Type to filter
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'} className='filter'>
+                                    <option value="all" >
+                                        All
                                     </option>
                                     {foodTypes.map((type) => (
                                         <option key={type.food_name} value={type.food_name}>
@@ -887,22 +953,28 @@ const DeliverySale = () => {
                                     ))}
                                 </select>
                             </div>
+
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory">Sort-by or Filter</span>
-                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption}>
+                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
+                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>
                                     <option value="lowPrice">Low Price</option>
                                     <option value="available">Available</option>
                                 </select>
                             </div>
-
-                            <div className='date-time'>
-
-                                <GetDate />
-                                <br></br>
-                                <GetTime />
+                            <div>
+                                <div className="search-container">
+                                    <input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={handleInputChange1}
+                                    />
+                                    <FaSearch className="search-icon" />
+                                </div>
                             </div>
+
 
                         </div>
                         <div>
@@ -911,6 +983,8 @@ const DeliverySale = () => {
                                 <DynamicComponent
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
+                                    foodterm={searchTerm}
+                                    handleFoodItem={handleFoodItem}
                                 />
                             }
 
