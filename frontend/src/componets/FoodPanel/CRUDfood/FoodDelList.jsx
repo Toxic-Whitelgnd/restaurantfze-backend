@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import './FoodDelList.css';
+
 const FoodDelList = () => {
     const [tables, setTables] = useState([]);
 
@@ -33,12 +35,15 @@ const FoodDelList = () => {
       }, []);
     return (
         <div className="container mt-4">
-        <h1>Select the Food item to Delete</h1>
-        <label>
+        <div class='food-del-list'>
+        <div class='food-del-list-heading'>
+        <h1>Select The Food Item To Delete</h1>
+        </div>
+        <label class='food-del-list-label'>
                         Food Type:
-                        <select value={foodType} onChange={(e) => setFoodType(e.target.value)}>
+                        <select value={foodType} className='food-del-list-select' onChange={(e) => setFoodType(e.target.value)}>
                             <option value="" disabled>
-                                Select Food Type to filter
+                                Select Food Type To Filter
                             </option>
                             {foodTypes.map((type) => (
                                 <option key={type.food_name} value={type.food_name}>
@@ -47,16 +52,18 @@ const FoodDelList = () => {
                             ))}
                         </select>
                     </label>
-        <ul>
+                   
+        <ul className='food-del-list-ui'>
           {
               tables.filter(x => x.foodType === foodType).map(table => (
                   <li key={table.tableNo}>
                     <Link to={`/admin/delete-fooddata/${table._id}`}>{`${table.foodName}`}</Link>
                   </li>
                 ))
-          }
+          }  
+          
         </ul>
-        
+        </div>
       </div>
     );
 }

@@ -1,0 +1,37 @@
+/* home-delte-table body entire css */
+.home-delete-table{
+    background-color: #5a7bdca6;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    margin-right: 55%;
+}
+/* home-delte-table heading css */
+.home-delete-table-heading{
+    background-color:blanchedalmond;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+
+}
+.home-delete-table-heading h1{
+    font-weight: 700;
+
+}
+.home-delete-table-page{
+    display: inline-block;
+}
+.home-delete-table-page p{
+    font-weight: 700;
+    color: rgb(157, 1, 1);
+    margin-left: 5%;
+    display: flex;
+}
+
+/* home-delte-table button  css */
+.home-delete-table-page button {
+    /* padding: 3px 25px 3px 25px ; */
+    margin-left: 250px;
+    border: none;
+    margin-right: 15%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;    
+} 

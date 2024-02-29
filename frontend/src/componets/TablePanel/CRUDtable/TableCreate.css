@@ -1,0 +1,72 @@
+/* table create css */
+.table-create{
+    margin-top: 1.5cm;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: #5a7bdca6;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+/* heading table  */
+.heading-table-create{
+    text-align: center;
+    background-color: blanchedalmond;
+    border-radius: 15px 15px 15px 15px;
+}  
+ /*label  */
+.label-1{
+    margin-left: 145px;
+}
+select[name=table_type]{
+    border: none;
+    border-radius: 10px;
+    margin-left: 35px;
+    padding-right: 105px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    
+}
+select[name=table_type]:focus{
+    border: none;
+    background-color:lightblue ;
+}
+input[type=number]{
+    border: none;
+    border-radius: 10px;
+   
+}
+input[type=table_no]:focus{
+    background-color: lightblue;
+   border: none;
+   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+   
+}
+/* button css */
+.btn {
+    color: white;
+    background-color: rgb(1, 1, 27);
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 0.5cm;
+    border-radius: 1cm;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.btn:hover{
+    background-color: rgb(156, 156, 29);
+}
+/* submit button css */
+.submit-1{
+    background-color: rgb(156, 156, 29);
+    color: aliceblue;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 0.5cm;
+    border-radius: 1cm;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.submit-1:hover{
+    background-color: rgb(1, 1, 27);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}   

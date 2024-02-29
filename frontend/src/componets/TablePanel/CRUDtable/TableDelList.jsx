@@ -27,7 +27,7 @@ const TableDelList = () => {
         {
             tables.filter(x => x.table_type === 'indoor').map(table => (
                 <li key={table.tableNo}>
-                  <Link to={`/delete-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
+                  <Link to={`/admin/delete-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
                 </li>
               ))
         }
@@ -36,7 +36,7 @@ const TableDelList = () => {
       <ul>
         {tables.filter(x => x.table_type === 'outdoor').map(table => (
           <li key={table.tableNo}>
-            <Link to={`/delete-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
+            <Link to={`/admin/delete-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
           </li>
         ))}
       </ul>

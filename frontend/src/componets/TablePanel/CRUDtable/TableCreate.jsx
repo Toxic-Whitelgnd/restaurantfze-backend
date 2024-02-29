@@ -1,6 +1,9 @@
 // src/TableForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import './TableCreate.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const TableForm = () => {
    
@@ -51,17 +54,18 @@ const TableForm = () => {
 
       // Optionally, you can add logic to handle success or navigate to another page
       console.log('Table data successfully submitted!');
-      alert("Table added successfully!");
+      toast.success("Table created successfully!");
+     
     } catch (error) {
       console.error('Error submitting table data:', error);
     }
   };
 
   return (
-    <div>
-        <h1>Add your Table Here</h1>
+    <div class='table-create'>
+        <h1 className='heading-table-create'>Add Your Table Here</h1>
     <form onSubmit={handleSubmit}>
-      <label>
+      <label class='label-1'>
         Table Type:
         <select name="table_type" value={formData.table_type} onChange={handleChange}>
           <option value="indoor">Indoor</option>
@@ -69,29 +73,29 @@ const TableForm = () => {
         </select>
       </label>
       <br></br>
-      <label>
+      <label class='label'>
         Table Number:
         <input type="number" name="table_no" value={formData.table_no} onChange={handleChange} />
       </label>
       <br></br>
-      <label>
+      <label class='label'>
         Table Capacity:
         <input type="number" name="table_capacity" value={formData.table_capacity} onChange={handleChange} />
       </label>
       <br></br>
-      <button type="button" className="btn btn-secondary" onClick={handleManualUpdate}>
+      <button class='set-iid-url'type="button" className="btn btn-secondary" onClick={handleManualUpdate}>
           Set ID 
         </button>
         <br></br>
-        <button type="button" className="btn btn-secondary" onClick={handleUrl}>
+        <button class='set-iid-url' type="button" className="btn btn-secondary" onClick={handleUrl}>
           Set URL
         </button>
         <br></br>
    
       
-      
+      <ToastContainer/>
 
-      <button type="submit">Create Table</button>
+      <button class='submit-1' type="submit">Create Table</button>
     </form>
     </div>
   );

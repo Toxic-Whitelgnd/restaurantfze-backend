@@ -1,0 +1,58 @@
+/* food delievry body css */
+.Food-Delivery-Panel{
+    margin-top: 1.5cm;
+    background-color: #5a7bdca6;
+    margin-right: 35%;
+    margin-bottom: 20%;
+    margin-left: 35%;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    align-items: center;
+}
+/*  Food-Delivery heading css*/
+.Food-Delivery-Panel-heading{
+    background-color:  blanchedalmond;
+    margin-top: 0.1cm;
+    margin-bottom: 0.2cm;
+    border-radius: 15px 15px 15px 15px;
+    text-align: center;
+    box-shadow:  rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+/* Food-Delivery options css */
+.Food-Delivery-Panel-option a{
+    display: inline-block;
+    color: white;
+    font-weight: 700;
+    background-color: #1c3176fd;
+    margin-left: 20%;
+    border-radius: 20px;
+    text-align: center;
+    padding: 25px 45px 26px 45px;
+    margin: 3px 25% 15px 25%;
+}
+
+.dinein-delivery-order:hover{
+    color: #1c3176fd;
+    font-weight: bold;
+    background-color:rgba(255, 228, 196, 0.755); 
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.takeaway-delivery-order:hover{
+    color: #1c3176fd;
+    font-weight: bold;
+    background-color:rgba(255, 228, 196, 0.755); 
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+}
+.deliverysale-delivery-order:hover{
+    color: #1c3176fd;
+    font-weight: bold;
+    background-color:rgba(255, 228, 196, 0.755); 
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.deliverysale-takeaway-order:hover{
+    color: #1c3176fd;
+    font-weight: bold;
+    background-color:rgba(255, 228, 196, 0.755); 
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+} 

@@ -1,19 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import './TablePanel.css';
 const TablePanel = () => {
     return (
-        <div>
-            <h1>Table Panel</h1>
-            <div>
-                <NavLink to='/admin/create-table'>Create Table</NavLink>
+        <div class='table-panel'>
+            <div class='table-panel-heading'><h1>Table Panel</h1></div>
+            <div class='table-panel-option'>
+                <NavLink to='/admin/create-table' className='create-table'style={{ textDecoration: 'none'}}>Create Table</NavLink>
                 <br></br>
-                <NavLink to='/admin/edit-table'>Edit Table</NavLink>
+            <NavLink to='/admin/edit-table'className='edit-table'style={{ textDecoration: 'none'}}>Edit <br/> Table</NavLink>
                 <br></br>
-                <NavLink to='/admin/delete-table'>Delete Table</NavLink>
-             
-            </div>
+            <NavLink to='/admin/delete-table' className='delete-table'style={{ textDecoration: 'none'}}>Delete Table</NavLink>
+                </div>  
         </div>
+        
     );
 }
 

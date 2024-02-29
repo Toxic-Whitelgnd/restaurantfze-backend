@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const HomeEdit = () => {
     const { homeno } = useParams();
@@ -40,8 +40,8 @@ const HomeEdit = () => {
         try {
             // Make a PUT request to /update_table_data/:table_no
             await axios.put(`https://restogenius.onrender.com/update_home_page_data/${homeno}`, formData);
-            alert('Home item updated successfully deleted!');
-
+           
+            toast.success("Home item updated successfully deleted!");
             window.location.href = "/"
         } catch (error) {
             console.error('Error updating table data:', error.message);
@@ -49,8 +49,11 @@ const HomeEdit = () => {
     };
 
     return (
-        <div>
+        <div className='Edit-table-home-panel'>
+            <div className='Edit-table-home-panel-heading'>
             <h1>Edit table for {homeno}</h1>
+            </div>
+            <div className='Edit-table-home-panel-form'>
             <form onSubmit={handleSubmit}>
                 
                 {/* Other input fields */}
@@ -59,9 +62,10 @@ const HomeEdit = () => {
                     <label htmlFor="tableCapacity" className="form-label">Home Name:</label>
                     <input type="text" className="form-control" id="table_capacity" name="home_name" value={formData.home_name} onChange={handleChange} />
                 </div>
-   
+                <ToastContainer/>
                 <button type="submit" className="btn btn-primary">Update Table</button>
             </form>
+            </div>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import './FoodData.css';
+import { ToastContainer, toast } from 'react-toastify';
 const FoodData = () => {
 
     const [foodName, setFoodName] = useState('');
@@ -70,7 +71,7 @@ const FoodData = () => {
 
             if (response.status === 201) {
                 console.log('Food data added successfully!');
-                alert('Food data added successfully!');
+                toast.success("Food data added successfully");
                 // You can also redirect or perform any other action upon success
                 window.location.reload();
             } else {
@@ -83,51 +84,57 @@ const FoodData = () => {
 
 
     return (
-        <div>
-            <h1>Add the food items</h1>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label>
+        <div class='FoodData'>
+          <div class='FoodData-heading'>
+            <h1>Add The Food Items</h1>
+            </div>
+            <div class='FoodData-form'>
+                <form className='form-FoodData' onSubmit={handleSubmit}>
+                    <label class='FoodData-label-1'>
                         Food Name:
                         <input
+                           class='FoodData-input-1'
                             type="text"
                             value={foodName}
                             onChange={(e) => setFoodName(e.target.value)}
                         />
                     </label>
                     <br></br>
-                    <label>
+                    <label  class='FoodData-label-1'>
                         Food Price:
                         <input
+                            class='FoodData-input-2'
                             type="text"
                             value={foodPrice}
                             onChange={(e) => setFoodPrice(e.target.value)}
                         />
                     </label>
                     <br></br>
-                    <label>
+                    <label  class='FoodData-label-1'>
                         Food Image:
                         <input
+                            class='FoodData-input-1'
                             type="file"
                             accept="image/*"
                             onChange={handleImageChange}
                         />
-                        {foodImage && <img src={URL.createObjectURL(foodImage)} alt="Food Preview" style={{ maxWidth: '200px', marginTop: '10px' }} />}
+                        {foodImage && <img src={URL.createObjectURL(foodImage)}alt="Food Preview" style={{ maxWidth: '200px', marginTop: '10px' }} />}
                         {/* {foodImage && <img src={foodImage} alt="Food Preview" style={{ maxWidth: '200px', marginTop: '10px' }} />} */}
                     </label>
                     <br></br>
-                    <label>
+                    <label  class='FoodData-label-1'>
                         Food Quantity:
                         <input
+                            class='FoodData-input-3'
                             type="text"
                             value={foodQty}
                             onChange={(e) => setFoodQty(e.target.value)}
                         />
                     </label>
                     <br></br>
-                    <label>
+                    <label  class='FoodData-label-1'>
                         Food Availability:
-                        <select value={foodAvailability} onChange={(e) => setFoodAvailability(e.target.value)}>
+                        <select value={foodAvailability} className='FoodData-input-4'onChange={(e) => setFoodAvailability(e.target.value)}>
                             <option value="" disabled>
                                 Select Availability
                             </option>
@@ -136,9 +143,9 @@ const FoodData = () => {
                         </select>
                     </label>
                     <br></br>
-                    <label>
+                    <label  class='FoodData-label-1'>
                         Food Type:
-                        <select value={foodType} onChange={(e) => setFoodType(e.target.value)}>
+                        <select value={foodType} className='FoodData-input-1' onChange={(e) => setFoodType(e.target.value)}>
                             <option value="" disabled>
                                 Select Food Type
                             </option>
@@ -148,8 +155,8 @@ const FoodData = () => {
                                 </option>
                             ))}
                         </select>
-                    </label>
-                    <button type="submit">Add food</button>
+                    </label><ToastContainer/>
+                    <button className='Food-submit' type="submit">Add Food</button>
                 </form>
             </div>
         </div>
