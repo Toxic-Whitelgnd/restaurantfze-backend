@@ -16,6 +16,9 @@ const FoodTypeDelete = () => {
       toast.success('Food type deleted successfully deleted!');
       // Optionally, you can add logic to handle success or navigate to another page
        // window.location.href = "/" // Redirect to the table list after deletion
+       setTimeout(()=>{
+        window.location.href = "/#/admin/foodpanel/"
+      },2000)
     } catch (error) {
       console.error('Error deleting table:', error);
       toast.error('Error deleting table:');

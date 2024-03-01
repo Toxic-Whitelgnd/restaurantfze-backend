@@ -81,6 +81,9 @@ const FoodEdit = () => {
             });
 
             toast.success('Food data updated successfully!');
+            setTimeout(()=>{
+                window.location.href = "/#/admin/foodpanel/"
+              },2000)
         } catch (error) {
             toast.error('Error updating food data:', error);
         }
