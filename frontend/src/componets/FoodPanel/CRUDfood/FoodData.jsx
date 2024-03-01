@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import './FoodData.css';
 
 const FoodData = () => {
 
@@ -86,12 +87,12 @@ const FoodData = () => {
 
 
     return (
-        <div>
-            <h1>Add the food items</h1>
+        <div class='FoodData'>
+            <h1 className='FoodData-heading'>Add The Food Items</h1>
             <ToastContainer />
             <div>
                 <form onSubmit={handleSubmit}>
-                    <label>
+                    <label class='FoodData-label-1'>
                         Food Name:
                         <input
                            class='FoodData-input-1'
