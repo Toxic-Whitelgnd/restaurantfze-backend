@@ -25,16 +25,17 @@ const TableDelete = () => {
 
   return (
     <div className="container mt-4">
-      <div className='table-delete'>
+      <div className='Table-delete'>
       <ToastContainer />
       <h1 id='table-delete-heading'>Delete Table {tableno}</h1>
-      </div>
+      
       <div className='table-delete-page'>
       <p>Are you sure you want to delete Table {tableno}?</p>
       <button type="button" className="btn btn-danger" onClick={handleDelete}>
         Delete Table
       </button>
       </div>
+    </div>
     </div>
   );
 };

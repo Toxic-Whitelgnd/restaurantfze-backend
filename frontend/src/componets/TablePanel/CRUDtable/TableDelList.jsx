@@ -22,9 +22,11 @@ const TableDelList = () => {
 
   return (
     <div className="container mt-4">
-      <h1>Select the Table to Delete</h1>
-      <h4>Indoor Tables</h4>
-      <ul>
+      <div className='tabledeli-list'>
+      <h1 id='tabledeli-list-heading-head'>Select The Table To Delete</h1>
+      <h4 id='tabledeli-list-heading'>Indoor Tables</h4>
+      
+      <ul className='tabledeli-list-ul'>
         {
             tables.filter(x => x.table_type === 'indoor').map(table => (
                 <li key={table.tableNo}>
@@ -33,14 +35,15 @@ const TableDelList = () => {
               ))
         }
       </ul>
-      <h4>OutDoor Tables</h4>
-      <ul>
+      <h4 id='tabledeli-list-heading'>OutDoor Tables</h4>
+      <ul className='tabledeli-list-ul'>
         {tables.filter(x => x.table_type === 'outdoor').map(table => (
           <li key={table.tableNo}>
             <Link to={`/admin/delete-table/${table.table_no}`}>{`Table ${table.table_no}`}</Link>
           </li>
         ))}
       </ul>
+      </div>
     </div>
   );
 };
