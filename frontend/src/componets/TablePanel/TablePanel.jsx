@@ -8,9 +8,9 @@ const TablePanel = () => {
             <div class='table-panel-option'>
                 <NavLink to='/admin/create-table' className='create-table'style={{ textDecoration: 'none'}}>Create Table</NavLink>
                 <br></br>
-            <NavLink to='/admin/edit-table'className='edit-table'style={{ textDecoration: 'none'}}>Edit <br/> Table</NavLink>
+                <NavLink to='/admin/edit-table'className='edit-table'style={{ textDecoration: 'none'}}>Edit Table</NavLink>
                 <br></br>
-            <NavLink to='/admin/delete-table' className='delete-table'style={{ textDecoration: 'none'}}>Delete Table</NavLink>
+                <NavLink to='/admin/delete-table' className='delete-table'style={{ textDecoration: 'none'}}>Delete Table</NavLink>
                 </div>  
         </div>
         
