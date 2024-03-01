@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 const FoodType = () => {
   const [foodType, setFoodType] = useState('');
@@ -17,6 +17,9 @@ const FoodType = () => {
 
 
       toast.success(`${foodType} added successfully!`)
+      setTimeout(()=>{
+        window.location.href = "/#/admin/foodpanel/"
+      },2000)
       setFoodType('');
     } catch (error) {
       console.error('Error:', error);
@@ -36,6 +39,7 @@ const FoodType = () => {
           type="text"
           value={foodType}
           onChange={(e) => setFoodType(e.target.value)}
+          required
         />
       </label>
       <button type="submit">Add</button>

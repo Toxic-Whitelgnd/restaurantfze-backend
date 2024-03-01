@@ -42,7 +42,7 @@ const HomeEdit = () => {
             await axios.put(`https://restogenius.onrender.com/update_home_page_data/${homeno}`, formData);
             toast.success('Home item updated successfully deleted!');
 
-            window.location.href = "/"
+            window.location.href = "/#/admin/"
         } catch (error) {
             toast.error('Error updating table data:', error.message);
         }

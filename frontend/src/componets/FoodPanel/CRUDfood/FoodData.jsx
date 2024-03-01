@@ -73,7 +73,9 @@ const FoodData = () => {
                 console.log('Food data added successfully!');
                 toast.success('Food data added successfully!');
                 // You can also redirect or perform any other action upon success
-              //  window.location.reload();
+                setTimeout(()=>{
+                  window.location.href = "/#/admin/foodpanel/"
+                },2000)
             } else {
                 toast.error('Failed to add food data');
             }
