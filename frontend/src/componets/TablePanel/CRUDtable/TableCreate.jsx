@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import './TableCreate.css'
 const TableForm = () => {
     
     const fr = {
@@ -58,11 +58,11 @@ const TableForm = () => {
   };
 
   return (
-    <div>
-        <h1>Add your Table Here</h1>
+    <div class='table-create'>
+        <h1 id='heading-table-create'>Add Your Table Here</h1>
         <ToastContainer />
     <form onSubmit={handleSubmit}>
-      <label class='label-1'>
+      <label class='label'>
         Table Type:
         <select name="table_type" value={formData.table_type} onChange={handleChange}>
           <option value="indoor">Indoor</option>

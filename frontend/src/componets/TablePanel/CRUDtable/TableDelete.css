@@ -1,0 +1,30 @@
+.table-delete{
+    background-color: #5a7bdca6;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    margin-right: 55%;
+}
+#table-delete-heading{
+    background-color:blanchedalmond;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    font-weight: 700;
+}
+
+.table-delete-page{
+    display: inline-block;
+}
+.table-delete-page p{
+    font-weight: 700;
+    color: rgb(157, 1, 1);
+    margin-left: 5%;
+    display: flex;
+}
+.table-delete-page button{
+    margin-left: 250px;
+    border: none;
+    margin-right: 15%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;    
+
+}

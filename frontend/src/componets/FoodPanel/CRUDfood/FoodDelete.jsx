@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams} from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import './FoodDelete.css';
 const FoodDelete = () => {
   const { foodid } = useParams();
 
@@ -23,10 +24,10 @@ const FoodDelete = () => {
 
   return (
     <div className="container mt-4">
-    <div>
+    <div className='delete-food'>
       <div>
       <ToastContainer />
-      <h1>Delete Food </h1>
+      <h1 id='delete-food-heading'>Delete Food </h1>
       </div>
       <div class='delete-food-body'>
       <p>Are you sure you want to delete this food?</p>

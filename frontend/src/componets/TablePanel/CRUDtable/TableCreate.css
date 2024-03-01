@@ -1,22 +1,22 @@
 /* table create css */
 .table-create{
     margin-top: 1.5cm;
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
     background-color: #5a7bdca6;
     align-items: center;
     border-radius: 20px;
     box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 /* heading table  */
-.heading-table-create{
+#heading-table-create{
     text-align: center;
     background-color: blanchedalmond;
     border-radius: 15px 15px 15px 15px;
 }  
  /*label  */
-.label-1{
-    margin-left: 145px;
+.label{
+    font-weight: 500;
 }
 select[name=table_type]{
     border: none;
