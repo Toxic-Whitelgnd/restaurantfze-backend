@@ -22,8 +22,9 @@ const FoodTypeDelList = () => {
       }, []);
     return (
         <div className="container mt-4">
-        <h1>Select the TYPE to delete</h1>
-        <ul>
+        <div class='food-del-list'>
+        <h1 id='food-del-list-heading'>Select The Type To Delete</h1>
+        <ul className='food-del-list-ui'>
           {
               tables.map(table => (
                   <li key={table._id}>
@@ -32,7 +33,7 @@ const FoodTypeDelList = () => {
                 ))
           }
         </ul>
-        
+        </div>
       </div>
     );
 }
