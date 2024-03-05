@@ -162,7 +162,7 @@ const customerSchema = new mongoose.Schema({
   discount: Number,
   amountpaid: Number,
   amountbalance: Number,
-  receiptNo: String ,
+  receiptNo: String,
   totalwithoutvat: Number,
 });
 
@@ -263,7 +263,7 @@ const customerTakeawaySchema = new mongoose.Schema({
 
   paid_by: {
     type: String,
-   
+
   },
 
   time: {
@@ -283,7 +283,7 @@ const customerTakeawaySchema = new mongoose.Schema({
   discount: Number,
   amountpaid: Number,
   amountbalance: Number,
-  receiptNo: String ,
+  receiptNo: String,
   totalwithoutvat: Number,
 });
 
@@ -320,19 +320,19 @@ const currentDeliverySaleOrderSchema = new mongoose.Schema({
 const customerDeliverySaleSchema = new mongoose.Schema({
   customer_mobileNumber: {
     type: String,
-    
+
   },
   customer_name: {
     type: String,
-    
+
   },
   customer_address: {
     type: String,
-    
+
   },
   customer_vehicleno: {
     type: String,
-    
+
   },
   date: {
     type: String,
@@ -376,7 +376,7 @@ const customerDeliverySaleSchema = new mongoose.Schema({
   discount: Number,
   amountpaid: Number,
   amountbalance: Number,
-  receiptNo: String ,
+  receiptNo: String,
   totalwithoutvat: Number,
 });
 
@@ -435,11 +435,24 @@ const messDetailsSchema = new mongoose.Schema({
 });
 
 const recipietSchema = new mongoose.Schema({
-   companyname: String,
-   companycaption: String,
-   address: String,
-   description: String,
+  companyname: String,
+  companycaption: String,
+  address: String,
+  description: String,
 })
+
+const CashAtStartingSchema = new mongoose.Schema({
+  selectedDate: {
+    type: String,
+
+  },
+  cash: {
+    type: Number,
+
+  }
+});
+
+
 
 // ****************** END **********************
 
@@ -494,7 +507,9 @@ const DeliverySaleCustomerDetails = mongoose.model(
   "delivery_sales_customer_details"
 );
 
-const Recipiet = mongoose.model("recipiet",recipietSchema);
+const Recipiet = mongoose.model("recipiet", recipietSchema);
+
+const CashAtStarting = mongoose.model('cashatstarting', CashAtStartingSchema);
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -1468,7 +1483,7 @@ app.get("/get_running_takeaway_order", async (req, res) => {
 });
 
 app.get("/get_takeaway_order/:orderid", async (req, res) => {
-  const {orderid} = req.params;
+  const { orderid } = req.params;
   try {
     const dlo = await TakeAwayCurrentOrder.findOne({
       order_no: orderid,
@@ -1733,21 +1748,21 @@ app.delete("/delete_messDetails/:messDetails_id", async (req, res) => {
 app.get('/get_recipiet', async (req, res) => {
   try {
     const rec = await Recipiet.find({});
-    res.json({ success: true , data: rec});
+    res.json({ success: true, data: rec });
   } catch (error) {
     res.status(500).json({ message: "Error in get_recipiet" });
   }
 });
 
 app.put('/update_recipiet/:id', async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   try {
     const rec = await Recipiet.findOneAndUpdate({
       _id: id,
-    },{
+    }, {
       $set: req.body,
     });
-    res.json({ success: true , msg: "Recipiet updated" , data: rec});
+    res.json({ success: true, msg: "Recipiet updated", data: rec });
   } catch (error) {
     res.status(500).json({ message: "Error in post_recipiet" });
   }
@@ -1755,9 +1770,147 @@ app.put('/update_recipiet/:id', async (req, res) => {
 
 // ******************************** END OF RECIPIENT *******************************
 
-// TODO: Expenses tracking schema
+// ******************************** START OF CASHATSTARTING ********************************
+app.post('/add_cashatstarting', async (req, res) => {
+  try {
+    const res1 = CashAtStarting(req.body);
+    await res1.save();
+    res.json({ success: true, msg: "Cash added" });
+  } catch (error) {
+    res.status(500).json({ error: "error at cashat starting" });
+  }
+});
 
-// TODO: ADD vat , Discout , cash at starting , credit sale , card sale page in the admin panel
+app.get('/get_cashatstarting', async (req, res) => {
+  try {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Adding 1 because getMonth() returns month index starting from 0
+    const date = String(currentDate.getDate()).padStart(2, '0'); // Adding padding for single-digit dates
+    const formattedDate = `${year}-${month}-${date}`;
+
+    const cas = await CashAtStarting.findOne({
+      selectedDate: formattedDate
+    });
+
+    console.log(cas);
+    res.json(cas);
+  } catch (error) {
+    res.status(500).json({ error: "error at cashat starting" });
+  }
+});
+
+app.put('/update_cashatstarting/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const casdata = await CashAtStarting.findOneAndUpdate({
+      _id: id,
+    },
+      {
+        $set: req.body,
+      });
+
+    res.json({ success: true, data: casdata });
+  } catch (error) {
+    res.status(500).json({ error: "error at cashat starting" });
+  }
+});
+
+app.get('/get_cashatstarting1/:getdate', async (req, res) => {
+  const { getdate } = req.params;
+  console.log(getdate);
+  try {
+    // Convert the integer date to a string
+    const dateString = String(getdate);
+
+    // Extract year, month, and date from the string
+    const year = dateString.slice(0, 4);
+    const month = dateString.slice(4, 6);
+    const day = dateString.slice(6, 8);
+    const formattedDate = `${year}-${day}-${month}`;
+    // console.log("from backends: " + formattedDate);
+    const cas = await CashAtStarting.findOne({
+      selectedDate: getdate
+    });
+
+    // console.log(cas);
+    res.json(cas);
+  } catch (error) {
+    res.status(500).json({ message: "Error in get_cashatstarting" });
+  }
+});
+
+// ******************************** END OF CASHSTARTING *******************************
+
+// ******************************** START OF CODLOG *******************************
+
+app.get('/get_codlog', async (req, res) => {
+  try {
+
+    const cust_det = await CustomerDetails.find({ paid_by: 'cash' }).lean();
+    const delv_cust = await DeliverySaleCustomerDetails.find({ paid_by: 'cash' }).lean();
+    const takaw_cust = await TakeAwayCustomerDetails.find({ paid_by: 'cash' }).lean();
+
+    // Combine the data into one array
+    const combinedData = [...cust_det, ...delv_cust, ...takaw_cust];
+
+    res.json({ data: combinedData, success: true });
+  } catch (error) {
+    res.json({ message: "Error in get_codlog" });
+  }
+});
+
+// ******************************** END OF CODLOG *******************************
+
+// ********************************* START OF SETTLE SALES ****************************
+
+app.get('/get_cashsale/:getdate', async (req, res) => {
+  const { getdate } = req.params;
+  console.log("from cashsale", getdate);
+  try {
+
+    const originalDate = getdate;
+    const convertedDate = convertDateFormat(originalDate);
+    console.log(convertedDate);
+
+    const cust_det = await CustomerDetails.find({ paid_by: 'cash', date: convertedDate }).lean();
+    const delv_cust = await DeliverySaleCustomerDetails.find({ paid_by: 'cash', date: convertedDate }).lean();
+    const takaw_cust = await TakeAwayCustomerDetails.find({ paid_by: 'cash', date: convertedDate }).lean();
+
+    console.log(cust_det);
+    // Calculate total sales
+    const totalSales = calculateTotalSales([...cust_det, ...delv_cust, ...takaw_cust]);
+
+    res.json({ totalSales, success: true });
+
+  } catch (error) {
+    res.json({ message: "Error in get_cashsale" });
+  }
+});
+
+function convertDateFormat(dateString) {
+  const parts = dateString.split('-');
+  const year = parts[0];
+  const month = parseInt(parts[1], 10);
+  const day = parseInt(parts[2], 10);
+
+  // Format the date as MM/DD/YYYY
+  const formattedDate = `${month}/${day}/${year}`;
+  return formattedDate;
+}
+
+// Function to calculate total sales
+function calculateTotalSales(data) {
+  let total = 0;
+  for (const item of data) {
+    total += item.total; // Assuming there is an 'amount' field in each document
+  }
+  return total;
+}
+
+// ******************************** END OF SETTLE SALES ****************************
+
+// TODO: Expenses tracking schema
 
 // ************************************DONT NOT TOUCH ****************************
 // api handler

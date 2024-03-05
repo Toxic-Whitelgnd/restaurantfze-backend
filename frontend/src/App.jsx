@@ -78,6 +78,7 @@ import TakeAwayPay from './components/TakeAway/TakeAwayPay';
 import RecipientTakeAwayCard from './cards/RecipitCards/RecipientTakeAwayCard';
 import EditRecipietPanel from './componets/BillPanel/CRUDbill/RecipietEditPanel';
 import RecipientDeliverySaleCard from './cards/RecipitCards/RecipientDeliverySaleCar';
+import CashOnDeliveryLog from './components/COD/CashOnDeliveryLog';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -101,6 +102,7 @@ function App() {
           <Route path='/expenses' index element={<Expenses />} />
           <Route path='/creditsale' index element={<Creditsale />} />
           <Route path='/cashatstarting' index element={<CashStarting />} />
+          <Route path='/cashondeliverylog' index element={<CashOnDeliveryLog />} />
           <Route path='/crm' index element={<CRM />} />
           <Route path='/messdetails' index element={<MessDetailsForm />} />
           <Route path='/takeaway' index element={<TakeAway />} />
