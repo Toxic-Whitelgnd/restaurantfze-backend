@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-
+import './Editwaiter.css';
 const EditWaiterForm = () => {
     const {waiterid} = useParams();
   const [waiterData, setWaiterData] = useState({
@@ -46,31 +46,39 @@ const EditWaiterForm = () => {
   };
 
   return (
-    <div>
-      <h2>Edit Waiter Details</h2>
+    <div class='EditWaiter-Data'>
+      <h2 id='EditWaiter-Data-heading'>Edit Waiter Details</h2>
       <ToastContainer />
       <form>
-        <label>
+        <label class='EditWaiter-Data-label-1'>
           Waiter Name:
-          <input type="text" name="waiterName" value={waiterData.waiterName} onChange={handleChange} />
+          <input 
+          class='EditWaiter-Data-input-1'
+          type="text" name="waiterName" value={waiterData.waiterName} onChange={handleChange} />
         </label>
         <br />
-        <label>
+        <label class='EditWaiter-Data-label-1'>
           Waiter Number:
-          <input type="text" name="waiterNumber" value={waiterData.waiterNumber} onChange={handleChange} />
+          <input 
+          class='EditWaiter-Data-input-1'
+          type="text" name="waiterNumber" value={waiterData.waiterNumber} onChange={handleChange} />
         </label>
         <br />
-        <label>
+        <label class='EditWaiter-Data-label-1'>
           Address:
-          <input type="text" name="address" value={waiterData.address} onChange={handleChange} />
+          <input 
+          class='EditWaiter-Data-input-1'
+          type="text" name="address" value={waiterData.address} onChange={handleChange} />
         </label>
         <br />
-        <label>
+        <label class='EditWaiter-Data-label-1'>
           Date of Joining:
-          <input type="date" name="dateOfJoining" value={waiterData.dateOfJoining} onChange={handleChange} />
+          <input 
+          class='EditWaiter-Data-input-1'
+          type="date" name="dateOfJoining" value={waiterData.dateOfJoining} onChange={handleChange} />
         </label>
         <br />
-        <button type="button" onClick={handleUpdate}>
+        <button className='EditWaiter-submit'  type="button" onClick={handleUpdate}>
           Update Waiter Details
         </button>
       </form>

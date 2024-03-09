@@ -23,8 +23,8 @@ const TableList = () => {
   return (
     <div className="container mt-4">
        <div className='tabledeli-list'>
-      <h1 id='tabledeli-list-heading-head'>Select the Table to Edit</h1>
-      <h4 id='tabledeli-list-heading'>Indoor Tables</h4>
+      <h1 id='tabledeli-list-heading-head'>Select The Table To Edit</h1>
+      <h4 id='tabledeli-list-heading'>InDoor Tables</h4>
       <ul className='tabledeli-list-ul'>
         {
             tables.filter(x => x.table_type === 'indoor').map(table => (

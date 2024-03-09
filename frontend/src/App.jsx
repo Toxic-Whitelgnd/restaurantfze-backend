@@ -124,7 +124,7 @@ function App() {
           <Route path='/admin/edit-home'  element={<HomeEditList/>} />
           <Route path='/admin/edit-home/:homeno'  element={<HomeEdit/>} />
           <Route path='/admin/delete-home'  element={<HomeDelList/>} />
-          <Route path='/admin/delete-home/:homeno'  element={<HomeDelete />} />
+          <Route path='/admin/delete-home/:homeno'  element={<HomeDelete/>} />
           {/* for tables */}
           <Route path='/admin/tablepanel'  element={<TablePanel/>} />
           <Route path='/admin/create-table' element={<TableForm />} />

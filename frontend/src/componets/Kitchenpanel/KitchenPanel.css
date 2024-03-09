@@ -39,7 +39,7 @@
     color: #1c3176fd;
     font-weight: bold;
     background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 
 
 }
@@ -47,20 +47,20 @@
     color: #1c3176fd;
     font-weight: bold;
     background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 
 }
 .running-delivery-order:hover{
     color: #1c3176fd;
     font-weight: bold;
     background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 
 }
 .running-takeaway-order:hover{
     color: #1c3176fd;
     font-weight: bold;
     background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './HomeDelList.css'
+import './HomeDelList.css';
 
 const HomeDelList = () => {
     const [tables, setTables] = useState([]);
@@ -22,7 +22,7 @@ const HomeDelList = () => {
         <div className="container mt-4">
             <div class='HomeDelList'>
             <div class='HomeDelList-heading'>
-            <h1 >Select The Home Name To Edit</h1>
+            <h1 >Select The Home Name To Delete</h1>
             </div>
             <div class='HomeDelList-options'>
             <ul>
