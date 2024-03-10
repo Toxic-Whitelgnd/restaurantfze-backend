@@ -655,7 +655,7 @@ const DeliverySale = () => {
         setSearchTerm(e.target.value);
     }
 
-    const [totalAmount, setTotalAmount] = useState('');
+    const [totalAmount, setTotalAmount] = useState(0);
 
     const handleAmountChange = (e) => {
         setTotalAmount(e.target.value);
@@ -843,7 +843,7 @@ const DeliverySale = () => {
                                     <select value={selectedPaymentType} onChange={handleSelectChange}>
                                         <option value="">Select...</option>
                                         <option value="creditcard">Credit Card</option>
-
+                                        <option value="creditsale">Credit sale</option>
                                         <option value="debitcard">Debit Card</option>
                                         <option value="cash">Cash</option>
                                     </select>

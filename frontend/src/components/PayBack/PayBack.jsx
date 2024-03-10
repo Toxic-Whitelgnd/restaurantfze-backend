@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Payback.css"
 import SaleOrderApi from '../api/sodapi';
 import PaybackCard from '../../cards/PayBackCards/paybackCard';
+import axios from 'axios';
 
 const PayBack = () => {
 
     const [pb,setpb] = useState(SaleOrderApi);
 
     const [rcard,setRcard] = useState([]);
+    useEffect(() =>{
+        fetchData();
+    },[]);
+
+    const fetchData = async () => {
+        try {
+            const res =  await axios.get(`http://localhost:9999/get_payback`);
+            console.log(res.data);
+            setpb(res.data.data);
+  
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     const [rcid,setrcip] = useState('');
     const onChangeRc = (e)=>{
@@ -15,7 +30,7 @@ const PayBack = () => {
     }
 
     const FindRcId = ()=>{
-        const RCans = pb.filter((x)=> x.recieptid.includes(rcid));
+        const RCans = pb.filter((x)=> x.order_no.toString().includes(rcid));
         
         setRcard(RCans);
         console.log(RCans);
@@ -45,16 +60,16 @@ const PayBack = () => {
                         <>
                         <div key={idx}>
                             <PaybackCard 
-                            name={val.custname}
+                            name={val.customer_name}
                             // ordertype={val.ordertype}
-                            recId={val.recieptid}
-                            paidby={val.paidby}
+                            recId={val.receiptNo}
+                            paidby={val.paid_by}
                             odate={val.date}
                             otime={val.time}
                             total={val.total}
                             bcolor={val.color}
-                            trasactionid={val.trasactionid}
-                            number={val.number}
+                            trasactionid={val.order_no}
+                            number={val.customer_mobileNumber}
                             />
                         </div>
                         

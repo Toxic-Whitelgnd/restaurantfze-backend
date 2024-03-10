@@ -1,11 +1,27 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./creditsale.css";
 import SaleOrderApi from '../api/sodapi';
 import CScards from '../../cards/CreditSaleCards/CScards';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Creditsale = () => {
 
-    const [sodata, setSodata] = useState(SaleOrderApi);
+    const [sodata, setSodata] = useState([]);
+
+    useEffect(() => {
+        fetchCreditSaleData();
+    }, []);
+
+    const fetchCreditSaleData = async () => {
+        try {
+            const res = await axios.get(`http://localhost:9999/get_creditsale`);
+            console.log(res.data);
+            setSodata(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const [saletype, setSaletype] = useState('all');
     const handleSalestate = (e) => {
@@ -41,68 +57,80 @@ const Creditsale = () => {
     const [fls, setFls] = useState('');
 
     const handleFilterRec = () => {
-        sortTableData(cards, saletype);
-        const ans = sodata.filter((x) =>
-            x.recieptid.includes(recipientIdFilter));
+        sortTableData(saletype);
 
-        setFls(ans);
     }
 
     // Function to sort table data
-    const sortTableData = (type, IorD) => {
+    const sortTableData = (IorD) => {
         const sortedData = [...sodata];
-
-        if (type === 'credit') {
-            // Sort by creditAmt where debitAmt is 0
-            if (IorD === "hightolow") {
-                sortedData.sort((a, b) => b.creditamt - a.creditamt);
-            }
-            else if (IorD === "lowtohigh") {
-                sortedData.sort((a, b) => a.creditamt - b.creditamt)
-            }
-            else {
-                sortedData.sort((a, b) => b.creditamt - a.creditamt);
-            }
-
-        } else if (type === 'debit') {
-            // Sort by debitAmt where creditAmt is 0
-            // Sort by creditAmt where debitAmt is 0
-            if (IorD === "hightolow") {
-                sortedData.sort((a, b) => b.debitamt - a.debitamt);
-            }
-            else if (IorD === "lowtohigh") {
-                sortedData.sort((a, b) => a.debitamt - b.debitamt);
-            }
-            else {
-                sortedData.sort((a, b) => b.debitamt - a.debitamt);
-            }
-
-        } else if (type === 'balancetopay') {
-            // Sort by debitAmt where creditAmt is 0
-            // Sort by creditAmt where debitAmt is 0
-            if (IorD === "hightolow") {
-                sortedData.sort((a, b) => b.balancetopay - a.balancetopay);
-            }
-            else if (IorD === "lowtohigh") {
-                sortedData.sort((a, b) => a.balancetopay - b.balancetopay);
-            }
-            else {
-                sortedData.sort((a, b) => b.balancetopay - a.balancetopay);
-            }
-
+        if (IorD === "hightolow") {
+            sortedData.sort((a, b) => b.total - a.total);
         }
+        else if (IorD === "lowtohigh") {
+            sortedData.sort((a, b) => a.total - b.total)
+        }
+        else {
+            sortedData.sort((a, b) => b.total - a.total);
+        }
+
 
 
         setSodata(sortedData);
     };
 
+    const handleReceive = async (cust) => {
+        console.log("check this customer", cust.customer_name);
+        if (cust.type === "dinein") {
+            try {
+                const res = await axios.put(`http://localhost:9999/update_creditsale_dineincustomerdetails/${cust._id}`, {
+                    amountpaid: cust.total,
+                    date: new Date().toLocaleDateString(),
+                });
+                if (res.data.success) {
+                    toast.success("Credit sale was successfully updated");
+                    setTimeout(()=>{
+                        window.location.reload();
+                    },2000)
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+        else if (cust.type === "deliverysale") {
+            try {
+                const res = await axios.put(`http://localhost:9999/update_creditsale_deliverysalecustomerdetails/${cust._id}`, {
+                    amountpaid: cust.total,
+                    date: new Date().toLocaleDateString(),
+                });
+                if (res.data.success) {
+                    toast.success("Credit sale was successfully updated");
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+        else if (cust.type === "countersale") {
+            try {
+                const res = await axios.put(`http://localhost:9999/update_creditsale_takeawaysalecustomerdetails/${cust._id}`, {
+                    amountpaid: cust.total,
+                    date: new Date().toLocaleDateString(),
+                });
+                if (res.data.success) {
+                    toast.success("Credit sale was successfully updated");
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+    }
 
 
 
     return (
         <div>
             <h1 className='text-center'>Credit sale details</h1>
-        
+            <ToastContainer />
             <div className='food-category-bar-1'>
 
                 <div className='foo-cat'>
@@ -118,7 +146,7 @@ const Creditsale = () => {
 
                     />
 
-                    <label for="name" class="form__label">Find by RecipientID</label>
+                    <label for="name" class="form__label">Find by OrderNo</label>
 
                 </div>
 
@@ -131,15 +159,14 @@ const Creditsale = () => {
                     </select>
 
                 </div>
-                <div className='foo-cat-1'>
+                {/* <div className='foo-cat-1'>
                     <span htmlFor="foodCategory">Sort by Card:</span>
                     <select id="foodCategory-1" onChange={handleCard} value={cards}>
                         <option value="all">All</option>
                         <option value="credit">Credit</option>
-                        <option value="debit">Debit</option>
                         <option value="balancetopay">BalanceToPay</option>
                     </select>
-                </div>
+                </div> */}
 
                 <div>
                     <button onClick={handleFilterRec} className="btn-fl"><i class="animation"></i>Filter<i class="animation"></i>
@@ -154,26 +181,26 @@ const Creditsale = () => {
                 <ul class="responsive-table">
                     <li class="otable-header">
                         <div class="colo colo-3">Customer Name</div>
-                        <div class="colo colo-1">RecipentId</div>
+                        <div class="colo colo-1">OrderNo</div>
                         <div class="colo colo-4">Credit Amt</div>
-                        <div class="colo colo-4">Debit Amt</div>
                         <div class="colo colo-3">BalanceTopay</div>
                         <div class="colo colo-3">Action</div>
                     </li>
                     {/* only three parameter is passed as it should contin only total,discount,net total */}
                     {
-                        sodata && fls &&fls.map((val, idx) => {
+                        //fls &&fls
+                        sodata && sodata.filter((x) =>
+                        x.order_no.toString().includes(recipientIdFilter)).map((val, idx) => {
                             return (
                                 <>
                                     <CScards
                                         key={idx}
-                                        name={val.custname}
-                                        recipientid={val.recieptid}
-                                        creditamt={val.creditamt}
-                                        debitamt={val.debitamt}
-                                        balancetopay={val.balancetopay}
-
-
+                                        name={val.customer_name}
+                                        recipientid={val.order_no}
+                                        creditamt={val.total}
+                                        balancetopay={val.total - val.amountpaid}
+                                        handleReceive={handleReceive}
+                                        custData={val}
                                     />
 
                                 </>

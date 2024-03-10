@@ -9,6 +9,7 @@ const Settlesale = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [cash, setCash] = useState('');
     const [cashSale,setCashSale] = useState('');
+    const [creditRecovery,setCreditRecovery] = useState('');
 
     const SettleSaleApi = [
         {
@@ -113,6 +114,7 @@ const Settlesale = () => {
         setTimeout(() => {
             fetchCashAtStarting();
             fetchCashSaleAt();
+            fetchCreditSales();
         }, 1000);
 
     }, []);
@@ -194,6 +196,28 @@ const Settlesale = () => {
         }
     };
 
+    const fetchCreditSales = async () => {
+        try {
+            const today = new Date();
+
+            // Format the date as YYYY-MM-DD
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+
+            console.log(selectedDate);
+            const res = await axios.get(`https://restogenius.onrender.com/get_creditsalerecovery/${formattedDate}`);
+           
+            console.log(res.data);
+            setCreditRecovery(res.data.creditSales);
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    // for change in the date
 
     const handleDateChange = (event) => {
         console.log("from date change", event.target.value);
@@ -217,14 +241,14 @@ const Settlesale = () => {
                     />
                     <p>Selected Date: {selectedDate}</p>
                 </div>
-                <div className='orderCont'>
+                {/* <div className='orderCont'>
 
                     <ul class="responsive-table">
                         <li class="otable-header">
                             <div class="colo colo-1">Content </div>
                             <div class="colo colo-4">Amount</div>
                         </li>
-                        {/* only three parameter is passed as it should contin only total,discount,net total */}
+                        only three parameter is passed as it should contin only total,discount,net total
                         {
                             ss && ss.filter(x => x.type == 'gdt').map((val, idx) => {
                                 return (
@@ -243,7 +267,7 @@ const Settlesale = () => {
 
                     </ul>
 
-                </div>
+                </div> */}
 
             </div>
 
@@ -270,6 +294,14 @@ const Settlesale = () => {
 
                             <div class="colo colo-1-ss" data-label="Job Id">Cash Sale</div>
                             <div class="colo colo-4-ss" data-label="Payment Status">{cashSale ? cashSale : 0}</div>
+
+                        </li>
+                    </div>
+                    <div>
+                        <li class="otable-row-ss"  >
+
+                            <div class="colo colo-1-ss" data-label="Job Id">CreditRecovery Sale</div>
+                            <div class="colo colo-4-ss" data-label="Payment Status">{creditRecovery ? creditRecovery : 0}</div>
 
                         </li>
                     </div>
