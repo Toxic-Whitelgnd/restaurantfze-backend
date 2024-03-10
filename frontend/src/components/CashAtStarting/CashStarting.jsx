@@ -15,10 +15,13 @@ function CashStarting() {
     try {
         const res = await axios.get(`https://restogenius.onrender.com/get_cashatstarting`);
         console.log(res.data);
-        setSelectedDate(res.data.selectedDate);
-        setCash(res.data.cash);
-        setUpdateCash(true);
-        setCashid(res.data._id);
+        if(res.data != null){
+          setSelectedDate(res.data.selectedDate);
+          setCash(res.data.cash);
+          setUpdateCash(true);
+          setCashid(res.data._id);
+        }
+       
     } catch (error) {
         console.log(error.message);
     }
@@ -37,9 +40,9 @@ function CashStarting() {
     // Here you can add code to handle saving the data
     console.log('Date:', selectedDate);
     console.log('Cash:', cash);
-    const data = {cash: cash, selectedDate: selectedDate };
+    const datacash = {cash: cash, selectedDate: selectedDate };
     // Reset form after saving
-    const res = axios.post('https://restogenius.onrender.com/add_cashatstarting', data);
+    const res = axios.post('https://restogenius.onrender.com/add_cashatstarting', datacash);
     if(res.data.success) {
         toast.success("Cash added successfully")
     }

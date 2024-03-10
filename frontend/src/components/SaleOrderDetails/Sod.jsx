@@ -125,7 +125,6 @@ const Sod = () => {
     return (
         <div>
             <h1>Sale order details</h1>
-            <p>Display the navbar with filter and sort </p>
             <div className='food-order-cont-1'>
                 <div className='food-category-bar-1'>
                     <div className='foo-cat-1'>
@@ -154,7 +153,7 @@ const Sod = () => {
                         <label for="name" class="form__label">Find by RecipientID</label>
 
                     </div>
-                    <button onClick={handleFilterRec} className='btn btn-success'>Find by ID</button>
+                    <button onClick={handleFilterRec} className='btn-success'>Find by ID</button>
 
                     <div className='foo-cat'>
                         <label htmlFor="startDate">Start Date:</label>
@@ -178,7 +177,7 @@ const Sod = () => {
 
 
 
-                    <button onClick={handleFilter} className='btn btn-success'>Filter by date</button>
+                    <button onClick={handleFilter} className='btn-1 btn-success'>Filter by date</button>
 
 
 
@@ -190,7 +189,7 @@ const Sod = () => {
                 {
                     isFocused ? fls &&
 
-                    fls.map((val, idx) => {
+                    fls.filter(x =>  x.amountpaid !== 0).map((val, idx) => {
                         return (
                             <>
                                 <div key={idx}>
@@ -211,7 +210,7 @@ const Sod = () => {
                     })
                         :  bySaletype &&
 
-                        bySaletype.map((val, idx) => {
+                        bySaletype.filter(x =>  x.amountpaid !== 0).map((val, idx) => {
                             return (
                                 <>
                                     <div key={idx}>

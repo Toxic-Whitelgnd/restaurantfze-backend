@@ -452,6 +452,50 @@ const CashAtStartingSchema = new mongoose.Schema({
   }
 });
 
+const ExpensesSchema = new mongoose.Schema({
+  category: {
+      type: String,
+      
+  },
+  companyName: {
+      type: String,
+      
+  },
+  description: {
+      type: String,
+      
+  },
+  invoiceNo: {
+      type: String,
+      
+  },
+  netTotal: {
+      type: String,
+      
+  },
+  purchaseDate: {
+      type: String,
+  },
+  subTotal: {
+      type: String,
+      
+  },
+  trnNo: {
+      type: String,
+      
+  },
+  vat: {
+      type: String,
+      
+  },
+  vatAmount: {
+      type: String,
+      
+  }
+});
+
+
+
 
 
 // ****************** END **********************
@@ -510,6 +554,8 @@ const DeliverySaleCustomerDetails = mongoose.model(
 const Recipiet = mongoose.model("recipiet", recipietSchema);
 
 const CashAtStarting = mongoose.model('cashatstarting', CashAtStartingSchema);
+
+const Expenses = mongoose.model('Expenses', ExpensesSchema);
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -1259,8 +1305,11 @@ app.put("/update_customer_details/:orderid", async (req, res) => {
 
 app.get("/get_customer_details", async (req, res) => {
   try {
-    const custdeat = await CustomerDetails.find({});
-    res.json(custdeat);
+    const cust_det = await CustomerDetails.find({ }).lean();
+    const delv_cust = await DeliverySaleCustomerDetails.find({ }).lean();
+    const takaw_cust = await TakeAwayCustomerDetails.find({ }).lean();
+    const customer_deatails = [...cust_det,...delv_cust,...takaw_cust]
+    res.json(customer_deatails);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -1888,6 +1937,28 @@ app.get('/get_cashsale/:getdate', async (req, res) => {
   }
 });
 
+
+
+app.get('/get_creditsalerecovery/:currdate', async (req, res) => {
+  const {currdate} = req.params;
+  try {
+    const originalDate = currdate;
+    const convertedDate = convertDateFormat(originalDate);
+    console.log(convertedDate);
+
+    const cust_det = await CustomerDetails.find({ paid_by: 'creditsale', date: convertedDate }).lean();
+    const delv_cust = await DeliverySaleCustomerDetails.find({ paid_by: 'creditsale', date: convertedDate }).lean();
+    const takaw_cust = await TakeAwayCustomerDetails.find({ paid_by: 'creditsale', date: convertedDate }).lean();
+
+    // Calculate total sales
+    const creditSales = calculateTotalSales([...cust_det, ...delv_cust, ...takaw_cust]);
+
+    res.json({ creditSales, success: true });
+  } catch (error) {
+    res.json({ message: "Error in get_cashsale" });
+  }
+});
+
 function convertDateFormat(dateString) {
   const parts = dateString.split('-');
   const year = parts[0];
@@ -1909,8 +1980,110 @@ function calculateTotalSales(data) {
 }
 
 // ******************************** END OF SETTLE SALES ****************************
+// ******************************** START OF PAYBACK ****************************
+app.get('/get_payback', async (req, res) => {
+  try {
 
-// TODO: Expenses tracking schema
+    const cust_det = await CustomerDetails.find().lean();
+    const delv_cust = await DeliverySaleCustomerDetails.find().lean();
+    const takaw_cust = await TakeAwayCustomerDetails.find().lean();
+
+    // Combine the data into one array
+    const combinedData = [...cust_det, ...delv_cust, ...takaw_cust];
+    console.log(combinedData.length);
+
+    res.json({ data: combinedData, success: true });
+  } catch (error) {
+    res.json({ message: "Error in get_payback" });
+  }
+});
+// ******************************** END OF PAYBACK ****************************
+// ******************************** START OF EXPENSES ***************************
+app.post('/post_expenses', async (req, res) => {
+  try {
+      console.log(req.body);
+      const purchase = new Expenses(req.body);
+     
+      await purchase.save();
+   
+      res.status(201).send({success: true, message:"purchase saved successfully"});
+  } catch (error) {
+      
+      res.status(400).send('Error creating purchase: ' + error.message);
+  }
+});
+
+// ******************************** END OF EXPENSES ***************************
+
+// ******************************** START OF CREDIT SALE ************************
+
+app.get('/get_creditsale', async (req, res) => {
+  try {
+    const cust_det = await CustomerDetails.find({ paid_by: 'creditsale', amountpaid:0 }).lean();
+    const delv_cust = await DeliverySaleCustomerDetails.find({ paid_by: 'creditsale', amountpaid:0 }).lean();
+    const takaw_cust = await TakeAwayCustomerDetails.find({ paid_by: 'creditsale', amountpaid:0 }).lean();
+
+    const creditsaledetails = [...cust_det, ...delv_cust, ...takaw_cust];
+    console.log(creditsaledetails);
+    res.json(creditsaledetails);
+  } catch (error) {
+    res.status(400).send('Error getting creditsale');
+  }
+});
+
+app.put('/update_creditsale_dineincustomerdetails/:id', async (req, res) => {
+  const {id} = req.params;
+  try {
+    const updateCust = await CustomerDetails.findOneAndUpdate({
+      _id: id,
+    },
+      {
+        $set: req.body,
+      });
+
+      res.json({success:true});
+
+  } catch (error) {
+    res.status(404).send('Error updating cresitsale in dinine');
+  }
+});
+
+app.put('/update_creditsale_deliverysalecustomerdetails/:id', async (req, res) => {
+  const {id} = req.params;
+  try {
+    const updateCust = await DeliverySaleCustomerDetails.findOneAndUpdate({
+      _id: id,
+    },
+      {
+        $set: req.body,
+      });
+
+      res.json({success:true});
+
+  } catch (error) {
+    res.status(404).send('Error updating cresitsale in dinine');
+  }
+});
+
+app.put('/update_creditsale_takeawaysalecustomerdetails/:id', async (req, res) => {
+  const {id} = req.params;
+  try {
+    const updateCust = await TakeAwayCustomerDetails.findOneAndUpdate({
+      _id: id,
+    },
+      {
+        $set: req.body,
+      });
+
+      res.json({success:true});
+
+  } catch (error) {
+    res.status(404).send('Error updating cresitsale in dinine');
+  }
+});
+
+
+// ******************************** END OF CREDIT SALE **************************
 
 // ************************************DONT NOT TOUCH ****************************
 // api handler

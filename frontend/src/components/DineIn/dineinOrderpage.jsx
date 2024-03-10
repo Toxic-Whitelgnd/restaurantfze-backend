@@ -461,6 +461,7 @@ const DineinOrderpage = () => {
                     toast.success(response.data.message);
                     window.location.reload();
                 } catch (error) {
+                    toast.error("Check your order once");
                     console.error(error);
                 }
             } else {
@@ -767,7 +768,7 @@ const DineinOrderpage = () => {
     };
 
     // handling the total amont
-    const [totalAmount, setTotalAmount] = useState('');
+    const [totalAmount, setTotalAmount] = useState(0);
 
     const handleAmountChange = (e) => {
         setTotalAmount(e.target.value);
@@ -1006,6 +1007,7 @@ const DineinOrderpage = () => {
                                         <option value="">Select...</option>
                                         <option value="creditcard">Credit Card</option>
                                         <option value="debitcard">Debit Card</option>
+                                        <option value="creditsale">Credit sale</option>
                                         <option value="cash">Cash</option>
                                     </select>
                                     <div className='row'>
