@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+import './dineinDeliveryorder.css';
 const DineinDeliveryorder = () => {
     const [runningORder, setRunningOrder] = useState([]);
     useEffect(() => {
@@ -31,9 +31,9 @@ const DineinDeliveryorder = () => {
     };
 
     return (
-        <div>
-            <h1>Dine in Delivery Order - Tracking</h1>
-            <div>
+        <div  class='dineinDeliveryorder-Data'>
+            <h1 id='dineinDeliveryorder-Data-heading'>Dine in Delivery Order - Tracking</h1>
+            <div class='dineinDeliveryorder-itemboard'>
                 {
                     runningORder && runningORder.map((order)=>{
                         return (
@@ -43,8 +43,11 @@ const DineinDeliveryorder = () => {
                             return(
                                 <>
                                 <h3>Table no : {order.tableNo}</h3>
-                                <h4>Food : {item.foodname} is {item.status}</h4>
-                                <button onClick={()=>handleDeleteRunningOrder(item)} >Delivered </button>
+                                <h4>Food : {item.foodname} is <span className={item.status === 'ready' ? 'ready-status' : 'not-ready-status'}>
+                                {item.status}
+                                                    </span>
+                                </h4>
+                                <button  className='dineinDeliveryorder-submit'onClick={()=>handleDeleteRunningOrder(item)} >Delivered </button>
                                 </>
                             )
                         })}
