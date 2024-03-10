@@ -24,13 +24,13 @@ const HomeEditList = () => {
     <div className="container mt-4">
         <div class='edit-home'>
         <div class='edit-home-heading'>
-      <h1>Select the Home Name to Edit</h1>
+      <h1>Select The Home Name To Edit</h1>
       </div>
       <div class='edit-home-options'>
       <ul>
         {
             tables.map(table => (
-                <li key={table.tableNo}>
+                <li key={table.tableNo}s>
                   <Link to={`/admin/edit-home/${table.home_id}`} style={{textDecoration:'none'}}>{`${table.home_name}`}</Link>
                 </li>
               ))

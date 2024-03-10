@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams} from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import './DeleteWaiter.css';
 const DeleteWaiter = () => {
   const { waiterid } = useParams();
 
@@ -23,12 +23,18 @@ const DeleteWaiter = () => {
 
   return (
     <div className="container mt-4">
+      <div className='DeleteWaiter-food'>
+      <div>
       <ToastContainer />
-      <h1>Delete Food </h1>
+      <h1 id='DeleteWaiter-food-heading'>Delete Food </h1>
+      </div>
+      <div class='DeleteWaiter-food-body'>
       <p>Are you sure you want to Remove this waiter?</p>
       <button type="button" className="btn btn-danger" onClick={handleDelete}>
         Fire off
       </button>
+    </div>
+    </div>
     </div>
   );
 };

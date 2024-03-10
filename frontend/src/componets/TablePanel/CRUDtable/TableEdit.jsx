@@ -56,7 +56,7 @@ const TableEdit = () => {
 
     return (
         <div className='edit-table-body'>
-            <h1 id='edit-table-body-heading'>Edit table for {tableno}</h1>
+            <h1 id='edit-table-body-heading'>Edit Table For {tableno}</h1>
             <ToastContainer />
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">

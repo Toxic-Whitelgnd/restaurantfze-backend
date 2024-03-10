@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './WaiterList.css';
 
 const EditWaiterList = () => {
     const [tables, setTables] = useState([]);
@@ -22,9 +23,10 @@ const EditWaiterList = () => {
       }, []);
     return (
         <div className="container mt-4">
-        <h1>Select the Waiter to Edit</h1>
+          <div class='WaiterList-list'>
+        <h1 id='WaiterList-list-heading'>Select The Waiter To Edit</h1>
     
-        <ul>
+        <ul className='WaiterList-list-ui'>
           {
               tables.map(table => (
                   <li key={table.tableNo}>
@@ -33,7 +35,7 @@ const EditWaiterList = () => {
                 ))
           }
         </ul>
-        
+        </div>
       </div>
     );
 }

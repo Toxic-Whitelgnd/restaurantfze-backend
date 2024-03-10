@@ -1,0 +1,52 @@
+.DeleteList-list{
+    margin: 1.5cm 20% 1.5cm 20%;
+    background-color: #5a7bdca6;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    padding: 0px 0px 25px 0px;
+}
+#DeleteList-list-heading{
+    font-weight:bolder bold;
+    background-color:blanchedalmond;
+    text-align: center;
+    padding:  1px 3px 5px 3px;
+    border-radius: 15px 15px 15px 15px;
+}
+#DeleteList-list-heading h1{
+    font-weight: 700;
+}
+.DeleteList-list-label{
+    margin: 1cm 25% 1px 25%;
+    font-weight: 700;
+}
+.DeleteList-list-ui{
+    
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 1cm;
+    color: rgb(226, 226, 250);
+    
+}
+.DeleteList-list-ui li{
+    text-decoration: none;
+    /* background-color: rgb(1, 1, 27); */
+    display: inline-block;
+    margin-left: 0.5cm;
+    margin-top: 1cm;
+    margin-right: 1.5cm;
+    color: white;
+    border-radius: 5px;
+}
+.DeleteList-list-ui a{
+    text-decoration: none;
+    color: white;
+    padding: 10px 10px 10px 10px;
+    background-color:rgb(1, 1, 27); 
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.DeleteList-list-ui a:hover{
+    background-color: rgb(156, 156, 29);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+}

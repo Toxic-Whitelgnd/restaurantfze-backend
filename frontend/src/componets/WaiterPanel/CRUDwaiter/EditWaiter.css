@@ -1,0 +1,64 @@
+/* main body css */
+.EditWaiter-Data{
+    margin: 1.5cm 38% 1.7cm 38%;
+    background-color: #5a7bdca6;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    padding: 0px 0px 15px 0px;
+}
+/* headi css */
+#EditWaiter-Data-heading{
+    font-weight:bolder bold;
+    background-color:blanchedalmond;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+}
+#EditWaiter-Data-heading h1{
+    font-weight: bold;
+}
+
+.form-EditWaiter-Data{
+ text-align: center;
+}
+.EditWaiter-Data-label-1{
+    display: inline-block;
+    margin-left: 20%;
+    margin-right: 2px;
+    border: none;
+    font-weight: 600;
+}
+.EditWaiter-Data-input-1{
+    margin-left: 10px;
+    border:none;
+    border-radius: 20px;
+    padding: 5px 5px 7px 7px;
+    background-color: rgb(226, 226, 250);
+}
+.EditWaiter-Data-input-1:focus{
+    background-color: lightblue;
+    border: none;
+}
+.EditWaiter-Data-input-2{
+    margin-left: 20px;
+    border:none;
+    border-radius: 20px;
+    padding: 5px 5px 7px 7px;
+    background-color: rgb(226, 226, 250);
+}
+.EditWaiter-Data-input-2:focus{
+    background-color: lightblue;
+}
+
+
+.EditWaiter-submit{
+    background-color: rgb(156, 156, 29);
+    color: aliceblue;
+    font-size: large;
+    padding: 5px 5px 5px 5px ; 
+    margin-bottom: 0.5cm;
+    border-radius: 1cm;
+    margin: 5px  15% 1px 15% ;
+}
+.EditWaiter-submit:hover{
+    background-color: rgb(1, 1, 27);
+}

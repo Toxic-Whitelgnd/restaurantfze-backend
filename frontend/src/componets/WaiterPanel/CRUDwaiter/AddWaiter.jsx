@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import './AddWaiter.css';
 const AddWaiter = () => {
 
     const [waiterData, setWaiterData] = useState({
@@ -42,31 +42,39 @@ const AddWaiter = () => {
       };
 
     return (
-        <div>
-         <h2>Add Waiter</h2>
+        <div class='Addwaiter-Data'>
+         <h2 id='Addwaiter-Data-heading'>Add Waiter</h2>
          <ToastContainer />
       <form onSubmit={handleSubmit}>
-        <label>
+        <label class='Addwaiter-Data-label-1'>
           Waiter Name:
-          <input type="text" name="waiterName" value={waiterData.waiterName} onChange={handleChange} />
+          <input 
+          class='Addwaiter-Data-input-1'
+          type="text" name="waiterName" value={waiterData.waiterName} onChange={handleChange} />
         </label>
         <br />
-        <label>
+        <label  class='Addwaiter-Data-label-1'>
           Waiter PhoneNumber:
-          <input type="text" name="waiterNumber" value={waiterData.waiterNumber} onChange={handleChange} />
+          <input
+          class='Addwaiter-Data-input-1'
+          type="text" name="waiterNumber" value={waiterData.waiterNumber} onChange={handleChange} />
         </label>
         <br />
-        <label>
+        <label class='Addwaiter-Data-label-1'>
           Address:
-          <input type="text" name="address" value={waiterData.address} onChange={handleChange} />
+          <br  />
+          <input
+          class='Addwaiter-Data-input-1' type="text" name="address" value={waiterData.address} onChange={handleChange} />
         </label>
         <br />
-        <label>
+        <label  class='Addwaiter-Data-label-1'>
           Date of Joining:
-          <input type="date" name="dateOfJoining" value={waiterData.dateOfJoining} onChange={handleChange} />
+          <input 
+          class='Addwaiter-Data-input-1'
+          type="date" name="dateOfJoining" value={waiterData.dateOfJoining} onChange={handleChange} />
         </label>
         <br />
-        <button type="submit">Add Waiter</button>
+        <button className='Addwaiter-submit'  type="submit">Add Waiter</button>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import './ChangeAvailability.css';
 const ChangeAvailability = () => {
     const [tables, setTables] = useState([]);
 
@@ -33,10 +33,11 @@ const ChangeAvailability = () => {
       }, []);
     return (
         <div className="container mt-4">
-        <h1>Select the Food to Edit</h1>
-        <label>
+        <div class='food-del-list'>
+        <h1 id='food-del-list-heading'>Select the Food to Edit</h1>
+        <label class='food-del-list-label'>
                         Food Type:
-                        <select value={foodType} onChange={(e) => setFoodType(e.target.value)}>
+                        <select value={foodType} className='food-del-list-select' onChange={(e) => setFoodType(e.target.value)}>
                             <option value="" disabled>
                                 Select Food Type to filter
                             </option>
@@ -47,7 +48,7 @@ const ChangeAvailability = () => {
                             ))}
                         </select>
                     </label>
-        <ul>
+        <ul className='food-del-list-ui'>
           {
               tables.filter(x => x.foodType === foodType).map(table => (
                   <li key={table.tableNo}>
@@ -56,7 +57,7 @@ const ChangeAvailability = () => {
                 ))
           }
         </ul>
-        
+        </div>
       </div>
     );
 }
