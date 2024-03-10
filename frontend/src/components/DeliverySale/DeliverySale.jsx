@@ -655,7 +655,7 @@ const DeliverySale = () => {
         setSearchTerm(e.target.value);
     }
 
-    const [totalAmount, setTotalAmount] = useState('');
+    const [totalAmount, setTotalAmount] = useState(0);
 
     const handleAmountChange = (e) => {
         setTotalAmount(e.target.value);

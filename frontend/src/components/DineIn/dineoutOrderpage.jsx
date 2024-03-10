@@ -770,7 +770,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
     };
 
     // handling the total amont
-    const [totalAmount, setTotalAmount] = useState('');
+    const [totalAmount, setTotalAmount] = useState(0);
 
     const handleAmountChange = (e) => {
         setTotalAmount(e.target.value);
