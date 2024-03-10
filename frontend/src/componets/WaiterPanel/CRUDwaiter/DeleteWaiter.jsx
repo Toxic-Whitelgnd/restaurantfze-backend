@@ -26,7 +26,7 @@ const DeleteWaiter = () => {
       <div className='DeleteWaiter-food'>
       <div>
       <ToastContainer />
-      <h1 id='DeleteWaiter-food-heading'>Delete Food </h1>
+      <h1 id='DeleteWaiter-food-heading'>Delete Waiter </h1>
       </div>
       <div class='DeleteWaiter-food-body'>
       <p>Are you sure you want to Remove this waiter?</p>

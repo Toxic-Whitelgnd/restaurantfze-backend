@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams} from 'react-router-dom';
 import axios from 'axios';
+import './DeleteMessDetails.css';
 import { ToastContainer, toast } from 'react-toastify';
+
 
 const DeleteMessDetails = () => {
   const { messid } = useParams();
@@ -22,12 +24,18 @@ const DeleteMessDetails = () => {
 
   return (
     <div className="container mt-4">
+       <div className='DeleteMessDetails-food'>
+      <div>
       <ToastContainer />
-      <h1>Delete Mess Details </h1>
+      <h1  id='DeleteMessDetails-food-heading'>Delete Mess Details </h1>
+     </div>
+      <div class='DeleteMessDetails-food-body'>
       <p>Are you sure you want to delete this Mess Detail?</p>
       <button type="button" className="btn btn-danger" onClick={handleDelete}>
         Delete
       </button>
+    </div>
+    </div>
     </div>
   );
 };

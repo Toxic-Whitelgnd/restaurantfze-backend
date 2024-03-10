@@ -1,0 +1,101 @@
+/* main body css */
+.RunnigOrderDeilverySale-Data{
+    margin: 1.5cm 10% 1.7cm 10%;
+    background-color: #5a7bdca6;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    padding: 0px 0px 15px 0px;
+}
+/* headi css */
+#RunnigOrderDeilverySale-Data-heading{
+    /* font-weight:bolder bold; */
+    background-color:blanchedalmond;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 25px 25px 15px 5px;
+}
+.RunnigOrderDeilverySale-itemboard{
+    /* display: block; */
+    color: white;
+    font-weight: 700;
+   
+    border-radius: 20px;
+    background-color: rgba(47, 113, 47, 0.568);
+    padding: 50px 0; /* Adjust padding */
+    text-decoration: none;
+    margin-bottom: 0.5cm;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.RunnigOrderDeilverySale-itemboard h2{
+    background-color:blanchedalmond;
+    text-align: center;
+    font-weight: 700;
+    color: black;
+    border-radius: 15px 15px 15px 15px;
+}
+.RunnigOrderDeilverySale-itemboard:hover{
+    /* box-shadow: blue 15px 5px 5px 5px; */
+   box-shadow:  #1c3176fd 6px 8px 6px 6px;
+    /* box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; */
+}
+/* status background */
+.ready-status {
+    background-color: rgb(38, 197, 38);
+    border: none;
+    border-radius: 5px;
+   
+}
+
+.not-ready-status {
+    background-color:rgb(231, 61, 61);
+    border: none;
+    border-radius: 5px;
+}
+
+/* ready order button */
+.RunnigOrderDeilverySale-ready-button{
+    background-color: rgb(38, 197, 38);
+    border: none;
+    border-radius: 10px 10px 10px 10px;
+    font-weight: 700;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.RunnigOrderDeilverySale-ready-button:hover{
+    background-color: rgb(0, 0, 0);
+    border: none;
+    color:floralwhite   ;
+    /* box-shadow: rgb(21, 32, 43) 0px 20px 30px -10px; */
+    border-radius: 10px 10px 10px 10px;
+    font-weight: 700;
+}
+.RunnigOrderDeilverySale-Notready-button{
+    background-color: rgb(231, 61, 61);
+    border: none;
+    border-radius: 10px 10px 10px 10px;
+    font-weight: 700;
+    margin-left: 5px;
+    margin-right: 2px;
+}
+.RunnigOrderDeilverySale-Notready-button:hover{
+    background-color: rgb(0, 0, 0);
+    border: none;
+    color:floralwhite   ;
+    /* box-shadow: rgb(21, 32, 43) 0px 20px 30px -10px; */
+    border-radius: 10px 10px 10px 10px;
+    font-weight: 700;
+}
+/* save button */
+.ChangeFoodAvail-submit{
+    background-color: rgb(156, 156, 29);
+    color: aliceblue;
+    font-size: large;
+    padding: 5px 5px 5px 5px ; 
+    margin-bottom: 0.5cm;
+    border-radius: 1cm;
+    margin: 5px  40% 1px 40% ;
+}
+.ChangeFoodAvail-submit:hover{
+    background-color: rgb(1, 1, 27);
+}

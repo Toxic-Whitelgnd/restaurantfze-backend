@@ -82,15 +82,15 @@ const RunningOrderTakeAway = () => {
 
     }
     return (
-        <div>
+        <div class='RunnigOrderDeilverySale-Data' >
             <ToastContainer />
-            <h1>Current running order of DeliverySale</h1>
+            <h1 id='RunnigOrderDeilverySale-Data-heading'>Current running order of DeliverySale</h1>
             
             <div>{
                 runningORder  && runningORder.map((val, idx) => {
                     return (
                         <> {
-                            <div>
+                            <div class='RunnigOrderDeilverySale-itemboard' >
                                 <h2>order no: {val.order_no}  Order From: {val.orderFrom}</h2>
                                 <h3>Items </h3> {
                                     val.items.map(f => {
@@ -98,19 +98,22 @@ const RunningOrderTakeAway = () => {
                                             <>
                                                 <h4>Item name: {f.foodname}</h4>
                                                 <h4>Item Qty: {f.qty} {f.id}</h4>
-                                                <h4>Item status: {f.status}</h4>
-                                                
+                                                <h4>Item status: 
+                                                    <span className={f.status === 'ready' ? 'ready-status' : 'not-ready-status'}>
+                                                        {f.status}
+                                                    </span>
+                                                </h4>
                                                 <label htmlFor="orderStatus">Order Status:</label>
 
-                                                <button onClick={() => handleUpdate(val, f)}>Update status to ready</button>
-                                                <button onClick={() => handleUpdateNot(val, f)}>Update status to Not-ready</button>
+                                                <button class='RunnigOrderDeilverySale-ready-button' onClick={() => handleUpdate(val, f)}>Update status to ready</button>
+                                                <button  class='RunnigOrderDeilverySale-Notready-button' onClick={() => handleUpdateNot(val, f)}>Update status to Not-ready</button>
 
                                             </>
                                         )
                                     })
                                     
                                 }
-                                <button onClick={()=>handleSave(val)}>Save changes</button>
+                                <button  className='ChangeFoodAvail-submit' onClick={()=>handleSave(val)}>Save changes</button>
                                 
                             </div >
                             }
