@@ -827,33 +827,33 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                 <button type="button" className="close-btn" onClick={closeModal}>
                                     &times;
                                 </button>
-                                <h2>Customer Details</h2>
+                                <h2 id='takwaway-headinh-h2'>Customer Details</h2>
                                 <form>
-                                    <label>
+                                    <label class="takeaway-name">
                                         Customer Name:
                                         <input
                                             type="text"
-                                            name="name"
+                                            name="takeaway-name"
                                             value={customerDetails.name}
                                             onChange={handleInputChange}
                                             required
                                         />
                                     </label>
-                                    <label>
+                                    <label class="takeaway-number">
                                         Mobile Number:
                                         <input
                                             type="tel"
-                                            name="mobileNumber"
+                                            name="takeaway-number"
                                             value={customerDetails.mobileNumber}
                                             onChange={handleInputChange}
                                             required
                                         />
                                     </label>
                                     <label>
-                                        Email:
+                                        Email: <br />
                                         <input
                                             type="email"
-                                            name="email"
+                                            name="takeaway-email"
                                             // placeholder={fetchFood.customer_details.numberOfSeats}
                                             value={customerDetails.email}
                                             onChange={handleInputChange}
@@ -862,10 +862,10 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                         />
                                     </label>
                                     <label>
-                                        Address:
+                                        Address:<br />
                                         <input
                                             type="text"
-                                            name="address"
+                                            name="takeaway-address"
                                             // placeholder={fetchFood.customer_details.numberOfSeats}
                                             value={customerDetails.address}
                                             onChange={handleInputChange}

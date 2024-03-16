@@ -1,4 +1,4 @@
-/* for table */
+for table
 .orderCont-tkl {
     overflow-y: scroll;
     max-width: 1300px;
@@ -88,3 +88,53 @@
   margin-left: 5px;
   margin-right: 5px;
 }
+
+/* closing button css */
+.model1{
+  width: 6cm;
+}
+
+.close-btn{
+  position: absolute;
+  top: 2.7cm;
+  left: 16.5cm;
+  font-size: 25px;
+  color: black;
+  background-color: transparent;
+}
+
+input[name=takeaway-name]{
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-top: .5cm;
+}
+input[name=takeaway-name]:focus{
+background-color: lightblue;
+border: 0px solid black;
+box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+input[name=takeaway-number]{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: .5cm;
+}
+
+input[name=takeaway-email]{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: .5cm;
+}
+
+input[name=takeaway-address]{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: .5cm;
+}
+
+.takeaway-number{
+  
+}
+
+/* Hyala ajun kuthe css dili ahe ka ??? */
+

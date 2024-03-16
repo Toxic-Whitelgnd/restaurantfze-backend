@@ -38,6 +38,7 @@ const FoodType = () => {
         Food Type:
         <input
           type="text"
+          name='food-type-name'
           value={foodType}
           onChange={(e) => setFoodType(e.target.value)}
           required
