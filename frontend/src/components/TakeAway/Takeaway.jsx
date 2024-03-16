@@ -797,7 +797,25 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
     }
 
 
+    const printText = async () => {
+        try {
+            const response = await fetch('http://localhost:9999/print', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text }),
+            });
 
+            if (response.ok) {
+                console.log('Print initiated successfully');
+            } else {
+                console.error('Print failed');
+            }
+        } catch (error) {
+            console.error('Error triggering print:', error);
+        }
+    };
 
 
     return (
@@ -897,7 +915,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                             {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                                 ordersave ? SaveOrder() : UpdateOrder()
                             }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
-                            <p className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>Receipt </p>
+                            <button className="running-order" onClick={printText} style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>Receipt </button>
                             <button onClick={SaveOrder} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>KOT
 
                             </button>
