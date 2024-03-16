@@ -566,15 +566,15 @@ const db1 = mongoose.connect(mongoUri);
 
 // **************************** FOR PRINTING ON POS ****************************
 // Assuming you have identified the correct USB devices for each printer
-const deviceReceiptPrinter = new escpos.USB(/* vid, pid for receipt printer */);
-const deviceKitchenPrinter = new escpos.USB(/* vid, pid for kitchen printer */);
+//const deviceReceiptPrinter = new escpos.USB(/* vid, pid for receipt printer */);
+//const deviceKitchenPrinter = new escpos.USB(/* vid, pid for kitchen printer */);
 
-const options = { encoding: "GB18030" /* Default encoding */ };
+//const options = { encoding: "GB18030" /* Default encoding */ };
 
 // Initialize printers
-const receiptPrinter = new escpos.Printer(deviceReceiptPrinter, options);
-const kitchenPrinter = new escpos.Printer(deviceKitchenPrinter, options);
-
+//const receiptPrinter = new escpos.Printer(deviceReceiptPrinter, options);
+//const kitchenPrinter = new escpos.Printer(deviceKitchenPrinter, options);
+/*
 function printReceipt(content) {
   deviceReceiptPrinter.open(function (error) {
     receiptPrinter
@@ -612,7 +612,7 @@ app.post('/print', (req, res) => {
     res.status(500).send('Print failed');
   }
 });
-
+*/
 
 // **************************** For HOME PAGE ********************************
 app.get("/home_page_data", async (req, res) => {
