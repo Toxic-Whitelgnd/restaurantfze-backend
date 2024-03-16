@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './FoodTypeEditList.css';
 
 const FoodTypeEditList = () => {
     const [tables, setTables] = useState([]);
@@ -22,8 +23,11 @@ const FoodTypeEditList = () => {
       }, []);
     return (
         <div className="container mt-4">
+          <div class='food-del-list'>
+        <h1 id='food-del-list-heading'>Select The Type To Edit</h1>
         
-        <ul>
+        
+        <ul className='food-del-list-ui'>
           {
               tables.map(table => (
                   <li key={table._id}>
@@ -32,7 +36,7 @@ const FoodTypeEditList = () => {
                 ))
           }
         </ul>
-        
+        </div>
       </div>
     );
 }

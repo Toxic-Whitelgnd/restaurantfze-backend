@@ -1,15 +1,18 @@
 /* table panel css */
-.table-panel{
+.table-panel {
     margin-top: 1.5cm;
     background-color: #5a7bdca6;
     margin-right: 40%;
-    margin-bottom: 20%;
+    margin-bottom: 10%;
     margin-left: 35%;
+    padding-bottom: 20px;
     border-radius: 20px;
     box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-    align-items: center;}
+    align-items: center;
+}
+
 /* heading css */
-.table-panel-heading{
+.table-panel-heading {
     background-color:  blanchedalmond;
     margin-top: 0.1cm;
     margin-bottom: 0.2cm;
@@ -18,90 +21,29 @@
     text-align: center;
     box-shadow:  rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
-.table-panel-option a{
-    display: inline-block;
+
+/* table panel options */
+.table-panel-option {
+    display: grid;
+    margin-top: 8px;
+    grid-template-columns: repeat(1, 1fr); /* 1x3 grid */
+   margin-top: 5%;
+    text-align: center;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.table-panel-option a {
     color: white;
     font-weight: 700;
     background-color: #1c3176fd;
-    margin-left: 20%;
     border-radius: 20px;
-    text-align: center;
     padding: 30px 55px 30px 54px;
-    margin: 3px 42% 10px 27%;
 }
-.edit-table{
-    padding: 35px 35px 55px 35px;
-}
-.table-panel-option a:hover{
+
+.table-panel-option a:hover {
     color: #1c3176fd;
     font-weight: bold;
-    background-color:rgba(255, 228, 196, 0.755); 
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
-}
-
-
-
-/* edit table css */
-.edit-table{
-    color: white;
-    background-color:#1c3176fd;
-    margin-top: 1cm;
-    display:inline-block;
-    margin-left: 10%;
-    margin-bottom: 1cm;
-    padding: 15px 0px 15px 0px;
-    border-radius: 20px;
-}
-.edit-table a{
-    color: white;
-    font-weight: bold;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 20px;
-}
-.edit-table:hover{
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    color:#1c3176fd;
-    text-decoration: #1c3176fd;
-    background-color: rgba(255, 228, 196, 0.755);
-
-}
-.edit-table a:hover{
-    color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); ;
-
-}
-.delete-table{
-    color: white;
-    background-color:#1c3176fd;
-    margin-top: 1cm;
-    display:inline-block;
-    margin-left: 10%;
-    margin-bottom: 1cm;
-    padding: 15px 0px 15px 0px;
-    border-radius: 20px;
-}
-.delete-table a{
-    color: white;
-    font-weight: bold;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 20px;
-}
-.delete-table:hover{
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    color:#1c3176fd;
-    text-decoration: #1c3176fd;
-    background-color: rgba(255, 228, 196, 0.755);
-
-}
-.delete-table a:hover{
-    color: #1c3176fd;
-    background-color:rgba(255, 228, 196, 0.755); ;
- 
+    background-color: rgba(255, 228, 196, 0.755); 
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }

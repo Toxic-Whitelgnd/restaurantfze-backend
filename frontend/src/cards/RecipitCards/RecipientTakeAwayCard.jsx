@@ -271,12 +271,12 @@ const RecipientTakeAwayCard = () => {
                                         </p>
                                     </center>
                                 </div>
-                                <div id="legalcopy">
+                                {/* <div id="legalcopy">
                                     <center>
                                         <p className="legal"><strong>{formData.companycaption}</strong>&nbsp;
                                         </p>
                                     </center>
-                                </div>
+                                </div> */}
                                 <div id="legalcopy">
                                     <center>
                                         <h2 className="legal"><strong>Reciept no: {foodData.receiptNo}</strong>&nbsp;

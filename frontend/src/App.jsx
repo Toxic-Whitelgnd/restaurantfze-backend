@@ -77,6 +77,8 @@ import KitchenRecipietTakeawayCard from './cards/RecipitCards/KitchenRecipietTak
 import TakeAwayPay from './components/TakeAway/TakeAwayPay';
 import RecipientTakeAwayCard from './cards/RecipitCards/RecipientTakeAwayCard';
 import EditRecipietPanel from './componets/BillPanel/CRUDbill/RecipietEditPanel';
+import RecipientDeliverySaleCard from './cards/RecipitCards/RecipientDeliverySaleCar';
+import CashOnDeliveryLog from './components/COD/CashOnDeliveryLog';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -100,6 +102,7 @@ function App() {
           <Route path='/expenses' index element={<Expenses />} />
           <Route path='/creditsale' index element={<Creditsale />} />
           <Route path='/cashatstarting' index element={<CashStarting />} />
+          <Route path='/cashondeliverylog' index element={<CashOnDeliveryLog />} />
           <Route path='/crm' index element={<CRM />} />
           <Route path='/messdetails' index element={<MessDetailsForm />} />
           <Route path='/takeaway' index element={<TakeAway />} />
@@ -113,6 +116,7 @@ function App() {
           <Route path='/print/kitchen/outdoor/:id' element={<KitchenRecipietCard />} />
           <Route path='/printrecipiet/:orderid' element={<RecipientTakeAwayCard />} />
           <Route path='/print/kitchen/takeaway/:orderno' element={<KitchenRecipietTakeawayCard />} />
+          <Route path='/printrecipiet/deliverysale/:orderid' element={<RecipientDeliverySaleCard />} />
           {/*ADMIN PATHS */}
           <Route path='/admin' index element={<Pages/>} />
           {/* for Home panel */}
@@ -120,7 +124,7 @@ function App() {
           <Route path='/admin/edit-home'  element={<HomeEditList/>} />
           <Route path='/admin/edit-home/:homeno'  element={<HomeEdit/>} />
           <Route path='/admin/delete-home'  element={<HomeDelList/>} />
-          <Route path='/admin/delete-home/:homeno'  element={<HomeDelete />} />
+          <Route path='/admin/delete-home/:homeno'  element={<HomeDelete/>} />
           {/* for tables */}
           <Route path='/admin/tablepanel'  element={<TablePanel/>} />
           <Route path='/admin/create-table' element={<TableForm />} />

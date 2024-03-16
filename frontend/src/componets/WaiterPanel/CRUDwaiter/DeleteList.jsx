@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './DeleteList.css';
 
-const DeleteWaiterList = () => {
+const DeleteDeleteList = () => {
     const [tables, setTables] = useState([]);
 
     useEffect(() => {
@@ -22,9 +23,10 @@ const DeleteWaiterList = () => {
       }, []);
     return (
         <div className="container mt-4">
-        <h1>Select the Waiter to Remove</h1>
+        <div class='DeleteList-list'>
+        <h1 id='DeleteList-list-heading'>Select The Waiter To Remove</h1>
     
-        <ul>
+        <ul className='DeleteList-list-ui'>
           {
               tables.map(table => (
                   <li key={table.tableNo}>
@@ -33,9 +35,9 @@ const DeleteWaiterList = () => {
                 ))
           }
         </ul>
-        
+        </div>
       </div>
     );
 }
 
-export default DeleteWaiterList;
+export default DeleteDeleteList;

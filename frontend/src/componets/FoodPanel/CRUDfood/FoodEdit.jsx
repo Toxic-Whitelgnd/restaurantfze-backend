@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { NavLink, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import './FoodEdit.css';
 
 const FoodEdit = () => {
     const { foodid } = useParams();
@@ -81,58 +82,70 @@ const FoodEdit = () => {
             });
 
             toast.success('Food data updated successfully!');
+            setTimeout(()=>{
+                window.location.href = "/#/admin/foodpanel/"
+              },2000)
         } catch (error) {
             toast.error('Error updating food data:', error);
         }
     };
 
     return (
-        <div>
+        <div class='FoodData'>
+             <h1 className='FoodData-heading'>Edit The Food Items</h1>
             <ToastContainer />
+            
             {foodData && foodData.map((food) => (
                 <form key={food._id} onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" {...register('id')} value={food._id} />
-                    <label>
+                    <label class='FoodData-label-1'>
                         Food Name:
-                        <input type="text" defaultValue={food.foodName} {...register('foodName')} />
+                        <input 
+                         class='FoodData-input-1'
+                        type="text" defaultValue={food.foodName} {...register('foodName')} />
                     </label>
                     <br></br>
-                    <label>
+                    <label  class='FoodData-label-1'>
                         Food Price:
-                        <input type="text" defaultValue={food.foodPrice} {...register('foodPrice')} />
+                        <input 
+                        class='FoodData-input-2'
+                        type="text" defaultValue={food.foodPrice} {...register('foodPrice')} />
                     </label>
                     <br></br>
-                    <label>
-
+                    <label class='FoodData-label-1'>
+                    
                         {food.foodImage && (
                             <div>
-                                <p>Food Image:</p>
+                                <p id='FoodData-label-1'>Food Image:</p>
+                                <NavLink to={`/change-food-image/${food._id}`}className='FoodData-input-8'style={{ textDecoration: 'none' }}>Change Image</NavLink>
+                            <br></br>
                                 <img
                                     src={`data:image/jpeg;base64,${food.foodImage}`}
                                     alt="Food"
-                                    style={{ maxWidth: '200px', marginTop: '10px' }}
+                                    style={{ maxWidth: '200px', marginTop: '12px' ,borderRadius:'20px'}}
                                 />
                             </div>
                         )}
-                        <NavLink to={`/change-food-image/${food._id}`}>Change Image</NavLink>
-                        <br></br>
+                       
                     </label>
-                    <label>
+                    <label class='FoodData-label-1'>
                         Food Quantity:
-                        <input type="text" defaultValue={food.foodQty} {...register('foodQty')} />
+                        <input 
+                         class='FoodData-input-3'
+                        type="text" defaultValue={food.foodQty} {...register('foodQty')} />
                     </label>
                     <br></br>
-                    <label>
+                    <label class='FoodData-label-1'>
                         Food Availability:
-                        <select defaultValue={food.foodAvailability} {...register('foodAvailability')}>
+                        <select className='FoodData-input-4'defaultValue={food.foodAvailability} {...register('foodAvailability')}>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </label>
                     <br></br>
-                    <label>
+                    <label class='FoodData-label-1'>
                         Food Type:
-                        <select defaultValue={food.foodType} {...register('foodType')}>
+                        <select className='FoodData-input-1' defaultValue={food.foodType} {...register('foodType')}>
                             <option value="" disabled>
                                 Select Food Type
                             </option>
@@ -143,7 +156,7 @@ const FoodEdit = () => {
                             ))}
                         </select>
                     </label>
-                    <button type="submit">Update</button>
+                    <button className='Food-submit' type="submit">Update</button>
                 </form>
             ))}
         </div>

@@ -1,0 +1,36 @@
+/* DeleteWaiter food entire body css */
+.DeleteWaiter-food{
+    background-color: #5a7bdca6;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    margin-right: 65%;
+}
+/* DeleteWaiter food heading css */
+#DeleteWaiter-food-heading{
+  
+    background-color:blanchedalmond;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.DeleteWaiter-food-heading h1{
+    font-weight: 700;
+}
+.DeleteWaiter-food-body {
+    display: inline-block;
+}
+.DeleteWaiter-food-body p{
+    font-weight: 700;
+    color: rgb(157, 1, 1);
+    margin-left: 15%;
+    display: flex;
+}
+/* DeleteWaiter food button css */
+.DeleteWaiter-food-body button{
+    /* padding: 3px 25px 3px 25px ;  */
+    margin-left: 190px;
+    margin-right: 5%;
+    border: none;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}

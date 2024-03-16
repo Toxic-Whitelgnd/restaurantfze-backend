@@ -33,6 +33,9 @@ const FoodTypeEdit = () => {
 
       console.log('Food type updated successfully:', response.data);
       toast.success("Updated food type ")
+      setTimeout(()=>{
+        window.location.href = "/#/admin/foodpanel/"
+      },2000)
     } catch (error) {
       console.error('Error updating food type:', error);
       toast.error("Error updating food type:");

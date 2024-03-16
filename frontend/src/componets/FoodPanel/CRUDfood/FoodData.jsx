@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import './FoodData.css';
 
 const FoodData = () => {
 
@@ -73,7 +74,9 @@ const FoodData = () => {
                 console.log('Food data added successfully!');
                 toast.success('Food data added successfully!');
                 // You can also redirect or perform any other action upon success
-              //  window.location.reload();
+                setTimeout(()=>{
+                  window.location.href = "/#/admin/foodpanel/"
+                },2000)
             } else {
                 toast.error('Failed to add food data');
             }
@@ -84,12 +87,12 @@ const FoodData = () => {
 
 
     return (
-        <div>
-            <h1>Add the food items</h1>
+        <div class='FoodData'>
+            <h1 className='FoodData-heading'>Add The Food Items</h1>
             <ToastContainer />
             <div>
                 <form onSubmit={handleSubmit}>
-                    <label>
+                    <label class='FoodData-label-1'>
                         Food Name:
                         <input
                            class='FoodData-input-1'

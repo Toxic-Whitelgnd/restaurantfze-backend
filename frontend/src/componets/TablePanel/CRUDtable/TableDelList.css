@@ -1,0 +1,47 @@
+.tabledeli-list{
+    background-color: #5a7bdca6;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    
+}
+#tabledeli-list-heading-head{
+    background-color:blanchedalmond;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    font-weight: 700;
+}
+.tabledeli-list h4{
+    margin-left: 35%;
+    margin-right: 35%;
+    padding: 15px 15px 15px 15px;
+    margin-top: 1cm;
+}
+#tabledeli-list-heading{
+    background-color:blanchedalmond;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    font-weight: 700;
+}
+.tabledeli-list-ul{
+    list-style-type: none; 
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 columns layout */
+        gap: 5px; /* Adjust the gap between items as needed */
+        margin: 1cm 15% 1cm 15%;
+        background-color: #1c3176fd;
+        border-radius: 20px;
+        padding: 15px 15px 15px 15px;
+
+}
+.tabledeli-list-ul a{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+   
+   }
+.tabledeli-list-ul a:hover{
+    background-color: rgb(157, 1, 1);
+    text-decoration: none;
+    font-weight: 400;
+    border-radius: 5PX;
+}

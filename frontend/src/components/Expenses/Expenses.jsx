@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./Expenses.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
 
 const Expenses = () => {
 
@@ -28,7 +29,7 @@ const Expenses = () => {
     };
 
     // Function to handle form submission
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
 
@@ -45,23 +46,28 @@ const Expenses = () => {
 
 
         // Perform any additional logic or save data as needed
+        try {
+            const res = await axios.post('http://localhost:9999/post_expenses', formData);
+            console.log(res.data);
+            if (res.data.success) {
+                setFormData({
+                    trnNo: '',
+                    companyName: '',
+                    purchaseDate: '',
+                    invoiceNo: '',
+                    vat: '',
+                    description: '',
+                    category: 'General',
+                    subTotal: 0,
+                    vatAmount: 0,
+                    netTotal: 0,
+                });
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
 
 
-
-
-        // Reset form after submission
-        setFormData({
-            trnNo: '',
-            companyName: '',
-            purchaseDate: '',
-            invoiceNo: '',
-            vat: '',
-            description: '',
-            category: 'General',
-            subTotal: 0,
-            vatAmount: 0,
-            netTotal: 0,
-        });
     };
 
     return (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import './Runningorder.css';
 const Runningorder = () => {
     const [runningORder, setRunningOrder] = useState([]);
     useEffect(() => {
@@ -84,15 +84,15 @@ const Runningorder = () => {
     }
 
     return (
-        <div>
+        <div class='Runnigorder-Data'>
             <ToastContainer />
-            <h1>Current running order</h1>
+            <h1  id='Runnigorder-Data-heading'>Current running order</h1>
             
             <div>{
                 runningORder  && runningORder.map((val, idx) => {
                     return (
                         <> {
-                            <div>
+                            <div class='RunnigOrder-itemboard'>
                                 <h2>Table no: {val.tableNo}  Order From: {val.from}</h2>
                                 <h3>Items </h3> {
                                     val.items.map(f => {
@@ -100,19 +100,23 @@ const Runningorder = () => {
                                             <>
                                                 <h4>Item name: {f.foodname}</h4>
                                                 <h4>Item Qty: {f.qty} {f.id}</h4>
-                                                <h4>Item status: {f.status}</h4>
+                                                <h4>Item status: 
+                                                    <span className={f.status === 'ready' ? 'ready-status' : 'not-ready-status'}>
+                                                        {f.status}
+                                                    </span>
+                                                </h4>
                                                 
                                                 <label htmlFor="orderStatus">Order Status:</label>
 
-                                                <button onClick={() => handleUpdate(val, f)}>Update status to ready</button>
-                                                <button onClick={() => handleUpdateNot(val, f)}>Update status to Not-ready</button>
+                                                <button class='RunnigOrder-ready-button' onClick={() => handleUpdate(val, f)}>Update status to ready</button>
+                                                <button class='RunnigOrder-Notready-button' onClick={() => handleUpdateNot(val, f)}>Update status to Not-ready</button>
 
                                             </>
                                         )
                                     })
                                     
                                 }
-                                <button onClick={()=>handleSave(val)}>Save changes</button>
+                                <button className='ChangeFoodAvail-submit' onClick={()=>handleSave(val)}>Save changes</button>
                                 
                             </div >
                             }

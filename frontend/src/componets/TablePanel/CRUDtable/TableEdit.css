@@ -1,0 +1,32 @@
+.edit-table-body{
+    margin-top: 1.5cm;
+    margin-left: 35%;
+    margin-right: 35%;
+    background-color: #5a7bdca6;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: rgba(99, 175, 146, 0.673) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+
+}
+#edit-table-body-heading{
+    text-align: center;
+    background-color: blanchedalmond;
+    border-radius: 15px 15px 15px 15px;
+
+}
+.edit-table-form-label{
+    margin-left: 15%;
+    font-weight: 600;
+}
+.edit-table-form-select{
+
+}
+.edit-table-form-control{
+    margin-left: 9px;
+    padding: 10px 18px 10px 18px;
+}
+input[type=text]{
+    border: none;
+    border-radius: 10px;
+   
+}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import './TableEdit.css';
 
 const TableEdit = () => {
     const { tableno } = useParams();
@@ -55,16 +55,18 @@ const TableEdit = () => {
     };
 
     return (
-        <div>
-            <h1>Edit table for {tableno}</h1>
+        <div className='edit-table-body'>
+            <h1 id='edit-table-body-heading'>Edit Table For {tableno}</h1>
             <ToastContainer />
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="tableType" className="form-label">Table Type:</label>
-                    <select className="form-select" id="table_type" name="table_type" value={formData.table_type} onChange={handleChange}>
+                   
+                    <label htmlFor="tableType" className="edit-table-form-label">Table Type:</label>
+                    <select className="edit-table-form-select" id="table_type" name="table_type" value={formData.table_type} onChange={handleChange}>
                         <option value="indoor">Indoor</option>
                         <option value="outdoor">Outdoor</option>
                     </select>
+                    
                 </div>
                 {/* Other input fields */}
                 {/* <div className="mb-3">
@@ -72,8 +74,8 @@ const TableEdit = () => {
                     <input type="text" className="form-control" id="table_no" name="table_no" value={formData.table_no} onChange={handleChange} />
                 </div> */}
                 <div className="mb-3">
-                    <label htmlFor="tableCapacity" className="form-label">Table Capacity:</label>
-                    <input type="text" className="form-control" id="table_capacity" name="table_capacity" value={formData.table_capacity} onChange={handleChange} />
+                    <label htmlFor="tableCapacity" className="edit-table-form-label">Table Capacity:</label>
+                    <input type="text" className="edit-table-form-control" id="table_capacity" name="table_capacity" value={formData.table_capacity} onChange={handleChange} />
                 </div>
    
                 <button type="submit" className="btn btn-primary">Update Table</button>
