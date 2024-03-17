@@ -89,52 +89,144 @@ for table
   margin-right: 5px;
 }
 
+/* Add user button */
+.add-user-btn{
+  padding: 10px 20px;
+  background-color:rgb(250, 246, 242);
+  color: black;
+  /* border: 1px solid black; */
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 7px;
+  margin-left: 7px;
+  margin: 7px 0px 0px 7px;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-user-btn::before{
+  content: '';
+  position: absolute;
+  left: -101%;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  background-color:black;
+  transition: left 0.3s;
+  z-index: 0;
+}
+
+.add-user-btn:hover::before{
+  left: 0%;
+}
+
 /* closing button css */
-.model1{
-  width: 6cm;
+.model3{
+  width: 9cm;
+  /* background-color: black; */
+  background-color: white;
+  border-radius: 5px;
+}
+
+.modal-overlay1{
+  /* background-color: green; */
+}
+
+.takeaway-form{
+  /* background-color: red; */
+  text-align: left;
+  padding: 0.5cm 1cm 1cm 1cm;
 }
 
 .close-btn{
   position: absolute;
-  top: 2.7cm;
-  left: 16.5cm;
-  font-size: 25px;
+  top: 2.2cm;
+  left: 16.3cm;
+  font-size: 30px;
   color: black;
   background-color: transparent;
+}
+
+.takwaway-headinh-h2{
+  margin-bottom: 1cm;
+}
+
+.takeaway-name-la{
+  margin: 0;
 }
 
 input[name=takeaway-name]{
   border: 1px solid gray;
   border-radius: 5px;
-  margin-top: .5cm;
 }
-input[name=takeaway-name]:focus{
-background-color: lightblue;
-border: 0px solid black;
-box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+.takeaway-no-la{
+  margin: 0;
+  margin-top: 0.5cm;
 }
 
 input[name=takeaway-number]{
   border: 1px solid black;
   border-radius: 5px;
-  margin-top: .5cm;
+}
+
+.takeaway-email-la{
+  margin: 0;
+  margin-top: 0.5cm;
 }
 
 input[name=takeaway-email]{
   border: 1px solid black;
   border-radius: 5px;
-  margin-top: .5cm;
+}
+
+.takeaway-add-la{
+  margin: 0;
+  margin-top: 0.5cm;
 }
 
 input[name=takeaway-address]{
   border: 1px solid black;
   border-radius: 5px;
-  margin-top: .5cm;
 }
 
-.takeaway-number{
-  
+.save-btn{
+  margin-top: 1cm;
 }
 
-/* Hyala ajun kuthe css dili ahe ka ??? */
+.dinein-nav{
+  text-align: center;
+}
 
+.orderNo{
+  font-size: large;
+  margin: 0;
+  font-size: 25px;
+}
+
+.pay-cont{
+  margin-bottom: 1cm;
+}
+
+.track-order-h5{
+  text-align: center;
+  font-size: 25px;
+}
+
+.mainpage-aed h5{
+  text-align: right;
+}
+
+.orderSummary {  
+  overflow: scroll;
+}
+
+.food-data{
+  margin-left: 1.5cm;
+}
+.button-incre-decre{
+  background-color: none;
+  color: yellowgreen;
+  padding: 100px ;
+}
