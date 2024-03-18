@@ -23,7 +23,8 @@ const TakeAwayCards = ({ name, recipientid, date, time, total, number, paymentTy
 
   const handleShowPopup = (saleOrder) => {
 
-    setShowPopup(true);
+    // setShowPopup(true);
+    window.location.href = `/#/printrecipiet/${recipientid}`;
   };
 
   const handleClosePopup = () => {

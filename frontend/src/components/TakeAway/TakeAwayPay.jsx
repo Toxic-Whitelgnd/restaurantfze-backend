@@ -890,8 +890,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                         <ToastContainer />
                         {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                             ordersave ? SaveOrder() : UpdateOrder()
-                        }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p>
+                        }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> 
+                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p>*/}
                         <button onClick={SaveOrder} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Add to kitchen
 
                         </button>
@@ -997,13 +997,24 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                 <div className='col'>
                                     <label>
                                         Total Amount Paid:
-                                        <input
+                                        {
+                                            selectedPaymentType === 'creditsale' ? <input
                                             type="number"
                                             value={totalAmount}
                                             onChange={handleAmountChange}
                                             placeholder="Enter total amount paid"
                                             required
-                                        />
+                                            disabled
+                                        /> : <input
+                                        type="number"
+                                        value={totalAmount}
+                                        onChange={handleAmountChange}
+                                        placeholder="Enter total amount paid"
+                                        required
+                                       
+                                    />
+                                        }
+                                        
                                     </label>
                                 </div>
                                 <button className="btn btn-success" onClick={handlePayBillPay} >Pay Bill</button>

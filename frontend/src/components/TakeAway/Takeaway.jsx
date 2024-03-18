@@ -606,7 +606,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         try {
 
-            window.location.reload();
+            // window.location.reload();
+            window.location.href = `/#/printrecipiet/${orderNou}`;
         } catch (error) {
             alert(error.message);
         }
@@ -896,8 +897,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                             <ToastContainer />
                             {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                                 ordersave ? SaveOrder() : UpdateOrder()
-                            }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
-                            <p className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>Receipt </p>
+                            }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> 
+                            <p className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>Receipt </p>*/}
                             <button onClick={SaveOrder} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>KOT
 
                             </button>

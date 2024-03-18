@@ -1993,8 +1993,8 @@ const TakeAwayEdit = () => {
 
                         {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                             ordersave ? SaveOrder() : UpdateOrder()
-                        }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p>
+                        }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> 
+                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p>*/}
                         {/* <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Pay Bill </button> */}
                         <button onClick={SaveTakeAway} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Save 
                         </button>

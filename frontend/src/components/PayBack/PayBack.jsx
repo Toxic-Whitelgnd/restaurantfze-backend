@@ -15,7 +15,7 @@ const PayBack = () => {
 
     const fetchData = async () => {
         try {
-            const res =  await axios.get(`http://localhost:9999/get_payback`);
+            const res =  await axios.get(`https://restogenius.onrender.com/get_payback`);
             console.log(res.data);
             setpb(res.data.data);
   

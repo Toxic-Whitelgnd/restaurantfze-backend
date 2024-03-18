@@ -105,6 +105,7 @@ const Creditsale = () => {
                 });
                 if (res.data.success) {
                     toast.success("Credit sale was successfully updated");
+                    window.location.reload();
                 }
             } catch (error) {
                 console.log(error.message);

@@ -115,9 +115,14 @@ const Settlesale = () => {
             fetchCashAtStarting();
             fetchCashSaleAt();
             fetchCreditSales();
+           
         }, 1000);
 
     }, []);
+
+    useEffect(() => {
+        fetchSettleSale(selectedDate);
+    },[selectedDate]);
     const fetchTodayDate = () => {
         const today = new Date();
 
@@ -217,14 +222,90 @@ const Settlesale = () => {
         }
     };
 
-    // for change in the date
+        // for change in the date
 
-    const handleDateChange = (event) => {
-        console.log("from date change", event.target.value);
-        setSelectedDate(event.target.value);
-        fetchCashAtStartingwithParams(event.target.value);
-        fetchCashSaleAtParams(event.target.value);
-    };
+        const handleDateChange = (event) => {
+            console.log("from date change", event.target.value);
+            setSelectedDate(event.target.value);
+            fetchCashAtStartingwithParams(event.target.value);
+            fetchCashSaleAtParams(event.target.value);
+        };
+
+    const [isSetted,setSetteld] = useState(false);
+
+    const  fetchSettleSale = async (selectedDate)=>{
+        try {
+            const res = await axios.get(`https://restogenius.onrender.com/settlesale/${selectedDate}`);
+            console.log(res.data.data);
+            if(res.data.data.length > 0){
+                console.log("valid");
+                setSetteld(true);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+    const handleSettlePrint = async ()=>{
+        const today = new Date();
+
+        const settelsale = {
+            date: convertDateFormat(selectedDate),
+            total: 0,
+            cashAtStarting: cash ? cash : 0,
+            creditRecoverySale: creditRecovery,
+            cashSale: cashSale,
+        }
+
+            console.log(selectedDate);
+         if(!isSetted){
+            try {
+                const res = await axios.put(`https://restogenius.onrender.com/update_settlesale/${selectedDate}`,settelsale);
+                console.log(res.data.data);
+                if(res.data.success){
+                    window.location.href = `/#/printrecipiet/settlesale/${selectedDate}`
+                    
+                }
+            } catch (error) {
+                console.log(error);
+            }
+         }
+         else{
+            console.log("in post");
+            try {
+                const res = await axios.post(`https://restogenius.onrender.com/save_settlesale`,settelsale);
+                console.log(res.data.success);
+                if(res.data.success){
+                    window.location.href = `/#/printrecipiet/settlesale/${selectedDate}`
+                }
+            } catch (error) {
+                console.log(error);
+            }
+         }
+                    
+                
+           
+
+       
+        
+    }
+
+    function convertDateFormat(dateString) {
+        const parts = dateString.split('-');
+        const year = parts[0];
+        const month = parseInt(parts[1], 10);
+        const day = parseInt(parts[2], 10);
+      
+        // Format the date as MM/DD/YYYY
+        const formattedDate = `${month}/${day}/${year}`;
+        return formattedDate;
+      }
+
+    const getTotal = ()=>{
+        return cash+creditRecovery+cashSale;
+    }
 
 
 
@@ -241,33 +322,7 @@ const Settlesale = () => {
                     />
                     <p>Selected Date: {selectedDate}</p>
                 </div>
-                {/* <div className='orderCont'>
-
-                    <ul class="responsive-table">
-                        <li class="otable-header">
-                            <div class="colo colo-1">Content </div>
-                            <div class="colo colo-4">Amount</div>
-                        </li>
-                        only three parameter is passed as it should contin only total,discount,net total
-                        {
-                            ss && ss.filter(x => x.type == 'gdt').map((val, idx) => {
-                                return (
-                                    <div key={idx}>
-                                        <SettleCard
-                                            name={val.name}
-                                            total={val.total}
-                                        />
-
-                                    </div>
-                                )
-                            })
-                        }
-
-
-
-                    </ul>
-
-                </div> */}
+     
 
             </div>
 
@@ -305,13 +360,13 @@ const Settlesale = () => {
 
                         </li>
                     </div>
-
+                    <div>{getTotal}</div>
 
 
                 </ul>
                 <div className='d-flex justify-content-evenly mb-3'>
-                    <button className='btn btn-primary'>Print</button>
-                    <button className='btn btn-primary'>Sumbit</button>
+                    <button className='btn btn-primary' onClick={handleSettlePrint}>Print</button>
+                    {/* <button className='btn btn-primary'>Sumbit</button> */}
                 </div>
 
             </div>
