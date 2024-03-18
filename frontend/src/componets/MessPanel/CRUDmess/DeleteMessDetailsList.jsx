@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import './DeleteMessDetailsList.css';
 const DeleteMessDetailsList = () => {
     const [tables, setTables] = useState([]);
 
@@ -19,18 +19,19 @@ const DeleteMessDetailsList = () => {
       }, []);
     return (
         <div className="container mt-4">
-        <h1>Select the Mess Details to Delete</h1>
+        <div class='DeleteMessDetailsList-list'>
+        <h1  id='DeleteMessDetailsList-list-heading'>Select The Mess Details To Delete</h1>
     
-        <ul>
+        <ul  className='DeleteMessDetailsList-list-ui'>
           {
               tables.map(table => (
                   <li key={table._id}>
-                    <Link to={`/admin/delete-messDetails/${table._id}`}>{`${table._id}-${table.name}-${table.mobileNumber}`}</Link>
+                    <Link to={`/admin/delete-messDetails/${table._id}`}>{`Name-${table.name},MobileNo-${table.mobileNumber}`}</Link>
                   </li>
                 ))
           }
         </ul>
-        
+        </div>
       </div>
     );
 }

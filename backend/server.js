@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const axios = require("axios");
 const Razorpay = require("razorpay");
+const escpos = require("escpos")
+escpos.USB = require("escpos-usb")
+
 
 const app = express();
 
@@ -586,6 +589,56 @@ const SettleSale = mongoose.model('SettleSale', settleSaleSchema);
 
 // Connect to MongoDB
 const db1 = mongoose.connect(mongoUri);
+
+// **************************** FOR PRINTING ON POS ****************************
+// Assuming you have identified the correct USB devices for each printer
+//const deviceReceiptPrinter = new escpos.USB(/* vid, pid for receipt printer */);
+//const deviceKitchenPrinter = new escpos.USB(/* vid, pid for kitchen printer */);
+
+//const options = { encoding: "GB18030" /* Default encoding */ };
+
+// Initialize printers
+//const receiptPrinter = new escpos.Printer(deviceReceiptPrinter, options);
+//const kitchenPrinter = new escpos.Printer(deviceKitchenPrinter, options);
+/*
+function printReceipt(content) {
+  deviceReceiptPrinter.open(function (error) {
+    receiptPrinter
+      .font('a')
+      .align('ct')
+      .text(content)
+      .cut()
+      .close();
+  });
+}
+
+function printKitchenOrder(content) {
+  deviceKitchenPrinter.open(function (error) {
+    kitchenPrinter
+      .font('a')
+      .align('ct')
+      .text(content)
+      .cut()
+      .close();
+  });
+}
+
+
+app.post('/print', (req, res) => {
+  try {
+    const device = new escpos.USB();
+    const printer = new escpos.Printer(device);
+
+    printReceipt("Printing on Reciept printer")
+    printKitchenOrder("Printing on Kitchen Order")
+
+    res.send('Print success');
+  } catch (error) {
+    console.error('Print error:', error);
+    res.status(500).send('Print failed');
+  }
+});
+*/
 
 // **************************** For HOME PAGE ********************************
 app.get("/home_page_data", async (req, res) => {

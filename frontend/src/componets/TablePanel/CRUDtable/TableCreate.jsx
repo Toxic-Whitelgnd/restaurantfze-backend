@@ -77,7 +77,7 @@ const TableForm = () => {
       <br></br>
       <label class='label'>
         Table Capacity:
-        <input type="number" name="table_capacity" value={formData.table_capacity} onChange={handleChange} />
+        <input type="number" name="table-capacity" value={formData.table_capacity} onChange={handleChange} />
       </label>
       <br></br>
       <button class='set-iid-url'type="button" className="btn btn-secondary" onClick={handleManualUpdate}>

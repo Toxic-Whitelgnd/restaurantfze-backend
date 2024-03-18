@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { NavLink, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-
+import './ChangeFoodAvil.css';
 const ChangeFoodAvil = () => {
     const { foodid } = useParams();
 
@@ -69,35 +69,43 @@ const ChangeFoodAvil = () => {
     };
 
     return (
-        <div>
+        <div class='ChangeFoodAvail-Data'>
+            <h2  id='ChangeFoodAvail-Data-heading'>Change Food Availability</h2>
             <ToastContainer />
             {foodData && foodData.map((food) => (
                 <form key={food._id} onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" {...register('id')} value={food._id} />
-                    <label>
+                    <label  class='ChangeFoodAvail-Data-label-1'>
                         Food Name:
-                        <input type="text" defaultValue={food.foodName} {...register('foodName')} />
+                        <input 
+                         class='ChangeFoodAvail-Data-input-1'
+                         type="text" defaultValue={food.foodName} {...register('foodName')} />
                     </label>
                     <br></br>
-                    <label>
+                    <label  class='ChangeFoodAvail-Data-label-1'>
                         Food Price:
-                        <input type="text" defaultValue={food.foodPrice} {...register('foodPrice')} />
+                        <input 
+                         class='ChangeFoodAvail-Data-input-1'
+                         type="text" defaultValue={food.foodPrice} {...register('foodPrice')} />
                     </label>
                     <br></br>
                     
-                    <label>
+                    <label  class='ChangeFoodAvail-Data-label-1'>
                         Food Availability:
-                        <select defaultValue={food.foodAvailability} {...register('foodAvailability')}>
+                        <select 
+                         class='ChangeFoodAvail-Data-input-1'
+                        defaultValue={food.foodAvailability} {...register('foodAvailability')}>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </label>
                     <br></br>
                     
-                    <button type="submit">Update</button>
+                    <button className='ChangeFoodAvail-submit'type="submit">Update</button>
                 </form>
             ))}
         </div>
+        
     );
 };
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+import './takeawayDeliveryorder.css';   
 const TakeawayDeliveryorder = () => {
     const [runningORder, setRunningOrder] = useState([]);
     useEffect(() => {
@@ -61,9 +61,9 @@ const TakeawayDeliveryorder = () => {
     };
 
     return (
-        <div>
-            <h1>Deliverysale  Order - Tracking</h1>
-            <div>
+        <div  class='takeawayDeliveryorder-Data'>
+            <h1 id='takeawayDeliveryorder-Data-heading' >Deliverysale  Order - Tracking</h1>
+            <div class='takeawayDeliveryorder-itemboard'>
                 {
                     runningORder && runningORder.map((order)=>{
                         return (
@@ -73,8 +73,11 @@ const TakeawayDeliveryorder = () => {
                             return(
                                 <>
                                 <h3>Table no : {order.order_no}</h3>
-                                <h4>Food : {item.foodname} is {item.status}</h4>
-                                <button onClick={()=>handleDeleteRunningOrder(item,order.items)} >Delivered </button>
+                                <h4>Food : {item.foodname} is                                 <span className={item.status === 'ready' ? 'ready-status' : 'not-ready-status'}>
+                                {item.status}
+                                                    </span>
+                                </h4>
+                                <button className='takeawayDeliveryorder-submit'onClick={()=>handleDeleteRunningOrder(item,order.items)} >Delivered </button>
                                 </>
                             )
                         })}

@@ -1212,7 +1212,7 @@
 // export default TakeAway;
 
 import React, { useEffect, useRef, useState } from 'react';
-import "./takeaway.css"
+import "./TakeAwayEdit.css"
 import { useParams } from 'react-router-dom';
 import Quanttity from '../../cards/QuantityCards/Quanttity';
 import FoodCard from '../../cards/FoodCards/FoodCard';
@@ -1924,7 +1924,7 @@ const TakeAwayEdit = () => {
                             <button type="button" className="close-btn" onClick={closeModal}>
                                 &times;
                             </button>
-                            <h2>Customer Details</h2>
+                            <h2 id='takawayedit'>Customer Details</h2>
                             <form>
                                 <label>
                                     Customer Name:

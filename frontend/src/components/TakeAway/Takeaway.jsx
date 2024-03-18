@@ -798,7 +798,25 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
     }
 
 
+    const printText = async () => {
+        try {
+            const response = await fetch('http://localhost:9999/print', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text }),
+            });
 
+            if (response.ok) {
+                console.log('Print initiated successfully');
+            } else {
+                console.error('Print failed');
+            }
+        } catch (error) {
+            console.error('Error triggering print:', error);
+        }
+    };
 
 
     return (
@@ -806,7 +824,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
             <div className='inside-container'>
                 {usercreated ? 
                 
-                <button type="button" className='adduser' onClick={openModal}>
+                <button type="button" className='adduser' class="add-user-btn" onClick={openModal}>
                     Add User
                 </button>
                 
@@ -824,56 +842,55 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
                     {isModalOpen && (
                         <div className="modal-overlay1">
-                            <div className="modal1">
+                            <div className="model3">
                                 <button type="button" className="close-btn" onClick={closeModal}>
                                     &times;
                                 </button>
-                                <h2>Customer Details</h2>
-                                <form>
-                                    <label>
-                                        Customer Name:
+                                <h2 id='takwaway-headinh-h2'>Customer Details</h2>
+                                <form class="takeaway-form">
+                                    <label class="takeaway-name-la">
+                                        Customer Name:</label>
                                         <input
                                             type="text"
-                                            name="name"
+                                            name="takeaway-name"
                                             value={customerDetails.name}
                                             onChange={handleInputChange}
                                             required
                                         />
-                                    </label>
-                                    <label>
-                                        Mobile Number:
+                                    
+                                    <label class="takeaway-no-la">
+                                        Mobile Number:</label>
                                         <input
                                             type="tel"
-                                            name="mobileNumber"
+                                            name="takeaway-number"
                                             value={customerDetails.mobileNumber}
                                             onChange={handleInputChange}
                                             required
                                         />
-                                    </label>
-                                    <label>
-                                        Email:
+                                    
+                                    <label class="takeaway-email-la">
+                                        Email: </label>
                                         <input
                                             type="email"
-                                            name="email"
+                                            name="takeaway-email"
                                             // placeholder={fetchFood.customer_details.numberOfSeats}
                                             value={customerDetails.email}
                                             onChange={handleInputChange}
                                             required
 
                                         />
-                                    </label>
-                                    <label>
-                                        Address:
+                
+                                    <label class="takeaway-add-la">
+                                        Address:</label>
                                         <input
                                             type="text"
-                                            name="address"
+                                            name="takeaway-address"
                                             // placeholder={fetchFood.customer_details.numberOfSeats}
                                             value={customerDetails.address}
                                             onChange={handleInputChange}
                                             required
-
                                         />
-                                    </label>
+
                                     <button type="button" onClick={handleSave} className="save-btn">
                                         Save
                                     </button>
@@ -884,28 +901,23 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                 </div>
 
                 <div className='row'>
-                    <div className='dinein-navbar-cont'>
+                    <div className='dinein-navbar-cont' class="dinein-nav">
 
                         <div>
-                            <p className="static-running-order" style={{ backgroundColor:'#A9B3CE','color': '#000' }}>OrderNo #{orderNou}</p>
+                            <p className="static-running-order" class="orderNo">OrderNo #{orderNou}</p>
                             {/* <a href="#" className="running-order" style={{ backgroundColor: "#FF7F7F", borderColor: "#FF7F7F", color: '#000' }}>Floor No 1</a>
                             <p className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Table {id}</p>
                             <p className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }}>Seats {ordersave ? customerDetails.numberOfSeats : fetchFood.customer_details.numberOfSeats}</p>
                             <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Waiter name </p> */}
                         </div>
-                        <div className='pay-cont'>
+                        <div className='pay-cont' class="pay-cont">
                             <ToastContainer />
                             {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                                 ordersave ? SaveOrder() : UpdateOrder()
-                            }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> 
-                            <p className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>Receipt </p>*/}
-                            <button onClick={SaveOrder} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>KOT
-
-                            </button>
-                            
-                            <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>Bill
-
-                            </button>
+                            }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
+                            <button className="running-order" onClick={printText} style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>Receipt </button>
+                            <button onClick={SaveOrder} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>KOT</button>
+                            <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>Bill</button>
 
                         </div>
 
@@ -945,7 +957,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                                 )
                                             })}
                                         </ul>
-                                        <div className="order-details-row">
+                                        <div className="totalAed" class="totalAed">
                                             <p>Total: AED{calculateTotalAmountofItem()}</p>
                                         </div>
 
@@ -1023,8 +1035,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                     </div>
                     {/* layout -1 */}
                     <div className='col-sm-6'>
-                        <div className='orderCont'>
-                            <h5 className='d-flex justify-content-center'>Track your order here</h5>
+                        <div className='orderCon'>
+                            <h5 className='d-flex text-align-center' class="track-order-h5">Track your order here</h5>
                             <ul class="responsive-table">
                                 <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius: '10px' }}>
                                     <div class="colo colo-1" style={{fontWeight:'bold'}}>Id</div>
@@ -1033,6 +1045,12 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                     <div class="colo colo-3" style={{ fontWeight: 'bold' }}>Price</div>
                                     <div class="colo colo-4" style={{ fontWeight: 'bold' }}>Amount</div>
                                 </li>
+                                {/* the total goes here */}
+                                <div class="mainpage-aed">
+                                    <h5>Total: AED {calculateTotalAmountofItem()} </h5>
+                                </div>
+
+                                <div class="orderSummary">
                                 {/* save to db and fetch from there DYNAMIC TODO:*/}
                                 {foodD.length > 0 && foodD.filter(x => x.orderFrom == "takeaway").map((food) => (
                                     < TableorderCard fooditem={food}
@@ -1043,6 +1061,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                 ))
 
                                 }
+                                </div>
 
                                 {ordersave ? '' :
                                     loadfood && (
@@ -1051,18 +1070,13 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                         </>)
 
                                 }
-
-
                             </ul>
-                            {/* the total goes here */}
-                            <div>
-                                <h5>Total: AED {calculateTotalAmountofItem()} </h5>
-                            </div>
+                
                         </div>
                     </div>
                     {/* layout - 2 */}
                     <div className='col-sm-6'>
-                        <div className='food-order-cont'>
+                        <div className='food-display'>
                             <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '10px' }}>
                                 <div className='foo-cat'>
                                     <span htmlFor="foodCategory" style={{fontWeight:'bold'}}>Food Category</span>
@@ -1102,8 +1116,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
 
                             </div>
-                            <div>
-
+                            <div class="food-data">
                                 {
                                     <DynamicComponent
                                         fooddata={filteredFoodItems}
