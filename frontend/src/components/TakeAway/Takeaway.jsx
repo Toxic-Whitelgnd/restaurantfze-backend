@@ -944,7 +944,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                             {foodD && foodD.filter(x => x.orderFrom == "takeaway").map((val, idx) => {
                                                 return (
                                                     <>
-                                                        <li class="otable-row">
+                                                        <li class="otable-row-takeway">
                                                             <div class="colo colo-1" data-label="Job Id">{val.id}</div>
                                                             <div class="colo colo-2" data-label="Customer Name">{val.foodname}</div>
                                                             <div class="colo colo-5" data-label="Amount">{val.qty}</div>
@@ -1049,7 +1049,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                     <h5>Total: AED {calculateTotalAmountofItem()} </h5>
                                 </div>
 
-                                <div class="orderSummary">
+                                <div class="orderSummary-takeaway">
                                 {/* save to db and fetch from there DYNAMIC TODO:*/}
                                 {foodD.length > 0 && foodD.filter(x => x.orderFrom == "takeaway").map((food) => (
                                     < TableorderCard fooditem={food}
@@ -1076,10 +1076,10 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                     {/* layout - 2 */}
                     <div className='col-sm-6'>
                         <div className='food-display'>
-                            <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '10px' }}>
+                            <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '5px' }}>
                                 <div className='foo-cat'>
-                                    <span htmlFor="foodCategory" style={{fontWeight:'bold'}}>Food Category</span>
-
+                                    {/* <span htmlFor="foodCategory" style={{fontWeight:'bold'}}>Food Category</span> */}
+                                    <label className='foodCategory'>Food Category</label>
                                     <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''} className='filter'>
                                         <option value="all" >
                                             All
@@ -1093,7 +1093,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                 </div>
                                 
                                 <div className='foo-cat'>
-                                    <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
+                                    <span htmlFor="foodCategory" style={{ fontWeight: 'bold', height: '0.7cm'}}>Sort-by or Filter</span>
                                     <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                         <option value="all">All</option>
                                         <option value="highPrice">High Price</option>
@@ -1104,6 +1104,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                 <div>
                                     <div className="search-container">
                                         <input
+                                            className='search-container-searchbar'
                                             type="text"
                                             placeholder="Search..."
                                             value={searchTerm}

@@ -1,86 +1,4 @@
-for table
-.orderCont-tkl {
-    overflow-y: scroll;
-    max-width: 1300px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-    max-height: 700px;
-  }
-  
-  h2 {
-    font-size: 26px;
-    margin: 20px 0;
-    text-align: center;
-    small {
-      font-size: 0.5em;
-    }
-  }
-  
-  .responsive-table {
-  
-    li {
-      border-radius: 3px;
-      padding: 25px 30px;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 25px;
-    }
-    .otable-header {
-      background-color: #95a5a6;
-      font-size: 1px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-    }
-    .otable-row {
-      background-color: #ffffff;
-      box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-      box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-    }
-    .colo-1 {
-      flex-basis: 10%;
-    }
-    .colo-2 {
-      flex-basis: 40%;
-    }
-    .colo-3 {
-      flex-basis: 15%;
-    }
-    .colo-4 {
-      flex-basis: 15%;
-    }
-    .colo-5{
-      flex-basis: 35%;
-    }
-  
-    @media all and (max-width: 767px) {
-      .otable-header {
-        display: none;
-      }
-      /* .otable-row {
-      } */
-      li {
-        display: block;
-      }
-      .colo {
-        flex-basis: 100%;
-      }
-      .colo {
-        display: flex;
-        padding: 10px 0;
-        &:before {
-          color: #6c7a89;
-          padding-right: 10px;
-          content: attr(data-label);
-          flex-basis: 50%;
-          text-align: right;
-        }
-      }
-    }
-  }
+
   
 .filter
 {
@@ -129,9 +47,9 @@ for table
   border-radius: 5px;
 }
 
-.modal-overlay1{
-  /* background-color: green; */
-}
+/* .modal-overlay1{
+  /* background-color: green; 
+} */
 
 .takeaway-form{
   /* background-color: red; */
@@ -160,7 +78,10 @@ input[name=takeaway-name]{
   border: 1px solid gray;
   border-radius: 5px;
 }
+input[name=takeaway-name]:focus{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
+}
 .takeaway-no-la{
   margin: 0;
   margin-top: 0.5cm;
@@ -170,7 +91,10 @@ input[name=takeaway-number]{
   border: 1px solid black;
   border-radius: 5px;
 }
+input[name=takeaway-number]:focus{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
+}
 .takeaway-email-la{
   margin: 0;
   margin-top: 0.5cm;
@@ -180,7 +104,10 @@ input[name=takeaway-email]{
   border: 1px solid black;
   border-radius: 5px;
 }
+input[name=takeaway-email]:focus{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
+}
 .takeaway-add-la{
   margin: 0;
   margin-top: 0.5cm;
@@ -190,7 +117,10 @@ input[name=takeaway-address]{
   border: 1px solid black;
   border-radius: 5px;
 }
+input[name=takeaway-address]:focus{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
+}
 .save-btn{
   margin-top: 1cm;
 }
@@ -218,11 +148,122 @@ input[name=takeaway-address]{
   text-align: right;
 }
 
-.orderSummary {  
-  overflow: scroll;
+
+
+/* Style for the track order header */
+.track-order-h5 {
+  text-align: center;
+  /* Add any other styles you want */
 }
+
+/* Style for the table header */
+.otable-header {
+  background-color: #B84A62;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Style for the table columns */
+.colo {
+  font-weight: bold;
+}
+/* Style for the order summary section */
+.orderSummary-takeaway {
+  /* Add styles for the order summary section */
+  max-height: 400px; /* Set a maximum height */
+  overflow-y: auto; /* Add vertical scrollbar */
+  background-color: lightblue;
+  border-radius: 30px;
+}
+
+
+
 
 .food-data{
   margin-left: 1.5cm;
 }
+
+.food-display{
+  margin-top: 1cm;
+}
+
+.otable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #B84A62; /* Set an attractive background color for the header */
+  color: white; /* Text color for better contrast */
+}
+
+/* Style for the table rows */
+.otable-row-takeway {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f8f8; /* Set an attractive background color for the rows */
+  border-bottom: 1px solid #ddd; /* Add a bottom border for separation */
+}
+
+
+
+
+/* chdbvhdbvbd */
+
+.food-category-bar {
+  background-color: #B84A62; /* Set an attractive background color */
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Style for the foo-cat container */
+.foo-cat {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+/* Style for the foodCategory label */
+.foodCategory {
+  font-weight: bold;
+  margin-right: 10px;
+  color: white; /* Set font color to white for better visibility */
+  margin-top: 3px;
+}
+
+/* Style for the select dropdown */
+.foo-cat select.filter {
+  padding: 3px;
+  margin-top: 0px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white; /* Set background color for select dropdown */
+  cursor: pointer;
+  margin-bottom: 3px;
+}
+.foo-cat select.filter:focus{
+  background-color:rgb(207, 230, 238);
+}
+.search-container{
+  margin-bottom: 5px;
+}
+/* Additional style for the span inside foo-cat */
+.foo-cat span {
+  font-weight: bold;
+  height: 0.7cm; /* Adjusted height */
+  margin-right: 10px;
+  color: white; /* Set font color to white for better visibility */
+}
+
+/* Style for the search container */
+
+
+.search-container-searchbar:focus {
+  background-color: rgb(207, 230, 238);
+  border: none;
+}
+
 
