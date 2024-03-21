@@ -120,7 +120,7 @@ const Expenses = () => {
 
                     <label>
                         VAT Amount:
-                        <input id="exp-input" type="number" name="vatAmount" value={formData.vatAmount} onChange={handleInputChange} />
+                        <input id="exp-input"   type="number" name="vatAmount" value={formData.vatAmount} onChange={handleInputChange} />
                     </label>
 
                     <label>

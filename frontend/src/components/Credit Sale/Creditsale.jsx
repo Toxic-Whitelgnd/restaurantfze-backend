@@ -135,8 +135,9 @@ const Creditsale = () => {
             <div className='food-category-bar-1'>
 
                 <div className='foo-cat'>
+                {/* <label for="name" class="form__label">Find by OrderNo</label> */}
 
-                    <input type="text" placeholder="Name" className="form__input" id="name"
+                    <input type="text" placeholder="Find by_OrderNo" className="form__input_creditsale" id="name"
                         value={recipientIdFilter}
                         // onChange={(e) => setRecipientIdFilter(e.target.value)}
                         onChange={handleSearch}
@@ -147,13 +148,12 @@ const Creditsale = () => {
 
                     />
 
-                    <label for="name" class="form__label">Find by OrderNo</label>
-
+     
                 </div>
 
                 <div className='foo-cat-1'>
-                    <span htmlFor="foodCategory">Sort by :</span>
-                    <select id="foodCategory-1" onChange={handleSalestate} value={saletype}>
+                    <span htmlFor="foodCategory" className='foodCategory-creditsale-span'>Sort by :</span>
+                    <select id="foodCategory-1-creditsale" onChange={handleSalestate} value={saletype}>
                         <option value="all">All</option>
                         <option value="hightolow">HighToLow</option>
                         <option value="lowtohigh">LowToHigh</option>

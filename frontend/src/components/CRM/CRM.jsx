@@ -361,7 +361,7 @@ const CRM = () => {
 
                 <div className='foo-cat'>
 
-                    <input type="text" placeholder="Name" className="form__input" id="name"
+                    <input type="text" placeholder="Find by_Number" className="form__input_CRM" id="name"
                         value={recipientIdFilter}
                         // onChange={(e) => setRecipientIdFilter(e.target.value)}
                         onChange={handleSearch}
@@ -372,7 +372,7 @@ const CRM = () => {
 
                     />
 
-                    <label for="name" class="form__label">Find by Number</label>
+                    {/* <label for="name" class="form__label">Find by Number</label> */}
 
                 </div>
 
@@ -394,7 +394,7 @@ const CRM = () => {
 
                 <div className='foo-cat-1'>
                     <span htmlFor="foodCategory">Sort by :</span>
-                    <select id="foodCategory-1" onChange={handleSalestate} value={saletype}>
+                    <select id="foodCategory-1-crm" onChange={handleSalestate} value={saletype}>
                         <option value="activecustomer">Active Customer</option>
                         <option value="topcustomer">Top Customer</option>
                         <option value="inactivecustomer">Incative Customer</option>

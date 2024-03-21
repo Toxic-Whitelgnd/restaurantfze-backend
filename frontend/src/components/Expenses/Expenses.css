@@ -123,3 +123,7 @@
    button:hover .button-text {
     color: #fff;
    }
+   /* css */
+ #exp-input {
+    background-color: white;
+   }

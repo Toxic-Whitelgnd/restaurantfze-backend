@@ -41,11 +41,11 @@ const PayBack = () => {
             <h1>Payback page</h1>
             <div className='dinein-navbar-cont-pb'>
                 <label for="inp" class="inp">
-                    <input type="text" id="inp" placeholder="&nbsp;" 
+                    <input type="text" id="inp" placeholder="Enter_Recipient " 
                     onChange={onChangeRc}
                     value={rcid}
                     />
-                    <span class="label">Enter Recipient ID</span>
+                    {/* <span class="label">Enter Recipient ID</span> */}
                     <span class="focus-bg"></span>
                 </label>
                 <button class="btn-31" onClick={FindRcId}>
