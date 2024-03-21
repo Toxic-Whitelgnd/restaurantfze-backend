@@ -606,7 +606,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
         try {
 
-            window.location.reload();
+            // window.location.reload();
+            window.location.href = `/#/printrecipiet/${orderNou}`;
         } catch (error) {
             alert(error.message);
         }

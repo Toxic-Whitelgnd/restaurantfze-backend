@@ -99,66 +99,66 @@ const currentOrderSchema = new mongoose.Schema({
   floor_no: { type: String, required: true },
   items: [itemSchema],
   items_ordered: { type: Number, required: true },
-  no_of_seats: { type: String, required: true },
-  waiterName: { type: String, required: true },
-  date: { type: String, required: true },
-  time: { type: String, required: true },
-  order_no: { type: Number, required: true },
-  running_order: { type: String, required: true },
-  table_no: { type: String, required: true },
-  orderFrom: { type: String, required: true },
-  total: { type: Number, required: true },
+  no_of_seats: { type: String },
+  waiterName: { type: String},
+  date: { type: String},
+  time: { type: String},
+  order_no: { type: Number},
+  running_order: { type: String},
+  table_no: { type: String},
+  orderFrom: { type: String},
+  total: { type: Number},
 });
 
 const customerSchema = new mongoose.Schema({
   customer_mobileNumber: {
     type: String,
-    required: true,
+   
   },
   customer_name: {
     type: String,
-    required: true,
+   
   },
   date: {
     type: String,
-    required: true,
+   
   },
   items: [itemSchema], // Array of items using the defined itemSchema
   items_ordered: {
     type: Number,
-    required: true,
+   
   },
   orderFrom: {
     type: String,
-    required: true,
+   
   },
   order_no: {
     type: Number,
-    required: true,
+   
   },
   ordered_tableno: {
     type: String,
-    required: true,
+   
   },
   paid_by: {
     type: String,
-    required: true,
+   
   },
   time: {
     type: String,
-    required: true,
+   
   },
   total: {
     type: Number,
-    required: true,
+   
   },
   total_ppl: {
     type: String,
-    required: true,
+   
   },
   type: {
     type: String,
-    required: true,
+   
   },
   vat: String,
   waiter_name: String,
@@ -232,36 +232,36 @@ const currentTakeawayOrderSchema = new mongoose.Schema({
 const customerTakeawaySchema = new mongoose.Schema({
   customer_mobileNumber: {
     type: String,
-    required: true,
+   
   },
   customer_name: {
     type: String,
-    required: true,
+   
   },
   customer_email: {
     type: String,
-    required: true,
+   
   },
   customer_address: {
     type: String,
-    required: true,
+   
   },
   date: {
     type: String,
-    required: true,
+   
   },
   items: [itemTakeawaySchema], // Array of items using the defined itemSchema
   items_ordered: {
     type: Number,
-    required: true,
+   
   },
   orderFrom: {
     type: String,
-    required: true,
+   
   },
   order_no: {
     type: Number,
-    required: true,
+   
   },
 
   paid_by: {
@@ -271,15 +271,15 @@ const customerTakeawaySchema = new mongoose.Schema({
 
   time: {
     type: String,
-    required: true,
+   
   },
   total: {
     type: Number,
-    required: true,
+   
   },
   type: {
     type: String,
-    required: true,
+   
   },
   vat: String,
   waiter_name: String,
@@ -339,7 +339,7 @@ const customerDeliverySaleSchema = new mongoose.Schema({
   },
   date: {
     type: String,
-    required: true,
+   
   },
   delivered_by: String, // backend dashboard handling
   delivery_vehicle_no: String, //backend dashboard handling
@@ -497,6 +497,30 @@ const ExpensesSchema = new mongoose.Schema({
   }
 });
 
+// Define the schema for the CashAtStarting, CashSale, and CreditRecoverySale
+const settleSaleSchema = new mongoose.Schema({
+  cashAtStarting: {
+      type: Number,
+      default: 0
+  },
+  cashSale: {
+      type: Number,
+      default: 0
+  },
+  creditRecoverySale: {
+      type: Number,
+      default: 0
+  },
+  date: {
+    type: String,
+  },
+  total: {
+    type: Number,
+    default: 0
+  }
+});
+
+
 
 
 
@@ -559,6 +583,8 @@ const Recipiet = mongoose.model("recipiet", recipietSchema);
 const CashAtStarting = mongoose.model('cashatstarting', CashAtStartingSchema);
 
 const Expenses = mongoose.model('Expenses', ExpensesSchema);
+
+const SettleSale = mongoose.model('SettleSale', settleSaleSchema);
 // ****************** END *********************
 
 // Connect to MongoDB
@@ -1965,6 +1991,56 @@ app.get('/get_codlog', async (req, res) => {
 // ******************************** END OF CODLOG *******************************
 
 // ********************************* START OF SETTLE SALES ****************************
+
+app.post('/save_settlesale', async (req, res) => {
+  try {
+    const settlesale = new SettleSale(req.body);
+    await  settlesale.save();
+
+    res.json({success: true, data: settlesale});
+  } catch (error) {
+      console.log(error);
+      res.json({ message: "Error in get_cashsale" });
+  }
+});
+
+app.get('/settlesale/:getdate', async (req, res) => {
+  try {
+    const { getdate } = req.params;
+    const originalDate = getdate;
+    const convertedDate = convertDateFormat(originalDate);
+    console.log(convertedDate);
+    const ss = await SettleSale.find({
+      date: convertedDate,
+    });
+
+    res.json({success: true, data: ss,});
+
+  } catch (error) {
+    console.log(error);
+    res.json({ message: "Error in get_cashsale" });
+  }
+});
+
+app.put('/update_settlesale/:getdate', async (req, res) => {
+  try {
+    const { getdate } = req.params;
+    const originalDate = getdate;
+    const convertedDate = convertDateFormat(originalDate);
+    // console.log(convertedDate);
+    const ss = await SettleSale.findOneAndUpdate({
+      date: convertedDate,
+    },{
+      $set: req.body,
+    });
+
+    res.json({success: true, data: ss,});
+
+  } catch (error) {
+    console.log(error);
+    res.json({ message: "Error in get_cashsale" });
+  }
+});
 
 app.get('/get_cashsale/:getdate', async (req, res) => {
   const { getdate } = req.params;

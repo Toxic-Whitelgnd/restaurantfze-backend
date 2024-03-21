@@ -21,52 +21,52 @@ const DeliverySale = () => {
 
     // Componet's are Dynamic 
 
-    const DynamicComponent = ({ fooddata, foodtype }) => (
-        <>
-            <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
+    // const DynamicComponent = ({ fooddata, foodtype , foodterm , handleFoodItem}) => (
+    //     <>
+    //         <div className='d-flex flex-wrap gap-2 mt-2 row-gap-3'>
 
-                {
+    //             {
 
-                    fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
-                        return (
-                            <>
-                                <div className="my-alert">
-                                    <div className="my-alert__unique1">
-                                        {val.foodImage && (
-                                            <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
-                                        )}
+    //                 fooddata.filter(x => x.foodType === foodtype).map((val, idx) => {
+    //                     return (
+    //                         <>
+    //                             <div className="my-alert">
+    //                                 <div className="my-alert__unique1">
+    //                                     {val.foodImage && (
+    //                                         <img src={`data:image/jpeg;base64,${val.foodImage}`} alt={val.foodName} className='img-card' />
+    //                                     )}
 
-                                        </div>
-                                        {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
-                                        <div className="my-alert__unique2">
-                                            <div className='my-alert__unique3'>
-                                                <div className='my-alert__unique4'>
-                                                    <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
-                                                    <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
-                                                </div>
-                                                <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
+    //                                     </div>
+    //                                     {val.foodAvailability === 'Yes' ? <span class="badge position-relative translate-middle aval" style={{ backgroundColor: 'green' }}>'</span> : <span class="badge position-relative translate-middle notaval" style={{ backgroundColor: 'red' }}>'</span>}
+    //                                     <div className="my-alert__unique2">
+    //                                         <div className='my-alert__unique3'>
+    //                                             <div className='my-alert__unique4'>
+    //                                                 <span className='fs-4 fw-bold text-capitalize'>{val.foodName}</span>
+    //                                                 <p className='fs-6'>{val.foodQty == 0 ? '' : val.foodQty}</p>
+    //                                             </div>
+    //                                             <span className='mt-3 fw-semibold'>AED {val.foodPrice}</span>
 
-                                        </div>
-                                        {val.foodAvailability === 'No' ? <button
-                                            className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
-                                            type='button' disabled
-                                        >Add to cart</button> :
-                                            <button
-                                                className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
-                                                type='button'
-                                            >Add to cart</button>}
+    //                                     </div>
+    //                                     {val.foodAvailability === 'No' ? <button
+    //                                         className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+    //                                         type='button' disabled
+    //                                     >Add to cart</button> :
+    //                                         <button
+    //                                             className='btn cust-btn-cart' onClick={() => handleFoodItem(val)}
+    //                                             type='button'
+    //                                         >Add to cart</button>}
 
-                                        </div>
-                                    </div>
-                                </>
-                            )
-                        })
+    //                                     </div>
+    //                                 </div>
+    //                             </>
+    //                         )
+    //                     })
 
-                }
+    //             }
 
-            </div>
-        </>
-    )
+    //         </div>
+    //     </>
+    // )
              
 
     // componet ending
@@ -517,6 +517,7 @@ const DeliverySale = () => {
         const fetchFoodTypes = async () => {
             try {
                 const response = await axios.get('https://restogenius.onrender.com/get_food_type');
+                console.log(response.data);
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -776,8 +777,8 @@ const DeliverySale = () => {
 
                         {/* <button className="running-order" style={{ backgroundColor: "#FF0505", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                             ordersave ? SaveOrder() : UpdateOrder()
-                        }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> */}
-                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p>
+                        }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button> 
+                        <p className="running-order" style={{ backgroundColor: "#FF9D08", borderColor: "#FF9D08", color: '#000' }}>Print Reciept </p> */}
                         <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#009946", borderColor: "#009946", color: '#000' }}>Pay Bill
 
                         </button>
@@ -873,13 +874,23 @@ const DeliverySale = () => {
                                         <div className='col'>
                                             <label>
                                                 Total Amount Paid:
-                                                <input
-                                                    type="number"
-                                                    value={totalAmount}
-                                                    onChange={handleAmountChange}
-                                                    placeholder="Enter total amount paid"
-                                                    required
-                                                />
+                                                {
+                                            selectedPaymentType === 'creditsale' ? <input
+                                            type="number"
+                                            value={totalAmount}
+                                            onChange={handleAmountChange}
+                                            placeholder="Enter total amount paid"
+                                            required
+                                            disabled
+                                        /> : <input
+                                        type="number"
+                                        value={totalAmount}
+                                        onChange={handleAmountChange}
+                                        placeholder="Enter total amount paid"
+                                        required
+                                       
+                                    />
+                                        }
                                             </label>
                                         </div>
                                     </div>
@@ -941,9 +952,9 @@ const DeliverySale = () => {
                             <div className='foo-cat'>
                                 <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span>
 
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''}>
-                                    <option value="" disabled>
-                                        Select Food Type to filter
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'}>
+                                    <option value="all">
+                                        All
                                     </option>
                                     {foodTypes.map((type) => (
                                         <option key={type.food_name} value={type.food_name}>
@@ -974,10 +985,13 @@ const DeliverySale = () => {
                         </div>
                         <div>
 
+                            
                             {
                                 <DynamicComponent
                                     fooddata={filteredFoodItems}
                                     foodtype={selectedCategory}
+                                    foodterm={searchTerm}
+                                    handleFoodItem={handleFoodItem}
                                 />
                             }
 

@@ -37,7 +37,10 @@ const RecipietCard = () => {
     const handleRecipetBill = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: 'FZE-Restaurant',
-        onAfterPrint: () => toast.success("Printed"),
+        onAfterPrint: () => {toast.success("Printed")
+    setTimeout(() =>{
+        window.location.href = '/#/';
+    },2000)},
     });
 
    

@@ -1013,13 +1013,23 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                         <div className='col'>
                                             <label>
                                                 Total Amount Paid:
-                                                <input
-                                                    type="number"
-                                                    value={totalAmount}
-                                                    onChange={handleAmountChange}
-                                                    placeholder="Enter total amount paid"
-                                                    required
-                                                />
+                                                {
+                                            selectedPaymentType === 'creditsale' ? <input
+                                            type="number"
+                                            value={totalAmount}
+                                            onChange={handleAmountChange}
+                                            placeholder="Enter total amount paid"
+                                            required
+                                            disabled
+                                        /> : <input
+                                        type="number"
+                                        value={totalAmount}
+                                        onChange={handleAmountChange}
+                                        placeholder="Enter total amount paid"
+                                        required
+                                       
+                                    />
+                                        }
                                             </label>
                                         </div>
                                         <div className="col">

@@ -244,9 +244,9 @@ const DineinOrderpage = () => {
     // end of serverside rendering
 
     const [customerDetails, setCustomerDetails] = useState({
-        name: '',
-        mobileNumber: '',
-        numberOfSeats: '',
+        name: 'customer',
+        mobileNumber: '999',
+        numberOfSeats: '1',
     }
     );
 
@@ -272,7 +272,7 @@ const DineinOrderpage = () => {
     const handleSave = () => {
 
         const gettotppl = tableData.filter(x => x.table_no == id);
-        console.log(gettotppl);
+        console.log("get totalseats",gettotppl);
         if (customerDetails.numberOfSeats > gettotppl[0].table_capacity) {
             toast.error(`Seats Max Capacity is ${gettotppl[0].table_capacity}`);
         }
@@ -595,6 +595,7 @@ const DineinOrderpage = () => {
         const fetchFoodTypes = async () => {
             try {
                 const response = await axios.get(`${dynamicurl}get_food_type`);
+                console.log(response.data);
                 setFoodTypes(response.data);
             } catch (error) {
                 console.error('Error fetching food types:', error);
@@ -855,7 +856,7 @@ const DineinOrderpage = () => {
                                         value={customerDetails.numberOfSeats}
                                         onChange={handleInputChange}
                                         required
-                                        max={4}
+                                        
                                     />
                                 </label>
                                 <button type="button" onClick={handleSave} className="save-btn">
@@ -948,7 +949,9 @@ const DineinOrderpage = () => {
                         <button className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#FF0505", color: '#000' }} onClick={() => {
                             ordersave ? SaveOrder() : UpdateOrder()
                         }}>{ordersave ? 'Save order' : 'Update Order'}<ToastContainer /></button>
-                        <button className="running-order" onClick={handleRecieptoKitchen} style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>KOT </button>
+                        { ordersave ?  <button  className="running-order" onClick={handleRecieptoKitchen} disabled style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>KOT </button> :
+                         <button  className="running-order" onClick={handleRecieptoKitchen} style={{ backgroundColor: "#ACE4AA", borderColor: "#FF9D08", color: '#000' }}>KOT </button>}
+                       
 
                         <button onClick={openModelPaybill} className="running-order" style={{ backgroundColor: "#ACE4AA", borderColor: "#009946", color: '#000' }}>Pay Bill
 
@@ -1014,13 +1017,23 @@ const DineinOrderpage = () => {
                                         <div className='col'>
                                             <label>
                                                 Total Amount Paid:
-                                                <input
-                                                    type="number"
-                                                    value={totalAmount}
-                                                    onChange={handleAmountChange}
-                                                    placeholder="Enter total amount paid"
-                                                    required
-                                                />
+                                                {
+                                            selectedPaymentType === 'creditsale' ? <input
+                                            type="number"
+                                            value={totalAmount}
+                                            onChange={handleAmountChange}
+                                            placeholder="Enter total amount paid"
+                                            required
+                                            disabled
+                                        /> : <input
+                                        type="number"
+                                        value={totalAmount}
+                                        onChange={handleAmountChange}
+                                        placeholder="Enter total amount paid"
+                                        required
+                                       
+                                    />
+                                        }
                                             </label>
                                         </div>
                                         <div className="col">
