@@ -976,7 +976,7 @@ const DeliverySale = () => {
                             </div>
 
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory" className="foodCategory-d-label"style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
+                                <span htmlFor="foodCategory" className="foodCategory-d-label" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
                                 <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>

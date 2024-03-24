@@ -124,11 +124,11 @@ const Sod = () => {
 
     return (
         <div>
-            <h1>Sale order details</h1>
+            <h1 className='text-center mt-2'>Sale order details</h1>
             <div className='food-order-cont-1'>
                 <div className='food-category-bar-1'>
                     <div className='foo-cat-1'>
-                        <span htmlFor="foodCategory">Order by   :</span>
+                        <span htmlFor="foodCategory">Order by :</span>
                         <select id="foodCategory-1" onChange={handleSalestate} value={saletype}>
                             <option value="all">All</option>
                             <option value="dinein">Dinein</option>
@@ -139,7 +139,7 @@ const Sod = () => {
                     </div>
                     <div className='foo-cat'>
 
-                        <input type="text" placeholder="Name" className="form__input" id="name"
+                        <input type="text" placeholder="Find by_RecipientID" className="form__input" id="name"
                             value={recipientIdFilter}
                             // onChange={(e) => setRecipientIdFilter(e.target.value)}
                             onChange={handleSearch}

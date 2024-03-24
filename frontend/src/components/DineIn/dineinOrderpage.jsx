@@ -807,7 +807,7 @@ const DineinOrderpage = () => {
 
     return (
         <div className='over-order-page'>
-            {usercreated ? <button type="button" className='adduser' onClick={openModal}>
+            {usercreated ? <button type="button" className='adduser' class="add-user-btn" onClick={openModal}>
                 Add User
             </button> : <div className='row'>
                 <p className='mt-1 col-md-2'>Customer name: <span className='text-capitalize fw-bold'>{!ordersave ? fetchFood.customer_details.name : customerDetails.name}</span> </p>
@@ -821,17 +821,18 @@ const DineinOrderpage = () => {
 
                 {isModalOpen && (
                     <div className="modal-overlay1">
-                        <div className="modal1">
-                            <button type="button" className="close-btn" onClick={closeModal}>
+                        <div className="modal1-deliverysale-1">
+                            <button type="button" className="close-btn-DINEIN" onClick={closeModal}>
                                 &times;
                             </button>
-                            <h2>Customer Details</h2>
-                            <form>
-                                <label>
+                            <h2  id='takwaway-headinh-h2'>Customer Details</h2>
+                            <form class="takeaway-form-delivery">
+                                <label class="takeaway-name-la">
                                     Customer Name:
                                     <input
                                         type="text"
                                         name="name"
+                                        id='takeaway-name'
                                         value={customerDetails.name}
                                         onChange={handleInputChange}
                                         required
@@ -842,6 +843,7 @@ const DineinOrderpage = () => {
                                     <input
                                         type="tel"
                                         name="mobileNumber"
+                                        id='takeaway-number'
                                         value={customerDetails.mobileNumber}
                                         onChange={handleInputChange}
                                         required
@@ -852,6 +854,7 @@ const DineinOrderpage = () => {
                                     <input
                                         type="number"
                                         name="numberOfSeats"
+                                        id='numberOfSea'
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
                                         value={customerDetails.numberOfSeats}
                                         onChange={handleInputChange}
@@ -1077,7 +1080,7 @@ const DineinOrderpage = () => {
                 </div>
                 {/* layout -1 */}
                 <div className='col-sm-6'>
-                    <div className='orderCont'>
+                    <div className='orderCon'>
                         <h5 className='d-flex justify-content-center'>Track your order here</h5>
                         <ul class="responsive-table">
                             <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius:'10px' }}>
@@ -1087,6 +1090,11 @@ const DineinOrderpage = () => {
                                 <div class="colo colo-3" style={{ fontWeight: 'bold' }}>Price</div>
                                 <div class="colo colo-4" style={{ fontWeight: 'bold' }}>Amount</div>
                             </li>
+                              {/* the total goes here */}
+                        <div  class="mainpage-aed">
+                            <h5>Total: AED {calculateTotalAmountofItem()} </h5>
+                        </div>
+                        <div class="orderSummary-takeaway">
                             {/* save to db and fetch from there DYNAMIC TODO:*/}
                             {foodD.length > 0 && foodD.filter(x => x.orderFrom == "indoor").map((food) => (
                                 < TableorderCard fooditem={food}
@@ -1097,7 +1105,7 @@ const DineinOrderpage = () => {
                             ))
 
                             }
-
+                            </div>
                             {ordersave ? '' :
                                 loadfood && (
                                     <>
@@ -1108,20 +1116,17 @@ const DineinOrderpage = () => {
 
 
                         </ul>
-                        {/* the total goes here */}
-                        <div>
-                            <h5>Total: AED {calculateTotalAmountofItem()} </h5>
-                        </div>
+                      
                     </div>
                 </div>
                 {/* layout - 2 */}
-                <div className='col-sm-5'>
+                <div className='col-sm-4'>
                     <div className='food-order-cont'>
-                        <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius:'10px' }}>
+                        <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '5px' }}>
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span>
-
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'}>
+                                {/* <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span> */}
+                                <label className='foodCategory'>Food Category</label>
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''} className='filter'>
                                     <option value="all">
                                         All
                                     </option>
@@ -1132,37 +1137,32 @@ const DineinOrderpage = () => {
                                     ))}
                                 </select>
                             </div>
+
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
-                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption}>
+                                <span htmlFor="foodCategory" className="foodCategory-d-label" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
+                                <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>
                                     <option value="lowPrice">Low Price</option>
                                     <option value="available">Available</option>
                                 </select>
                             </div>
-                            <div>
-                                <div className="search-container">
-                                    <input
-                                        type="text"
-                                        placeholder="Search..."
-                                        value={searchTerm}
-                                        onChange={handleInputChange1}
-                                    />
-                                    <FaSearch className="search-icon" />
-                                </div>
-                            </div>
+                            <div className='date-time-container'>         
+                            <div className='date'>
 
-                            <div className='date-time'>
-
-                                <GetDate />
+                              <label>Date:</label><span  className='getdate' ><GetDate /></span>
                                 <br></br>
-                                <GetTime />
+                                
+                                <label>Time:</label><span id='span-time'><GetTime /></span>
+                                
                             </div>
+                            </div>
+
 
                         </div>
                         <div>
 
+                        <div class="food-data">  
                             {
                                 <DynamicComponent
                                     fooddata={filteredFoodItems}
@@ -1172,9 +1172,7 @@ const DineinOrderpage = () => {
                                 />
                             }
 
-
-
-
+                        </div>    
                         </div>
                     </div>
                 </div>

@@ -1097,7 +1097,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                             {ordersave ? '' :
                                 loadfood && (
                                     <>
-                                        <button className='btn btn-primary' onClick={loadItems} > load data</button>
+                                        <button id="add-user-btn-dienin" className='adduser' onClick={loadItems} > load data</button>
                                     </>)
 
                             }
