@@ -260,6 +260,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
         address: `customer address`,
     }
     );
+    
 
 
     const openModal = () => {
@@ -851,28 +852,32 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                     <label class="takeaway-name-la">
                                         Customer Name:</label>
                                         <input
-                                            type="text"
-                                            name="takeaway-name"
-                                            value={customerDetails.name}
-                                            onChange={handleInputChange}
-                                            required
+                                             type="text"
+                                             name="name"
+                                             id='takeaway-name'
+                                             value={customerDetails.name}
+                                             onChange={handleInputChange}
+                                             required
                                         />
                                     
                                     <label class="takeaway-no-la">
                                         Mobile Number:</label>
                                         <input
                                             type="tel"
-                                            name="takeaway-number"
+                                            name="mobileNumber"
+                                            id='takeaway-number'
                                             value={customerDetails.mobileNumber}
                                             onChange={handleInputChange}
                                             required
+                                            pattern="[0-9]*" // Only allows digits
                                         />
                                     
                                     <label class="takeaway-email-la">
                                         Email: </label>
                                         <input
                                             type="email"
-                                            name="takeaway-email"
+                                            name="email"
+                                            id='takeaway-email'
                                             // placeholder={fetchFood.customer_details.numberOfSeats}
                                             value={customerDetails.email}
                                             onChange={handleInputChange}
@@ -883,12 +888,13 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                     <label class="takeaway-add-la">
                                         Address:</label>
                                         <input
-                                            type="text"
-                                            name="takeaway-address"
-                                            // placeholder={fetchFood.customer_details.numberOfSeats}
-                                            value={customerDetails.address}
-                                            onChange={handleInputChange}
-                                            required
+                                             type="text"
+                                             name="address"
+                                             id='takeaway-address'
+                                             // placeholder={fetchFood.customer_details.numberOfSeats}
+                                             value={customerDetails.address}
+                                             onChange={handleInputChange}
+                                             required
                                         />
 
                                     <button type="button" onClick={handleSave} className="save-btn">
@@ -958,16 +964,16 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                             })}
                                         </ul>
                                         <div className="totalAed" class="totalAed">
-                                            <p>Total: AED{calculateTotalAmountofItem()}</p>
+                                            <p id='total-ds'>Total: AED{calculateTotalAmountofItem()}</p>
                                         </div>
 
                                     </div>
 
 
                                     <div>
-                                        <label>Waiter Name: </label>
-                                        <select id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
-                                            <option value="" disabled>
+                                        <label id='l-p-ds'>Waiter Name: </label>
+                                        <select id="foodCategory" class='option-ds'  onChange={handleWaiterChange} value={waiterName || ''}>
+                                            <option  class='option-ds' value="" disabled>
                                                 Waiter handled
                                             </option>
 
@@ -977,8 +983,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                                 </option>
                                             ))}
                                         </select>
-                                        <label>Select Payment Type:</label>
-                                        <select value={selectedPaymentType} onChange={handleSelectChange}>
+                                        <label  id='select-ds'>Select Payment Type:</label>
+                                        <select class='option-ds' value={selectedPaymentType} onChange={handleSelectChange}>
                                             <option value="">Select...</option>
                                             <option value="creditcard">Credit Card</option>
                                             <option value="creditsale">Credit sale</option>
@@ -988,22 +994,22 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                         <div className='row'>
                                             <div className="col">
 
-                                                {selectedPaymentType == "creditcard" ? <p>{selectedPaymentType} offer {bill.creditSale}</p>
+                                                {selectedPaymentType == "creditcard" ? <p id='l-p-ds'>{selectedPaymentType} offer: <span id='l-q-ds'>{bill.creditSale}</span></p>
                                                     : ""}
-                                                {selectedPaymentType == "debitcard" ? <p>Card offer {bill.cardSale}</p>
+                                                {selectedPaymentType == "debitcard" ? <p id='l-p-ds'>Card offer {bill.cardSale}</p>
                                                     : ""}
 
-                                                {<p>Discount: {bill.discount}</p>}
+                                                {<p><span id='l-r-ds'>Discount:</span> <span id='l-q-ds'>{bill.discount}</span></p>}
                                             </div>
                                             <div className="col">
                                                 <div className="order-details-row">
-                                                    <p>VAT:{bill && bill.VAT}</p>
-                                                    %
+                                                    <p id='l-p-ds'>VAT:</p><p id='l-q-ds'>{bill && bill.VAT} %</p>
+                                                   
 
                                                 </div>
                                                 <div className="order-details-row">
-                                                    <p>After Applying:</p>
-                                                    <p>AED
+                                                    <p id='l-p-ds'>After Applying:</p>
+                                                    <p id='l-q-ds'>AED
                                                         {calculateTotalwithvatdis()}</p>
 
                                                 </div>
@@ -1014,9 +1020,10 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
 
                                     </div>
                                     <div className='col'>
-                                        <label>
+                                        <label   id='l-p-ds'>
                                             Total Amount Paid:
                                             <input
+                                                 id='option-ds-sw'
                                                 type="number"
                                                 value={totalAmount}
                                                 onChange={handleAmountChange}
@@ -1025,7 +1032,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                                             />
                                         </label>
                                     </div>
-                                    <button className="btn btn-success" onClick={handlePayBillPay} >Pay Bill</button>
+                                    <button className="btn btn-success" class="add-user-btn-paybill-tk" onClick={handlePayBillPay} >Pay Bill</button>
                                 </div>
 
                             </div>
@@ -1036,7 +1043,7 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                     {/* layout -1 */}
                     <div className='col-sm-6'>
                         <div className='orderCon'>
-                            <h5 className='d-flex text-align-center' class="track-order-h5">Track your order here</h5>
+                            <h5 className='d-flex justify-content-center' class="track-order-h5">Track your order here</h5>
                             <ul class="responsive-table">
                                 <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius: '10px' }}>
                                     <div class="colo colo-1" style={{fontWeight:'bold'}}>Id</div>
@@ -1075,8 +1082,8 @@ fooddata.filter(x => x.foodType === foodtype ||  x.foodName.toLowerCase().includ
                         </div>
                     </div>
                     {/* layout - 2 */}
-                    <div className='col-sm-6'>
-                        <div className='food-display'>
+                    <div className='col-sm-4'>
+                        <div className='food-order-cont'>
                             <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '5px' }}>
                                 <div className='foo-cat'>
                                     {/* <span htmlFor="foodCategory" style={{fontWeight:'bold'}}>Food Category</span> */}

@@ -74,11 +74,11 @@
   margin: 0;
 }
 
-input[name=takeaway-name]{
+input[id=takeaway-name]{
   border: 1px solid gray;
   border-radius: 5px;
 }
-input[name=takeaway-name]:focus{
+input[id=takeaway-name]:focus{
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
 }
@@ -87,11 +87,11 @@ input[name=takeaway-name]:focus{
   margin-top: 0.5cm;
 }
 
-input[name=takeaway-number]{
+input[id=takeaway-number]{
   border: 1px solid black;
   border-radius: 5px;
 }
-input[name=takeaway-number]:focus{
+input[id=takeaway-number]:focus{
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
 }
@@ -100,11 +100,11 @@ input[name=takeaway-number]:focus{
   margin-top: 0.5cm;
 }
 
-input[name=takeaway-email]{
+input[id=takeaway-email]{
   border: 1px solid black;
   border-radius: 5px;
 }
-input[name=takeaway-email]:focus{
+input[id=takeaway-email]:focus{
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
 }
@@ -113,11 +113,19 @@ input[name=takeaway-email]:focus{
   margin-top: 0.5cm;
 }
 
-input[name=takeaway-address]{
+input[id=takeaway-address]{
   border: 1px solid black;
   border-radius: 5px;
 }
-input[name=takeaway-address]:focus{
+input[id=takeaway-address]:focus{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+}
+input[id=takeaway-vehicle]{
+  border: 1px solid black;
+  border-radius: 5px;
+}
+input[id=takeaway-vehicle]:focus{
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
 }
@@ -248,6 +256,12 @@ input[name=takeaway-address]:focus{
   background-color:rgb(207, 230, 238);
 }
 .search-container{
+
+  position:relative;
+
+  
+}
+.search-container-searchbar{
   margin-bottom: 5px;
 }
 /* Additional style for the span inside foo-cat */
@@ -266,4 +280,95 @@ input[name=takeaway-address]:focus{
   border: none;
 }
 
+/* form pay bill */
+.add-user-btn-paybill-tk{
+  padding: 10px 20px;
+  background-color:rgb(48, 149, 30);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color:rgb(5, 6, 5);
+  /* border: 1px solid black; */
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 7px;
+  font-weight: 700;
+  margin-left: 50px;
+  margin: 7px 0px 0px 7px;
+  position: relative;
+  overflow: hidden;
+}
 
+.add-user-btn-paybill-tk::before{
+  content: '';
+  position: absolute;
+  left: -101%;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  font-weight: 700;
+  background-color:rgb(247, 243, 243);
+  transition: left 0.3s;
+  z-index: 0;
+}
+
+.add-user-btn-paybill-tk:hover::before{
+  left: 0%;
+  font-weight: 700;
+  color: rgb(3, 56, 3);
+  
+}
+#select-ds{
+  margin-left: 35px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: rgb(219, 12, 12);
+  /* color: rgb(33, 204, 136); */
+}
+.option-ds{
+  border-radius: 10px;
+  background-color: rgb(229, 252, 233) ;
+  color: rgb(0, 142, 33);
+  font-weight: 600;
+}
+.option-ds:focus{
+  background-color: rgb(194, 251, 203);
+  border-radius: 10px;
+  
+}
+#option-ds-sw{
+  background-color: rgb(194, 251, 203);
+  border-radius: 10px;
+  color: rgb(0, 142, 33);
+  font-weight: 800;
+}
+#option-ds-sw:focus{
+  background-color: rgb(194, 251, 203);
+  border-radius: 10px;
+  color: rgb(0, 142, 33);
+  font-weight: 800;
+
+  
+}
+#option-ds-sw{
+  border-radius: 10px;
+ 
+}
+#l-p-ds{
+  font-weight: 700;
+  color: rgb(219, 12, 12);
+}
+#l-q-ds{
+  color: rgb(0, 142, 33);
+  font-weight: 800;
+}
+#l-r-ds {
+  font-weight: 700;
+  color: rgb(219, 12, 12);
+}
+#l-r-ds span{
+  font-weight: 700;
+  color: rgb(219, 12, 12);
+}
+#total-ds{
+  font-weight: 700;
+}

@@ -676,7 +676,7 @@ const DeliverySale = () => {
 
     return (
         <div className='over-order-page'>
-            {usercreated ? <button type="button" className='btn btn-primary mt-2 ms-3' onClick={openModal}>
+            {usercreated ? <button type="button" className='adduser' class="add-user-btn"  onClick={openModal}>
                 Add User
             </button> : <div>
                 <p className='ms-3 mt-3'>Customer name: <span className='text-capitalize fw-bold'>{customerDetails.name}</span> </p>
@@ -692,17 +692,18 @@ const DeliverySale = () => {
 
                 {isModalOpen && (
                     <div className="modal-overlay1">
-                        <div className="modal1">
-                            <button type="button" className="close-btn" onClick={closeModal}>
+                        <div className="modal1-deliverysale-1">
+                            <button type="button" className="close-btn-deilvery" onClick={closeModal}>
                                 &times;
                             </button>
-                            <h2>Customer Details</h2>
-                            <form>
-                                <label>
+                            <h2 id='takwaway-headinh-h2'>Customer Details</h2>
+                            <form class="takeaway-form-delivery">
+                                <label class="takeaway-name-la">
                                     Customer Name:
                                     <input
                                         type="text"
                                         name="name"
+                                        id='takeaway-name'
                                         value={customerDetails.name}
                                         onChange={handleInputChange}
                                         required
@@ -713,9 +714,11 @@ const DeliverySale = () => {
                                     <input
                                         type="tel"
                                         name="mobileNumber"
+                                        id='takeaway-number'
                                         value={customerDetails.mobileNumber}
                                         onChange={handleInputChange}
                                         required
+                                        pattern="[0-9]*" // Only allows digits
                                     />
                                 </label>
                                 <label>
@@ -723,6 +726,7 @@ const DeliverySale = () => {
                                     <input
                                         type="email"
                                         name="email"
+                                        id='takeaway-email'
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
                                         value={customerDetails.email}
                                         onChange={handleInputChange}
@@ -735,6 +739,7 @@ const DeliverySale = () => {
                                     <input
                                         type="text"
                                         name="address"
+                                        id='takeaway-address'
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
                                         value={customerDetails.address}
                                         onChange={handleInputChange}
@@ -747,6 +752,7 @@ const DeliverySale = () => {
                                     <input
                                         type="text"
                                         name="vin"
+                                        id='takeaway-vehicle'
                                         // placeholder={fetchFood.customer_details.numberOfSeats}
                                         value={customerDetails.vin}
                                         onChange={handleInputChange}
@@ -821,16 +827,16 @@ const DeliverySale = () => {
                                         })}
                                     </ul>
                                     <div className="order-details-row">
-                                        <p>Total: AED{calculateTotalAmountofItem()}</p>
+                                        <p id='total-ds'>Total: AED{calculateTotalAmountofItem()}</p>
                                     </div>
 
                                 </div>
 
 
                                 <div>
-                                    <label>Waiter Name: </label>
-                                    <select id="foodCategory" onChange={handleWaiterChange} value={waiterName || ''}>
-                                        <option value="" disabled>
+                                    <label id='l-p-ds'>Waiter Name: </label>
+                                    <select id="foodCategory" class='option-ds' onChange={handleWaiterChange} value={waiterName || ''}>
+                                        <option class='option-ds'value="" disabled>
                                             Waiter handled
                                         </option>
 
@@ -840,8 +846,8 @@ const DeliverySale = () => {
                                             </option>
                                         ))}
                                     </select>
-                                    <label>Select Payment Type:</label>
-                                    <select value={selectedPaymentType} onChange={handleSelectChange}>
+                                    <label id='select-ds'>Select Payment Type:</label>
+                                    <select class='option-ds' value={selectedPaymentType} onChange={handleSelectChange}>
                                         <option value="">Select...</option>
                                         <option value="creditcard">Credit Card</option>
                                         <option value="creditsale">Credit sale</option>
@@ -851,31 +857,32 @@ const DeliverySale = () => {
                                     <div className='row'>
                                         <div className="col">
 
-                                            {selectedPaymentType == "creditcard" ? <p>{selectedPaymentType} offer {bill.creditSale}</p>
+                                            {selectedPaymentType == "creditcard" ? <p id='l-p-ds'>{selectedPaymentType} offer:<span id='l-q-ds'>{bill.creditSale}</span></p>
                                                 : ""}
-                                            {selectedPaymentType == "debitcard" ? <p>Card offer {bill.cardSale}</p>
+                                            {selectedPaymentType == "debitcard" ? <p id='l-p-ds'>Card offer <span id='l-q-ds'>{bill.cardSale}</span></p>
                                                 : ""}
 
-                                            {<p>Discount: {bill.discount}</p>}
+                                            {<p ><span id='l-r-ds'>Discount:</span> <span id='l-q-ds'>{bill.discount}</span></p>}
                                         </div>
                                         <div className="col">
                                             <div className="order-details-row">
-                                                <p>VAT:{bill && bill.VAT}</p>
-                                                %
+                                                <p id='l-p-ds'>VAT:</p><p id='l-q-ds'>{bill && bill.VAT}
+                                                %</p>
 
                                             </div>
                                             <div className="order-details-row">
-                                                <p>After Applying:</p>
-                                                <p>AED
+                                                <p id='l-p-ds'>After Applying:</p>
+                                                <p id='l-q-ds'>AED
                                                     {calculateTotalwithvatdis()}</p>
 
                                             </div>
                                         </div>
                                         <div className='col'>
-                                            <label>
+                                            <label id='l-p-ds'>
                                                 Total Amount Paid:
                                                 {
                                             selectedPaymentType === 'creditsale' ? <input
+                                            id='option-ds-sw'
                                             type="number"
                                             value={totalAmount}
                                             onChange={handleAmountChange}
@@ -883,6 +890,7 @@ const DeliverySale = () => {
                                             required
                                             disabled
                                         /> : <input
+                                        id='option-ds-sw'
                                         type="number"
                                         value={totalAmount}
                                         onChange={handleAmountChange}
@@ -898,7 +906,7 @@ const DeliverySale = () => {
 
 
                                 </div>
-                                <button className="btn btn-success" onClick={handlePayBill} >Pay Bill</button>
+                                <button className="btn btn-success"   class="add-user-btn-paybill"  onClick={handlePayBill} >Pay Bill</button>
                             </div>
 
                         </div>
@@ -908,7 +916,7 @@ const DeliverySale = () => {
                 </div>
                 {/* layout -1 */}
                 <div className='col-sm-6'>
-                    <div className='orderCont'>
+                    <div className='orderCon'>
                         <h5 className='d-flex justify-content-center'>Track your order here</h5>
                         <ul class="responsive-table">
                             <li class="otable-header" style={{ backgroundColor: '#B84A62', padding: '10px', borderRadius: '10px' }}>
@@ -918,6 +926,11 @@ const DeliverySale = () => {
                                 <div class="colo colo-3" style={{ fontWeight: 'bold' }}>Price</div>
                                 <div class="colo colo-4" style={{ fontWeight: 'bold' }}>Amount</div>
                             </li>
+                            {/* the total goes here */}
+                        <div  class="mainpage-aed">
+                            <h5>Total: AED {calculateTotalAmountofItem()} </h5>
+                        </div>
+                            <div class="orderSummary-takeaway">
                             {/* save to db and fetch from there DYNAMIC TODO:*/}
                             {foodD.length > 0 && foodD.filter(x => x.orderFrom == "deliverysale").map((food) => (
                                 < TableorderCard fooditem={food}
@@ -928,6 +941,7 @@ const DeliverySale = () => {
                             ))
 
                             }
+                            </div>
 
                             {ordersave ? '' :
                                 loadfood && (
@@ -939,20 +953,17 @@ const DeliverySale = () => {
 
 
                         </ul>
-                        {/* the total goes here */}
-                        <div>
-                            <h5>Total: AED {calculateTotalAmountofItem()} </h5>
-                        </div>
+                        
                     </div>
                 </div>
                 {/* layout - 2 */}
-                <div className='col-sm-6'>
+                <div className='col-sm-4'>
                     <div className='food-order-cont'>
-                        <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '10px' }}>
+                        <div className='food-category-bar' style={{ backgroundColor: '#B84A62', borderRadius: '5px' }}>
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span>
-
-                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || 'all'}>
+                                {/* <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Food Category</span> */}
+                                <label className='foodCategory'>Food Category</label>
+                                <select id="foodCategory" onChange={handleCategoryChange} value={selectedCategory || ''} className='filter'>
                                     <option value="all">
                                         All
                                     </option>
@@ -965,7 +976,7 @@ const DeliverySale = () => {
                             </div>
 
                             <div className='foo-cat'>
-                                <span htmlFor="foodCategory" style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
+                                <span htmlFor="foodCategory" className="foodCategory-d-label"style={{ fontWeight: 'bold' }}>Sort-by or Filter</span>
                                 <select id="foodCategory" onChange={handleFilterChange} value={filterOption} className='filter'>
                                     <option value="all">All</option>
                                     <option value="highPrice">High Price</option>
@@ -973,19 +984,22 @@ const DeliverySale = () => {
                                     <option value="available">Available</option>
                                 </select>
                             </div>
+                            <div className='date-time-container'>         
+                            <div className='date'>
 
-                            <div className='date-time'>
-
-                                <GetDate />
+                              <label>Date:</label><span  className='getdate' ><GetDate /></span>
                                 <br></br>
-                                <GetTime />
+                                
+                                <label>Time:</label><span id='span-time'><GetTime /></span>
+                                
+                            </div>
                             </div>
 
 
                         </div>
                         <div>
 
-                            
+                        <div class="food-data">  
                             {
                                 <DynamicComponent
                                     fooddata={filteredFoodItems}
@@ -995,7 +1009,7 @@ const DeliverySale = () => {
                                 />
                             }
 
-
+                        </div>    
                         </div>
                     </div>
                 </div>
